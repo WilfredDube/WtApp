@@ -104,6 +104,7 @@ double Individual::cal_fitness()
     }
 
     std::cout << "===============================================" << seqDistance << std::endl;
+    std::cout << "===============================================" << seqDistance << std::endl;
 
     return fitness;
 }; 
