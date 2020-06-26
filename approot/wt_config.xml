@@ -1,0 +1,5 @@
+<server>
+    <application-settings location="*">
+	<max-request-size>5000000</max-request-size>
+    </application-settings>
+</server>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<messages>
+    <message id="tpl.template">
+        <div class="controls">
+            <div>
+                ${add-model}
+            </div>           
+            <div>
+                ${bs-gen}
+            </div>          
+            <div>
+                ${fag}
+            </div>
+            <div>
+                ${settings}
+            </div>
+        </div>
+    </message>
+
+    <message id="Wt.Auth.template.logged-in">
+        <div class="Wt-auth-logged-in auth-margins">
+        Logged in as <b>${user-name}</b> | ${logout}
+        </div>
+    </message>
+
+    <message id="project">
+        <div class="container">
+            ${project_container}
+        </div>
+    </message>
+    
+    <message id="pp.template">
+      <table class="myTable">
+	<tr>
+		<th colspan="5">PROCESS PLAN SHEET : ${process_code}</th>
+		<th>PAGE : 1 / 1 <!--${page_no} --> </th>
+	</tr>
+	<tr>
+		<td colspan="5"><b>Units : </b> Degrees, mm, kN, sec</td>
+		<td><b>MODULES :</b> ${module_no}</td>
+	</tr>
+	<tr>
+		<td colspan="2"><b>ENGINEER :</b> ${planner_name}</td>
+		<td colspan="2"><b>CHECKED BY :</b> ${moderator}</td>
+		<td colspan="2"><b>DATE CREATED : </b>${creation_date}</td>
+	</tr>
+	<tr >
+		<td colspan="2"><b>PART No :</b> ${part_no}</td>		
+	  	<td colspan="2"><b>PART NAME :</b> ${part_name}</td>
+	  	<td colspan="2"><b>MATERIAL :</b> ${material_name}</td>	  	
+	</tr>
+	<tr>
+	  	<td height="80"><b>STOCK SIZE :</b> ${stock_size}</td>
+	  	<td><b>MACHINE PARAMETERS :</b> ${machine_params}</td>	  	
+	  	<td><b>NO OF ROTATIONS :</b> ${rotations_no}</td>
+	        <td><b>NO OF FLIPS :</b> ${flips_no}</td>
+	  	<td><b>PROCESS PLANNING TIME :</b> ${process_planning_time}</td>
+	  	<td><b>ESTIMATED PRODUCTION TIME  :</b> ${total_processing_time}</td>
+	</tr>
+	<tr>
+		<td colspan="6"></td>
+	</tr>
+	<tr>
+		<td colspan="6"> 
+			${feature_table}
+		</td>
+	</tr>
+      </table>
+  </message>
+</messages>

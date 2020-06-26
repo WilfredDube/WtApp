@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<messages>
+    <message id="str.prompt">Bhala ibizo lakho:</message>
+    <message id="str.greet-me">Ngibingelela!</message>
+    <message id="str.result">Sakubona, {1}</message>
+</messages>
