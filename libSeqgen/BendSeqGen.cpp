@@ -22,7 +22,7 @@
     return factorial;
  }
 
-std::vector<int> generateBendingSeq(Fxt::Model& model, std::vector<int> initialSeq)
+Individual generateBendingSeq(Fxt::Model& model, std::vector<int> initialSeq)
 {   
     // current generation 
     int generation = 0, factorial {1};   
@@ -97,5 +97,5 @@ std::vector<int> generateBendingSeq(Fxt::Model& model, std::vector<int> initialS
     std::cout << "======================================================================";
     std::cout << "==============================" << std::endl;
 
-    return new_generation[0].chromosome;
+    return new_generation[0];
 } 
