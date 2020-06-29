@@ -23,7 +23,7 @@ public:
   int face_id2;
   double bend_angle;
   double bend_radius;
-  double bend_thickness;
+  double bend_force;
   double bend_length;
   int bend_direction;
   std::string bending_tool_id;
@@ -37,7 +37,7 @@ public:
     dbo::field(a, face_id2, "face_id2");
     dbo::field(a, bend_angle, "bend_angle");
     dbo::field(a, bend_radius, "bend_radius");
-    dbo::field(a, bend_thickness, "bend_thickness");
+    dbo::field(a, bend_force, "bend_force");
     dbo::field(a, bend_length, "bend_length");
     dbo::field(a, bend_direction, "bend_direction");
     dbo::field(a, bending_tool_id, "bending_tool_id");
