@@ -240,11 +240,10 @@ void ModelFileWidget::processModelFile()
                 b->face_id2 = a.getJoiningFaceID2();
                 b->bend_angle = a.getBendAngle();
                 b->bend_radius = a.getBendRadius();
-                b->bend_thickness = thickness;
                 b->bend_length = a.getBendLength();
                 b->modelFile = modelFile_;
                 b->bend_direction = 0;
-                b->bending_tool_id = toolName;         
+                b->bending_tool_id = toolName;
                 b->bend_force = bend_force;
 
                 modelFile_.modify()->thickness = thickness;
@@ -296,8 +295,6 @@ void ModelFileWidget::processModelFile()
 
             modelFile_.modify()->modelData = save(*restored);
 
-            t.commit();       
-
             for (const auto& bend : restored->getBendMap()) {
                 bids.push_back(static_cast<int>(bend.first));
             }
@@ -330,8 +327,8 @@ void ModelFileWidget::processModelFile()
               
                 bendSeq.modify()->bend_id = bs;
                 bendSeq.modify()->processPlan = processPlan;
-        }
-        
+            }
+
             dbo::ptr<MachineParam> machineParam(Wt::cpp14::make_unique<MachineParam>());
             MachineParam *mp = machineParam.modify();
 
@@ -339,6 +336,16 @@ void ModelFileWidget::processModelFile()
             mp->num_tools = bestSequence.nTools;
             mp->processPlan = processPlan;
 
+            modelFile_.modify()->processLevel = ProcessLevel::PROCESS_PLAN_GEN;
+
+            session_.flush();            
+
+            t.commit(); 
+        }
+
+        std::cout << "\n" << std::endl;
+        
+        icons_->setIconColor(ProcessLevel::PROCESS_PLAN_GEN );
         // session_.modelFeaturesExtracted().emit(modelFile_);
         break;
     case ProcessLevel::PROCESS_PLAN_GEN:
