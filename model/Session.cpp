@@ -8,6 +8,7 @@
 #include "ProcessPlan.h"
 #include "MachineParam.h"
 #include "BendSequence.h"
+#include "Material.h"
 
 #include <Wt/Auth/AuthService.h>
 #include <Wt/Auth/HashFunction.h>
@@ -98,6 +99,7 @@ Session::Session(dbo::SqlConnectionPool& connectionPool)
   mapClass<BendSequence>("bend_sequence");
   mapClass<ProcessPlan>("process_plan");
   
+  mapClass<Material>("material");
 
   mapClass<Tool>("tools");
   
