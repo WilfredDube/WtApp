@@ -54,6 +54,7 @@ private:
     Wt::Signal< dbo::ptr<ModelFile> > modelFeaturesExtracted_;
 
     void fillTools();
+    void fillMaterial();
 };
 
 #endif // SESSION_H_

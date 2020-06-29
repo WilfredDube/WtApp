@@ -98,7 +98,7 @@ Session::Session(dbo::SqlConnectionPool& connectionPool)
   mapClass<MachineParam>("machine_param");
   mapClass<BendSequence>("bend_sequence");
   mapClass<ProcessPlan>("process_plan");
-  
+
   mapClass<Material>("material");
 
   mapClass<Tool>("tools");
@@ -123,6 +123,7 @@ Session::Session(dbo::SqlConnectionPool& connectionPool)
     myPasswordService.updatePassword(guestUser, "guest");
 
     fillTools();
+    fillMaterial();
 
     std::cerr << "Created database." << std::endl;
 
@@ -132,6 +133,24 @@ Session::Session(dbo::SqlConnectionPool& connectionPool)
       std::cerr << e.what() << std::endl;
       std::cerr << "Using existing database";
   }
+}
+
+void Session::fillMaterial()
+{
+  dbo::ptr<Material> material(Wt::cpp14::make_unique<Material>());
+  Material *m = material.modify();
+  m->addMaterial("Aluminium", 310, 0.43);
+  add(material);
+
+  dbo::ptr<Material> material1(Wt::cpp14::make_unique<Material>());
+  Material *m1 = material1.modify();
+  m1->addMaterial("Mild Steel", 440, 0.45);
+  add(material1);
+
+  dbo::ptr<Material> material2(Wt::cpp14::make_unique<Material>());
+  Material *m2 = material2.modify();
+  m2->addMaterial("Stainless Steel", 505, 0.45);
+  add(material2);
 }
 
 void Session::fillTools()
