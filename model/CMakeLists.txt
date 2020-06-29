@@ -20,6 +20,8 @@ set(model_source_files
   Token.h
   Tool.cpp
   Tool.h
+  Material.cpp
+  Material.h
   User.cpp
   User.h
 )
