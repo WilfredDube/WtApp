@@ -24,6 +24,8 @@
 #include <cmath>
 
 #include "FileDropApplication.h"
+#include "ProcessPlanDialog.h"
+#include "FeatureDialog.h"
 #include "../model/Project.h"
 #include "../model/ModelFile.h"
 #include "../libfxtract/include/ModelMath.h"
@@ -31,7 +33,6 @@
 namespace fs = std::filesystem;
 
 namespace {
-    #include "../Utils/Utils.h"
 
     long long dupCount = 0;
     std::string userProjectFolder;
@@ -186,7 +187,6 @@ void ModelViewerControls::saveNewModel(std::vector<std::string> files, std::stri
         
         session_.add(modelFile);
 
-        m->tensileStrength = tensileStrength(materialType);
         m->modelMaterial = materialType;
         m->modelFile = modelFileName;
         m->modelObjFile = modelObjFile;
@@ -269,81 +269,8 @@ void ModelViewerControls::featureDialog()
         return;
     }
 
-    auto dialog = addChild(Wt::cpp14::make_unique<Wt::WDialog>("Model File : " + modelFile_->modelFile.toUTF8()));
+    auto dialog = addChild(Wt::cpp14::make_unique<FeatureDialog>(session_, "Model File : " + modelFile_->modelFile.toUTF8(), modelFile_));
     dialog->setWidth(900);
-
-    Wt::WPushButton *cancel =
-        dialog->footer()->addNew<Wt::WPushButton>("OK");
-    dialog->rejectWhenEscapePressed();
-
-    auto bendFeaturesTable = dialog->contents()->addNew<Wt::WTable>();
-    bendFeaturesTable->setHeaderCount(1);
-    bendFeaturesTable->setWidth(Wt::WLength("100%"));
-    bendFeaturesTable->elementAt(0, 0)->addNew<Wt::WText>("Bend ID");
-    bendFeaturesTable->elementAt(0, 1)->addNew<Wt::WText>("Face ID");
-    bendFeaturesTable->elementAt(0, 2)->addNew<Wt::WText>("Face ID");
-    bendFeaturesTable->elementAt(0, 3)->addNew<Wt::WText>("Bend Angle");
-    bendFeaturesTable->elementAt(0, 4)->addNew<Wt::WText>("Bend Length");
-    bendFeaturesTable->elementAt(0, 5)->addNew<Wt::WText>("Bend Radius");
-    bendFeaturesTable->elementAt(0, 6)->addNew<Wt::WText>("Bend Directions");
-    bendFeaturesTable->elementAt(0, 7)->addNew<Wt::WText>("Tool Name");
-    bendFeaturesTable->setStyleClass("myTable");//table-bordered table-hover table-striped");
-
-    dbo::Transaction t(session_);
-
-    BendFeatures bf = modelFile_->bendFeatures;
-
-    int rowCount = bendFeaturesTable->rowCount();
-
-    for(auto& bend : bf) {
-        bendFeaturesTable->elementAt(rowCount, 0)->addNew<Wt::WText>("B" + std::to_string(bend->bend_id));
-        bendFeaturesTable->elementAt(rowCount, 1)->addNew<Wt::WText>("F" + std::to_string(bend->face_id1));
-        bendFeaturesTable->elementAt(rowCount, 2)->addNew<Wt::WText>("F" + std::to_string(bend->face_id2));
-        bendFeaturesTable->elementAt(rowCount, 3)->addNew<Wt::WText>(processString(bend->bend_angle));
-        bendFeaturesTable->elementAt(rowCount, 4)->addNew<Wt::WText>(processString(bend->bend_length));
-        bendFeaturesTable->elementAt(rowCount, 5)->addNew<Wt::WText>(processString(bend->bend_radius));
-        auto comboBox = bendFeaturesTable->elementAt(rowCount, 6)->addNew<Wt::WComboBox>();
-        comboBox->addItem("Select the bend direction");
-        comboBox->addItem("Inside");
-        comboBox->addItem("Outside");
-
-        // if(bend->bend_direction == 1 || bend->bend_direction == 2)
-        // {
-            comboBox->setCurrentIndex(roundd(bend->bend_direction));
-        // }    
-
-        bendFeaturesTable->elementAt(rowCount, 7)->addNew<Wt::WText>(bend->bending_tool_id.c_str());
-
-        comboBox->changed().connect([=]{
-            Wt::WString bendDirStr = comboBox->currentText();
-            size_t bendDir;
-
-            if (bendDirStr == "Inside")
-            {
-                bendDir = 1;
-            } else {
-                bendDir = 2;
-            }
-
-            if (bendDir == 1 || bendDir == 2) {
-                dbo::Transaction t(session_);
-
-                bend.modify()->bend_direction = bendDir;
-
-                t.commit();
-            }            
-        });
-
-        ++rowCount;
-    }
-
-    t.commit();
-
-    /*
-     * Reject the dialog
-     */
-    cancel->clicked().connect(dialog, &Wt::WDialog::reject);
-
     dialog->show();
 }
 
@@ -358,82 +285,18 @@ void ModelViewerControls::settingsDialog()
         return;
     }
 
-    // auto t = Wt::cpp14::make_unique<Wt::WTemplate>(Wt::WString::tr("pp.template"));
+    if (modelFile_->processLevel != ProcessLevel::PROCESS_PLAN_GEN)
+    {
+        Wt::WMessageBox::show(
+            "FxTract", "<b> generate the model process plan.</b>", 
+            Wt::StandardButton::Ok
+        );
 
-    auto dialog = addChild(Wt::cpp14::make_unique<Wt::WDialog>("MODEL PROCESS PLAN"));
-    // dialog->setWidth(Wt::WLength::Auto);
-
-    Wt::WPushButton *cancel =
-        dialog->footer()->addNew<Wt::WPushButton>("OK");
-    dialog->rejectWhenEscapePressed();
-
-    // auto bendFeaturesTable = (Wt::cpp14::make_unique<Wt::WTable>());
-    auto t = dialog->contents()->addWidget(Wt::cpp14::make_unique<Wt::WTemplate>(Wt::WString::tr("pp.template")));
-    dialog->setWidth(1200);
-    
-    auto plannerName = t->bindWidget("part_name", Wt::cpp14::make_unique<Wt::WText>());
-    plannerName->setText(modelFile_->modelFile);
-
-    auto part_no = t->bindWidget("part_no", Wt::cpp14::make_unique<Wt::WInPlaceEdit>("Enter part number"));
-    part_no->setPlaceholderText("Enter part number");
-
-    plannerName = t->bindWidget("process_code", Wt::cpp14::make_unique<Wt::WText>());
-    plannerName->setText(modelFile_->project->title);
-
-    plannerName = t->bindWidget("planner_name", Wt::cpp14::make_unique<Wt::WText>());
-    plannerName->setText(modelFile_->author->name);
-
-    plannerName = t->bindWidget("module_no", Wt::cpp14::make_unique<Wt::WText>());
-    plannerName->setText(std::to_string(modelFile_->nModules));
-
-    plannerName = t->bindWidget("material_name", Wt::cpp14::make_unique<Wt::WText>());
-    plannerName->setText(modelFile_->modelMaterial);
-
-    auto ipe = t->bindWidget("moderator", Wt::cpp14::make_unique<Wt::WInPlaceEdit>("Click to enter moderator"));
-    ipe->setPlaceholderText("Enter moderator's name");
-
-    auto bendFeaturesTable  = t->bindWidget("feature_table", Wt::cpp14::make_unique<Wt::WTable>());
-
-    bendFeaturesTable->setWidth(Wt::WLength("100%"));
-
-    bendFeaturesTable->elementAt(0, 0)->addNew<Wt::WText>("<b>OPERATION NO</b>");
-    bendFeaturesTable->elementAt(0, 1)->addNew<Wt::WText>("<b>BEND ID</b>");
-    bendFeaturesTable->elementAt(0, 2)->addNew<Wt::WText>("<b>BEND ANGLE</b>");
-    bendFeaturesTable->elementAt(0, 3)->addNew<Wt::WText>("<b>BEND RADIUS</b>");
-    bendFeaturesTable->elementAt(0, 4)->addNew<Wt::WText>("<b>BEND DIRECTION</b>");
-    bendFeaturesTable->elementAt(0, 5)->addNew<Wt::WText>("<b>BEND LENGTH</b>");
-    bendFeaturesTable->elementAt(0, 6)->addNew<Wt::WText>("<b>TOOLS</b>");
-
-    dbo::Transaction transaction(session_);
-
-    BendFeatures bf = modelFile_->bendFeatures;
-
-    int rowCount = bendFeaturesTable->rowCount();
-
-    int size = 1;
-    for(auto& bend : bf) {
-        bendFeaturesTable->elementAt(rowCount, 0)->addNew<Wt::WText>(std::to_string(size));
-        bendFeaturesTable->elementAt(rowCount, 1)->addNew<Wt::WText>("B" + std::to_string(bend->bend_id));
-        bendFeaturesTable->elementAt(rowCount, 2)->addNew<Wt::WText>(processString(bend->bend_angle));
-        bendFeaturesTable->elementAt(rowCount, 3)->addNew<Wt::WText>(processString(bend->bend_radius));
-        bendFeaturesTable->elementAt(rowCount, 4)->addNew<Wt::WText>(processString(bend->bend_direction));
-        bendFeaturesTable->elementAt(rowCount, 5)->addNew<Wt::WText>(processString(bend->bend_length));
-        bendFeaturesTable->elementAt(rowCount, 6)->addNew<Wt::WText>(bend->bending_tool_id);
-
-        std::cout << "Angle : " << std::to_string(round(bend->bend_angle)) << std::endl;
-
-        ++rowCount;
-        ++size;
+        return;
     }
-
-    transaction.commit();
-
-    /*
-     * Reject the dialog
-     */
-    cancel->clicked().connect(dialog, &Wt::WDialog::reject);
-
-    dialog->show();
+    
+    auto d = addChild(Wt::cpp14::make_unique<ProcessPlanDialog>(session_, "Process Plan", modelFile_));
+    d->show();
 }
 
 void ModelViewerControls::bendingSeqDialog()
