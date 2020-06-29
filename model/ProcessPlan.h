@@ -22,7 +22,6 @@ typedef dbo::collection< dbo::ptr<BendSequence> > BendSequences;
 class ProcessPlan {
 public:
   std::string part_no;
-  double stock_size;
   int no_rotations;
   int no_flips;
   int quantity;
@@ -40,7 +39,7 @@ public:
     dbo::field(a, part_no, "part_no");
     dbo::field(a, no_rotations, "no_rotations");
     dbo::field(a, no_flips, "no_flips");
-    dbo::field(a, stock_size, "stock_size");
+    dbo::field(a, quantity, "quantity");
     dbo::field(a, process_planning_time, "process_planning_time");
     dbo::field(a, estimated_manufacturing_time, "estimated_manufacturing_time");
     dbo::field(a, moderator, "moderator");
@@ -48,7 +47,7 @@ public:
 
     dbo::belongsTo(a, modelFile, "model_file", dbo::OnDeleteCascade);
 
-    dbo::hasMany(a, bendSequences, dbo::ManyToOne, "bend_sequences");
+    dbo::hasMany(a, bendSequences, dbo::ManyToOne, "process_plan");
     dbo::hasOne(a, machineParam, "machine_param");
   }
 };
