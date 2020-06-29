@@ -2,6 +2,11 @@
 #define UTILS_H_
 
 #include <string>
+#include <iostream>
+#include <sstream>
+#include <fstream>
+#include <filesystem>
+#include <cmath>
 
 static const double Aluminium = 310; // 0.43
 static const double MildSteel = 440; // 0.45
@@ -30,4 +35,12 @@ std::string urltoTitle(std::string url)
   
   return result;
 }
+
+auto processString(double x) 
+{
+  std::ostringstream os;
+  os << x;
+  return os.str();
+}
+
 #endif
