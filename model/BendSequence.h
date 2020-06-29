@@ -15,15 +15,14 @@ class ProcessPlan;
 
 class BendSequence {
 public:
-  int bend_id, test;
+  int bend_id;
   dbo::ptr<ProcessPlan> processPlan;
 
   template<class Action>
   void persist(Action& a) {
     dbo::field(a, bend_id, "bend_id");
-    dbo::field(a, test, "test");
 
-    dbo::belongsTo(a, processPlan, "bend_sequences", dbo::OnDeleteCascade);
+    dbo::belongsTo(a, processPlan, "process_plan", dbo::OnDeleteCascade);
   }
 };
 
