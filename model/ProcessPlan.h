@@ -25,6 +25,7 @@ public:
   double stock_size;
   int no_rotations;
   int no_flips;
+  int quantity;
   double process_planning_time;
   double estimated_manufacturing_time;
   std::string moderator;
