@@ -240,6 +240,10 @@ void ModelFileWidget::processModelFile()
                 b->modelFile = modelFile_;
                 b->bend_direction = 0;
                 b->bending_tool_id = toolName;         
+                b->bend_force = bend_force;
+
+                modelFile_.modify()->thickness = thickness;
+                modelFile_.modify()->bendingForce = bend_force;
 
                 session_.flush();
 
