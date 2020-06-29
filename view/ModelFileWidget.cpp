@@ -12,6 +12,11 @@
 #include "../model/ModelFile.h"
 #include "../model/BendFeature.h"
 #include "../model/Tool.h"
+#include "../model/ProcessPlan.h"
+#include "../model/BendSequence.h"
+#include "../model/MachineParam.h"
+#include "../model/Material.h"
+#include "../libSeqgen/GaIndividual.h"
 #include "../libSeqgen/BendSeqGen.h"
 
 #include <vector>
@@ -306,6 +311,19 @@ void ModelFileWidget::processModelFile()
             total_time = (stopTime - startTime) / double(CLOCKS_PER_SEC);
             // std::cout << ">>>>>>>>>> Bend sequence time : " << total_time <<std::endl;
             // std::cout << total_time << std::endl;
+
+            dbo::ptr<ProcessPlan> processPlan(Wt::cpp14::make_unique<ProcessPlan>());
+            ProcessPlan *pp = processPlan.modify();
+
+            session_.add(processPlan);
+
+            pp->dateCreated = Wt::WDateTime::currentDateTime();
+            pp->no_flips = bestSequence.nFlips;
+            pp->no_rotations = bestSequence.nRotations;
+            pp->process_planning_time += total_time + modelFile_.modify()->feature_recognition_time;
+            pp->modelFile = modelFile_;
+            pp->quantity = 1;
+
         }
         
         icons_->setIconColor(ProcessLevel::PROCESS_PLAN_GEN);
