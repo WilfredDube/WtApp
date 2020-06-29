@@ -256,12 +256,15 @@ void ModelFileWidget::processModelFile()
             modelFile_.modify()->nbends = bendFeatureData.size();
             modelFile_.modify()->nModules = computerModules(bendFeatureData);
             modelFile_.modify()->modelData = save(*test);
+            modelFile_.modify()->feature_recognition_time = total_time;
 
             icons_->setIconColor(ProcessLevel::FEATURE_EXTRACTED);
 
             t.commit();
             
         }
+
+        // std::cout << "\n\n\n" << std::endl;
 
         session_.modelFeaturesExtracted().emit(modelFile_);
         std::cout << "Done......................." << std::endl;
