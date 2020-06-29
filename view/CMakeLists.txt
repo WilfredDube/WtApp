@@ -25,6 +25,10 @@ set(view_source_files
   ProjectListWidget.h
   ProjectSummaryWidget.cpp
   ProjectSummaryWidget.h
+  ProcessPlanDialog.cpp
+  ProcessPlanDialog.h
+  FeatureDialog.cpp
+  FeatureDialog.h
   readObj.cpp
   readObj.h
 )
