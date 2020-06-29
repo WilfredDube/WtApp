@@ -213,6 +213,18 @@ void ModelFileWidget::processModelFile()
                     break;
                 }
 
+                dbo::ptr<Material> material = session_.find<Material>()
+                                    .where("material_name = ?").bind(modelFile_->modelMaterial);     
+
+                std::cout << "Material : " << material->material_name
+                          << "K Factor : " << material->k_factor
+                          << "TStrength : " << material->tensile_strength << std::endl;
+                          
+                auto bend_force = a.getBendLength() * std::pow(thickness, 2) 
+                                * material->k_factor 
+                                * material->tensile_strength
+                                / (8 * thickness);
+
                 dbo::ptr<BendFeature> bendFeature(Wt::cpp14::make_unique<BendFeature>());
                 BendFeature *b = bendFeature.modify();
                 
