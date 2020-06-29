@@ -332,7 +332,13 @@ void ModelFileWidget::processModelFile()
                 bendSeq.modify()->processPlan = processPlan;
         }
         
-        icons_->setIconColor(ProcessLevel::PROCESS_PLAN_GEN);
+            dbo::ptr<MachineParam> machineParam(Wt::cpp14::make_unique<MachineParam>());
+            MachineParam *mp = machineParam.modify();
+
+            session_.add(machineParam);
+            mp->num_tools = bestSequence.nTools;
+            mp->processPlan = processPlan;
+
         // session_.modelFeaturesExtracted().emit(modelFile_);
         break;
     case ProcessLevel::PROCESS_PLAN_GEN:
