@@ -32,6 +32,7 @@
 #include <map>
 
 #include "BreadCrumbWidget.h"
+#include "FeatureDialog.h"
 #include "../model/ModelFile.h"
 #include "../libfxtract/include/ModelMath.h"
 #include "readObj.h"
@@ -149,76 +150,8 @@ ModelViewerWidget::ModelViewerWidget(Session& session, dbo::ptr<Project> project
 
 void ModelViewerWidget::setBendDirection(dbo::ptr<ModelFile> modelFile)
 {
-    auto dialog = addChild(Wt::cpp14::make_unique<Wt::WDialog>("Set the bend direction"));
+    auto dialog = addChild(Wt::cpp14::make_unique<FeatureDialog>(session_, "Model File : " + modelFile->modelFile.toUTF8(), modelFile));
     dialog->setWidth(900);
-
-    Wt::WPushButton *cancel =
-        dialog->footer()->addNew<Wt::WPushButton>("SAVE");
-    dialog->rejectWhenEscapePressed();
-
-    auto bendFeaturesTable = dialog->contents()->addNew<Wt::WTable>();
-    bendFeaturesTable->setStyleClass("myTable");
-    bendFeaturesTable->setHeaderCount(1);
-    bendFeaturesTable->setWidth(Wt::WLength("100%"));
-    bendFeaturesTable->elementAt(0, 0)->addNew<Wt::WText>("Bend ID");
-    bendFeaturesTable->elementAt(0, 1)->addNew<Wt::WText>("Face ID");
-    bendFeaturesTable->elementAt(0, 2)->addNew<Wt::WText>("Face ID");
-    bendFeaturesTable->elementAt(0, 3)->addNew<Wt::WText>("Bend Angle");
-    bendFeaturesTable->elementAt(0, 4)->addNew<Wt::WText>("Bend Length");
-    bendFeaturesTable->elementAt(0, 5)->addNew<Wt::WText>("Bend Radius");
-    bendFeaturesTable->elementAt(0, 6)->addNew<Wt::WText>("Bend Direction");
-    bendFeaturesTable->elementAt(0, 7)->addNew<Wt::WText>("Tool Name");
-    bendFeaturesTable->setStyleClass("myTable");
-
-    dbo::Transaction t(session_);
-
-    BendFeatures bf = modelFile->bendFeatures;
-
-    int rowCount = bendFeaturesTable->rowCount();
-
-    for(auto& bend : bf) {
-        bendFeaturesTable->elementAt(rowCount, 0)->addNew<Wt::WText>("B" + std::to_string(bend->bend_id));
-        bendFeaturesTable->elementAt(rowCount, 1)->addNew<Wt::WText>("F" + std::to_string(bend->face_id1));
-        bendFeaturesTable->elementAt(rowCount, 2)->addNew<Wt::WText>("F" + std::to_string(bend->face_id2));
-        bendFeaturesTable->elementAt(rowCount, 3)->addNew<Wt::WText>(std::to_string(Fxt::roundd(bend->bend_angle)));
-        bendFeaturesTable->elementAt(rowCount, 4)->addNew<Wt::WText>(std::to_string(Fxt::roundd(bend->bend_length)));
-        bendFeaturesTable->elementAt(rowCount, 5)->addNew<Wt::WText>(std::to_string(Fxt::roundd(bend->bend_radius)));
-        auto comboBox = bendFeaturesTable->elementAt(rowCount, 6)->addNew<Wt::WComboBox>();
-        comboBox->addItem("Set the bend direction");
-        comboBox->addItem("Inside");
-        comboBox->addItem("Outside");
-      
-        comboBox->setCurrentIndex(Fxt::roundd(bend->bend_direction));   
-
-        bendFeaturesTable->elementAt(rowCount, 7)->addNew<Wt::WText>(bend->bending_tool_id.c_str());
-
-        comboBox->changed().connect([=]{
-            Wt::WString bendDirStr = comboBox->currentText();
-            size_t bendDir;
-
-            if (bendDirStr == "Inside")
-            {
-                bendDir = 1;
-            } else {
-                bendDir = 2;
-            }
-
-            if (bendDir == 1 || bendDir == 2) {
-                dbo::Transaction t(session_);
-
-                bend.modify()->bend_direction = bendDir;
-
-                t.commit();
-            }            
-        });
-
-        ++rowCount;
-    }
-
-    t.commit();
-
-    cancel->clicked().connect(dialog, &Wt::WDialog::reject);
-
     dialog->show();
 }
 
