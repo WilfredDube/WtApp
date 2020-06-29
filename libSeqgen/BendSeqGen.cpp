@@ -6,7 +6,6 @@
 #include <random>       // std::default_random_engine
 #include <chrono>       // std::chrono::system_clock
 
-#include "GaIndividual.h"
 #include "GA.h"
  
  // run ./hello --approot ../approot --docroot ../docroot --http-listen localhost:8090
@@ -36,7 +35,7 @@ Individual generateBendingSeq(Fxt::Model& model, std::vector<int> initialSeq)
 
     if (initialSeq.size() == 1 || initialSeq.size() == 2)
     {
-        return initialSeq;
+        return Individual(initialSeq, model, initialSeq.size());
     }
       
     // create initial population 
