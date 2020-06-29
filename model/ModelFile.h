@@ -27,7 +27,7 @@ public:
   dbo::ptr<User> author;
   dbo::ptr<Project> project;
 
-  double tensileStrength;
+  double bendingForce, feature_recognition_time, thickness;
   int nbends;
   int nModules; //number_of_modules;
   Wt::WString modelFile;
@@ -43,7 +43,7 @@ public:
 
   template<class Action>
   void persist(Action& a) {
-    dbo::field(a, tensileStrength, "model_tensile_strength");
+    dbo::field(a, bendingForce, "bending_force");
     dbo::field(a, nbends, "model_bend_count");
     dbo::field(a, nModules, "number_of_modules");
     dbo::field(a, modelFile, "model_file");
@@ -53,6 +53,8 @@ public:
     dbo::field(a, uploadDate, "model_upload_date");
     dbo::field(a, modelData, "model_data");
     dbo::field(a, modelMaterial, "model_material");
+    dbo::field(a, thickness, "thickness");
+    dbo::field(a, feature_recognition_time, "feature_recognition_time");
 
     dbo::belongsTo(a, project, "project", dbo::OnDeleteCascade);
     dbo::belongsTo(a, author, "author");
