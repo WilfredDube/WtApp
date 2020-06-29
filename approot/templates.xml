@@ -40,9 +40,9 @@
 		<td><b>MODULES :</b> ${module_no}</td>
 	</tr>
 	<tr>
-		<td colspan="2"><b>ENGINEER :</b> ${planner_name}</td>
+		<td colspan="3"><b>ENGINEER :</b> ${planner_name}</td>
 		<td colspan="2"><b>CHECKED BY :</b> ${moderator}</td>
-		<td colspan="2"><b>DATE CREATED : </b>${creation_date}</td>
+		<td colspan="1"><b>DATE CREATED : </b>${creation_date}</td>
 	</tr>
 	<tr >
 		<td colspan="3"><b>PART No :</b> ${part_no}</td>		
@@ -51,7 +51,11 @@
 		<td colspan="1"><b>QUANTITY :</b> ${quantity}</td>	 	
 	</tr>
 	<tr>
+	  	<!-- <td height="80"><b>STOCK SIZE :</b> ${stock_size}</td> -->
+	  	<td colspan="3"><b>MACHINE PARAMETERS :</b> <br/>No of tools : ${tools_no} <br/> Bending Force : ${bending_force}</td>	  	
 	  	<td ><b>NO OF ROTATIONS :</b> ${rotations_no}<br/><br/><b>NO OF FLIPS :</b> ${flips_no}</td>
+	  	<td colspan="1"><b>PROCESS <br/>PLANNING TIME :</b> ${process_planning_time}</td>
+	  	<td colspan="1"><b>ESTIMATED <br/>PRODUCTION TIME  :</b> ${total_processing_time}</td>
 	</tr>
 	<tr>
 		<td colspan="6"></td>
