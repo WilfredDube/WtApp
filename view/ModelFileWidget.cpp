@@ -38,6 +38,7 @@ namespace fs = std::filesystem;
 
 namespace {
     const Standard_Real kMachineModuleLength = 1000.0;
+    double total_time = 0;
     std::map<std::string, std::vector<ModelBend>> modelFeatureMap;
     std::unique_ptr<Fxt::Model> test;
 
@@ -187,8 +188,13 @@ void ModelFileWidget::processModelFile()
             bendFeatureData = modelFeatureMap[std::string(filename)];
         } else
         {
+            int startTime = clock();
             long double thickness = procModelFile(filename.c_str());
             bendFeatureData = modelFeatureMap[std::string(filename)];
+            int stopTime = clock();
+
+            total_time = (stopTime - startTime) / double(CLOCKS_PER_SEC);
+            std::cout << ">>>>>>>>>> Feature extraction time : " << total_time <<std::endl;
 
             for (auto a: bendFeatureData) {
                 std::cout << "Bend ID : " << a.getFaceId() << std::endl;
@@ -245,6 +251,7 @@ void ModelFileWidget::processModelFile()
         std::cout << "Done......................." << std::endl;
         break;
     case ProcessLevel::FEATURE_EXTRACTED:
+        total_time = 0;
         std::cout << "Process Planning started..." << std::endl;        
         {
             std::string restoreStr;
@@ -273,7 +280,13 @@ void ModelFileWidget::processModelFile()
 
             std::cout << ">>>>>>>>>> Filename : " << restored->getModelFile() << std::endl;
 
-            generateBendingSeq(*restored, bids);
+            int startTime = clock();
+            Individual bestSequence = generateBendingSeq(*restored, bids);
+            int stopTime = clock();
+
+            total_time = (stopTime - startTime) / double(CLOCKS_PER_SEC);
+            // std::cout << ">>>>>>>>>> Bend sequence time : " << total_time <<std::endl;
+            // std::cout << total_time << std::endl;
         }
         
         icons_->setIconColor(ProcessLevel::PROCESS_PLAN_GEN);
