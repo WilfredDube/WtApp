@@ -3,9 +3,9 @@
 
 #include <string>
 
-static const double Aluminium = 10;
-static const double MildSteel = 20;
-static const double StainlessSteel = 40;
+static const double Aluminium = 310; // 0.43
+static const double MildSteel = 440; // 0.45
+static const double StainlessSteel = 505; // 0.45
 
 double tensileStrength(const std::string material)
 {
