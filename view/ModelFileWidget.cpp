@@ -324,6 +324,12 @@ void ModelFileWidget::processModelFile()
             pp->modelFile = modelFile_;
             pp->quantity = 1;
 
+            for(const auto& bs : bestSequence.chromosome )
+            {
+                dbo::ptr<BendSequence> bendSeq = session_.add(Wt::cpp14::make_unique<BendSequence>());
+              
+                bendSeq.modify()->bend_id = bs;
+                bendSeq.modify()->processPlan = processPlan;
         }
         
         icons_->setIconColor(ProcessLevel::PROCESS_PLAN_GEN);
