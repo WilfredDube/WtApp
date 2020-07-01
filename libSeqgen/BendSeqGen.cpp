@@ -91,6 +91,7 @@ Individual generateBendingSeq(Fxt::Model& model, std::vector<int> initialSeq)
     std::cout<< "No of tools : "<< new_generation[0].nTools << "\n";
     std::cout<< "No of rotations : "<< new_generation[0].nRotations << "\n";
     std::cout<< "No of flips : "<< new_generation[0].nFlips << "\n";
+    std::cout<< "Distance : "<< new_generation[0].distance << "\n";
     std::cout << "======================================================================";
     std::cout << "==============================" << std::endl;
     std::cout << "======================================================================";
