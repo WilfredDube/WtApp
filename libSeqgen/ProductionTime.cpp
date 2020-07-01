@@ -15,14 +15,14 @@ double computeTotalTime(
     unsigned nRotations,
     double totalDistance,
     double bendingForce
-);
+)
+{
+    double setUpTime = machineSetUpTime(nTools);
+    double totalBendingTime = computeTotalBendingTime(totalDistance, bendingForce);
 
-/**
- *  Computes the time to setup the machine
- *  Total bending machine setup time = (the number of tools * time to remove tools for the previous part) + 
- *  (the number of tools * time to setup the tools for the current part) + time to configure the machine
- */
-double machineSetUpTime(unsigned nTools);
+    return setUp + (nParts * totalBendingTime);
+}
+
 
 /**
  *  Computes the time to bend the whole part
