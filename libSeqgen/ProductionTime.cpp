@@ -28,20 +28,15 @@ double machineSetUpTime(unsigned nTools)
     return ((nTools * unClampingTime) + (nTools * clampingTime) + configurationTime);
 }
 
-/**
- *  Computes the time to bend the whole part
- *  Time to bend the part = (number of bends * time to perform a bend) + 
- * (linear distance * time for linear movement) + (angular movement * time to rotate) + (number of flips * time to flip)
- */
-double copmputeTotalBendingTime(
-    unsigned nBends,
-    unsigned nFlips,
-    unsigned nRotations,
+double computeTotalBendingTime(
     double totalDistance,
     double bendingForce
 )
 {
-    double timeToPerformBend = computeTimeToFormBend(bendingForce);
+    double timeToPerformBend = nBends * computeTimeToFormBend(bendingForce);
+    double linearTime = computeLinearDistance(totalDistance, bendingForce);
+
+    return (timeToPerformBend + linearTime);
 }
 
 double computeLinearDistance(double bendingForce, double totalDistance)
