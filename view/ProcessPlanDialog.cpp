@@ -47,7 +47,7 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
     t->bindWidget("planner_name", Wt::cpp14::make_unique<Wt::WText>())
                 ->setText(modelFile_->author->name);
 
-    std::string placeHolder = modelFile_->processPlan->moderator.empty() ? "Click to enter moderator" : modelFile_->processPlan->moderator;
+    std::string placeHolder = modelFile_->processPlan->moderator.empty() ? "Click to enter moderator name" : modelFile_->processPlan->moderator;
     moderator_ = t->bindWidget("moderator", Wt::cpp14::make_unique<Wt::WInPlaceEdit>(placeHolder));
     moderator_->setPlaceholderText("Enter moderator's name");
     moderator_->valueChanged().connect([&]{
@@ -59,7 +59,7 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
     creationDate_ = t->bindWidget("creation_date", Wt::cpp14::make_unique<Wt::WText>());
     creationDate_->setText(processPlan->dateCreated.toString("dddd, MMMM d, yyyy, HH:mm"));
 
-    std::string partPlaceHolder = modelFile_->processPlan->part_no.empty() ? "Click to part number" : modelFile_->processPlan->part_no;
+    std::string partPlaceHolder = modelFile_->processPlan->part_no.empty() ? "Click to enter the part number" : modelFile_->processPlan->part_no;
     partNo_ = t->bindWidget("part_no", Wt::cpp14::make_unique<Wt::WInPlaceEdit>(partPlaceHolder));
     partNo_->setPlaceholderText("Enter part number");
     partNo_->valueChanged().connect([&]{
