@@ -19,7 +19,8 @@ bool Individual::operator==(const Individual& ind2)
 }
 
 Individual::Individual(std::vector<int> chromosome, Fxt::Model& model, size_t target_size) 
-: chromosome (chromosome), targetSize(target_size), model(model), nTools(1), nRotations(0), nFlips(0)
+: chromosome (chromosome), targetSize(target_size), model(model), nTools(1), 
+  nRotations(0), nFlips(0), distance(0)
 { 
     fitness = cal_fitness();  
 }; 
@@ -100,6 +101,8 @@ double Individual::cal_fitness()
             fitness += parallel * equality * direction / seqDistance;
         }        
         
+        distance += seqDistance;
+
         parallel = 1; equality = 1; direction = 1; seqDistance = 0.0;
     }
 
