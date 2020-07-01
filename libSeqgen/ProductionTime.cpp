@@ -3,10 +3,10 @@
 #ifndef PRODUCTION_TIME_H_
 #define PRODUCTION_TIME_H_
 
-/**
- *  Compute the total production time i.e. the total bending time
- *  Total production time = time to setup + (num of parts * bending time)
- */
+const double clampingTime = 30;
+const double unClampingTime = 40;
+const double configurationTime = 120;
+
 double computeTotalTime(
     unsigned nParts,
     unsigned nTools,
