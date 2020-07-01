@@ -12,6 +12,7 @@ class Individual
 public:
     std::vector<int> chromosome;
     unsigned nTools, nRotations, nFlips;
+    double distance;
 
     size_t targetSize; 
     double fitness;
