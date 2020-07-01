@@ -23,6 +23,10 @@ double computeTotalTime(
     return setUp + (nParts * totalBendingTime);
 }
 
+double machineSetUpTime(unsigned nTools)
+{
+    return ((nTools * unClampingTime) + (nTools * clampingTime) + configurationTime);
+}
 
 /**
  *  Computes the time to bend the whole part
