@@ -27,9 +27,7 @@ double machineSetUpTime(unsigned nTools);
  *  Time to bend the part = (number of bends * time to perform a bend) + 
  * (linear distance * time for linear movement) + (angular movement * time to rotate) + (number of flips * time to flip)
  */
-double copmputeTotalBendingTime(
-    unsigned nBends,
-    unsigned nFlips,
+double computeTotalBendingTime(
     unsigned nRotations,
     double totalDistance
 );
@@ -37,12 +35,12 @@ double copmputeTotalBendingTime(
 /**
  *  Computes the total bending distance
  */
-double computeLinearDistance(double totalDistance);
+double computeLinearDistance(double bendingForce, double totalDistance);
 
 /**
  *  Compute rotational distance
  */
-double computeRotationalDistance(unsigned nRotations);
+double computeRotationalDistance(double bendingForce, unsigned nRotations);
 
 /**
  *  Compute the time to perfom a bend
