@@ -34,7 +34,6 @@ namespace Fxt {
     }
     
     setFaceId(faceID);
-    makeBendLine();
   }
 
   void ModelBend::init()
