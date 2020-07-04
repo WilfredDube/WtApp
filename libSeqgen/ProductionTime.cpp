@@ -1,7 +1,6 @@
 #include "ProductionTime.h"
 
-#ifndef PRODUCTION_TIME_H_
-#define PRODUCTION_TIME_H_
+#include <cmath>
 
 const double clampingTime = 30;
 const double unClampingTime = 40;
@@ -20,7 +19,7 @@ double computeTotalTime(
     double setUpTime = machineSetUpTime(nTools);
     double totalBendingTime = computeTotalBendingTime(nBends, totalDistance, bendingForce);
 
-    return setUp + (nParts * totalBendingTime);
+    return setUpTime + (nParts * totalBendingTime);
 }
 
 double machineSetUpTime(unsigned nTools)
@@ -162,5 +161,3 @@ double returningSpeed(double bendingForce)
 
     return speed;   
 }
-
-#endif
