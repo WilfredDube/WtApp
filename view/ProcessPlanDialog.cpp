@@ -120,49 +120,33 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
 
     int rowCount = bendSequenceTable_->rowCount();
 
-    std::cout << "ID : " << processPlan.id() << std::endl;
+    auto& seq = processPlan->bendSequences;
 
-    // dbo::collection<dbo::ptr<BendSequence> > x = session_.find<BendSequence>()
-    //                             .where("bend_sequences_id")
-    //                             .bind(processPlan.id());
+    auto startIter = processPlan->bendSequences.begin();
+    auto endIter = processPlan->bendSequences.end();
 
-    auto seq = processPlan->bendSequences;
+    int size = 1;
+    for( ; startIter != endIter; ++startIter)
+    {    
+        for(auto& bend : bf) 
+        {
+            if (bend->bend_id == startIter->get()->bend_id )
+            {
+                std::cout << "Bend Sequences count : " << startIter->get()->bend_id << std::endl;
 
-    // int size = 1;
-    // for(auto& id : seq)
-    {
-        // Wt::Dbo::ptr<BendFeature> bend = session_.find<BendFeature>()
-        //             .where("bend_id = ?").bind(id->bend_id);
+                bendSequenceTable_->elementAt(rowCount, 0)->addNew<Wt::WText>(std::to_string(size));
+                bendSequenceTable_->elementAt(rowCount, 1)->addNew<Wt::WText>("B" + std::to_string(bend->bend_id));
+                bendSequenceTable_->elementAt(rowCount, 2)->addNew<Wt::WText>(processString(bend->bend_angle));
+                bendSequenceTable_->elementAt(rowCount, 3)->addNew<Wt::WText>(processString(bend->bend_radius));
+                bendSequenceTable_->elementAt(rowCount, 4)->addNew<Wt::WText>(processString(bend->bend_direction));
+                bendSequenceTable_->elementAt(rowCount, 5)->addNew<Wt::WText>(processString(bend->bend_length));
+                bendSequenceTable_->elementAt(rowCount, 6)->addNew<Wt::WText>(bend->bending_tool_id);
 
-        // std::cout << "Bend Sequences count : " << seq.size() << std::endl;
-        // std::cout << "Bend ID : " << seq->modify()->bend_id << std::endl;
-
-        // bendSequenceTable_->elementAt(rowCount, 0)->addNew<Wt::WText>(std::to_string(size));
-        // bendSequenceTable_->elementAt(rowCount, 1)->addNew<Wt::WText>("B" + std::to_string(bend->bend_id));
-        // bendSequenceTable_->elementAt(rowCount, 2)->addNew<Wt::WText>(processString(bend->bend_angle));
-        // bendSequenceTable_->elementAt(rowCount, 3)->addNew<Wt::WText>(processString(bend->bend_radius));
-        // bendSequenceTable_->elementAt(rowCount, 4)->addNew<Wt::WText>(processString(bend->bend_direction));
-        // bendSequenceTable_->elementAt(rowCount, 5)->addNew<Wt::WText>(processString(bend->bend_length));
-        // bendSequenceTable_->elementAt(rowCount, 6)->addNew<Wt::WText>(bend->bending_tool_id);
-
-        // ++rowCount;
-        // ++size;
+                ++rowCount;
+                ++size;
+            }            
+        }
     }
-    // int size = 1;
-    // for(auto& bend : bf) {
-    //     bendSequenceTable_->elementAt(rowCount, 0)->addNew<Wt::WText>(std::to_string(size));
-    //     bendSequenceTable_->elementAt(rowCount, 1)->addNew<Wt::WText>("B" + std::to_string(bend->bend_id));
-    //     bendSequenceTable_->elementAt(rowCount, 2)->addNew<Wt::WText>(processString(bend->bend_angle));
-    //     bendSequenceTable_->elementAt(rowCount, 3)->addNew<Wt::WText>(processString(bend->bend_radius));
-    //     bendSequenceTable_->elementAt(rowCount, 4)->addNew<Wt::WText>(processString(bend->bend_direction));
-    //     bendSequenceTable_->elementAt(rowCount, 5)->addNew<Wt::WText>(processString(bend->bend_length));
-    //     bendSequenceTable_->elementAt(rowCount, 6)->addNew<Wt::WText>(bend->bending_tool_id);
-
-    //     // std::cout << "Angle : " << std::to_string(round(bend->bend_angle)) << std::endl;
-
-    //     ++rowCount;
-    //     ++size;
-    // }
 
     transaction.commit();
 
