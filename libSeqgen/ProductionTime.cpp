@@ -71,7 +71,7 @@ double lengthOfStroke(double bendingForce)
     if (bendingForce > 0 && bendingForce <= 2300)
     {
         lengthOfStroke = 280;
-    } else (bendingForce > 2300)
+    } else if (bendingForce > 2300)
     {
         lengthOfStroke = 385;
     }
