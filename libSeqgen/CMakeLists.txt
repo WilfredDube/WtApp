@@ -5,6 +5,8 @@ set(view_source_files
   GA.h
   GaIndividual.cpp
   GaIndividual.h
+  ProductionTime.cpp
+  ProductionTime.h
   )
 
 set(CMAKE_CXX_STANDARD 17)
