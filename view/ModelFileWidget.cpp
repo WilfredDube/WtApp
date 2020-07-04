@@ -322,6 +322,7 @@ void ModelFileWidget::processModelFile()
             pp->process_planning_time += total_time + modelFile_.modify()->feature_recognition_time;
             pp->modelFile = modelFile_;
             pp->quantity = 1;
+            pp->tool_distance = bestSequence.distance;
 
             for(const auto& bs : bestSequence.chromosome )
             {
