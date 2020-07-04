@@ -77,21 +77,13 @@ double Individual::cal_fitness()
         }
 
         if ((i + 1) < len){
-            // Add 8 to the fitness if the current and next bend are parallel
-            // if(model.isParallel(chromosome[i], chromosome[i + 1])){
-            //     parallel = 20;
-            // } else
-            // {
-            //     ++nRotations;
-            // }
-
-            if (seqDistance != 0)
-            {
+            // Add 20 to the fitness if the current and next bend are parallel
+            if(model.isParallel(chromosome[i], chromosome[i + 1])){
                 parallel = 20;
             } else
             {
                 ++nRotations;
-            }  
+            }
         } 
 
         if (seqDistance == 0.0)
