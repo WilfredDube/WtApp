@@ -67,6 +67,8 @@ namespace Fxt {
         ar & boost::serialization::base_object<MFace>(*this);
         ar & mBendAngle & mBendDirection;
         ar & bendLinePnt & bendLineDir;
+
+        makeBendLine();
     }
     
   public:
