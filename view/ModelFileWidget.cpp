@@ -265,7 +265,6 @@ void ModelFileWidget::processModelFile()
             icons_->setIconColor(ProcessLevel::FEATURE_EXTRACTED);
 
             t.commit();
-            
         }
 
         // std::cout << "\n\n\n" << std::endl;
@@ -294,6 +293,9 @@ void ModelFileWidget::processModelFile()
             }
 
             modelFile_.modify()->modelData = save(*restored);
+            restoreStr = modelFile_.modify()->modelData.toUTF8();
+            restored = restore(restoreStr);
+
 
             for (const auto& bend : restored->getBendMap()) {
                 bids.push_back(static_cast<int>(bend.first));
