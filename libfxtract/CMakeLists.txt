@@ -3,7 +3,6 @@ set(Headers
   include/MFace.h
   include/StepProcessor.h
   include/IgesProcessor.h
-  include/ModelApp.h
   include/ModelEdge.h
   include/ModelReader.h
   include/ModelFace.h
@@ -17,7 +16,6 @@ set(Sources
   src/MFace.cpp
   src/StepProcessor.cpp
   src/IgesProcessor.cpp
-  src/ModelApp.cpp
   src/ModelEdge.cpp
   src/ModelReader.cpp
   src/ModelFace.cpp
