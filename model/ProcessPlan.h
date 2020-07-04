@@ -25,6 +25,7 @@ public:
   int no_rotations;
   int no_flips;
   int quantity;
+  double tool_distance;
   double process_planning_time;
   double estimated_manufacturing_time;
   std::string moderator;
@@ -42,6 +43,7 @@ public:
     dbo::field(a, quantity, "quantity");
     dbo::field(a, process_planning_time, "process_planning_time");
     dbo::field(a, estimated_manufacturing_time, "estimated_manufacturing_time");
+    dbo::field(a, tool_distance, "tool_distance");
     dbo::field(a, moderator, "moderator");
     dbo::field(a, dateCreated, "project_creation_date");
 
