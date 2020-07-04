@@ -18,7 +18,7 @@ double computeTotalTime(
 )
 {
     double setUpTime = machineSetUpTime(nTools);
-    double totalBendingTime = computeTotalBendingTime(totalDistance, bendingForce);
+    double totalBendingTime = computeTotalBendingTime(nBends, totalDistance, bendingForce);
 
     return setUp + (nParts * totalBendingTime);
 }
@@ -28,10 +28,7 @@ double machineSetUpTime(unsigned nTools)
     return ((nTools * unClampingTime) + (nTools * clampingTime) + configurationTime);
 }
 
-double computeTotalBendingTime(
-    double totalDistance,
-    double bendingForce
-)
+double computeTotalBendingTime(unsigned nBends, double totalDistance, double bendingForce)
 {
     double timeToPerformBend = nBends * computeTimeToFormBend(bendingForce);
     double linearTime = computeLinearDistance(totalDistance, bendingForce);
