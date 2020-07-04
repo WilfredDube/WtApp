@@ -26,8 +26,6 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
     session_(session),
     modelFile_(modelFile)
 {
-    auto& processPlan = modelFile_->processPlan;
-
     download_ = footer()->addNew<Wt::WPushButton>("DOWNLOAD");
     ok_ = footer()->addNew<Wt::WPushButton>("DONE");
 
@@ -38,6 +36,14 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
     setWidth(1200);
 
     dbo::Transaction transaction(session_);
+
+    auto& processPlan = modelFile_->processPlan;
+    auto nTools = modelFile_->processPlan->machineParam->num_tools;
+    auto nBend = modelFile_->nbends;
+    auto nFlips = modelFile_->processPlan->no_flips;
+    auto nRotations = modelFile_->processPlan->no_rotations;
+    auto distance = modelFile_->processPlan->tool_distance;
+    auto bendingForce = modelFile_->bendingForce;
 
     t->bindWidget("process_code", Wt::cpp14::make_unique<Wt::WText>())
                 ->setText(modelFile_->project->title);
@@ -81,23 +87,18 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
     quantity_->setValue(value);
     quantity_->setSingleStep(1);
     quantity_->setWidth(100);
-    quantity_->changed().connect([&]{
-        dbo::Transaction trn(session);
-        modelFile_->processPlan.modify()->quantity = quantity_->value();
-        trn.commit();
-    });
 
     nTools_ = t->bindWidget("tools_no", Wt::cpp14::make_unique<Wt::WText>());
-    nTools_->setText(processString(modelFile_->processPlan->machineParam->num_tools));
+    nTools_->setText(processString(nTools));
 
     bendingForce_ = t->bindWidget("bending_force", Wt::cpp14::make_unique<Wt::WText>());
-    bendingForce_->setText(processString(modelFile_->bendingForce));
+    bendingForce_->setText(processString(bendingForce));
 
     nRotations_ = t->bindWidget("rotations_no", Wt::cpp14::make_unique<Wt::WText>());
-    nRotations_->setText(processString(processPlan->no_rotations));
+    nRotations_->setText(processString(nRotations));
 
     nFlips_ = t->bindWidget("flips_no", Wt::cpp14::make_unique<Wt::WText>());
-    nFlips_->setText(processString(processPlan->no_flips));
+    nFlips_->setText(processString(nFlips));
 
     processPlanningTime_ = t->bindWidget("process_planning_time", Wt::cpp14::make_unique<Wt::WText>());
     processPlanningTime_->setText(processString(processPlan->process_planning_time));
