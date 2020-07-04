@@ -2,6 +2,7 @@
 
 #include "../model/ModelFile.h"
 #include "../model/BendSequence.h"
+#include "../libSeqgen/ProductionTime.h"
 
 #include <Wt/WText.h>
 #include <Wt/WTemplate.h>
@@ -103,6 +104,16 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
 
     totalProcessingTime_ = t->bindWidget("total_processing_time", Wt::cpp14::make_unique<Wt::WText>());
     totalProcessingTime_->setText(processString(processPlan->estimated_manufacturing_time));
+
+    quantity_->changed().connect([&]{
+        dbo::Transaction trn(session);
+        modelFile_->processPlan.modify()->quantity = quantity_->value();
+
+        auto time_p = computeTotalTime(quantity_->value(), nTools, nBend, nFlips, nRotations, distance, bendingForce);
+        totalProcessingTime_->setText(std::to_string(time_p));
+        
+        trn.commit();
+    });
 
     bendSequenceTable_  = t->bindWidget("feature_table", Wt::cpp14::make_unique<Wt::WTable>());
 
