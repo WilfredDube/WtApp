@@ -69,7 +69,10 @@ Sequence generateBendingSeq(Fxt::Model& model, std::vector<int> initialSeq)
         for(auto& c : new_generation[generation].chromosome)
         	std::cout<< c << " ";
         std::cout <<"\t"; 
-        std::cout<< "Fitness: "<< population[generation].fitness << "  "<< "No of flips : "<< new_generation[generation].nFlips << "\n"; 
+        std::cout << "Fitness: "<< population[generation].fitness << "  "<< "Flips: "<< new_generation[generation].nFlips;
+        std::cout << " Tools: " << population[generation].nTools;
+        std::cout << " Rotations: " << population[generation].nRotations;
+        std::cout << " Distance: " << population[generation].distance << "\n"; 
   
         ++generation; 
      }
