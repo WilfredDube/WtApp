@@ -86,11 +86,11 @@ double Sequence::cal_fitness()
             }
         } 
 
-        if (seqDistance == 0.0)
+        // if (seqDistance == 0.0)
         {
-            fitness += parallel * equality * direction * seqDistance;
-        } else {
-            fitness += parallel * equality * direction / seqDistance;
+        //     fitness += parallel * equality * direction * seqDistance / (nFlips * nRotations + 1);
+        // } else {
+            fitness += parallel * equality * direction / (seqDistance * nFlips * nRotations + 1);
         }        
         
         distance += seqDistance;
