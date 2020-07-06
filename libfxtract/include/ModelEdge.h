@@ -11,12 +11,12 @@
 #include <TopExp_Explorer.hxx>
 #include <vector>
 
+#include "ModelUtils.h"
+
 namespace Fxt {
 
   using EdgeID = size_t;
-  enum class EdgeType { DEFAULT = -1, LINE, ARC };
-  enum class EdgePosition { DEFAULT = -1, JOINING_EDGE, SIDE_EDGE, DISJOINT_EDGE };
-
+  
   class ModelEdge
   {
     EdgeID mEdgeNumber;

@@ -9,8 +9,6 @@
 
 namespace Fxt {
 
-  enum class FileFormat{ UNKNOWN_FORMAT, IGES_FORMAT, STEP_FORMAT };
-
   class ModelReader
   {
   private:
