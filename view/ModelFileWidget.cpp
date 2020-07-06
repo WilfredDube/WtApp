@@ -16,7 +16,7 @@
 #include "../model/BendSequence.h"
 #include "../model/MachineParam.h"
 #include "../model/Material.h"
-#include "../libSeqgen/GaIndividual.h"
+#include "../libSeqgen/Sequence.h"
 #include "../libSeqgen/BendSeqGen.h"
 
 #include <vector>
@@ -304,7 +304,7 @@ void ModelFileWidget::processModelFile()
             std::cout << ">>>>>>>>>> Filename : " << restored->getModelFile() << std::endl;
 
             int startTime = clock();
-            Individual bestSequence = generateBendingSeq(*restored, bids);
+            Sequence bestSequence = generateBendingSeq(*restored, bids);
             int stopTime = clock();
 
             total_time = (stopTime - startTime) / double(CLOCKS_PER_SEC);

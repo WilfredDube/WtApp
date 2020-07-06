@@ -1,12 +1,12 @@
-#ifndef GA_INDIVIDUAL_H_
-#define GA_INDIVIDUAL_H_
+#ifndef SEQUENCE_H_
+#define SEQUENCE_H_
 
 #include "../libfxtract/include/Model.h"
 
 #include <vector>
 
 // Class representing individual bend in population 
-class Individual 
+class Sequence 
 { 
     static double min_dist;
 public:
@@ -18,17 +18,17 @@ public:
     double fitness;
     Fxt::Model model;
     
-    Individual(std::vector<int> chromosome, Fxt::Model& model, size_t target_size); 
-    Individual mate(Individual parent2); 
+    Sequence(std::vector<int> chromosome, Fxt::Model& model, size_t target_size); 
+    Sequence mate(Sequence parent2); 
     double cal_fitness();
     
     // Overloading < operator 
-    bool operator<(const Individual &ind2) 
+    bool operator<(const Sequence &ind2) 
     { 
-        return fitness > ind2.fitness; 
+        return fitness > ind2.fitness && nFlips < ind2.nFlips; 
     }
 
-    bool operator==(const Individual& ind2);
+    bool operator==(const Sequence& ind2);
 };
 
 #endif

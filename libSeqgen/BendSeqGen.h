@@ -3,11 +3,11 @@
 
 #include "../libfxtract/include/Model.h"
 
-#include "GaIndividual.h"
+#include "Sequence.h"
 #include <vector>
 
-class Individual;
+class Sequence;
 
-Individual generateBendingSeq(Fxt::Model& model, std::vector<int> initialSeq);
+Sequence generateBendingSeq(Fxt::Model& model, std::vector<int> initialSeq);
 
 #endif

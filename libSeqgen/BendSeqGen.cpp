@@ -21,11 +21,11 @@
     return factorial;
  }
 
-Individual generateBendingSeq(Fxt::Model& model, std::vector<int> initialSeq)
+Sequence generateBendingSeq(Fxt::Model& model, std::vector<int> initialSeq)
 {   
     // current generation 
     int generation = 0, factorial {1};   
-    std::vector<Individual> population; 
+    std::vector<Sequence> population; 
     bool found = false;
     size_t POPULATION_SIZE, arrSize = initialSeq.size();
 
@@ -35,7 +35,7 @@ Individual generateBendingSeq(Fxt::Model& model, std::vector<int> initialSeq)
 
     if (initialSeq.size() == 1 || initialSeq.size() == 2)
     {
-        return Individual(initialSeq, model, initialSeq.size());
+        return Sequence(initialSeq, model, initialSeq.size());
     }
       
     // create initial population 
@@ -51,13 +51,13 @@ Individual generateBendingSeq(Fxt::Model& model, std::vector<int> initialSeq)
 
     for(int i = 0; i < genomes.size() ; i++) 
     { 
-        auto newPerm = Individual(genomes[i], model, initialSeq.size());
+        auto newPerm = Sequence(genomes[i], model, initialSeq.size());
         population.push_back(newPerm); 
     }
 
     std::cout << "Num in pop = " << population.size() << std::endl;
   
-    std::vector<Individual> new_generation; 
+    std::vector<Sequence> new_generation; 
     
     while (generation < POPULATION_SIZE)
     {   

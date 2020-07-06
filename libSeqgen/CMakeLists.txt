@@ -3,8 +3,8 @@ set(view_source_files
   BendSeqGen.h
   GA.cpp
   GA.h
-  GaIndividual.cpp
-  GaIndividual.h
+  Sequence.cpp
+  Sequence.h
   ProductionTime.cpp
   ProductionTime.h
   )
