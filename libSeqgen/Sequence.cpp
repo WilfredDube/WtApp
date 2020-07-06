@@ -1,24 +1,24 @@
-#include "GaIndividual.h"
+#include "Sequence.h"
 
 #include "GA.h"
 #include <algorithm>
 #include <random>       // std::default_random_engine
 #include <chrono>       // std::chrono::system_clock
 
-double Individual::min_dist = 0.0;
+double Sequence::min_dist = 0.0;
 
 // Overloading < operator 
-bool operator<(const Individual &ind1, const Individual &ind2) 
+bool operator<(const Sequence &ind1, const Sequence &ind2) 
 { 
     return ind1.fitness > ind2.fitness; 
 } 
 
-bool Individual::operator==(const Individual& ind2) 
+bool Sequence::operator==(const Sequence& ind2) 
 { 
     return std::equal(cbegin(this->chromosome), cend(this->chromosome), cbegin(ind2.chromosome)); 
 }
 
-Individual::Individual(std::vector<int> chromosome, Fxt::Model& model, size_t target_size) 
+Sequence::Sequence(std::vector<int> chromosome, Fxt::Model& model, size_t target_size) 
 : chromosome (chromosome), targetSize(target_size), model(model), nTools(1), 
   nRotations(0), nFlips(0), distance(0)
 { 
@@ -26,7 +26,7 @@ Individual::Individual(std::vector<int> chromosome, Fxt::Model& model, size_t ta
 }; 
 
 // Perform mating and produce new offspring  
-Individual Individual::mate(Individual par2) 
+Sequence Sequence::mate(Sequence par2) 
 { 
     // chromosome for offspring 
     std::vector<int> child_chromosome = par2.chromosome;
@@ -36,11 +36,11 @@ Individual Individual::mate(Individual par2)
     std::shuffle (child_chromosome.begin(), child_chromosome.end(), std::default_random_engine(seed));
 
     // create new Individual(offspring) using generated chromosome for offspring 
-    return Individual(child_chromosome, model, targetSize); 
+    return Sequence(child_chromosome, model, targetSize); 
 };
 
 // Calculate fittness score
-double Individual::cal_fitness() 
+double Sequence::cal_fitness() 
 { 
     int len = targetSize; 
     double parallel = 1, equality = 1, direction = 1, fitness = 0, seqDistance = 0.0;
