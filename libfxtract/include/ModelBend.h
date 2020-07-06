@@ -32,8 +32,6 @@ namespace Fxt {
     long double X, Y, Z;
   };
 
-  enum class BendOrientation { PARALLEL,  PERPENDICULAR };
-
   class ModelBend : public MFace
   {
     friend class boost::serialization::access;
