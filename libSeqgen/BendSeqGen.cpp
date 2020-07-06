@@ -100,5 +100,24 @@ Sequence generateBendingSeq(Fxt::Model& model, std::vector<int> initialSeq)
     std::cout << "======================================================================";
     std::cout << "==============================" << std::endl;
 
+    int n = 0;   
+    while (n < POPULATION_SIZE)
+    {   
+        // new_generation.push_back(population[n]);
+
+        // population = new_generation; 
+        std::cout<< "Generation: " << n << "\t"; 
+        std::cout<< "String: " ;
+        for(auto& c : new_generation[n].chromosome)
+        	std::cout<< c << " ";
+        std::cout <<"\t"; 
+        std::cout << "Fitness: "<< new_generation[n].fitness << "  "<< "Flips: "<< new_generation[n].nFlips;
+        std::cout << " Tools: " << new_generation[n].nTools;
+        std::cout << " Rotations: " << new_generation[n].nRotations;
+        std::cout << " Distance: " << new_generation[n].distance << "\n"; 
+  
+        ++n; 
+     }
+
     return new_generation[0];
 } 
