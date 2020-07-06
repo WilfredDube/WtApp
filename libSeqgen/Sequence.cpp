@@ -98,8 +98,5 @@ double Sequence::cal_fitness()
         parallel = 1; equality = 1; direction = 1; seqDistance = 0.0;
     }
 
-    std::cout << "===============================================" << seqDistance << std::endl;
-    std::cout << "===============================================" << seqDistance << std::endl;
-
     return fitness;
 }; 
