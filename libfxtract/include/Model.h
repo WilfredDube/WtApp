@@ -87,7 +87,7 @@ namespace Fxt {
 
     FaceID getBendWithJoiningFID(FaceID id, FaceID currbendID);
 
-    bool findFace(FaceID query, std::vector<ModelBend>& BL, std::vector<ModelBend>& innerBends);
+    bool findFace(FaceID id, std::vector<ModelBend>& BL, std::vector<ModelBend>& innerBends);
 
     void printAdjacencyGraph(std::map<FaceID, std::vector<std::pair<FaceID, double>>> mInnerFaceAdjacencyMap);
 
