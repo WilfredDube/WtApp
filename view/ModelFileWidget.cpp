@@ -18,6 +18,7 @@
 #include "../model/Material.h"
 #include "../libSeqgen/Sequence.h"
 #include "../libSeqgen/BendSeqGen.h"
+#include "ProcessPlanDialog.h"
 
 #include <vector>
 #include <map>
@@ -296,7 +297,6 @@ void ModelFileWidget::processModelFile()
             restoreStr = modelFile_.modify()->modelData.toUTF8();
             restored = restore(restoreStr);
 
-
             for (const auto& bend : restored->getBendMap()) {
                 bids.push_back(static_cast<int>(bend.first));
             }
@@ -352,8 +352,13 @@ void ModelFileWidget::processModelFile()
         // session_.modelFeaturesExtracted().emit(modelFile_);
         break;
     case ProcessLevel::PROCESS_PLAN_GEN:
-        std::cout << "Processing already complete!" << std::endl;
-        // session_.modelFeaturesExtracted().emit(modelFile_);
+
+        {
+            std::cout << "Processing already complete!" << std::endl;
+            auto d = addChild(Wt::cpp14::make_unique<ProcessPlanDialog>(session_, "Process Plan", modelFile_));
+            d->show();
+        }
+        
         break;
     
     default:
