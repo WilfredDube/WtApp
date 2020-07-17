@@ -98,11 +98,10 @@ namespace {
 
     static size_t computerModules(std::vector<ModelBend> bendFeatureData)
     {
-        // TODO : Find the longest bend length to find the number of required modules
         Standard_Real longest = 0.0;
         for (auto bend : bendFeatureData) {
             if (longest < roundd(bend.getBendLength())) {
-            longest = roundd(bend.getBendLength());
+                longest = roundd(bend.getBendLength());
             }
         }
 
