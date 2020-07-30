@@ -104,7 +104,8 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
     processPlanningTime_->setText(processString(processPlan->process_planning_time));
 
     totalProcessingTime_ = t->bindWidget("total_processing_time", Wt::cpp14::make_unique<Wt::WText>());
-    totalProcessingTime_->setText(processString(processPlan->estimated_manufacturing_time));
+    auto totalProductionTime = computeTotalProductionTime(quantity_->value(), nTools, nBend, nFlips, nRotations);
+    totalProcessingTime_->setText(processString(totalProductionTime));
 
     quantity_->changed().connect([&]{
         dbo::Transaction trn(session);
