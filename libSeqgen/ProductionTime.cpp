@@ -2,162 +2,49 @@
 
 #include <cmath>
 
-const double clampingTime = 30;
-const double unClampingTime = 40;
-const double configurationTime = 120;
+namespace {
+    const double approachingSpeed = 0.1;
+    const double formingSpeed = 0.01;
+    const double returningSpeed = 0.08;
+    const double strokeLength = 0.2;
 
-double computeTotalTime(
-    unsigned nParts,
-    unsigned nTools,
-    unsigned nBends,
-    unsigned nFlips,
-    unsigned nRotations,
-    double totalDistance,
-    double bendingForce
-)
+    const double toolRemovalTime = 3;
+    const double toolSetUpTime = 4;
+    const double configurationTime = 20;
+    const double strokeAdjustmentTime = 20;
+
+    const double flipingTime = 25;
+    const double rotatingTime = 20;
+    const double partRemovalTime = 10;
+    const double sheetPositioningTime = 10;
+} // namespace
+
+double computeTotalProductionTime(unsigned nParts, unsigned nTools, unsigned nBends, unsigned nFlips, unsigned nRotations)
 {
     double setUpTime = machineSetUpTime(nTools);
-    double totalBendingTime = computeTotalBendingTime(nBends, totalDistance, bendingForce);
+    double totalBendingTime = computeTotalBendingTime(nBends, nFlips, nRotations);
 
     return setUpTime + (nParts * totalBendingTime);
 }
 
 double machineSetUpTime(unsigned nTools)
 {
-    return ((nTools * unClampingTime) + (nTools * clampingTime) + configurationTime);
+    return ((nTools * toolRemovalTime) + (nTools * toolSetUpTime) + configurationTime + strokeAdjustmentTime);
 }
 
-double computeTotalBendingTime(unsigned nBends, double totalDistance, double bendingForce)
+double computeTotalBendingTime(unsigned nBends, unsigned nFlips, unsigned nRotations)
 {
-    double timeToPerformBend = nBends * computeTimeToFormBend(bendingForce);
-    double linearTime = computeLinearDistance(totalDistance, bendingForce);
+    double timeToPerformBend = nBends * computeTimeToFormBend();
+    double linearTime = (nFlips * flipingTime) + (nRotations * rotatingTime) + partRemovalTime + sheetPositioningTime;
 
     return (timeToPerformBend + linearTime);
 }
 
-double computeLinearDistance(double bendingForce, double totalDistance)
+double computeTimeToFormBend()
 {
-    double axisSpd = axisSpeed(bendingForce);
-
-    return (totalDistance / axisSpd); // FIX 
-}
-
-double computeRotationalDistance(double bendingForce, unsigned nRotations)
-{
-    double axisSpd = axisSpeed(bendingForce);
-
-    double rotate = nRotations * (M_PI / 2);
-
-    return (rotate / axisSpd); // FIX
-}
-
-double computeTimeToFormBend(double bendingForce)
-{
-    double approachingTime = approachingSpeed(bendingForce);
-    double formingTime = formingSpeed(bendingForce);
-    double returningTime = returningSpeed(bendingForce);
+    double formingTime = strokeLength / formingSpeed;
+    double approachingTime = strokeLength / approachingSpeed;
+    double returningTime = strokeLength / returningSpeed;
 
     return (approachingTime + formingTime + returningTime);
-}
-
-double lengthOfStroke(double bendingForce)
-{
-    double lengthOfStroke;
-
-    if (bendingForce > 0 && bendingForce <= 2300)
-    {
-        lengthOfStroke = 280;
-    } else if (bendingForce > 2300)
-    {
-        lengthOfStroke = 385;
-    }
-
-    return lengthOfStroke;
-}
-
-double axisSpeed(double bendingForce)
-{
-    double speed;
-
-    if (bendingForce > 0 && bendingForce <= 1800)
-    {
-        speed = 800;
-    } else if (bendingForce > 1800 && bendingForce <= 3700)
-    {
-        speed = 400;
-    } else if (bendingForce > 3700)
-    {
-        speed = 300;
-    }
-
-    return speed;
-}
-
-double approachingSpeed(double bendingForce)
-{
-    double speed;
-
-    if (bendingForce <= 600)
-    {
-        speed = 200;
-    } else if (bendingForce > 600 && bendingForce <= 900)
-    {
-        speed = 180;
-    } else if (bendingForce > 900 && bendingForce <= 1300)
-    {
-        speed = 160;
-    } else if (bendingForce > 1300 && bendingForce <= 2300)
-    {
-        speed = 120;
-    } else if (bendingForce > 2300 && bendingForce <= 3700)
-    {
-        speed = 100;
-    } else if (bendingForce > 3700)
-    {
-        speed = 90;
-    }
-
-    return speed;   
-}
-
-double formingSpeed(double bendingForce)
-{
-    double speed;
-
-    if (bendingForce > 0 && bendingForce <= 2300)
-    {
-        speed = 10;
-    } else if (bendingForce > 2300 && bendingForce <= 3100)
-    {
-        speed = 9;
-    } else if (bendingForce > 3100)
-    {
-        speed = 8;
-    } 
-
-    return speed;    
-}
-
-double returningSpeed(double bendingForce)
-{
-    double speed;
-
-    if (bendingForce <= 600)
-    {
-        speed = 110;
-    } else if (bendingForce > 600 && bendingForce <= 900)
-    {
-        speed = 120;
-    } else if (bendingForce > 900 && bendingForce <= 2300)
-    {
-        speed = 120;
-    } else if (bendingForce > 2300 && bendingForce <= 3700)
-    {
-        speed = 80;
-    } else if (bendingForce > 3700)
-    {
-        speed = 70;
-    }  
-
-    return speed;   
 }
