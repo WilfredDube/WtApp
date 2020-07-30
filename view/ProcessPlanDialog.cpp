@@ -86,7 +86,7 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
     material_->setText(modelFile_->modelMaterial);    
 
     quantity_ = t->bindWidget("quantity", Wt::cpp14::make_unique<Wt::WSpinBox>());
-    quantity_->setRange(1,100);
+    quantity_->setRange(1,10000);
     int value = modelFile_->processPlan->quantity == 1 ? 1 : modelFile_->processPlan->quantity;
     quantity_->setValue(value);
     quantity_->setSingleStep(1);
