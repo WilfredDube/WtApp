@@ -177,4 +177,10 @@ void ProcessPlanDialog::setModelCrumb(dbo::ptr<ModelFile> modelFile)
     refresh();
 }
 
+inline void ProcessPlanDialog::quantityChanged(unsigned nParts, unsigned nTools, unsigned nBends, unsigned nFlips, unsigned nRotations)
+{
+    auto time_p = computeTotalProductionTime(quantity_->value(), nTools, nBends, nFlips, nRotations);;
+    totalProcessingTime_->setText(processString(time_p));
+}
+
 ProcessPlanDialog::~ProcessPlanDialog(){}
