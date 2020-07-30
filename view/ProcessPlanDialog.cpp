@@ -1,5 +1,7 @@
 #include "ProcessPlanDialog.h"
 
+#include <chrono>
+
 #include "../model/ModelFile.h"
 #include "../model/BendSequence.h"
 #include "../libSeqgen/ProductionTime.h"
@@ -11,6 +13,8 @@
 #include <Wt/WSpinBox.h>
 #include <Wt/WInPlaceEdit.h>
 #include <Wt/WMessageBox.h>
+
+using namespace std::literals::chrono_literals;
 
 namespace {
 
@@ -105,7 +109,7 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
 
     totalProcessingTime_ = t->bindWidget("total_processing_time", Wt::cpp14::make_unique<Wt::WText>());
     auto totalProductionTime = computeTotalProductionTime(quantity_->value(), nTools, nBends, nFlips, nRotations);
-    totalProcessingTime_->setText(processString(totalProductionTime));
+    setProductionTime(totalProductionTime);
 
     quantity_->changed().connect([=]{
         dbo::Transaction trn(session_);
@@ -190,8 +194,23 @@ void ProcessPlanDialog::setModelCrumb(dbo::ptr<ModelFile> modelFile)
 
 inline void ProcessPlanDialog::quantityChanged(unsigned nParts, unsigned nTools, unsigned nBends, unsigned nFlips, unsigned nRotations)
 {
-    auto time_p = computeTotalProductionTime(quantity_->value(), nTools, nBends, nFlips, nRotations);;
-    totalProcessingTime_->setText(processString(time_p));
+    auto time_p = computeTotalProductionTime(quantity_->value(), nTools, nBends, nFlips, nRotations);
+    setProductionTime(time_p);
+}
+
+inline void ProcessPlanDialog::setProductionTime(const double time_p)
+{
+    std::cout << "+++++++++++++++++++_++++++++++++++++++++" << std::endl;
+    std::cout << "Seconds = " << time_p << std::endl;
+    std::cout << "+++++++++++++++++++_++++++++++++++++++++" << std::endl;
+    auto time = std::chrono::seconds(static_cast<int>(time_p));
+    
+    auto days = std::chrono::duration_cast<std::chrono::duration<int,std::ratio<3600*24>>>(time);
+    auto hours = std::chrono::duration_cast<std::chrono::hours>(time  % std::chrono::hours(24));
+    auto mins = std::chrono::duration_cast<std::chrono::minutes>(time % std::chrono::hours(1));;
+    auto secs = std::chrono::duration_cast<std::chrono::seconds>(time % std::chrono::minutes(1));
+
+    totalProcessingTime_->setText(std::to_string(days.count()) + " d : " + std::to_string(hours.count()) + " h : " + std::to_string(mins.count()) + " min :" + (std::to_string(secs.count()) + " s"));
 }
 
 ProcessPlanDialog::~ProcessPlanDialog(){}
