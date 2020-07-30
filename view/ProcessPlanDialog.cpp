@@ -166,7 +166,7 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
                 bendSequenceTable_->elementAt(rowCount, 1)->addNew<Wt::WText>("B" + std::to_string(bend->bend_id));
                 bendSequenceTable_->elementAt(rowCount, 2)->addNew<Wt::WText>(processString(bend->bend_angle));
                 bendSequenceTable_->elementAt(rowCount, 3)->addNew<Wt::WText>(processString(bend->bend_radius));
-                bendSequenceTable_->elementAt(rowCount, 4)->addNew<Wt::WText>(processString(bend->bend_direction));
+                bendSequenceTable_->elementAt(rowCount, 4)->addNew<Wt::WText>((bend->bend_direction == 1 ? "Inside" : "Outside"));
                 bendSequenceTable_->elementAt(rowCount, 5)->addNew<Wt::WText>(processString(bend->bend_length));
                 bendSequenceTable_->elementAt(rowCount, 6)->addNew<Wt::WText>(bend->bending_tool_id);
 
