@@ -107,13 +107,24 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
     auto totalProductionTime = computeTotalProductionTime(quantity_->value(), nTools, nBends, nFlips, nRotations);
     totalProcessingTime_->setText(processString(totalProductionTime));
 
-    quantity_->changed().connect([&]{
-        dbo::Transaction trn(session);
-        modelFile_->processPlan.modify()->quantity = quantity_->value();
+    quantity_->changed().connect([=]{
+        dbo::Transaction trn(session_);
 
-        auto time_p = computeTotalTime(quantity_->value(), nTools, nBend, nFlips, nRotations, distance, bendingForce);
-        totalProcessingTime_->setText(std::to_string(time_p));
+        modelFile_->processPlan.modify()->quantity = quantity_->value();
         
+        quantityChanged(quantity_->value(), nTools, nBends, nFlips, nRotations);
+
+        trn.commit();
+
+    });
+
+    quantity_->enterPressed().connect([=]{
+        dbo::Transaction trn(session_);
+
+        modelFile_->processPlan.modify()->quantity = quantity_->value();   
+
+        quantityChanged(quantity_->value(), nTools, nBends, nFlips, nRotations);
+
         trn.commit();
     });
 
