@@ -39,7 +39,7 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
 
     auto& processPlan = modelFile_->processPlan;
     auto nTools = modelFile_->processPlan->machineParam->num_tools;
-    auto nBend = modelFile_->nbends;
+    auto nBends = modelFile_->nbends;
     auto nFlips = modelFile_->processPlan->no_flips;
     auto nRotations = modelFile_->processPlan->no_rotations;
     auto distance = modelFile_->processPlan->tool_distance;
@@ -104,7 +104,7 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
     processPlanningTime_->setText(processString(processPlan->process_planning_time));
 
     totalProcessingTime_ = t->bindWidget("total_processing_time", Wt::cpp14::make_unique<Wt::WText>());
-    auto totalProductionTime = computeTotalProductionTime(quantity_->value(), nTools, nBend, nFlips, nRotations);
+    auto totalProductionTime = computeTotalProductionTime(quantity_->value(), nTools, nBends, nFlips, nRotations);
     totalProcessingTime_->setText(processString(totalProductionTime));
 
     quantity_->changed().connect([&]{
