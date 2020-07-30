@@ -1,7 +1,5 @@
 #include "ProductionTime.h"
 
-#include <cmath>
-
 namespace {
     const double approachingSpeed = 0.1;
     const double formingSpeed = 0.01;
