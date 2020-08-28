@@ -60,10 +60,10 @@ ModelInfoPanels::ModelInfoPanels(Session& session, dbo::ptr<Project> project)
     panelList_->addWidget("Bend Feature Summary", std::move(bendFeaturesSummaryTable));
 
     /************************** Project Process Plans *********************/
-    auto processPlanGroupBox = Wt::cpp14::make_unique<Wt::WGroupBox>();
-    processPlanGroupBox_ = processPlanGroupBox.get();
-    processPlanGroupBox->addStyleClass("centered-example");
-    panelList_->addWidget("Project Process Plans", std::move(processPlanGroupBox));
+    // auto processPlanGroupBox = Wt::cpp14::make_unique<Wt::WGroupBox>();
+    // processPlanGroupBox_ = processPlanGroupBox.get();
+    // processPlanGroupBox->addStyleClass("centered-example");
+    // panelList_->addWidget("Project Process Plans", std::move(processPlanGroupBox));
 }
 
 void ModelInfoPanels::loadModelList()

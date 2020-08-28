@@ -22,7 +22,7 @@ private:
     Wt::WGroupBox *modelFilesGroupBox_;
     Wt::WTable *faceRelationshipTable_;
     Wt::WTable *bendFeaturesSummaryTable_;
-    Wt::WGroupBox *processPlanGroupBox_;
+    // Wt::WGroupBox *processPlanGroupBox_;
     PanelList *panelList_;
     
     void reloadList();
