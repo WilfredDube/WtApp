@@ -6,7 +6,7 @@
                 ${add-model}
             </div>           
             <div>
-                ${bs-gen}
+                <!-- ${bs-gen} -->
             </div>          
             <div>
                 ${fag}

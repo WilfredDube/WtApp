@@ -68,14 +68,14 @@ ModelViewerControls::ModelViewerControls(Session& session, const std::string upl
         addModelDialog();
     });
 
-    auto bendingSeqButton = Wt::cpp14::make_unique<Wt::WPushButton>();
-	bendingSeqButton_ = controls_->bindWidget("bs-gen", std::move(bendingSeqButton));
-    bendingSeqButton_->addStyleClass("btn btn-floating btn-success btn-circle btn-md");
-    bendingSeqButton_->setIcon("icons/bsg.svg");
-    bendingSeqButton_->setToolTip("Generate the Bending Sequence");
-    bendingSeqButton_->clicked().connect([=] {
-        bendingSeqDialog();
-    });
+    // auto bendingSeqButton = Wt::cpp14::make_unique<Wt::WPushButton>();
+	// bendingSeqButton_ = controls_->bindWidget("bs-gen", std::move(bendingSeqButton));
+    // bendingSeqButton_->addStyleClass("btn btn-floating btn-success btn-circle btn-md");
+    // bendingSeqButton_->setIcon("icons/settings.svg");
+    // bendingSeqButton_->setToolTip("Generate the Bending Sequence");
+    // bendingSeqButton_->clicked().connect([=] {
+    //     bendingSeqDialog();
+    // });
 
     auto featureButton = Wt::cpp14::make_unique<Wt::WPushButton>();
 	featureButton_ = controls_->bindWidget("fag", std::move(featureButton));
@@ -89,7 +89,7 @@ ModelViewerControls::ModelViewerControls(Session& session, const std::string upl
     auto SettingButton = Wt::cpp14::make_unique<Wt::WPushButton>();
 	SettingButton_ = controls_->bindWidget("settings", std::move(SettingButton));
     SettingButton_->addStyleClass("btn btn-success btn-circle btn-md");
-    SettingButton_->setIcon("icons/settings.svg");
+    SettingButton_->setIcon("icons/bsg.svg");
     SettingButton_->setToolTip("Change Display settings");
     SettingButton_->clicked().connect([=] {
         settingsDialog();

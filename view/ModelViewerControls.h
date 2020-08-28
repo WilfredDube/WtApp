@@ -20,7 +20,7 @@ private:
     dbo::ptr<ModelFile> modelFile_;
 
     Wt::WPushButton *addModelButton_;
-    Wt::WPushButton *bendingSeqButton_;
+    // Wt::WPushButton *bendingSeqButton_;
     Wt::WPushButton *featureButton_;
     Wt::WPushButton *SettingButton_;
     Wt::WTable *bendFeaturesTable_;
