@@ -66,7 +66,7 @@ namespace Fxt {
         ar & mBendAngle & mBendDirection;
         ar & bendLinePnt & bendLineDir;
 
-        makeBendLine();
+        if (Archive::is_loading::value) makeBendLine();
     }
     
   public:
