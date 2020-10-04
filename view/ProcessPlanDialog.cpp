@@ -48,6 +48,7 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
     auto nRotations = modelFile_->processPlan->no_rotations;
     auto distance = modelFile_->processPlan->tool_distance;
     auto bendingForce = modelFile_->bendingForce;
+    auto thickness = modelFile_->thickness;
 
     t->bindWidget("process_code", Wt::cpp14::make_unique<Wt::WText>())
                 ->setText(modelFile_->project->title);
@@ -94,6 +95,9 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
 
     nTools_ = t->bindWidget("tools_no", Wt::cpp14::make_unique<Wt::WText>());
     nTools_->setText(processString(nTools));
+
+    thickness_ = t->bindWidget("thickness", Wt::cpp14::make_unique<Wt::WText>());
+    thickness_->setText(processString(thickness));
 
     bendingForce_ = t->bindWidget("bending_force", Wt::cpp14::make_unique<Wt::WText>());
     bendingForce_->setText(processString(bendingForce));

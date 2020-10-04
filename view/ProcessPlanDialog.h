@@ -30,6 +30,7 @@ private:
     Wt::WSpinBox* quantity_;
 
     Wt::WText* nTools_;
+    Wt::WText* thickness_;
     Wt::WText* bendingForce_;
     Wt::WText* nRotations_;
     Wt::WText* nFlips_;
