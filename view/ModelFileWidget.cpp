@@ -250,9 +250,6 @@ void ModelFileWidget::processModelFile()
                 b->bending_tool_id = toolName;
                 b->bend_force = bend_force;
 
-                modelFile_.modify()->thickness = thickness;
-                modelFile_.modify()->bendingForce = bend_force;
-
                 session_.flush();
 
                 t.commit();
@@ -271,9 +268,17 @@ void ModelFileWidget::processModelFile()
 
             modelFile_.modify()->thickness = thickness;
             
+            modelFile_.modify()->bendingForce = longestBend * std::pow(thickness, 2) 
+                                * material->k_factor 
+                                * material->tensile_strength
+                                / (8 * thickness * 1000);
+
             icons_->setIconColor(ProcessLevel::FEATURE_EXTRACTED);
 
             t.commit();
+
+            std::cout << "Thickness : " << thickness << ", Longest bend : " << longestBend
+                      << ", K : " << material->k_factor << ", TS : " << material->tensile_strength << '\n';
         }
 
         // std::cout << "\n\n\n" << std::endl;
