@@ -52,7 +52,7 @@
 	</tr>
 	<tr>
 	  	<!-- <td height="80"><b>STOCK SIZE :</b> ${stock_size}</td> -->
-	  	<td colspan="3"><b>MACHINE PARAMETERS :</b> <br/>No of tools : ${tools_no} <br/> Bending Force : ${bending_force}</td>	  	
+	  	<td colspan="3"><b>MACHINE PARAMETERS :</b> <br/>No of tools : ${tools_no} <br/> Thickness : ${thickness} <br/> Bending Force : ${bending_force}</td>	  	
 	  	<td ><b>NO OF ROTATIONS :</b> ${rotations_no}<br/><br/><b>NO OF FLIPS :</b> ${flips_no}</td>
 	  	<td colspan="1"><b>PROCESS <br/>PLANNING TIME :</b> ${process_planning_time}</td>
 	  	<td colspan="1"><b>ESTIMATED <br/>PRODUCTION TIME  :</b> ${total_processing_time}</td>
