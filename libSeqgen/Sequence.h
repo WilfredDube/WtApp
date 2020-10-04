@@ -22,7 +22,6 @@ public:
     Sequence mate(Sequence parent2); 
     double cal_fitness();
     
-    // Overloading < operator 
     bool operator<(const Sequence &ind2) 
     { 
         return fitness > ind2.fitness; 
