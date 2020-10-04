@@ -194,6 +194,7 @@ void ModelFileWidget::processModelFile()
         } else
         {
             int startTime = clock();
+            long double longestBend = 0.0;
             long double thickness = procModelFile(filename.c_str());
             bendFeatureData = modelFeatureMap[std::string(filename)];
             int stopTime = clock();
@@ -225,6 +226,9 @@ void ModelFileWidget::processModelFile()
                           << "K Factor : " << material->k_factor
                           << "TStrength : " << material->tensile_strength << std::endl;
                           
+                if(a.getBendLength() > longestBend)
+                    longestBend = a.getBendLength();
+                    
                 auto bend_force = a.getBendLength() * std::pow(thickness, 2) 
                                 * material->k_factor 
                                 * material->tensile_strength
