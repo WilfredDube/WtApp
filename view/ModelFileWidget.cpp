@@ -266,6 +266,11 @@ void ModelFileWidget::processModelFile()
             modelFile_.modify()->modelData = save(*test);
             modelFile_.modify()->feature_recognition_time = total_time;
 
+            dbo::ptr<Material> material = session_.find<Material>()
+                                    .where("material_name = ?").bind(modelFile_->modelMaterial);
+
+            modelFile_.modify()->thickness = thickness;
+            
             icons_->setIconColor(ProcessLevel::FEATURE_EXTRACTED);
 
             t.commit();
