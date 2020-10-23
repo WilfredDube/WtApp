@@ -1,5 +1,4 @@
 #include "../../../include/sheet-metal-component/bend/ModelBend.h"
-#include "../../../include/sheet-metal-component/bend/BendComputation.h"
 #include "../../../include/Computation.h"
 #include "../../../include/sheet-metal-component/ModelTypes.h"
 
@@ -74,6 +73,13 @@ void ModelBend::computeBendLine()
     mBendLineDir->X = dirVertex.X();
     mBendLineDir->Y = dirVertex.Y();
     mBendLineDir->Z = dirVertex.Z();
+}
+
+void ModelBend::makeBendLine()
+{
+    mBendLine = std::make_shared<gp_Lin>(
+        gp_Pnt( mBendLinePnt->X, mBendLinePnt->Y, mBendLinePnt->Z), gp_Dir(mBendLineDir->X, mBendLineDir->Y, mBendLineDir->Z)
+        );
 }
 
 std::shared_ptr<gp_Lin> ModelBend::getBendLine() const

@@ -34,6 +34,8 @@ namespace Bend
 
         void computeBendLine();
 
+        void makeBendLine();
+        
         std::shared_ptr<gp_Lin> getBendLine() const;
 
         double computeBendDistance(const std::shared_ptr<Fxt::SheetMetalComponent::Bend::ModelBend>& otherBend) const;
