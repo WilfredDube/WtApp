@@ -1,27 +1,56 @@
 set(Headers
+  include/cad-file-reader/CadFileReader.h
+  include/cad-file-reader/CadFileReaderFactory.h
+  include/cad-file-reader/IgesFileReader.h
+  include/cad-file-reader/StepFileReader.h
+  include/cad-file-reader/UnknownFileFormatException.h
   include/ModelUtils.h
   include/MFace.h
-  include/StepProcessor.h
-  include/IgesProcessor.h
+#  include/StepProcessor.h
+#  include/IgesProcessor.h
   include/ModelEdge.h
-  include/ModelReader.h
+#  include/ModelReader.h
   include/ModelFace.h
   include/ModelBend.h
   include/Model.h
   include/ModelMath.h
+
+  include/Computation.h
+  include/sheet-metal-component/BoostSerializer.h
+  include/sheet-metal-component/MFaceAbstract.h
+  include/sheet-metal-component/Point.h
+
+  include/sheet-metal-component/edge/ModelEdge.h
+
+  include/sheet-metal-component/bend/BendFeature.h
+  include/sheet-metal-component/bend/ModelBend.h
+
+  include/sheet-metal-component/face/ModelFace.h
 )
 
 set(Sources
+  src/cad-file-reader/CadFileReaderFactory.cpp
+  src/cad-file-reader/IgesFileReader.cpp
+  src/cad-file-reader/StepFileReader.cpp
   src/ModelUtils.cpp
   src/MFace.cpp
-  src/StepProcessor.cpp
-  src/IgesProcessor.cpp
+#  src/StepProcessor.cpp
+#  src/IgesProcessor.cpp
   src/ModelEdge.cpp
-  src/ModelReader.cpp
+#  src/ModelReader.cpp
   src/ModelFace.cpp
   src/ModelBend.cpp
   src/Model.cpp
   src/ModelMath.cpp
+  
+  src/Computation.cpp
+  src/sheet-metal-component/MFaceAbstract.cpp
+  src/sheet-metal-component/face/ModelFace.cpp
+
+  src/sheet-metal-component/edge/ModelEdge.cpp
+
+  src/sheet-metal-component/bend/BendFeature.cpp
+  src/sheet-metal-component/bend/ModelBend.cpp
 )
 
 set(THREADS_PREFER_PTHREAD_FLAG ON)
