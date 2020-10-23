@@ -6,13 +6,9 @@
 #include "../Point.h"
 #include "../../Computation.h"
 
-// #include "BendComputation.h"
-
 #include <gp_Lin.hxx>
 #include <TopoDS_Face.hxx>
 #include <vector>
-
-// class ModelBend;
 
 namespace Fxt
 {
