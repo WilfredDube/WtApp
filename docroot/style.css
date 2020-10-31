@@ -216,18 +216,20 @@ h1 {
 }
 
 .myTable { 
-  width: 100%;
-  text-align: left;
-  background-color: white;
-  border-collapse: collapse;
-  #table-layout: fixed;
-  }
+    width: 100%;
+    text-align: left;
+    background-color: white;
+    border-collapse: collapse;
+    #table-layout: fixed;
+}
+
 .myTable th { 
-  background-color: goldenrod;
-  color: white; 
-  }
+    background-color: goldenrod;
+    color: white; 
+}
+
 .myTable td, 
 .myTable th { 
-  padding: 10px;
-  border: 1px solid goldenrod; 
-  }
+    padding: 10px;
+    border: 1px solid goldenrod; 
+}
