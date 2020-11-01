@@ -49,3 +49,7 @@ void BendLine::makeBendLine()
         );
 }
         
+std::shared_ptr<gp_Lin> BendLine::getBendLine() const 
+{
+    return mBendLine;
+}
