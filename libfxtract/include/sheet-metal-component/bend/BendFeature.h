@@ -3,7 +3,6 @@
 #include "../BoostSerializer.h"
 #include "../edge/ModelEdge.h"
 #include "../MFaceAbstract.h"
-#include "../Point.h"
 #include "../../Computation.h"
 
 #include <gp_Lin.hxx>
@@ -21,7 +20,9 @@ namespace Bend
         using FaceID = Fxt::SheetMetalComponent::ModelTypes::FaceID;
 
         long double mBendLength;
-        long double mCurvature; //!< face curvature value : zero for planar type faces and non-zero for non-planar type faces.
+
+        //!< face curvature value : zero for planar type faces and non-zero for non-planar type faces.
+        long double mCurvature;
 
         //!< the face ID of the face connected to the bend face via its Straight edge.
         FaceID mJoinedFaceId1;
@@ -34,7 +35,6 @@ namespace Bend
         long double mBendRadius; //!< bend radius : zero if face is planar and non-zero if face is a bend.
         size_t mBendDirection;
 
-        // std::shared_ptr<BendComputation> mBendComputation;
     public:
 
         void setJoiningFaceID1(const FaceID mFaceID);
