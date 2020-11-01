@@ -1,4 +1,6 @@
 #include "../../../include/sheet-metal-component/bend/ModelBend.h"
+#include "../../../include/sheet-metal-component/bend/BendLine.h"
+#include "../../../include/sheet-metal-component/bend/BendFeature.h"
 #include "../../../include/Computation.h"
 #include "../../../include/sheet-metal-component/ModelTypes.h"
 
@@ -69,7 +71,7 @@ double ModelBend::computeBendDistance(const std::shared_ptr<Fxt::SheetMetalCompo
 
 bool ModelBend::isParallel(const std::shared_ptr<ModelBend>& otherBend) const
 {
-    auto angle = roundd(mBendLine->Angle(*(otherBend->getBendLine())) * (180 / M_PI));
+    auto angle = mBendLine->angle(otherBend->getBendLine());
 
     return (angle == 0.0 || angle == 180);
 }
