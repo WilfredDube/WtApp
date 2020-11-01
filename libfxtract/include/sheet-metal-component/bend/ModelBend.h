@@ -13,16 +13,22 @@ namespace Bend
     using FaceID = Fxt::SheetMetalComponent::ModelTypes::FaceID;
     using BendType = Fxt::SheetMetalComponent::ModelTypes::BendType;
 
+    class BendLine;
+    class BendFeature;
+
     class ModelBend : Fxt::SheetMetalComponent::MFaceAbstract
     {
         BendType mBendType;
 
         std::shared_ptr< Fxt::SheetMetalComponent::Bend::BendFeature> mBendFeature;
-        // std::shared_ptr< Fxt::SheetMetalComponent::Bend::BendComputation> mComputation;
     
         unsigned long mBendSameAsId;
 
-        std::shared_ptr<gp_Lin> mBendLine;
+        // The arc type edges in a bend.
+        // useful for computing the bend line because if prevents multiple calls to
+        // the arcEdgeExtraction function.
+        std::vector<std::shared_ptr<Edge::ModelEdge>> mArcEdges;
+
         
         std::shared_ptr<Point> mBendLinePnt, mBendLineDir;    
     public:
