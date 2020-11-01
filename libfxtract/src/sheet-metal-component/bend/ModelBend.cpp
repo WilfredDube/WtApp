@@ -64,7 +64,7 @@ std::shared_ptr<Fxt::SheetMetalComponent::Bend::BendLine> ModelBend::getBendLine
 
 double ModelBend::computeBendDistance(const std::shared_ptr<Fxt::SheetMetalComponent::Bend::ModelBend>& otherBend) const
 {
-    return mBendLine->Distance(*(otherBend->getBendLine()));
+    return mBendLine->distance(otherBend->getBendLine());
 }
 
 bool ModelBend::isParallel(const std::shared_ptr<ModelBend>& otherBend) const
