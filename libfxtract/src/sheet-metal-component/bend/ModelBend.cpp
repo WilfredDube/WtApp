@@ -35,7 +35,8 @@ void ModelBend::init()
 
     setBendLength();
 
-    computeBendLine();
+
+    mBendLine->computeBendLine(mArcEdges);
 }
 
 void ModelBend::arcEdgeExtraction()
