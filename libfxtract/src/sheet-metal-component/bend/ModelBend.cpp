@@ -36,12 +36,11 @@ void ModelBend::init()
     computeBendLine();
 }
 
-void ModelBend::setBendLength(const std::vector<std::shared_ptr<Fxt::SheetMetalComponent::Edge::ModelEdge>> mFaceEdges)
+void ModelBend::arcEdgeExtraction()
 {
     for(const auto& edge : mFaceEdges){
-        if(edge->getEdgeType() == Fxt::SheetMetalComponent::ModelTypes::EdgeType::LINE){
-            mBendFeature->setBendLength(edge->getEdgeLength());
-            break;
+        if(edge->getEdgeType() == Fxt::SheetMetalComponent::ModelTypes::EdgeType::ARC){
+            mArcEdges.push_back(edge);
         }
     }
 }

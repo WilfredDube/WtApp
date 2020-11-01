@@ -37,6 +37,8 @@ namespace Bend
 
         void init();
 
+        void arcEdgeExtraction();
+
         void setBendLength(const std::vector<std::shared_ptr<Fxt::SheetMetalComponent::Edge::ModelEdge>> mFaceEdges);
 
         void computeBendLine();
