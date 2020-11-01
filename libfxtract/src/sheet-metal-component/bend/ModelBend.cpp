@@ -57,32 +57,7 @@ void ModelBend::setBendLength()
        }       
 }
 
-    gp_Pnt dirVertex(
-      endPoints[0].X() - endPoints[1].X(),
-      endPoints[0].Y() - endPoints[1].Y(),
-      endPoints[0].Z() - endPoints[1].Z()
-    );
-
-
-    mBendLine = std::make_shared<gp_Lin>(endPoints[0], gp_Dir(dirVertex.X(), dirVertex.Y(), dirVertex.Z()));
-
-    mBendLinePnt->X = endPoints[0].X();//bendLine_.Location().X();
-    mBendLinePnt->Y = endPoints[0].Y();//bendLine_.Location().Y();
-    mBendLinePnt->Z = endPoints[0].Z();//bendLine_.Location().Z();
-
-    mBendLineDir->X = dirVertex.X();
-    mBendLineDir->Y = dirVertex.Y();
-    mBendLineDir->Z = dirVertex.Z();
-}
-
-void ModelBend::makeBendLine()
-{
-    mBendLine = std::make_shared<gp_Lin>(
-        gp_Pnt( mBendLinePnt->X, mBendLinePnt->Y, mBendLinePnt->Z), gp_Dir(mBendLineDir->X, mBendLineDir->Y, mBendLineDir->Z)
-        );
-}
-
-std::shared_ptr<gp_Lin> ModelBend::getBendLine() const
+std::shared_ptr<Fxt::SheetMetalComponent::Bend::BendLine> ModelBend::getBendLine() const 
 {
     return mBendLine;
 }

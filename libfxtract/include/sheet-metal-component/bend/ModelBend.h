@@ -1,8 +1,6 @@
 #pragma once
 
 #include "../MFaceAbstract.h"
-#include "BendFeature.h"
-// #include "BendComputation.h"
 
 namespace Fxt
 {
@@ -40,11 +38,7 @@ namespace Bend
 
         void setBendLength();
         
-        void computeBendLine();
-
-        void makeBendLine();
-        
-        std::shared_ptr<gp_Lin> getBendLine() const;
+        std::shared_ptr<Fxt::SheetMetalComponent::Bend::BendLine> getBendLine() const;
 
         double computeBendDistance(const std::shared_ptr<Fxt::SheetMetalComponent::Bend::ModelBend>& otherBend) const;
 
