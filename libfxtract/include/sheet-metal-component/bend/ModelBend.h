@@ -30,8 +30,7 @@ namespace Bend
         std::vector<std::shared_ptr<Edge::ModelEdge>> mArcEdges;
 
         std::shared_ptr<Fxt::SheetMetalComponent::Bend::BendLine> mBendLine;
-        
-        std::shared_ptr<Point> mBendLinePnt, mBendLineDir;    
+
     public:
         ModelBend(const Fxt::SheetMetalComponent::FaceID faceID = 0, std::shared_ptr<TopoDS_Face> topoDSFace = nullptr);
 
@@ -39,8 +38,8 @@ namespace Bend
 
         void arcEdgeExtraction();
 
-        void setBendLength(const std::vector<std::shared_ptr<Fxt::SheetMetalComponent::Edge::ModelEdge>> mFaceEdges);
-
+        void setBendLength();
+        
         void computeBendLine();
 
         void makeBendLine();

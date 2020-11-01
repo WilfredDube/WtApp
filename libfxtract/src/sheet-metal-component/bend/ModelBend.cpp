@@ -31,7 +31,7 @@ void ModelBend::init()
     computeFaceNormal();
     setUnitNormal(computeUnitNormal(mModelFace));
 
-    setBendLength(mFaceEdges);
+    setBendLength();
 
     computeBendLine();
 }
@@ -45,16 +45,17 @@ void ModelBend::arcEdgeExtraction()
     }
 }
 
-void ModelBend::computeBendLine()
+void ModelBend::setBendLength()
 {
-    std::vector<gp_Pnt> endPoints;
-
-    for(auto& edge :  getFaceEdges()) {
-       if (edge->getEdgeType() == EdgeType::ARC)
-       {  
-         endPoints.push_back(computeMidPoint(edge->getEdgeEndPoints()[0], edge->getEdgeEndPoints()[1]));
-       }       
+    for(const auto& edge : mFaceEdges){
+        if(edge->getEdgeType() == Fxt::SheetMetalComponent::ModelTypes::EdgeType::LINE){
+            mBendFeature->setBendLength(edge->getEdgeLength());
+            break;
+        }
     }
+}
+       }       
+}
 
     gp_Pnt dirVertex(
       endPoints[0].X() - endPoints[1].X(),
