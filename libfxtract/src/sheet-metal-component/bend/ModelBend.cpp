@@ -35,6 +35,8 @@ void ModelBend::init()
 
     setBendLength();
 
+    if(mArcEdges.size() != 2)
+        arcEdgeExtraction();
 
     mBendLine->computeBendLine(mArcEdges);
 }
@@ -56,8 +58,6 @@ void ModelBend::setBendLength()
             break;
         }
     }
-}
-       }       
 }
 
 std::shared_ptr<Fxt::SheetMetalComponent::Bend::BendLine> ModelBend::getBendLine() const 
