@@ -53,3 +53,8 @@ std::shared_ptr<gp_Lin> BendLine::getBendLine() const
 {
     return mBendLine;
 }
+
+double BendLine::distance(const std::shared_ptr<Fxt::SheetMetalComponent::Bend::BendLine>& otherBendLine) const
+{
+    return mBendLine->Distance(*(otherBendLine->getBendLine()));
+}
