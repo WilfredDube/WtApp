@@ -42,3 +42,10 @@ void BendLine::computeBendLine(
     mBendLineDir->Z = dirVertex.Z();
 }
 
+void BendLine::makeBendLine()
+{
+    mBendLine = std::make_shared<gp_Lin>(
+        gp_Pnt( mBendLinePnt->X, mBendLinePnt->Y, mBendLinePnt->Z), gp_Dir(mBendLineDir->X, mBendLineDir->Y, mBendLineDir->Z)
+        );
+}
+        
