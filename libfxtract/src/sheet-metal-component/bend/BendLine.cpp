@@ -58,3 +58,8 @@ double BendLine::distance(const std::shared_ptr<Fxt::SheetMetalComponent::Bend::
 {
     return mBendLine->Distance(*(otherBendLine->getBendLine()));
 }
+
+double BendLine::angle(const std::shared_ptr<Fxt::SheetMetalComponent::Bend::BendLine>& otherBendLine) const
+{
+    return roundd(mBendLine->Angle(*(otherBendLine->getBendLine())) * (180 / M_PI));
+}
