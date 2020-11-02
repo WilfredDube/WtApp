@@ -39,7 +39,7 @@ namespace SheetMetalComponent
 
         std::shared_ptr<gp_Dir> getNormalByFaceID(const FaceID faceID) const;
 
-        std::shared_ptr<Bend::ModelBend> getBendWithJoiningFaceID(const FaceID faceID) const;
+        FaceID getIdOfBendWithJoiningFaceID(const FaceID currbendID, const FaceID faceID) const;
         
         bool findFace(FaceID id, std::map<FaceID, std::shared_ptr<Bend::ModelBend>>& BL, 
                         std::map<FaceID, std::shared_ptr<Bend::ModelBend>>& innerBends);
