@@ -34,7 +34,7 @@ namespace Fxt {
   *   Computes the curvature of a ModelFace and ModelBend.
   */
   template<typename T>
-  Standard_Real computeCurvature(const std::shared_ptr<T> face)
+  Standard_Real computeCurvature(const std::shared_ptr<T>& face)
   {
     BRepAdaptor_Surface surface = BRepAdaptor_Surface(*face);
     double u = (surface.FirstUParameter() + surface.LastUParameter()) / 2.0;
