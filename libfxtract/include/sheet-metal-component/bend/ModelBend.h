@@ -14,7 +14,7 @@ namespace Bend
     class BendLine;
     class BendFeature;
 
-    class ModelBend : Fxt::SheetMetalComponent::MFaceAbstract
+    class ModelBend : public Fxt::SheetMetalComponent::MFaceAbstract
     {
         BendType mBendType;
 
