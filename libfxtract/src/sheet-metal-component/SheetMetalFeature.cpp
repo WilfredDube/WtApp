@@ -15,6 +15,11 @@ void SheetMetalFeature::addModelBend(std::shared_ptr<Bend::ModelBend>& modelBend
     mModelBends[modelBend->getFaceId()] = modelBend;
 }
 
+std::shared_ptr<gp_Dir> SheetMetalFeature::getNormalByFaceID(const FaceID faceID) const
+{
+    auto modelFace = mModelFaces.find(faceID)->second;
+    return modelFace->getFaceNormal();
+}
 
 FaceID SheetMetalFeature::getIdOfBendWithJoiningFaceID(const FaceID currbendID, const FaceID faceID) const
 {
