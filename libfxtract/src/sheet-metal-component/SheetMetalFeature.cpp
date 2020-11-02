@@ -75,7 +75,29 @@ double SheetMetalFeature::getThickness() const
     return mThickness;
 }
 
-// void SheetMetalFeature::assignFaceAttributes(FaceID faceID, TopoDS_Shape& aShape);
+void SheetMetalFeature::assignFaceAttributes(const FaceID faceID, std::shared_ptr<TopoDS_Shape>& aShape)
+{
+    mTopologicalShape = aShape;
+
+    auto pTopoDSFace { std::make_shared<TopoDS_Face>(TopoDS::Face(*mTopologicalShape)) };
+
+    Standard_Real curvature = computeCurvature(pTopoDSFace);
+
+    if (curvature == 0.0){
+
+      auto pModelFace { std::make_shared<Face::ModelFace>(faceID, pTopoDSFace) };
+
+      addModelFace(pModelFace);
+
+    } else {
+
+      auto pModelFace { std::make_shared<Bend::ModelBend>(faceID, pTopoDSFace) };
+
+      pModelFace->getBendFeature()->setCurvature(curvature);
+
+      addModelBend(pModelFace);
+    }
+}
 
 // void SheetMetalFeature::classifyFaces();
 
