@@ -27,9 +27,6 @@ void ModelBend::init()
 {
     extractEdges();
 
-    Standard_Real curvature = computeCurvature<TopoDS_Face>(mModelFace);
-    mBendFeature->setCurvature(curvature);
-
     computeFaceNormal();
     setUnitNormal(computeUnitNormal(mModelFace));
 
