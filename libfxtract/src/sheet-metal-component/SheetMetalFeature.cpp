@@ -59,3 +59,26 @@ bool SheetMetalFeature::splitModelBends(const FaceID id, std::map<FaceID, std::s
 
     return found;
 }
+
+std::map<FaceID, std::shared_ptr<Face::ModelFace>> SheetMetalFeature::getFaces() const
+{
+    return mModelFaces;
+}
+
+std::map<FaceID, std::shared_ptr<Bend::ModelBend>> SheetMetalFeature::getBends() const
+{
+    return mModelBends;
+}
+
+double SheetMetalFeature::getThickness() const
+{
+    return mThickness;
+}
+
+// void SheetMetalFeature::assignFaceAttributes(FaceID faceID, TopoDS_Shape& aShape);
+
+// void SheetMetalFeature::classifyFaces();
+
+// void SheetMetalFeature::computeBendAngles();
+
+// bool SheetMetalFeature::cleanModel();
