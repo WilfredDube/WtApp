@@ -36,3 +36,26 @@ FaceID SheetMetalFeature::getIdOfBendWithJoiningFaceID(const FaceID currbendID, 
     return -1;
 }
 
+bool SheetMetalFeature::splitModelBends(const FaceID id, std::map<FaceID, std::shared_ptr<Bend::ModelBend>>& innerBends, 
+                std::map<FaceID, std::shared_ptr<Bend::ModelBend>>& outerBends)
+{
+    bool found = false;
+    // TODO: Find appropriate STL <algorithm> functions
+    for (auto bendIter = innerBends.begin(); bendIter != innerBends.end();) {
+        auto& bend = bendIter->second;
+        if(id == bend->getBendFeature()->getJoiningFaceID1()){
+            outerBends[bend->getFaceId()] = bend;
+            found = true;
+            bendIter = innerBends.erase(bendIter);
+        }
+        else if (id == bend->getBendFeature()->getJoiningFaceID2()) {
+            outerBends[bend->getFaceId()] = bend;
+            found = true;
+            bendIter = innerBends.erase(bendIter);
+        } else {
+            ++bendIter;
+        }
+    }
+
+    return found;
+}
