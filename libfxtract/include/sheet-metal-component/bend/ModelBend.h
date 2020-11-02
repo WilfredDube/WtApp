@@ -43,6 +43,8 @@ namespace Bend
         double computeBendDistance(const std::shared_ptr<Fxt::SheetMetalComponent::Bend::ModelBend>& otherBend) const;
 
         bool isParallel(const std::shared_ptr<Fxt::SheetMetalComponent::Bend::ModelBend>& otherBend) const;
+
+        std::shared_ptr< Fxt::SheetMetalComponent::Bend::BendFeature> getBendFeature() const;
     };
 }
 } 

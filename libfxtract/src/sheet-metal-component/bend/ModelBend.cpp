@@ -76,3 +76,8 @@ bool ModelBend::isParallel(const std::shared_ptr<ModelBend>& otherBend) const
 
     return (angle == 0.0 || angle == 180);
 }
+
+std::shared_ptr< Fxt::SheetMetalComponent::Bend::BendFeature> ModelBend::getBendFeature() const
+{
+    return mBendFeature;
+}
