@@ -49,7 +49,7 @@ namespace SheetMetalComponent
 
         double getThickness() const;
 
-        void assignFaceAttributes(FaceID faceID, TopoDS_Shape& aShape);
+        void assignFaceAttributes(const FaceID faceID, std::shared_ptr<TopoDS_Shape>& aShape);
 
         void classifyFaces();
 
