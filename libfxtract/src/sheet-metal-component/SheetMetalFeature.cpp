@@ -36,7 +36,8 @@ FaceID SheetMetalFeature::getIdOfBendWithJoiningFaceID(const FaceID currbendID, 
     return -1;
 }
 
-bool SheetMetalFeature::splitModelBends(const FaceID id, std::map<FaceID, std::shared_ptr<Bend::ModelBend>>& innerBends, 
+bool SheetMetalFeature::splitModelBends(const FaceID id, std::map<FaceID, 
+                std::shared_ptr<Bend::ModelBend>>& innerBends, 
                 std::map<FaceID, std::shared_ptr<Bend::ModelBend>>& outerBends)
 {
     bool found = false;
@@ -101,6 +102,21 @@ void SheetMetalFeature::assignFaceAttributes(const FaceID faceID, std::shared_pt
 
 // void SheetMetalFeature::classifyFaces();
 
-// void SheetMetalFeature::computeBendAngles();
-
 // bool SheetMetalFeature::cleanModel();
+
+void SheetMetalFeature::computeBendAngles()
+{
+    for (auto& elem : mModelBends){
+        auto& bend = elem.second;
+        
+        if ((bend->getBendFeature()->getJoiningFaceID1() != 0) && (bend->getBendFeature()->getJoiningFaceID2() != 0)) 
+        {
+            auto fn1 = getNormalByFaceID(bend->getBendFeature()->getJoiningFaceID1());
+            auto fn2 = getNormalByFaceID(bend->getBendFeature()->getJoiningFaceID2());
+
+            double angle = round(fn1->Angle(*fn2) * (180.0 / M_PI));
+            
+            bend->getBendFeature()->setBendAngle(roundd(angle));
+        }
+    }
+}
