@@ -41,6 +41,15 @@ namespace SheetMetalComponent
         void setFaceIdWrapper(std::map<FaceID, std::shared_ptr<Face::ModelFace>>& mFaces);
         void setBendIdWrapper(std::map<FaceID, std::shared_ptr<Bend::ModelBend>>& mBends);
 
+        /**
+         * After reassigning the bend and face ID's the is a disconnection between faces and bends
+         * because the JoiningFaceId to which the bends were pointing no long exit.
+         * 
+         * Method : searches the face list (mModelFaces) to find the faces to which each bend is 
+         *           connected too.
+         */
+        void connectBendsToNewFaceId();
+
     public:
         void addModelFace(std::shared_ptr<Face::ModelFace>& modelFace);
 

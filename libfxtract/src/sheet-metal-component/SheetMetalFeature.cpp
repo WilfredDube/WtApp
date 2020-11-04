@@ -256,6 +256,44 @@ void SheetMetalFeature::removeOuterFaces()
         mModelFaces = innerFaces;
 }
 
+// TODO: toooooo many for loops
+void SheetMetalFeature::connectBendsToNewFaceId()
+{
+    for(auto& [bendId, bend] : mModelBends)
+    {
+        std::vector<std::shared_ptr<Edge::ModelEdge>> straightEdges = bend->getStraightEdges();
+
+        for (const auto& edge : straightEdges)
+        {
+            for (auto& [faceId, face] : mModelFaces)
+            {
+                if(face->getFaceType() == Fxt::SheetMetalComponent::ModelTypes::FaceType::FACE)
+                {
+                    for (const auto& faceEdge : face->getFaceEdges())
+                    {
+                        if (abs(faceEdge->getEdgeLength() - edge->getEdgeLength()) < 0.01) {
+                            if(faceEdge == edge) { 
+                                faceEdge->setEdgePosition(EdgePosition::JOINING_EDGE);           
+                                if ((bend->getBendFeature()->getJoiningFaceID1() == 0) && 
+                                    (bend->getBendFeature()->getJoiningFaceID2() == 0)) 
+                                {
+                                    bend->getBendFeature()->setJoiningFaceID1(faceId);
+                                    edge->setJoiningFaceID(faceId);
+                                } 
+                                else if (bend->getBendFeature()->getJoiningFaceID2() == 0){
+                                    bend->getBendFeature()->setJoiningFaceID2(faceId);
+                                    edge->setJoiningFaceID(faceId);
+                                } else {
+                                }
+                            }
+                        }
+                    }                    
+                }
+            }            
+        }        
+    }
+}
+
 void SheetMetalFeature::computeBendAngles()
 {
     for (auto& elem : mModelBends){
