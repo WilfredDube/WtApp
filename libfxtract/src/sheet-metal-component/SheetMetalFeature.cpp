@@ -100,7 +100,53 @@ void SheetMetalFeature::assignFaceAttributes(const FaceID faceID, std::shared_pt
     }
 }
 
-// void SheetMetalFeature::classifyFaces();
+void SheetMetalFeature::classifyFaces()
+{
+    std::map<FaceID, std::shared_ptr<Face::ModelFace>> tempFaces;
+    
+    // Extract all the useful faces
+    for (auto& [bendId, bend] : mModelBends)
+    {
+      for (auto& edge: bend->getFaceEdges())
+      {
+        if (edge->getEdgeType() == EdgeType::LINE) 
+        {
+          for (auto& [faceId, face] : mModelFaces)
+          {
+            if (face->getFaceType() == FaceType::NONE) 
+            {
+              for (auto& faceEdge : face->getFaceEdges())
+              {
+                if (abs(faceEdge->getEdgeLength() - edge->getEdgeLength()) < 0.01) 
+                {
+                  if(faceEdge == edge) 
+                  {
+                    faceEdge->setEdgePosition(EdgePosition::JOINING_EDGE);
+                    face->setFaceType(FaceType::FACE);
+                  
+                    tempFaces.insert({ faceId, face } );
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    setThicknessDefiningFaceAttributes();
+
+    setFaceIdWrapper(mModelFaces);
+    setBendIdWrapper(mModelBends);
+
+    mModelFaces = tempFaces;
+
+    connectBendsToNewFaceId();
+
+    for(auto& [faceId, face]: mModelFaces)
+      face->setFaceEdgePosition();
+}
+
 
 // bool SheetMetalFeature::cleanModel();
 
