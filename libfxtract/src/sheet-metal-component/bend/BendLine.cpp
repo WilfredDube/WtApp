@@ -33,10 +33,12 @@ void BendLine::computeBendLine(
 
     mBendLine = std::make_shared<gp_Lin>(endPoints[0], gp_Dir(dirVertex.X(), dirVertex.Y(), dirVertex.Z()));
 
+    mBendLinePnt = std::make_shared<Point>();
     mBendLinePnt->X = endPoints[0].X();//bendLine_.Location().X();
     mBendLinePnt->Y = endPoints[0].Y();//bendLine_.Location().Y();
     mBendLinePnt->Z = endPoints[0].Z();//bendLine_.Location().Z();
 
+    mBendLineDir = std::make_shared<Point>();
     mBendLineDir->X = dirVertex.X();
     mBendLineDir->Y = dirVertex.Y();
     mBendLineDir->Z = dirVertex.Z();
