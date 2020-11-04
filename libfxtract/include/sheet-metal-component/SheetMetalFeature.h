@@ -35,6 +35,7 @@ namespace SheetMetalComponent
 
         void removeOuterFaces();
 
+        void reAssignFaceId(bool isBend = false);
 
         void setThicknessDefiningFaceAttributes();
 

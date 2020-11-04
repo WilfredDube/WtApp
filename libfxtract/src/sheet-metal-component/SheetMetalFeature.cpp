@@ -256,6 +256,41 @@ void SheetMetalFeature::removeOuterFaces()
         mModelFaces = innerFaces;
 }
 
+void SheetMetalFeature::reAssignFaceId(bool isBend)
+{
+    size_t newFaceId = 0;
+
+    if (isBend)
+    {
+        std::map<FaceID, std::shared_ptr<Bend::ModelBend>> tempBends;
+
+        for(auto& bend : mModelBends){
+            ++newFaceId;
+
+            bend.second->setFaceId(newFaceId);
+            bend.second->getBendFeature()->setJoiningFaceID1(0);
+            bend.second->getBendFeature()->setJoiningFaceID2(0);
+
+            tempBends[newFaceId] = bend.second;
+        }
+
+        mModelBends = tempBends;
+    } else
+    {
+        std::map<FaceID, std::shared_ptr<Face::ModelFace>> tempFaces;
+
+        for(auto& face : mModelFaces){
+            ++newFaceId;
+
+            face.second->setFaceId(newFaceId);
+
+            tempFaces[newFaceId] = face.second;
+        }
+
+        mModelFaces = tempFaces;
+    }
+}
+
 // TODO: toooooo many for loops
 void SheetMetalFeature::connectBendsToNewFaceId()
 {
