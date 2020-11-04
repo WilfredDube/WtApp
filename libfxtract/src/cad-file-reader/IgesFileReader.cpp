@@ -1,4 +1,5 @@
 #include "../../include/cad-file-reader/CadFileReader.h"
+#include "../../include/sheet-metal-component/SheetMetalFeature.h"
 #include "../../include/cad-file-reader/IgesFileReader.h"
 #include "../../include/cad-file-reader/ReaderCreationFailedException.h"
 
@@ -7,6 +8,7 @@
 #include <IGESControl_Reader.hxx>
 
 using namespace Fxt::CadFileReader;
+using namespace Fxt::SheetMetalComponent;
 
 void IgesFileReader::makeReader(const std::string& igesFile)
 {
@@ -27,7 +29,7 @@ void IgesFileReader::makeReader(const std::string& igesFile)
     mMyIgesReader->TransferList(myList);
 }
 
-void IgesFileReader::extractFaces(Model& model, const std::string& filename)
+void IgesFileReader::extractFaces(std::shared_ptr<SheetMetalFeature>& model, const std::string& filename)
 {
   makeReader(filename);
 

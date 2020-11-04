@@ -1,4 +1,5 @@
 #include "../../include/cad-file-reader/CadFileReader.h"
+#include "../../include/sheet-metal-component/SheetMetalFeature.h"
 #include "../../include/cad-file-reader/StepFileReader.h"
 #include "../../include/cad-file-reader/ReaderCreationFailedException.h"
 
@@ -7,6 +8,7 @@
 #include <STEPControl_Reader.hxx>
 
 using namespace Fxt::CadFileReader;
+using namespace Fxt::SheetMetalComponent;
 
 void StepFileReader::makeReader(const std::string& stepFile)
 {
@@ -27,7 +29,7 @@ void StepFileReader::makeReader(const std::string& stepFile)
     }
 }
 
-void StepFileReader::extractFaces(Model& model, const std::string& filename)
+void StepFileReader::extractFaces(std::shared_ptr<SheetMetalFeature>& model, const std::string& filename)
 {
   makeReader(filename);
 

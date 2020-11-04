@@ -13,7 +13,7 @@ namespace CadFileReader
         std::shared_ptr<IGESControl_Reader> mMyIgesReader = nullptr;
     public:
         void makeReader(const std::string& filename);
-        void extractFaces(Model& model, const std::string& filename);
+        void extractFaces(std::shared_ptr<Fxt::SheetMetalComponent::SheetMetalFeature>& model, const std::string& filename);
     };
 }
 }
