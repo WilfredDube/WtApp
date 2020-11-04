@@ -42,6 +42,9 @@ namespace SheetMetalComponent
 
         FaceID getIdOfBendWithJoiningFaceID(const FaceID currbendID, const FaceID faceID) const;
         
+        /**
+         * Seperates bends into inner and outer bend faces.
+         */
         bool splitModelBends(const FaceID id, std::map<FaceID, 
                         std::shared_ptr<Bend::ModelBend>>& innerBends, 
                         std::map<FaceID, std::shared_ptr<Bend::ModelBend>>& outerBends);
