@@ -17,6 +17,7 @@ set(Headers
 
   include/Computation.h
   include/sheet-metal-component/BoostSerializer.h
+  include/sheet-metal-component/SheetMetalFeature.h
   include/sheet-metal-component/MFaceAbstract.h
   include/sheet-metal-component/Point.h
 
@@ -24,6 +25,7 @@ set(Headers
 
   include/sheet-metal-component/bend/BendFeature.h
   include/sheet-metal-component/bend/ModelBend.h
+  include/sheet-metal-component/bend/BendLine.h
 
   include/sheet-metal-component/face/ModelFace.h
 )
@@ -44,6 +46,7 @@ set(Sources
   src/ModelMath.cpp
   
   src/Computation.cpp
+  src/sheet-metal-component/SheetMetalFeature.cpp
   src/sheet-metal-component/MFaceAbstract.cpp
   src/sheet-metal-component/face/ModelFace.cpp
 
@@ -51,6 +54,7 @@ set(Sources
 
   src/sheet-metal-component/bend/BendFeature.cpp
   src/sheet-metal-component/bend/ModelBend.cpp
+  src/sheet-metal-component/bend/BendLine.cpp
 )
 
 set(THREADS_PREFER_PTHREAD_FLAG ON)
