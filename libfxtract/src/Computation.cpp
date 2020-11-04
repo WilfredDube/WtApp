@@ -6,8 +6,10 @@
 
 using namespace Fxt::SheetMetalComponent::Edge;
 
-namespace Fxt {
-
+namespace Fxt 
+{
+namespace Computation
+{
   long double roundd(long double value)
   {
     char str[40];
@@ -209,4 +211,5 @@ namespace Fxt {
     return gp_Pnt(x, y, z);
   }
 
+}
 }

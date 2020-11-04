@@ -8,7 +8,10 @@
 #include <Precision.hxx>
 #include <vector>
 
-namespace Fxt {
+namespace Fxt 
+{
+namespace Computation 
+{
 
   /*
   *   Prints a vertex
@@ -90,4 +93,5 @@ namespace Fxt {
   * */
   gp_Pnt computeMidPoint(const std::shared_ptr<gp_Pnt>& p1, const std::shared_ptr<gp_Pnt>& p2);
 
+}
 }
