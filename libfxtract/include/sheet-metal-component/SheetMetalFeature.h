@@ -29,7 +29,7 @@ namespace SheetMetalComponent
         std::map<FaceID, std::shared_ptr<Face::ModelFace>> mModelFaces;
         std::map<FaceID, std::shared_ptr<Bend::ModelBend>> mModelBends;
 
-        long double mThickness;
+        long double mThickness {0.0};
 
         std::shared_ptr<TopoDS_Shape> mTopologicalShape;
 
