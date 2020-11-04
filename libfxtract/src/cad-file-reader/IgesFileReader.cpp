@@ -44,11 +44,11 @@ void IgesFileReader::extractFaces(std::shared_ptr<SheetMetalFeature>& model, con
 
   /* Go through the shape object and extract the faces. */
   for (size_t i = 1; i <= numShapes; i++) {
-    TopoDS_Shape aShape = mMyIgesReader->Shape(i);
+    std::shared_ptr<TopoDS_Shape> aShape { std::make_shared<TopoDS_Shape>(mMyIgesReader->Shape(i)) };
 
     ++faceID;
 
-    model.assignFaceAttributes(faceID, aShape);
+    model->assignFaceAttributes(faceID, aShape);
   }
 }
 

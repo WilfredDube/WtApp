@@ -49,11 +49,11 @@ void StepFileReader::extractFaces(std::shared_ptr<SheetMetalFeature>& model, con
     TopExp_Explorer myFaceExplorer(topoDSFaces, TopAbs_FACE);
 
     while (myFaceExplorer.More()){
-      TopoDS_Shape aShape = myFaceExplorer.Current();
+      std::shared_ptr<TopoDS_Shape> aShape { std::make_shared<TopoDS_Shape>(myFaceExplorer.Current()) };
 
       ++faceID;
 
-      model.assignFaceAttributes(faceID, aShape);
+      model->assignFaceAttributes(faceID, aShape);
 
       myFaceExplorer.Next();
     }
