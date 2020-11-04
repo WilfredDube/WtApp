@@ -59,7 +59,7 @@ void BendFeature::setCurvature(const long double cv)
 
     if (mCurvature != 0.0) {
       // Divide by 2 to get radius else you get the diameter.
-      mBendRadius = roundd(((mCurvature < 0.0) ? -(1 / mCurvature) : (1 / mCurvature)) / 2);
+      mBendRadius = Computation::roundd(((mCurvature < 0.0) ? -(1 / mCurvature) : (1 / mCurvature)) / 2);
     }
 }
 

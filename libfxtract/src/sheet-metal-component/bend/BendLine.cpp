@@ -16,11 +16,11 @@ void BendLine::computeBendLine(
     
     std::vector<gp_Pnt> endPoints;
 
-    endPoints.push_back(computeMidPoint(arcEdges[0]->getEdgeEndPoints()[0], 
+    endPoints.push_back(Computation::computeMidPoint(arcEdges[0]->getEdgeEndPoints()[0], 
                                 arcEdges[0]->getEdgeEndPoints()[1])
                         );
 
-    endPoints.push_back(computeMidPoint(arcEdges[1]->getEdgeEndPoints()[0], 
+    endPoints.push_back(Computation::computeMidPoint(arcEdges[1]->getEdgeEndPoints()[0], 
                                 arcEdges[1]->getEdgeEndPoints()[1])
                         );
 
@@ -61,5 +61,5 @@ double BendLine::distance(const std::shared_ptr<Fxt::SheetMetalComponent::Bend::
 
 double BendLine::angle(const std::shared_ptr<Fxt::SheetMetalComponent::Bend::BendLine>& otherBendLine) const
 {
-    return roundd(mBendLine->Angle(*(otherBendLine->getBendLine())) * (180 / M_PI));
+    return Computation::roundd(mBendLine->Angle(*(otherBendLine->getBendLine())) * (180 / M_PI));
 }

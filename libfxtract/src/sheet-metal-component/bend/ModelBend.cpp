@@ -28,7 +28,7 @@ void ModelBend::init()
     extractEdges();
 
     computeFaceNormal();
-    setUnitNormal(computeUnitNormal(mModelFace));
+    setUnitNormal(Computation::computeUnitNormal(mModelFace));
 
     setBendLength();
 

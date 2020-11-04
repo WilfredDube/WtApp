@@ -14,7 +14,7 @@ ModelEdge::ModelEdge(std::shared_ptr<TopoDS_Edge> edge)
     BRepAdaptor_Curve curve = BRepAdaptor_Curve(*edge);
     setEdgeType(BRepAdaptor_Curve(*edge).GetType());
 
-    setEdgeLength(computeLength(*this));
+    setEdgeLength(Computation::computeLength(*this));
     setEdgeLineVector();
     setJoiningFaceID(0);
 }
@@ -122,7 +122,7 @@ long double ModelEdge::getEdgeLength() const
 
 void ModelEdge::setEdgeLineVector()
 {
-    auto point = computeLineVector(this);
+    auto point = Computation::computeLineVector(this);
     mEdgeLineVector = std::make_shared<gp_Dir>(point.X(), point.Y(), point.Z()); 
 }
 

@@ -44,7 +44,7 @@ std::shared_ptr<gp_Dir> MFaceAbstract::getUnitNormal() const
 
 void MFaceAbstract::computeFaceNormal()
 {
-    mFaceNormal = computeNormal(mFaceEdges);
+    mFaceNormal = Computation::computeNormal(mFaceEdges);
 }
 
 std::shared_ptr<gp_Dir> MFaceAbstract::getFaceNormal() const 

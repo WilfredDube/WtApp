@@ -17,6 +17,6 @@ void ModelFace::init()
     extractEdges();
 
     computeFaceNormal();
-    setUnitNormal(computeUnitNormal(getTModelFace()));
+    setUnitNormal(Computation::computeUnitNormal(getTModelFace()));
 }
    
