@@ -6,6 +6,7 @@ add_subdirectory(libSeqgen)
 add_subdirectory(libfxtract)
 add_subdirectory(model)
 add_subdirectory(view)
+add_subdirectory(tests)
 
 set(main_source_files
  main.cpp
