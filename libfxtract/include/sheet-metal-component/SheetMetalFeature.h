@@ -34,6 +34,9 @@ namespace SheetMetalComponent
         std::shared_ptr<TopoDS_Shape> mTopologicalShape;
 
 
+
+        void setThicknessDefiningFaceAttributes();
+
         void setFaceIdWrapper(std::map<FaceID, std::shared_ptr<Face::ModelFace>>& mFaces);
         void setBendIdWrapper(std::map<FaceID, std::shared_ptr<Bend::ModelBend>>& mBends);
 

@@ -167,7 +167,19 @@ void SheetMetalFeature::setFaceIdWrapper(std::map<FaceID, std::shared_ptr<Face::
     }
 }
 
-// bool SheetMetalFeature::cleanModel();
+void SheetMetalFeature::setThicknessDefiningFaceAttributes()
+{
+    for (auto& [faceId, face]: mModelFaces) {
+      if (face->getFaceType() == FaceType::NONE) {
+        face->setFaceType(FaceType::THICKNESS_DEFINING_FACE);
+        face->setFaceId(0);
+
+        if(mThickness == 0.0){
+            mThickness = Computation::computeThickness(face);
+        }
+      }
+    }
+}
 
 void SheetMetalFeature::computeBendAngles()
 {
