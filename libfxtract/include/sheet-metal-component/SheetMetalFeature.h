@@ -4,6 +4,7 @@
 
 #include <TopoDS_Shape.hxx>
 
+#include <ostream>
 #include <map>
 #include <memory>
 
@@ -56,7 +57,7 @@ namespace SheetMetalComponent
 
         void computeBendAngles();
 
-        bool cleanModel();
+        friend std::ostream& operator<<(std::ostream& os, const std::shared_ptr<SheetMetalFeature>& sheetMetal);
     };
 }
 }
