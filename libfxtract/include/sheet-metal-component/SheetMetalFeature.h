@@ -33,6 +33,7 @@ namespace SheetMetalComponent
 
         std::shared_ptr<TopoDS_Shape> mTopologicalShape;
 
+        void removeOuterFaces();
 
 
         void setThicknessDefiningFaceAttributes();
@@ -65,6 +66,12 @@ namespace SheetMetalComponent
 
         void classifyFaces();
 
+        /**
+         *  Method removes outer faces leaving inner faces for easy computation and representation 
+         *  of bend features.
+         *  Fixes the problem of processing a bends twice because of it has an inner and outer face.
+         */
+        bool removeOuterBendFaces();
 
         bool reduceModelSize();
 

@@ -195,6 +195,67 @@ bool SheetMetalFeature::reduceModelSize()
     
     return true;
 }
+
+bool SheetMetalFeature::removeOuterBendFaces()
+{
+    FaceID searchID;
+    std::map<FaceID, std::shared_ptr<Bend::ModelBend>>& allModelBends = mModelBends;
+    std::map<FaceID, std::shared_ptr<Bend::ModelBend>> outerBends;
+
+    auto& firstBend = allModelBends.begin()->second;
+    outerBends[firstBend->getFaceId()] = firstBend;
+
+    searchID = firstBend->getBendFeature()->getJoiningFaceID1();
+
+    allModelBends.erase(allModelBends.begin());
+
+    size_t i = 0;
+    while(outerBends.size() != allModelBends.size())
+    {
+      if(splitModelBends(searchID, allModelBends, outerBends)) {        
+        if (searchID == outerBends[i]->getBendFeature()->getJoiningFaceID1()) {
+          searchID = outerBends[i]->getBendFeature()->getJoiningFaceID2();
+        } else {
+          ++i;
+          searchID = outerBends[i]->getBendFeature()->getJoiningFaceID1();
+        }
+      } else {
+        if(outerBends.size() != allModelBends.size())
+        {
+          if (searchID != outerBends[i]->getBendFeature()->getJoiningFaceID2()) {
+            searchID = outerBends[i]->getBendFeature()->getJoiningFaceID2();
+          } else {
+            ++i;
+            searchID = outerBends[i]->getBendFeature()->getJoiningFaceID1();
+          }
+        }        
+      }
+    }
+
+    return (outerBends.size() == allModelBends.size());
+}
+
+void SheetMetalFeature::removeOuterFaces()
+{
+    std::map<FaceID, std::shared_ptr<Face::ModelFace>> innerFaces;
+
+    // TODO: reduce the time complexity to O(n)
+    for(auto& faceItem : mModelFaces){
+      for(auto& elem : mModelBends) {
+        auto& bend = elem.second;
+        if(bend->getBendFeature()->getJoiningFaceID1() == faceItem.first || 
+            bend->getBendFeature()->getJoiningFaceID2() == faceItem.first )
+        {
+          innerFaces[faceItem.first] = faceItem.second;
+          break;
+        }
+      }
+    }
+
+    if(innerFaces.size() == (mModelFaces.size() / 2))
+        mModelFaces = innerFaces;
+}
+
 void SheetMetalFeature::computeBendAngles()
 {
     for (auto& elem : mModelBends){
