@@ -27,6 +27,8 @@ namespace Bend
         // the arcEdgeExtraction function.
         std::vector<std::shared_ptr<Edge::ModelEdge>> mArcEdges;
 
+        std::vector<std::shared_ptr<Edge::ModelEdge>> mStraightEdges;
+
         std::shared_ptr<Fxt::SheetMetalComponent::Bend::BendLine> mBendLine;
 
     public:
