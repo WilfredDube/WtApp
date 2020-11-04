@@ -147,6 +147,25 @@ void SheetMetalFeature::classifyFaces()
       face->setFaceEdgePosition();
 }
 
+void SheetMetalFeature::setBendIdWrapper(std::map<FaceID, std::shared_ptr<Bend::ModelBend>>& mFaces)
+{
+    size_t faceID = 0;
+
+    for(auto& [faceId, face]: mFaces){
+      ++faceID;
+      face->setFaceId(faceID);
+    }
+}
+
+void SheetMetalFeature::setFaceIdWrapper(std::map<FaceID, std::shared_ptr<Face::ModelFace>>& mFaces)
+{
+    size_t faceID = 0;
+
+    for(auto& [faceId, face]: mFaces){
+      ++faceID;
+      face->setFaceId(faceID);
+    }
+}
 
 // bool SheetMetalFeature::cleanModel();
 
