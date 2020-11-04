@@ -181,6 +181,20 @@ void SheetMetalFeature::setThicknessDefiningFaceAttributes()
     }
 }
 
+bool SheetMetalFeature::reduceModelSize()
+{
+    if (removeOuterBendFaces())
+    {
+        removeOuterFaces();
+
+        reAssignFaceId(true);
+        reAssignFaceId();
+
+        connectBendsToNewFaceId();
+    }
+    
+    return true;
+}
 void SheetMetalFeature::computeBendAngles()
 {
     for (auto& elem : mModelBends){

@@ -65,6 +65,9 @@ namespace SheetMetalComponent
 
         void classifyFaces();
 
+
+        bool reduceModelSize();
+
         void computeBendAngles();
 
         friend std::ostream& operator<<(std::ostream& os, const std::shared_ptr<SheetMetalFeature>& sheetMetal);
