@@ -78,3 +78,9 @@ std::shared_ptr< Fxt::SheetMetalComponent::Bend::BendFeature> ModelBend::getBend
 {
     return mBendFeature;
 }
+
+std::vector<std::shared_ptr<ModelEdge>> ModelBend::getStraightEdges() const
+{
+    return mStraightEdges;
+}
+

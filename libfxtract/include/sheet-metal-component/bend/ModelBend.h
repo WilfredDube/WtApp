@@ -47,6 +47,9 @@ namespace Bend
         bool isParallel(const std::shared_ptr<Fxt::SheetMetalComponent::Bend::ModelBend>& otherBend) const;
 
         std::shared_ptr< Fxt::SheetMetalComponent::Bend::BendFeature> getBendFeature() const;
+
+        std::vector<std::shared_ptr<Edge::ModelEdge>> getStraightEdges() const;
+
     };
 }
 } 
