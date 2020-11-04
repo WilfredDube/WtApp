@@ -82,7 +82,7 @@ void SheetMetalFeature::assignFaceAttributes(const FaceID faceID, std::shared_pt
 
     auto pTopoDSFace { std::make_shared<TopoDS_Face>(TopoDS::Face(*mTopologicalShape)) };
 
-    Standard_Real curvature = computeCurvature(pTopoDSFace);
+    Standard_Real curvature = Computation::computeCurvature(pTopoDSFace);
 
     if (curvature == 0.0){
 
@@ -116,9 +116,10 @@ void SheetMetalFeature::computeBendAngles()
 
             double angle = round(fn1->Angle(*fn2) * (180.0 / M_PI));
             
-            bend->getBendFeature()->setBendAngle(roundd(angle));
+            bend->getBendFeature()->setBendAngle(Computation::roundd(angle));
         }
     }
+}
 
 std::ostream& operator<<(std::ostream& os, const std::shared_ptr<SheetMetalFeature>& sheetMetal)
 {
