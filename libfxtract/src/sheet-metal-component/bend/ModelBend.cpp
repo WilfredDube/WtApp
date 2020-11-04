@@ -84,3 +84,19 @@ std::vector<std::shared_ptr<ModelEdge>> ModelBend::getStraightEdges() const
     return mStraightEdges;
 }
 
+std::ostream& operator<<(std::ostream& os, const std::shared_ptr<ModelBend>& modelBend)
+{
+    os << modelBend->getFaceId() << '\n';
+    
+    auto bendFeature = modelBend->getBendFeature();
+
+    os << "F" << bendFeature->getJoiningFaceID1() << "---" << 
+          "B" << modelBend->getFaceId() << "---" <<
+          "F" << bendFeature->getJoiningFaceID2() << " ";
+    
+    os << "Angle: " << bendFeature->getBendAngle() << ", ";
+    os << "Radius: " << bendFeature->getBendRadius() << "mm, ";
+    os << "Bend length: " << bendFeature->getBendLength() << "mm";
+    
+    return os;
+}

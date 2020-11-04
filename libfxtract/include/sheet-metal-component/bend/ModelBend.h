@@ -50,6 +50,7 @@ namespace Bend
 
         std::vector<std::shared_ptr<Edge::ModelEdge>> getStraightEdges() const;
 
+        friend std::ostream& operator<<(std::ostream& os, const std::shared_ptr<ModelBend>& modelBend);
     };
 }
 } 
