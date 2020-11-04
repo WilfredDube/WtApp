@@ -8,7 +8,8 @@ using namespace Fxt::SheetMetalComponent::Bend;
 using namespace Fxt::SheetMetalComponent::Edge;
 
 ModelBend::ModelBend(Fxt::SheetMetalComponent::FaceID faceID, std::shared_ptr<TopoDS_Face> topoDSFace)
-: MFaceAbstract(faceID, topoDSFace)
+: MFaceAbstract(faceID, topoDSFace), mBendFeature {std::make_shared<BendFeature>()},
+    mBendLine {std::make_shared<BendLine>()}
 {
     if(topoDSFace != nullptr)
     {
