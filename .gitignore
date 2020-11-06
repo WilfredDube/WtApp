@@ -1,5 +1,5 @@
 build
 .vscode
 TODO
-./approot/fxtract.db
-./libfxtract/include/OLD/*
+approot/fxtract.db
+tests
