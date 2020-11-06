@@ -14,9 +14,11 @@ void IgesFileReader::makeReader(const std::string& igesFile)
 {
     mMyIgesReader = std::make_shared<IGESControl_Reader>();
 
-    std::cout << "File .......... : " << igesFile << '\n';
-    mMyIgesReader->ReadFile (igesFile.c_str());
+    if (mMyIgesReader->ReadFile(igesFile.c_str()) != IFSelect_RetDone) {
+        throw std::invalid_argument("Cannot open IGES file");
+    };
 
+    std::cout << "File .......... : " << igesFile << '\n';
     IFSelect_PrintCount mode = IFSelect_ListByItem;
     mMyIgesReader->PrintCheckLoad(false, mode);
 

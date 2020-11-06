@@ -15,7 +15,9 @@ void StepFileReader::makeReader(const std::string& stepFile)
 {
     mMyStepReader = std::make_shared<STEPControl_Reader>();
 
-    mMyStepReader->ReadFile(stepFile.c_str());
+    if (mMyStepReader->ReadFile(stepFile.c_str()) != IFSelect_RetDone) {
+        throw std::invalid_argument("Cannot open STEP file");
+    }
 
     std::cout << "File .......... : " << stepFile << '\n';
     IFSelect_PrintCount mode = IFSelect_ListByItem;
