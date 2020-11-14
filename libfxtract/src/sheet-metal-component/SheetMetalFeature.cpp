@@ -1,6 +1,4 @@
 #include "../../include/sheet-metal-component/SheetMetalFeature.h"
-#include "../../include/sheet-metal-component/face/ModelFace.h"
-#include "../../include/sheet-metal-component/bend/ModelBend.h"
 #include "../../include/sheet-metal-component/bend/BendFeature.h"
 
 using namespace Fxt::SheetMetalComponent;
@@ -37,8 +35,6 @@ FaceID SheetMetalFeature::getIdOfBendWithJoiningFaceID(const FaceID currbendID, 
 }
 
 bool SheetMetalFeature::splitModelBends(const FaceID id, std::map<FaceID, 
-                        std::shared_ptr<Bend::ModelBend>>& innerBends, 
-                std::shared_ptr<Bend::ModelBend>>& innerBends, 
                         std::shared_ptr<Bend::ModelBend>>& innerBends, 
                         std::map<FaceID, std::shared_ptr<Bend::ModelBend>>& outerBends,
                         std::deque<FaceID>& queue)
@@ -216,37 +212,32 @@ bool SheetMetalFeature::removeOuterBendFaces()
     FaceID searchID;
     std::map<FaceID, std::shared_ptr<Bend::ModelBend>>& allModelBends = mModelBends;
     std::map<FaceID, std::shared_ptr<Bend::ModelBend>> outerBends;
+    std::deque<FaceID> queue;
 
     auto& firstBend = allModelBends.begin()->second;
     outerBends[firstBend->getFaceId()] = firstBend;
+
+    queue.push_back(firstBend->getBendFeature()->getJoiningFaceID1());
+    queue.push_back(firstBend->getBendFeature()->getJoiningFaceID2());
 
     searchID = firstBend->getBendFeature()->getJoiningFaceID1();
 
     allModelBends.erase(allModelBends.begin());
 
-    size_t i = 0;
-    while(outerBends.size() != allModelBends.size())
+    while(outerBends.size() != allModelBends.size() && !queue.empty())
     {
-      if(splitModelBends(searchID, allModelBends, outerBends)) {        
-        if (searchID == outerBends[i]->getBendFeature()->getJoiningFaceID1()) {
-          searchID = outerBends[i]->getBendFeature()->getJoiningFaceID2();
-        } else {
-          ++i;
-          searchID = outerBends[i]->getBendFeature()->getJoiningFaceID1();
-        }
-      } else {
-        if(outerBends.size() != allModelBends.size())
-        {
-          if (searchID != outerBends[i]->getBendFeature()->getJoiningFaceID2()) {
-            searchID = outerBends[i]->getBendFeature()->getJoiningFaceID2();
-          } else {
-            ++i;
-            searchID = outerBends[i]->getBendFeature()->getJoiningFaceID1();
-          }
-        }        
-      }
+      splitModelBends(searchID, allModelBends, outerBends, queue); 
+
+      queue.pop_front();
+      
+      searchID = queue.front();
     }
 
+    if(outerBends.size() == allModelBends.size())
+      allModelBends = outerBends;
+
+    std::cout << "All : " << allModelBends.size() << std::endl; 
+    std::cout << "Out : " << outerBends.size() << std::endl; 
     return (outerBends.size() == allModelBends.size());
 }
 
@@ -359,17 +350,4 @@ void SheetMetalFeature::computeBendAngles()
             bend->getBendFeature()->setBendAngle(Computation::roundd(angle));
         }
     }
-}
-
-std::ostream& operator<<(std::ostream& os, const std::shared_ptr<SheetMetalFeature>& sheetMetal)
-{
-    using namespace Fxt::SheetMetalComponent::Bend;
-
-    os << "Thickness : " << sheetMetal->getThickness() << '\n';
-
-    // for(const auto& [bendId, bend] : sheetMetal->getBends()){
-        // os << bend << '\n';
-    // }
-    
-    return os;
 }
