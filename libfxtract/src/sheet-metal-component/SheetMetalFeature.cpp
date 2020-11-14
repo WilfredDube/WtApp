@@ -131,7 +131,7 @@ void SheetMetalFeature::classifyFaces()
               {
                 if (abs(faceEdge->getEdgeLength() - edge->getEdgeLength()) < 0.01) 
                 {
-                  if(faceEdge == edge) 
+                  if(*faceEdge == *edge) 
                   {
                     faceEdge->setEdgePosition(EdgePosition::JOINING_EDGE);
                     face->setFaceType(FaceType::FACE);
@@ -319,7 +319,7 @@ void SheetMetalFeature::connectBendsToNewFaceId()
                     for (const auto& faceEdge : face->getFaceEdges())
                     {
                         if (abs(faceEdge->getEdgeLength() - edge->getEdgeLength()) < 0.01) {
-                            if(faceEdge == edge) { 
+                            if(*faceEdge == *edge) { 
                                 faceEdge->setEdgePosition(EdgePosition::JOINING_EDGE);           
                                 if ((bend->getBendFeature()->getJoiningFaceID1() == 0) && 
                                     (bend->getBendFeature()->getJoiningFaceID2() == 0)) 
@@ -345,7 +345,7 @@ void SheetMetalFeature::computeBendAngles()
 {
     for (auto& elem : mModelBends){
         auto& bend = elem.second;
-        
+  
         if ((bend->getBendFeature()->getJoiningFaceID1() != 0) && (bend->getBendFeature()->getJoiningFaceID2() != 0)) 
         {
             auto fn1 = getNormalByFaceID(bend->getBendFeature()->getJoiningFaceID1());
