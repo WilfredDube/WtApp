@@ -87,7 +87,18 @@ namespace SheetMetalComponent
 
         void computeBendAngles();
 
-        friend std::ostream& operator<<(std::ostream& os, const std::shared_ptr<SheetMetalFeature>& sheetMetal);
+        friend std::ostream& operator<<(std::ostream& os, const std::shared_ptr<SheetMetalFeature>& sheetMetal)
+        {
+            using namespace Fxt::SheetMetalComponent::Bend;
+
+            os << "Thickness : " << sheetMetal->getThickness() << '\n';
+
+            for(const auto& [bendId, bend] : sheetMetal->getBends()){
+                os << bend << '\n';
+            }
+            
+            return os;
+        }
     };
 }
 }
