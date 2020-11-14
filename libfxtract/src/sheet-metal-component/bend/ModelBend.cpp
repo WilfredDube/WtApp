@@ -1,6 +1,5 @@
 #include "../../../include/sheet-metal-component/bend/ModelBend.h"
 #include "../../../include/sheet-metal-component/bend/BendLine.h"
-#include "../../../include/sheet-metal-component/bend/BendFeature.h"
 #include "../../../include/Computation.h"
 #include "../../../include/sheet-metal-component/ModelTypes.h"
 

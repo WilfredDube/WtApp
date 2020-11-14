@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../MFaceAbstract.h"
+#include "../../../include/sheet-metal-component/bend/BendFeature.h"
 
 namespace Fxt
 {
@@ -50,7 +51,20 @@ namespace Bend
 
         std::vector<std::shared_ptr<Edge::ModelEdge>> getStraightEdges() const;
 
-        friend std::ostream& operator<<(std::ostream& os, const std::shared_ptr<ModelBend>& modelBend);
+        friend std::ostream& operator<<(std::ostream& os, const std::shared_ptr<ModelBend>& modelBend)
+        {
+            auto bendFeature = modelBend->getBendFeature();
+
+            os << "F" << bendFeature->getJoiningFaceID1() << "---" << 
+                "B" << modelBend->getFaceId() << "---" <<
+                "F" << bendFeature->getJoiningFaceID2() << " ";
+            
+            os << "Angle: " << bendFeature->getBendAngle() << ", ";
+            os << "Bend length: " << bendFeature->getBendLength() << "mm, ";
+            os << "Radius: " << bendFeature->getBendRadius() << "mm";
+            
+            return os;
+        }
     };
 }
 } 
