@@ -50,11 +50,19 @@ bool SheetMetalFeature::splitModelBends(const FaceID id, std::map<FaceID,
       auto bend = bendIter->second;
       if(id == bend->getBendFeature()->getJoiningFaceID1()){
           outerBends[bend->getFaceId()] = bend;
+
+          queue.push_back(bend->getBendFeature()->getJoiningFaceID1());
+          queue.push_back(bend->getBendFeature()->getJoiningFaceID2());
+
           found = true;
           bendIter = innerBends.erase(bendIter);
       }
       else if (id == bend->getBendFeature()->getJoiningFaceID2()) {
           outerBends[bend->getFaceId()] = bend;
+
+          queue.push_back(bend->getBendFeature()->getJoiningFaceID1());
+          queue.push_back(bend->getBendFeature()->getJoiningFaceID2());
+
           found = true;
           bendIter = innerBends.erase(bendIter);
       } else {
