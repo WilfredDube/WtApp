@@ -1,6 +1,8 @@
 #pragma once
 
 #include "ModelTypes.h"
+#include "../../include/sheet-metal-component/bend/ModelBend.h"
+#include "../../include/sheet-metal-component/face/ModelFace.h"
 
 #include <TopoDS_Shape.hxx>
 
