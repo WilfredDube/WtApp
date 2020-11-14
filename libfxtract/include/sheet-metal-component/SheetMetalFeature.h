@@ -9,21 +9,12 @@
 #include <ostream>
 #include <map>
 #include <memory>
+#include <deque>
 
 namespace Fxt
 {
 namespace SheetMetalComponent
 {
-    namespace Face
-    {
-        class ModelFace;
-    }
-
-    namespace Bend
-    {
-        class ModelBend;
-    }
-
     using FaceID = Fxt::SheetMetalComponent::ModelTypes::FaceID;
 
     class SheetMetalFeature
@@ -67,7 +58,8 @@ namespace SheetMetalComponent
          */
         bool splitModelBends(const FaceID id, std::map<FaceID, 
                         std::shared_ptr<Bend::ModelBend>>& innerBends, 
-                        std::map<FaceID, std::shared_ptr<Bend::ModelBend>>& outerBends);
+                        std::map<FaceID, std::shared_ptr<Bend::ModelBend>>& outerBends,
+                        std::deque<FaceID>& queue);
 
         std::map<FaceID, std::shared_ptr<Face::ModelFace>> getFaces() const;
         std::map<FaceID, std::shared_ptr<Bend::ModelBend>> getBends() const;
