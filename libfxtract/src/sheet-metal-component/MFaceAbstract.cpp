@@ -84,11 +84,14 @@ void MFaceAbstract::extractEdges()
       std::shared_ptr<Edge::ModelEdge> edgex { std::make_shared<Edge::ModelEdge>(edge) };
       edgex->setEdgeNum(edgeid);
 
+      /**
+       * If the face is PLANAR but has two arc edges then set the edge position to
+       * SIDE_EDGE and the face type to BEND_SIDE
+       */
       if (getPlaneType() == PlaneType::PLANAR) {
         if (edgex->getEdgeType() == EdgeType::ARC) {
           edgex->setEdgePosition(EdgePosition::SIDE_EDGE);
           setFaceType(FaceType::BEND_SIDE);
-          setFaceId(0);
         }
       }
 
