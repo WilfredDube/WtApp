@@ -74,7 +74,7 @@ namespace Edge
         void setJoiningFaceID(const FaceID id);
         FaceID getJoiningFaceID();
 
-        bool operator==(const std::shared_ptr<ModelEdge>& otherEdge) const;
+        bool operator==(const ModelEdge& otherEdge) const;
     };
 }
 }

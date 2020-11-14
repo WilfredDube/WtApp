@@ -144,7 +144,7 @@ FaceID ModelEdge::getJoiningFaceID()
     return mJoinedToFaceID;
 }
 
-bool ModelEdge::operator==(const std::shared_ptr<ModelEdge>& otherEdge) const
+bool ModelEdge::operator==(const ModelEdge& otherEdge) const
 {
     bool equal = false;
     const std::shared_ptr<gp_Pnt> wThisEdge = getEdgeEndPoints()[0];
