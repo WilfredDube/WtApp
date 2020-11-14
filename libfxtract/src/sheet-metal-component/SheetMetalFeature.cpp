@@ -195,6 +195,7 @@ void SheetMetalFeature::setThicknessDefiningFaceAttributes()
 
 bool SheetMetalFeature::reduceModelSize()
 {
+    bool done = false;
     if (removeOuterBendFaces())
     {
         removeOuterFaces();
@@ -203,9 +204,11 @@ bool SheetMetalFeature::reduceModelSize()
         reAssignFaceId();
 
         connectBendsToNewFaceId();
+
+        done = true;
     }
     
-    return true;
+    return done;
 }
 
 bool SheetMetalFeature::removeOuterBendFaces()
