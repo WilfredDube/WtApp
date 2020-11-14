@@ -149,14 +149,16 @@ bool ModelEdge::operator==(const ModelEdge& otherEdge) const
     bool equal = false;
     const std::shared_ptr<gp_Pnt> wThisEdge = getEdgeEndPoints()[0];
     const std::shared_ptr<gp_Pnt> xThisEdge = getEdgeEndPoints()[1];
-    const std::shared_ptr<gp_Pnt> yOtherEdge = otherEdge->getEdgeEndPoints()[0];
-    const std::shared_ptr<gp_Pnt> zOtherEdge = otherEdge->getEdgeEndPoints()[1];    
-    
-    if ((IsEqual(wThisEdge, yOtherEdge)) && (IsEqual(xThisEdge, zOtherEdge)))
+    const std::shared_ptr<gp_Pnt> yOtherEdge = otherEdge.getEdgeEndPoints()[0];
+    const std::shared_ptr<gp_Pnt> zOtherEdge = otherEdge.getEdgeEndPoints()[1];    
+
+    if ((wThisEdge->IsEqual(*yOtherEdge, Precision::Approximation())) 
+        && (xThisEdge->IsEqual(*zOtherEdge, Precision::Approximation())))
     {
       equal = true;
     } 
-    else if ((IsEqual(wThisEdge, zOtherEdge)) && (IsEqual(xThisEdge, yOtherEdge)))
+    else if ((wThisEdge->IsEqual(*zOtherEdge, Precision::Approximation())) 
+        && (xThisEdge->IsEqual(*yOtherEdge, Precision::Approximation())))
     {
       equal = true;
     }
