@@ -337,8 +337,7 @@ void SheetMetalFeature::connectBendsToNewFaceId()
 
 void SheetMetalFeature::computeBendAngles()
 {
-    for (auto& elem : mModelBends){
-        auto& bend = elem.second;
+    for (auto& [bendId, bend] : mModelBends){
   
         if ((bend->getBendFeature()->getJoiningFaceID1() != 0) && (bend->getBendFeature()->getJoiningFaceID2() != 0)) 
         {
