@@ -245,17 +245,18 @@ void SheetMetalFeature::removeOuterFaces()
 {
     std::map<FaceID, std::shared_ptr<Face::ModelFace>> innerFaces;
 
-    // TODO: reduce the time complexity to O(n)
-    for(auto& faceItem : mModelFaces){
-      for(auto& elem : mModelBends) {
-        auto& bend = elem.second;
-        if(bend->getBendFeature()->getJoiningFaceID1() == faceItem.first || 
-            bend->getBendFeature()->getJoiningFaceID2() == faceItem.first )
-        {
-          innerFaces[faceItem.first] = faceItem.second;
-          break;
+    for(auto& [id, bend] : mModelBends) {
+        auto face = mModelFaces.find(bend->getBendFeature()->getJoiningFaceID1());
+
+        if(face != mModelFaces.end()){
+            innerFaces.insert({face->first, face->second});
         }
-      }
+
+        face = mModelFaces.find(bend->getBendFeature()->getJoiningFaceID2());
+
+        if(face != mModelFaces.end()){
+            innerFaces.insert({face->first, face->second});
+        }
     }
 
     if(innerFaces.size() == (mModelFaces.size() / 2))
