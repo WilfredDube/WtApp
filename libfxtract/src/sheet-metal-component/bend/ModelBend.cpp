@@ -30,10 +30,10 @@ void ModelBend::init()
     computeFaceNormal();
     setUnitNormal(Computation::computeUnitNormal(mModelFace));
 
-    setBendLength();
-
     if(mArcEdges.size() != 2)
         arcEdgeExtraction();
+
+    setBendLength();
 
     mBendLine->computeBendLine(mArcEdges);
 }
