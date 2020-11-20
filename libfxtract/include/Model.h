@@ -57,6 +57,8 @@ namespace Fxt {
     bool isSameDirection(size_t bend1, size_t bend2);
     double distance(size_t bend1, size_t bend2);
     bool hasCollision(size_t bend1, size_t bend2);
+    
+    void assignBendDirection();
 
   private:
     std::string mModelFile;
@@ -96,7 +98,6 @@ namespace Fxt {
     double computeDistance(ModelFace& mf);
     double computeDistance(FaceID faceId, ModelBend& b);
     double computeDistance(FaceID faceId, ModelBend& b1, ModelBend& b2);
-
   };
 
 }

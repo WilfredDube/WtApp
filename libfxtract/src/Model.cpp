@@ -631,4 +631,51 @@ namespace Fxt {
   }
   
   bool Model::hasCollision(size_t bend1, size_t bend2){ return true;}
+
+  void Model::assignBendDirection()
+  {
+    auto max = std::numeric_limits<long double>::min();
+    auto min = std::numeric_limits<long double>::max();
+
+    for(auto& bend : mInnerBends_){
+      if(max < bend.getBendRadius()){
+        max = bend.getBendRadius();
+        std::cerr << "max -> " << max << '\n';
+        bend.setBendDirection(2);
+      }
+      
+      if(min > bend.getBendRadius()){
+        min = bend.getBendRadius();
+        std::cerr << "min -> " << min << '\n';
+        bend.setBendDirection(1);
+      }
+    }
+
+    for(auto& bend : mInnerBends_){
+      if(max == bend.getBendRadius()){
+        bend.setBendDirection(2);
+      }
+      
+      if(min == bend.getBendRadius()){
+        bend.setBendDirection(1);
+      }
+
+      bend.setBendRadius(min);
+    }
+
+    // auto max = std::max(mModelBends.begin(), mModelBends.end(), [](auto& first, auto& sec)
+    // {
+    //   return first->getBendRadius() > sec->getBendRadius();
+    // });
+
+    // auto min = std::min(mModelBends.begin(), mModelBends.end(), [](auto& first, auto& sec)
+    // {
+    //   return first->getBendRadius() < sec->getBendRadius();
+    // });
+
+    std::cerr << "Max radius: " << max << '\n';
+    std::cerr << "Min radius: " << min << '\n';
+    std::cerr << "Actual radius: " << (min + max) / 2 << '\n';
+    
+  }
 }
