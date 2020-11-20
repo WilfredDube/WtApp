@@ -78,6 +78,10 @@ namespace {
             std::cout << "++++++++++++++++CLEANED!!++++++++++++++++" << std::endl;
         
         test->printBendInfo();
+            std::cout << "++++++++++++++++Before Direction Assignment!!++++++++++++++++" << std::endl;
+
+        test->assignBendDirection();
+        test->printBendInfo();
 
         std::cout << "extractFeatures------" << std::endl;
         return *test;
@@ -246,7 +250,7 @@ void ModelFileWidget::processModelFile()
                 b->bend_radius = a.getBendRadius();
                 b->bend_length = a.getBendLength();
                 b->modelFile = modelFile_;
-                b->bend_direction = 0;
+                b->bend_direction = a.getBendDirection();
                 b->bending_tool_id = toolName;
                 b->bend_force = bend_force;
 
