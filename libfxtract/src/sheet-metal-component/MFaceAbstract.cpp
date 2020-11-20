@@ -110,10 +110,12 @@ void MFaceAbstract::extractEdges()
 void MFaceAbstract::setFaceEdgePosition()
 {
     // set edge positions
-    for (auto& a : mFaceEdges)
+    for (auto& firstEdge : mFaceEdges)
     {
       if(firstEdge->isJoiningEdge()) {
+        for (auto& secondEdge : mFaceEdges) {
           if(secondEdge->isJoiningEdge()) {
+            auto angle = round(firstEdge->getEdgeLineVector()->Angle(*(secondEdge->getEdgeLineVector())) * (180.0 / M_PI));
             // std::cout << "Angle : " << angle << std::endl;
 
             if (angle == 0.0 || angle == 180){
