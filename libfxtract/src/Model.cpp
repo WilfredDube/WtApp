@@ -331,7 +331,8 @@ namespace Fxt {
       "---F" << a.getJoiningFaceID2()<<
       " Angle : " << a.getBendAngle() <<
       " Radius : " << a.getBendRadius() <<
-      " Length : " << a.getBendLength() << " mm\n";
+      " Length : " << a.getBendLength() << " mm" <<
+      " Direction : " << (a.getBendDirection() == 1 ? "Inside" : "Outside") << '\n';
     }
 
     std::cout << "\n=============================================" << '\n';    
