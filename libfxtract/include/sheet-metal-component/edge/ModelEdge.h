@@ -70,6 +70,25 @@ namespace Edge
         FaceID getJoiningFaceID();
 
         bool operator==(const ModelEdge& otherEdge) const;
+
+    private:
+        EdgeID mEdgeID;
+        EdgeType mEdgeType;
+        EdgePosition mEdgePosition;
+
+        std::shared_ptr<gp_Dir> mEdgeLineVector;
+
+        long double mEdgeLength;
+
+        FaceID mJoinedToFaceID;
+
+        //! Whether its a straight line (rational = 0) or arc (rational = 1)
+        bool mIsrational;
+
+        //! Edge ID of an edge in the Model shared by another face.
+        EdgeID mEdgeSameAsEdgeID;
+
+        std::shared_ptr<TopoDS_Edge> mModelEdge;
     };
 }
 }
