@@ -5,10 +5,10 @@
 using namespace Fxt::SheetMetalComponent::Edge;
 
 ModelEdge::ModelEdge(std::shared_ptr<TopoDS_Edge> edge)
+: mModelEdge { edge }
 {
-    mModelEdge = edge;
-
-    setEdgePosition(EdgePosition::DEFAULT);
+    mEdgePosition = EdgePosition::DEFAULT;
+    
     setIsRational(BRepAdaptor_Curve(*edge).IsRational());
 
     BRepAdaptor_Curve curve = BRepAdaptor_Curve(*edge);
