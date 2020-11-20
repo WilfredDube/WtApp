@@ -154,6 +154,11 @@ namespace Fxt {
     }
   }
 
+  void ModelBend::setBendRadius(Standard_Real bendRadius)
+  {
+    mBendRadius = bendRadius;
+  }
+
   Standard_Real ModelBend::getBendRadius(){ return mBendRadius; }
 
   double ModelBend::computeBendDistance(ModelBend& otherBend)

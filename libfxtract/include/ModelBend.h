@@ -93,6 +93,7 @@ namespace Fxt {
     void setBendLength(std::vector<ModelEdge> mFaceEdges);
 
     void setCurvature(Standard_Real cv);
+    void setBendRadius(Standard_Real bendRadius);
     Standard_Real getBendRadius();
 
     void computeBendLine();
