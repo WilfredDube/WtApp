@@ -41,7 +41,7 @@ void ModelBend::init()
 void ModelBend::arcEdgeExtraction()
 {
     for(const auto& edge : mFaceEdges){
-        if(edge->getEdgeType() == Fxt::SheetMetalComponent::ModelTypes::EdgeType::ARC){
+        if(edge->isArc()){
             mArcEdges.push_back(edge);
         } else
         {

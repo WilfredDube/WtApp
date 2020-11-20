@@ -117,7 +117,7 @@ void SheetMetalFeature::classifyFaces()
     {
       for (auto& edge: bend->getFaceEdges())
       {
-        if (edge->getEdgeType() == EdgeType::LINE) 
+        if (edge->isLine()) 
         {
           for (auto& [faceId, face] : mModelFaces)
           {

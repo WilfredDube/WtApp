@@ -89,15 +89,13 @@ void MFaceAbstract::extractEdges()
        * SIDE_EDGE and the face type to BEND_SIDE
        */
       if (getPlaneType() == PlaneType::PLANAR) {
-        if (edgex->getEdgeType() == EdgeType::ARC) {
-          edgex->setEdgePosition(EdgePosition::SIDE_EDGE);
+        if (edgex->isArc()) {
           setFaceType(FaceType::BEND_SIDE);
         }
       }
 
       if (getPlaneType() == PlaneType::NON_PLANAR) {
-        if (edgex->getEdgeType() == EdgeType::LINE) {
-          edgex->setEdgePosition(EdgePosition::JOINING_EDGE);
+        if (edgex->isLine()) {
         } else {
           edgex->setEdgePosition(EdgePosition::SIDE_EDGE);
         }
@@ -112,10 +110,8 @@ void MFaceAbstract::setFaceEdgePosition()
     // set edge positions
     for (auto& a : mFaceEdges)
     {
-      if(a->getEdgePosition() == EdgePosition::JOINING_EDGE) {
-        for (auto& b : mFaceEdges) {
-          if(b->getEdgePosition() != EdgePosition::JOINING_EDGE) {
-            auto angle = round(a->getEdgeLineVector()->Angle(*(b->getEdgeLineVector())) * (180.0 / M_PI));
+      if(firstEdge->isJoiningEdge()) {
+          if(secondEdge->isJoiningEdge()) {
             // std::cout << "Angle : " << angle << std::endl;
 
             if (angle == 0.0 || angle == 180){
