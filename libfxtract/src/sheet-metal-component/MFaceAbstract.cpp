@@ -90,14 +90,16 @@ void MFaceAbstract::extractEdges()
        */
       if (getPlaneType() == PlaneType::PLANAR) {
         if (edgex->isArc()) {
+          edgex->setEdgePosition(Edge::ModelEdge::EdgePosition::SIDE_EDGE);
           setFaceType(FaceType::BEND_SIDE);
         }
       }
 
       if (getPlaneType() == PlaneType::NON_PLANAR) {
         if (edgex->isLine()) {
+          edgex->setEdgePosition(Edge::ModelEdge::EdgePosition::JOINING_EDGE);
         } else {
-          edgex->setEdgePosition(EdgePosition::SIDE_EDGE);
+          edgex->setEdgePosition(Edge::ModelEdge::EdgePosition::SIDE_EDGE);
         }
       }
 
@@ -115,11 +117,11 @@ void MFaceAbstract::setFaceEdgePosition()
             // std::cout << "Angle : " << angle << std::endl;
 
             if (angle == 0.0 || angle == 180){
-              b->setEdgePosition(EdgePosition::DISJOINT_EDGE);
+              secondEdge->setEdgePosition(Edge::ModelEdge::EdgePosition::DISJOINT_EDGE);
             } else if(angle == 90.0) {
-              b->setEdgePosition(EdgePosition::SIDE_EDGE);
+              secondEdge->setEdgePosition(Edge::ModelEdge::EdgePosition::SIDE_EDGE);
             } else {
-              b->setEdgePosition(EdgePosition::SIDE_EDGE);
+              secondEdge->setEdgePosition(Edge::ModelEdge::EdgePosition::SIDE_EDGE);
             }
           }
 

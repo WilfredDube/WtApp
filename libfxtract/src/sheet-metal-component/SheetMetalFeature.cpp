@@ -129,7 +129,7 @@ void SheetMetalFeature::classifyFaces()
                 {
                   if(*faceEdge == *edge) 
                   {
-                    faceEdge->setEdgePosition(EdgePosition::JOINING_EDGE);
+                    faceEdge->setEdgePosition(Edge::ModelEdge::EdgePosition::JOINING_EDGE);
                     face->setFaceType(FaceType::FACE);
                   
                     tempFaces.insert({ faceId, face } );
@@ -315,7 +315,7 @@ void SheetMetalFeature::connectBendsToNewFaceId()
                     {
                         if (abs(faceEdge->getEdgeLength() - edge->getEdgeLength()) < 0.01) {
                             if(*faceEdge == *edge) { 
-                                faceEdge->setEdgePosition(EdgePosition::JOINING_EDGE);           
+                                faceEdge->setEdgePosition(Edge::ModelEdge::EdgePosition::JOINING_EDGE);           
                                 if ((bend->getBendFeature()->getJoiningFaceID1() == 0) && 
                                     (bend->getBendFeature()->getJoiningFaceID2() == 0)) 
                                 {
