@@ -18,10 +18,8 @@ namespace SheetMetalComponent
 {
     using FaceID = Fxt::SheetMetalComponent::ModelTypes::FaceID;
     using EdgeID = Fxt::SheetMetalComponent::ModelTypes::EdgeID;
-    using EdgeType = Fxt::SheetMetalComponent::ModelTypes::EdgeType;
     using FaceType = Fxt::SheetMetalComponent::ModelTypes::FaceType;
     using PlaneType = Fxt::SheetMetalComponent::ModelTypes::PlaneType;
-    using EdgePosition = Fxt::SheetMetalComponent::ModelTypes::EdgePosition;
 
     class MFaceAbstract
     {
