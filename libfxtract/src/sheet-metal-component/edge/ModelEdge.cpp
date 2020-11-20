@@ -95,19 +95,9 @@ void ModelEdge::setEdgeType(const GeomAbs_CurveType type)
     }
 }
 
-EdgeType ModelEdge::getEdgeType() const
-{
-    return mEdgeType;
-}
-
 void ModelEdge::setEdgePosition(const EdgePosition edgePosition)
 {
     mEdgePosition = edgePosition;
-}
-
-EdgePosition ModelEdge::getEdgePosition() const
-{
-    return mEdgePosition;
 }
 
 void ModelEdge::setEdgeLength(const long double edgeLength)
@@ -142,6 +132,31 @@ void ModelEdge::setJoiningFaceID(const FaceID id)
 FaceID ModelEdge::getJoiningFaceID()
 {
     return mJoinedToFaceID;
+}
+
+bool ModelEdge::isLine() const
+{
+    return (mEdgeType == EdgeType::LINE);
+}
+
+bool ModelEdge::isArc() const
+{
+    return (mEdgeType == EdgeType::ARC);
+}
+
+bool ModelEdge::isJoiningEdge() const
+{
+    return (mEdgePosition == EdgePosition::JOINING_EDGE);
+}
+
+bool ModelEdge::isSideEdge() const
+{
+    return (mEdgePosition == EdgePosition::SIDE_EDGE);
+}
+
+bool ModelEdge::isDisjointEdge() const
+{
+    return (mEdgePosition == EdgePosition::DISJOINT_EDGE);
 }
 
 bool ModelEdge::operator==(const ModelEdge& otherEdge) const

@@ -53,10 +53,8 @@ namespace Edge
         EdgeID getEdgeNum() const;
 
         void setEdgeType(const GeomAbs_CurveType type);
-        EdgeType getEdgeType() const;
 
         void setEdgePosition(const EdgePosition edgePosition);
-        EdgePosition getEdgePosition() const;
 
         void setEdgeLength(const long double edgeLength);
         long double getEdgeLength() const;
@@ -68,6 +66,13 @@ namespace Edge
 
         void setJoiningFaceID(const FaceID id);
         FaceID getJoiningFaceID();
+
+        bool isLine() const;
+        bool isArc() const;
+
+        bool isJoiningEdge() const;
+        bool isSideEdge() const;
+        bool isDisjointEdge() const;
 
         bool operator==(const ModelEdge& otherEdge) const;
 
