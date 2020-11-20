@@ -21,29 +21,24 @@ namespace Edge
 {
     using EdgeID = Fxt::SheetMetalComponent::ModelTypes::EdgeID;
     using FaceID = Fxt::SheetMetalComponent::ModelTypes::FaceID;
-    using EdgeType = Fxt::SheetMetalComponent::ModelTypes::EdgeType;
-    using EdgePosition = Fxt::SheetMetalComponent::ModelTypes::EdgePosition;
 
     class ModelEdge
     {
-        EdgeID mEdgeID;
-        EdgeType mEdgeType;
-        EdgePosition mEdgePosition;
-
-        std::shared_ptr<gp_Dir> mEdgeLineVector;
-
-        long double mEdgeLength;
-
-        FaceID mJoinedToFaceID;
-
-        //! Whether its a straight line (rational = 0) or arc (rational = 1)
-        bool mIsrational;
-
-        //! Edge ID of an edge in the Model shared by another face.
-        EdgeID mEdgeSameAsEdgeID;
-
-        std::shared_ptr<TopoDS_Edge> mModelEdge;
     public:
+        enum class EdgePosition 
+        { 
+            DEFAULT = -1, 
+            JOINING_EDGE, 
+            SIDE_EDGE, 
+            DISJOINT_EDGE 
+        };
+
+        enum class EdgeType { 
+            DEFAULT = -1, 
+            LINE, 
+            ARC 
+        };
+
         ModelEdge() = default;
         ModelEdge(std::shared_ptr<TopoDS_Edge> edge);
 
