@@ -4,9 +4,9 @@
 
 using namespace Fxt::CadFileReader;
 
-inline CadFileFormat CadFileReaderFactory::checkFileFormat(const std::string& fileName) const
+inline CadFileReaderFactory::CadFileFormat CadFileReaderFactory::checkFileFormat(const std::string& fileName) const
 {
-    CadFileFormat cadFileFormat;
+    CadFileReaderFactory::CadFileFormat cadFileFormat;
 
     if (fileName.find("igs") != std::string::npos || fileName.find("iges") != std::string::npos) {
       cadFileFormat = CadFileFormat::IGES_FILE_FORMAT;
