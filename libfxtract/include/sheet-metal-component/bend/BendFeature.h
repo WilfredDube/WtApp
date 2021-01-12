@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../BoostSerializer.h"
-#include "../edge/ModelEdge.h"
-#include "../MFaceAbstract.h"
+// #include "../BoostSerializer.h"
+// #include "../edge/ModelEdge.h"
+// #include "../MFaceAbstract.h"
 #include "../../Computation.h"
 
 #include <gp_Lin.hxx>
@@ -15,9 +15,10 @@ namespace SheetMetalComponent
 {
 namespace Bend
 {
-    class BendFeature
+    struct BendFeature
     {
-        using FaceID = Fxt::SheetMetalComponent::ModelTypes::FaceID;
+    private:
+        // using FaceID = Fxt::SheetMetalComponent::ModelTypes::FaceID;
 
         long double mBendLength;
 
