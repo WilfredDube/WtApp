@@ -32,7 +32,7 @@ void StepFileReader::makeReader(const std::string& stepFile)
     }
 }
 
-void StepFileReader::extractFaces(std::shared_ptr<SheetMetalFeature>& model, const std::string& filename)
+void StepFileReader::extractFaces(SheetMetalFeaturePtr& model, const std::string& filename)
 {
   makeReader(filename);
 

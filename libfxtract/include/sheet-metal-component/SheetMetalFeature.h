@@ -96,3 +96,5 @@ namespace SheetMetalComponent
     };
 }
 }
+
+using SheetMetalFeaturePtr = std::shared_ptr<Fxt::SheetMetalComponent::SheetMetalFeature>;

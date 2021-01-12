@@ -16,7 +16,7 @@ namespace CadFileReader
 
         inline CadFileFormat checkFileFormat(const std::string& fileExtension) const;
     public:
-        std::shared_ptr<Fxt::CadFileReader::CadFileReader> createReader(const std::string& filename);
+       CadFileReaderPtr createReader(const std::string& filename);
     };
 }
 }

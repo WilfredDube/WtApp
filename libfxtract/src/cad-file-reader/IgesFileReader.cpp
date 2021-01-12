@@ -31,7 +31,7 @@ void IgesFileReader::makeReader(const std::string& igesFile)
     mMyIgesReader->TransferList(myList);
 }
 
-void IgesFileReader::extractFaces(std::shared_ptr<SheetMetalFeature>& model, const std::string& filename)
+void IgesFileReader::extractFaces(SheetMetalFeaturePtr& model, const std::string& filename)
 {
   makeReader(filename);
 

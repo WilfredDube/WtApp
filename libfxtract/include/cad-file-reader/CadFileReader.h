@@ -18,7 +18,9 @@ namespace CadFileReader
     protected:
         virtual void makeReader(const std::string& filename) = 0;
     public:
-        virtual void extractFaces(std::shared_ptr<Fxt::SheetMetalComponent::SheetMetalFeature>& model, const std::string& filename) = 0;
+        virtual void extractFaces(SheetMetalFeaturePtr& model, const std::string& filename) = 0;
     };
 }
 }
+
+using CadFileReaderPtr =  std::shared_ptr<Fxt::CadFileReader::CadFileReader>;
