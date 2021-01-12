@@ -4,6 +4,10 @@
 
 using namespace Fxt::CadFileReader;
 
+CadFileReaderFactory::CadFileReaderFactory(const Logger& loggingService) 
+: logger { loggingService } 
+{}
+
 inline CadFileReaderFactory::CadFileFormat CadFileReaderFactory::checkFileFormat(const std::string& fileName) const
 {
     CadFileReaderFactory::CadFileFormat cadFileFormat;
@@ -31,6 +35,9 @@ std::shared_ptr<CadFileReader> CadFileReaderFactory::createReader(const std::str
     return std::make_shared<StepFileReader>();
   else if(format == CadFileFormat::IGES_FILE_FORMAT)
     return std::make_shared<IgesFileReader>();
+
+  std::string_view warningMessage { filename + "-> Unknown file format : Fxtract only accepts iges and step file formats." };
+  logger->writeErrorEntry(warningMessage);
 
   throw UnknownFileFormatException(
           "Unknown file format : Fxtract only accepts iges and step file formats."

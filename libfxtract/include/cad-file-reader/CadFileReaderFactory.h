@@ -2,6 +2,8 @@
 
 #include "CadFileReader.h"
 
+#include "../../../logging/include/LoggingFacility.h"
+
 namespace Fxt
 {
 namespace CadFileReader 
@@ -15,8 +17,12 @@ namespace CadFileReader
         };
 
         inline CadFileFormat checkFileFormat(const std::string& fileExtension) const;
+
+        Logger logger;
     public:
-       CadFileReaderPtr createReader(const std::string& filename);
+        explicit CadFileReaderFactory(const Logger& loggingService);
+
+        CadFileReaderPtr createReader(const std::string& filename);
     };
 }
 }
