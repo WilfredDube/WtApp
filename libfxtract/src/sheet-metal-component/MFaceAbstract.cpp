@@ -67,7 +67,7 @@ void MFaceAbstract::setPlaneType(PlaneType ptype)
     mPlaneType = ptype; 
 }
 
-PlaneType MFaceAbstract::getPlaneType() const 
+MFaceAbstract::PlaneType MFaceAbstract::getPlaneType() const 
 { 
     return mPlaneType; 
 }
