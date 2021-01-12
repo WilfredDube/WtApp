@@ -10,7 +10,7 @@ namespace CadFileReader
 {    
     class IgesFileReader : public Fxt::CadFileReader::CadFileReader 
     {
-        std::shared_ptr<IGESControl_Reader> mMyIgesReader = nullptr;
+        std::shared_ptr<IGESControl_Reader> mMyIgesReader { nullptr };
     public:
         void makeReader(const std::string& filename);
         void extractFaces(SheetMetalFeaturePtr& model, const std::string& filename);

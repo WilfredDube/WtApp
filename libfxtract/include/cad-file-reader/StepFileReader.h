@@ -10,7 +10,7 @@ namespace CadFileReader
 {
     class StepFileReader : public Fxt::CadFileReader::CadFileReader 
     {
-        std::shared_ptr<STEPControl_Reader> mMyStepReader = nullptr;
+        std::shared_ptr<STEPControl_Reader> mMyStepReader { nullptr };
     public:
         void makeReader(const std::string& filename);
         void extractFaces(SheetMetalFeaturePtr& model, const std::string& filename);
