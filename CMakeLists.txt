@@ -4,6 +4,7 @@ project(hello_x)
 
 add_subdirectory(libSeqgen)
 add_subdirectory(libfxtract)
+add_subdirectory(logging)
 add_subdirectory(model)
 add_subdirectory(view)
 add_subdirectory(tests)
@@ -31,4 +32,4 @@ find_package(wt COMPONENTS wt dbo dbosqlite3 http REQUIRED)
 
 add_executable (hello ${main_source_files})
 target_include_directories(hello PRIVATE ${Boost_INCLUDE_DIRS} ${wt_INCLUDE_DIRS})
-target_link_libraries(hello view model fxtract seqgen -g ${Boost_LIBRARIES} Threads::Threads ${wt_LIBRARIES} -lwthttp -lwt -lwtdbo -lwtdbosqlite3 -lboost_serialization)
+target_link_libraries(hello view model fxtract seqgen logger -g ${Boost_LIBRARIES} Threads::Threads ${wt_LIBRARIES} -lwthttp -lwt -lwtdbo -lwtdbosqlite3 -lboost_serialization)
