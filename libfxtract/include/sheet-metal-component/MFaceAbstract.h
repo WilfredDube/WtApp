@@ -24,6 +24,8 @@ namespace SheetMetalComponent
     class MFaceAbstract
     {
     protected:
+        enum class PlaneType { PLANAR, NON_PLANAR };
+
         FaceID mFaceID; /*!< an integer value  represents the Face Identification number */
         PlaneType mPlaneType;
         FaceType mFaceType;

@@ -9,8 +9,6 @@ namespace ModelTypes
     using FaceID = unsigned int;
     using EdgeID = unsigned int;
 
-
-    enum class PlaneType { PLANAR, NON_PLANAR };
     enum class FaceType { NONE, THICKNESS_DEFINING_FACE, BEND_FACE, BEND_SIDE, FACE };
 
     enum class BendType { UNASSIGNED = -1, INTERNAL, EXTERNAL };
