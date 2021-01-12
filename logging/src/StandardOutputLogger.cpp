@@ -3,6 +3,7 @@
 #include <iostream>
 
 using namespace std;
+using namespace Fxt::Logging;
 
 void StandardOutputLogger::writeInfoEntry(std::string_view& entry)
 {

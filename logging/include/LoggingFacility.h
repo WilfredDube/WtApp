@@ -3,14 +3,20 @@
 #include <memory>
 #include <string_view>
 
-class ILoggingFacility
+namespace Fxt 
 {
-public:
-    virtual ~ILoggingFacility() = default;
+namespace Logging
+{
+    class ILoggingFacility
+    {
+    public:
+        virtual ~ILoggingFacility() = default;
 
-    virtual void writeInfoEntry(std::string_view& entry) = 0;
-    virtual void writeWarnEntry(std::string_view& entry) = 0;
-    virtual void writeErrorEntry(std::string_view& entry) = 0;
-};
+        virtual void writeInfoEntry(std::string_view& entry) = 0;
+        virtual void writeWarnEntry(std::string_view& entry) = 0;
+        virtual void writeErrorEntry(std::string_view& entry) = 0;
+    };
+}
+}
 
-using Logger = std::shared_ptr<ILoggingFacility>;
+using Logger = std::shared_ptr<Fxt::Logging::ILoggingFacility>;
