@@ -9,16 +9,11 @@ namespace SheetMetalComponent
 {
 namespace Bend
 {            
-    using FaceID = Fxt::SheetMetalComponent::ModelTypes::FaceID;
-    using BendType = Fxt::SheetMetalComponent::ModelTypes::BendType;
-
     class BendLine;
     class BendFeature;
 
     class ModelBend : public Fxt::SheetMetalComponent::MFaceAbstract
     {
-        BendType mBendType;
-
         std::shared_ptr< Fxt::SheetMetalComponent::Bend::BendFeature> mBendFeature;
     
         unsigned long mBendSameAsId;
