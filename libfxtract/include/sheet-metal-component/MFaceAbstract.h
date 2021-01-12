@@ -37,7 +37,7 @@ namespace SheetMetalComponent
     public:
         MFaceAbstract() = default;
 
-        MFaceAbstract(const Fxt::SheetMetalComponent::FaceID faceID = 0, std::shared_ptr<TopoDS_Face> topoDSFace = nullptr);
+        MFaceAbstract(const FaceID faceID = 0, std::shared_ptr<TopoDS_Face> topoDSFace = nullptr);
 
         virtual void init() = 0;
 

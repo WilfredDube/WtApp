@@ -6,7 +6,7 @@
 
 using namespace Fxt::SheetMetalComponent;
 
-MFaceAbstract::MFaceAbstract(const Fxt::SheetMetalComponent::FaceID faceID, std::shared_ptr<TopoDS_Face> topoDSFace)
+MFaceAbstract::MFaceAbstract(const FaceID faceID, std::shared_ptr<TopoDS_Face> topoDSFace)
 {
     setFaceId(faceID);
     setTModelFace(topoDSFace);

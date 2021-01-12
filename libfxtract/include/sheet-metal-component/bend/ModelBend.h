@@ -33,7 +33,7 @@ namespace Bend
         std::shared_ptr<Fxt::SheetMetalComponent::Bend::BendLine> mBendLine;
 
     public:
-        ModelBend(const Fxt::SheetMetalComponent::FaceID faceID = 0, std::shared_ptr<TopoDS_Face> topoDSFace = nullptr);
+        ModelBend(const FaceID faceID = 0, std::shared_ptr<TopoDS_Face> topoDSFace = nullptr);
 
         void init();
 

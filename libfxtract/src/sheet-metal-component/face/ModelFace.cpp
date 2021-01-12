@@ -3,7 +3,7 @@
 
 using namespace Fxt::SheetMetalComponent::Face;
 
-ModelFace::ModelFace(Fxt::SheetMetalComponent::FaceID faceID, std::shared_ptr<TopoDS_Face> topoDSFace)
+ModelFace::ModelFace(const FaceID faceID, std::shared_ptr<TopoDS_Face> topoDSFace)
 : MFaceAbstract(faceID, topoDSFace) 
 {
     setPlaneType(PlaneType::PLANAR);
