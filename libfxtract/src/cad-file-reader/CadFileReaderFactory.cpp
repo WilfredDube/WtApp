@@ -1,6 +1,7 @@
 #include "../../include/cad-file-reader/CadFileReaderFactory.h"
 #include "../../include/cad-file-reader/IgesFileReader.h"
 #include "../../include/cad-file-reader/StepFileReader.h"
+#include "../../include/cad-file-reader/NullFileReader.h"
 
 using namespace Fxt::CadFileReader;
 
@@ -39,7 +40,5 @@ std::shared_ptr<CadFileReader> CadFileReaderFactory::createReader(const std::str
   std::string_view warningMessage { filename + "-> Unknown file format : Fxtract only accepts iges and step file formats." };
   logger->writeErrorEntry(warningMessage);
 
-  throw UnknownFileFormatException(
-          "Unknown file format : Fxtract only accepts iges and step file formats."
-          );
+  return { std::make_shared<NullFileReader>() };
 }
