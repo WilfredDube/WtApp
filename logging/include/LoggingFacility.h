@@ -1,6 +1,8 @@
 #pragma once
 
+#include <ctime>
 #include <memory>
+#include <sstream>
 #include <string_view>
 
 namespace Fxt 
@@ -16,6 +18,16 @@ namespace Logging
         virtual void writeWarnEntry(std::string_view username, std::string_view entry, std::string_view other = "") = 0;
         virtual void writeErrorEntry(std::string_view username, std::string_view entry, std::string_view other = "") = 0;
 
+        inline std::string formatMessage(std::string_view username, std::string_view entry, std::string_view other = "") noexcept
+        {
+            std::ostringstream ostr;
+            ostr << dateTimeString() << " : { " 
+                 << username << " } : [ " 
+                 << other << " ] -> " 
+                 << entry;
+
+            return ostr.str();
+        }
     private:
         inline std::string dateTimeString() noexcept
         {
