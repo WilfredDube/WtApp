@@ -12,9 +12,10 @@ namespace Logging
     public:
         virtual ~ILoggingFacility() = default;
 
-        virtual void writeInfoEntry(std::string_view entry) = 0;
-        virtual void writeWarnEntry(std::string_view entry) = 0;
-        virtual void writeErrorEntry(std::string_view entry) = 0;
+        virtual void writeInfoEntry(std::string_view username, std::string_view entry, std::string_view other = "") = 0;
+        virtual void writeWarnEntry(std::string_view username, std::string_view entry, std::string_view other = "") = 0;
+        virtual void writeErrorEntry(std::string_view username, std::string_view entry, std::string_view other = "") = 0;
+
     };
 }
 }
