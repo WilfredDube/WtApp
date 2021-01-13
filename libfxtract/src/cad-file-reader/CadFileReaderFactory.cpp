@@ -30,14 +30,23 @@ inline CadFileReaderFactory::CadFileFormat CadFileReaderFactory::checkFileFormat
 
 std::shared_ptr<CadFileReader> CadFileReaderFactory::createReader(const std::string& filename)
 {
-  CadFileFormat format = checkFileFormat(filename);      
+  CadFileFormat format = checkFileFormat(filename);  
 
-  if(format == CadFileFormat::STEP_FILE_FORMAT)
-    return std::make_shared<StepFileReader>();
-  else if(format == CadFileFormat::IGES_FILE_FORMAT)
-    return std::make_shared<IgesFileReader>();
+  if(reuseMap.find(format) != reuseMap.end()){
+    return reuseMap[format];
+  }
+
+  if(format == CadFileFormat::STEP_FILE_FORMAT){
+    reuseMap[format] = std::make_shared<StepFileReader>();
+    return reuseMap[format];
+  } else if(format == CadFileFormat::IGES_FILE_FORMAT){
+    reuseMap[format] = std::make_shared<IgesFileReader>();
+    return reuseMap[format];
+  }
 
   logger->writeErrorEntry("Unknown file format : Fxtract only accepts iges and step file formats.", filename);
 
-  return { std::make_shared<NullFileReader>() };
+  reuseMap[format] = std::make_shared<NullFileReader>();
+    
+  return reuseMap[format];
 }
