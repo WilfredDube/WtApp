@@ -12,6 +12,7 @@ namespace Logging
     class ILoggingFacility
     {
     public:
+        ILoggingFacility(std::string_view username) : username { username } {}
         virtual ~ILoggingFacility() = default;
 
         virtual void writeInfoEntry(std::string_view username, std::string_view entry, std::string_view other = "") = 0;
@@ -29,6 +30,8 @@ namespace Logging
             return ostr.str();
         }
     private:
+        std::string_view username;
+
         inline std::string dateTimeString() noexcept
         {
             std::time_t t_t = time(nullptr); // Get current system time

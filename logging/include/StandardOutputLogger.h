@@ -9,9 +9,8 @@ namespace Logging
     class StandardOutputLogger : public ILoggingFacility
     {
     public:
-        void writeInfoEntry(std::string_view username, std::string_view entry, std::string_view other = "") override;
-        void writeWarnEntry(std::string_view username, std::string_view entry, std::string_view other = "") override;
-        void writeErrorEntry(std::string_view username, std::string_view entry, std::string_view other = "") override;
+        StandardOutputLogger(std::string_view username) : ILoggingFacility(username){ }
+
     };
 }
 }
