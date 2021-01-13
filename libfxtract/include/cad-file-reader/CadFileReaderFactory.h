@@ -4,6 +4,8 @@
 
 #include "../../../logging/include/LoggingFacility.h"
 
+#include <unordered_map>
+
 namespace Fxt
 {
 namespace CadFileReader 
@@ -19,6 +21,8 @@ namespace CadFileReader
         inline CadFileFormat checkFileFormat(const std::string& fileExtension) const;
 
         Logger logger;
+
+        std::unordered_map<CadFileFormat, CadFileReaderPtr> reuseMap;
     public:
         explicit CadFileReaderFactory(const Logger& loggingService);
 
