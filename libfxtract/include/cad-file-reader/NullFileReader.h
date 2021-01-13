@@ -6,7 +6,7 @@ namespace Fxt
 {
 namespace CadFileReader
 {    
-    class NullFileReader : public Fxt::CadFileReader::CadFileReader 
+    class NullFileReader : public CadFileReader 
     {
     public:
         void makeReader(const std::string& filename) {}

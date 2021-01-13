@@ -8,7 +8,7 @@ namespace Fxt
 {
 namespace CadFileReader
 {
-    class StepFileReader : public Fxt::CadFileReader::CadFileReader 
+    class StepFileReader : public CadFileReader 
     {
         std::shared_ptr<STEPControl_Reader> mMyStepReader { nullptr };
     public:

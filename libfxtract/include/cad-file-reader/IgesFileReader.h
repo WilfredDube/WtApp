@@ -8,7 +8,7 @@ namespace Fxt
 {
 namespace CadFileReader
 {    
-    class IgesFileReader : public Fxt::CadFileReader::CadFileReader 
+    class IgesFileReader : public CadFileReader 
     {
         std::shared_ptr<IGESControl_Reader> mMyIgesReader { nullptr };
     public:
