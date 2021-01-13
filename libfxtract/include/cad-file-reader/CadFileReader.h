@@ -19,6 +19,7 @@ namespace CadFileReader
         virtual void makeReader(const std::string& filename) = 0;
     public:
         virtual void extractFaces(SheetMetalFeaturePtr& model, const std::string& filename) = 0;
+        virtual bool isUsable() const noexcept { return true; }
     };
 }
 }
