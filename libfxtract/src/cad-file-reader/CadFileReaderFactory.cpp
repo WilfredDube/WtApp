@@ -37,8 +37,7 @@ std::shared_ptr<CadFileReader> CadFileReaderFactory::createReader(const std::str
   else if(format == CadFileFormat::IGES_FILE_FORMAT)
     return std::make_shared<IgesFileReader>();
 
-  std::string_view warningMessage { filename + "-> Unknown file format : Fxtract only accepts iges and step file formats." };
-  logger->writeErrorEntry(warningMessage);
+  logger->writeErrorEntry("Unknown file format : Fxtract only accepts iges and step file formats.", filename);
 
   return { std::make_shared<NullFileReader>() };
 }
