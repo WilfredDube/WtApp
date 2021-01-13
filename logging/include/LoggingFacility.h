@@ -14,12 +14,12 @@ namespace Logging
     public:
         ILoggingFacility(std::string_view username) : username { username } {}
         virtual ~ILoggingFacility() = default;
+        
+        virtual void writeInfoEntry(std::string_view entry, std::string_view other = "") = 0;
+        virtual void writeWarnEntry(std::string_view entry, std::string_view other = "") = 0;
+        virtual void writeErrorEntry(std::string_view entry, std::string_view other = "") = 0;
 
-        virtual void writeInfoEntry(std::string_view username, std::string_view entry, std::string_view other = "") = 0;
-        virtual void writeWarnEntry(std::string_view username, std::string_view entry, std::string_view other = "") = 0;
-        virtual void writeErrorEntry(std::string_view username, std::string_view entry, std::string_view other = "") = 0;
-
-        inline std::string formatMessage(std::string_view username, std::string_view entry, std::string_view other = "") noexcept
+        inline std::string formatMessage(std::string_view entry, std::string_view other = "") noexcept
         {
             std::ostringstream ostr;
             ostr << dateTimeString() << " : { " 
@@ -29,6 +29,7 @@ namespace Logging
 
             return ostr.str();
         }
+
     private:
         std::string_view username;
 
