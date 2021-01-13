@@ -2,20 +2,19 @@
 
 #include <iostream>
 
-using namespace std;
 using namespace Fxt::Logging;
 
 void StandardOutputLogger::writeInfoEntry(std::string_view username, std::string_view entry, std::string_view other)
 {
-    std::cout << "INFO: " << entry << '\n';
+    std::cout << "INFO: " << formatMessage(username, entry, other) << '\n';
 }
 
 void StandardOutputLogger::writeWarnEntry(std::string_view username, std::string_view entry, std::string_view other)
 {
-    std::cout << "WARN: " << entry << '\n';
+    std::cout << "WARN: " << formatMessage(username, entry, other) << '\n';
 }
 
 void StandardOutputLogger::writeErrorEntry(std::string_view username, std::string_view entry, std::string_view other)
 {
-    std::cout << "ERROR: " << entry << '\n';
+    std::cout << "ERROR: " << formatMessage(username, entry, other) << '\n';
 }
