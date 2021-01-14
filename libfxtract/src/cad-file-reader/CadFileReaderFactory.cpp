@@ -13,13 +13,13 @@ inline CadFileReaderFactory::CadFileFormat CadFileReaderFactory::checkFileFormat
 {
     CadFileReaderFactory::CadFileFormat cadFileFormat;
 
-    if (fileName.find("igs") != std::string::npos || fileName.find("iges") != std::string::npos) {
+    if (fileName.find("igs") != std::string::npos || fileName.find("IGS") != std::string::npos ||
+        fileName.find("iges") != std::string::npos || fileName.find("IGES") != std::string::npos) 
+    {
       cadFileFormat = CadFileFormat::IGES_FILE_FORMAT;
-    } else if (fileName.find("IGS") != std::string::npos || fileName.find("IGES") != std::string::npos) {
-      cadFileFormat = CadFileFormat::IGES_FILE_FORMAT;
-    } else if (fileName.find("step") != std::string::npos || fileName.find("stp") != std::string::npos) {
-      cadFileFormat = CadFileFormat::STEP_FILE_FORMAT;
-    } else if (fileName.find("STEP") != std::string::npos || fileName.find("STP") != std::string::npos) {
+    } else if (fileName.find("step") != std::string::npos || fileName.find("STEP") != std::string::npos ||
+               fileName.find("stp") != std::string::npos || fileName.find("STP") != std::string::npos) 
+    {
       cadFileFormat = CadFileFormat::STEP_FILE_FORMAT;
     } else {
       cadFileFormat = CadFileFormat::UNKNOWN_FILE_FORMAT;
