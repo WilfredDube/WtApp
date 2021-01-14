@@ -95,3 +95,5 @@ namespace Edge
 }
 }
 }
+
+using ModelEdgePtr = std::shared_ptr<Fxt::SheetMetalComponent::Edge::ModelEdge>;
