@@ -1,11 +1,13 @@
 #pragma once
 
-#include "BoostSerializer.h"
+#include "../BoostSerializer.h"
 #include <ostream>
 
 namespace Fxt 
 {
 namespace SheetMetalComponent
+{
+namespace Bend
 {
     class Point 
     {
@@ -23,5 +25,5 @@ namespace SheetMetalComponent
         long double X, Y, Z;
   };
 }
-
+}
 }

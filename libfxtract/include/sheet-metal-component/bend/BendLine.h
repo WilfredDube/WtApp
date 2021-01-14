@@ -12,7 +12,6 @@ namespace Fxt
 {
 namespace SheetMetalComponent
 {
-    class Point;
 namespace Edge
 {
     class ModelEdge;
@@ -20,6 +19,8 @@ namespace Edge
 
 namespace Bend
 {    
+    class Point;
+    
     class BendLine
     {
         // Central in line along a bend and between the LINE type edges.
