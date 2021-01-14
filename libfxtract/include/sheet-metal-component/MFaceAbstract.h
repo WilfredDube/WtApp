@@ -16,11 +16,6 @@ namespace Fxt
 {
 namespace SheetMetalComponent
 {
-    using FaceID = Fxt::SheetMetalComponent::ModelTypes::FaceID;
-    using EdgeID = Fxt::SheetMetalComponent::ModelTypes::EdgeID;
-    using FaceType = Fxt::SheetMetalComponent::ModelTypes::FaceType;
-    using PlaneType = Fxt::SheetMetalComponent::ModelTypes::PlaneType;
-
     class MFaceAbstract
     {
     protected:

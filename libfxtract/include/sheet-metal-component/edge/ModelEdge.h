@@ -19,9 +19,6 @@ namespace SheetMetalComponent
 {
 namespace Edge
 {
-    using EdgeID = Fxt::SheetMetalComponent::ModelTypes::EdgeID;
-    using FaceID = Fxt::SheetMetalComponent::ModelTypes::FaceID;
-
     class ModelEdge
     {
     public:
