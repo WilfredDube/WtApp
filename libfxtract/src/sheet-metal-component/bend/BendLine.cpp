@@ -1,6 +1,6 @@
 #include "../../../include/sheet-metal-component/bend/BendLine.h"
 #include "../../../include/Computation.h"
-#include "../../../include/sheet-metal-component/Point.h"
+#include "../../../include/sheet-metal-component/bend/Point.h"
 #include "../../../include/sheet-metal-component/edge/ModelEdge.h"
 
 #include <gp_Pnt.hxx>
