@@ -57,7 +57,7 @@ namespace Edge
         long double getEdgeLength() const;
 
         void setEdgeLineVector();
-        std::shared_ptr<gp_Dir> getEdgeLineVector();
+        gp_DirPtr getEdgeLineVector();
 
         void printEdgePosition();
 

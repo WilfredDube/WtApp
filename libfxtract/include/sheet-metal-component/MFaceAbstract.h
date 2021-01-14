@@ -25,29 +25,29 @@ namespace SheetMetalComponent
         PlaneType mPlaneType;
         FaceType mFaceType;
 
-        std::shared_ptr<gp_Dir> mFaceNormal; //!< the normal vector to the face.
-        std::shared_ptr<gp_Dir> mFaceUnitNormal; //!< the unit normal vector to the face.
+        gp_DirPtr mFaceNormal; //!< the normal vector to the face.
+        gp_DirPtr mFaceUnitNormal; //!< the unit normal vector to the face.
 
-        std::vector<std::shared_ptr<Edge::ModelEdge>> mFaceEdges; //!< edges of the face.
+        std::vector<ModelEdgePtr> mFaceEdges; //!< edges of the face.
 
-        std::shared_ptr<TopoDS_Face> mModelFace;
+        TopoDS_FacePtr mModelFace;
     public:
         MFaceAbstract() = default;
 
-        MFaceAbstract(const FaceID faceID = 0, std::shared_ptr<TopoDS_Face> topoDSFace = nullptr);
+        MFaceAbstract(const FaceID faceID = 0, TopoDS_FacePtr topoDSFace = nullptr);
 
         virtual void init() = 0;
 
-        void setTModelFace(std::shared_ptr<TopoDS_Face>& tface);
-        std::shared_ptr<TopoDS_Face> getTModelFace() const;
+        void setTModelFace(TopoDS_FacePtr& tface);
+        TopoDS_FacePtr getTModelFace() const;
 
         void setFaceId(FaceID faceID);
         FaceID getFaceId() const;
 
-        void setUnitNormal(std::shared_ptr<gp_Dir> unit_normal);
-        std::shared_ptr<gp_Dir> getUnitNormal() const;
+        void setUnitNormal(gp_DirPtr unit_normal);
+        gp_DirPtr getUnitNormal() const;
 
-        std::shared_ptr<gp_Dir> getFaceNormal() const;
+        gp_DirPtr getFaceNormal() const;
         void computeFaceNormal();
 
         void setFaceType(FaceType ftype);
@@ -60,11 +60,11 @@ namespace SheetMetalComponent
 
         void setFaceEdgePosition();
 
-        void addEdge(const std::shared_ptr<Edge::ModelEdge>& edge);
+        void addEdge(const ModelEdgePtr& edge);
 
-        std::vector<std::shared_ptr<Edge::ModelEdge>>& getFaceEdges();
+        std::vector<ModelEdgePtr>& getFaceEdges();
 
-        std::shared_ptr<Edge::ModelEdge> getFaceEdgesAt(const int index) const;
+        ModelEdgePtr getFaceEdgesAt(const int index) const;
 
         // void getFaceEdgePosition() const; 
     };
