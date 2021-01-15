@@ -1,13 +1,14 @@
-set(view_source_files
-  BendSeqGen.cpp
-  BendSeqGen.h
-  GA.cpp
-  GA.h
-  Sequence.cpp
-  Sequence.h
-  ProductionTime.cpp
-  ProductionTime.h
-  )
+set(Headers
+  include/BendSequenceGenerator.h
+  include/ProductionTime.h
+  include/GA.h
+)
+
+set(Sources
+  src/BendSequenceGenerator.cpp
+  src/ProductionTime.cpp
+  src/GA.cpp
+)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -23,6 +24,6 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 find_package(wt COMPONENTS wt wtdbo wtdbosqlite3 wthttp REQUIRED)
 
-add_library(seqgen ${view_source_files})
+add_library(seqgen ${Sources} ${Headers})
 target_include_directories(seqgen PRIVATE ${Boost_INCLUDE_DIRS} ${wt_INCLUDE_DIRS} ${OpenCASCADE_INCLUDE_DIR})
 target_link_libraries(seqgen fxtract ${Boost_LIBRARIES} Threads::Threads ${wt_LIBRARIES} stdc++fs wthttp wt wtdbo wtdbosqlite3)
