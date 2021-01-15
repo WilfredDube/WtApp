@@ -351,3 +351,52 @@ void SheetMetalFeature::computeBendAngles()
         }
     }
 }
+
+bool SheetMetalFeature::isParallel(FaceID bend1, FaceID bend2)
+{
+    bool parallel = false;
+    auto b1 = mModelBends.find(bend1);
+    auto b2 = mModelBends.find(bend2);
+
+    if (b1 != mModelBends.end() && b2 != mModelBends.end()) {
+        parallel = b1->second->isParallel(b2->second);
+    }
+
+    return parallel;
+}
+
+bool SheetMetalFeature::isSameAngle(FaceID bend1, FaceID bend2)
+{
+    bool parallel = false;
+    auto b1 = mModelBends.find(bend1);
+    auto b2 = mModelBends.find(bend2);
+
+    if (b1 != mModelBends.end() && b2 != mModelBends.end()) {
+        parallel = (b1->second->getBendFeature()->getBendAngle() == b2->second->getBendFeature()->getBendAngle());
+    }
+
+    return parallel;
+}
+
+double SheetMetalFeature::distance(FaceID bend1, FaceID bend2)
+{
+    double distance = 0;
+    auto b1 = mModelBends.find(bend1);
+    auto b2 = mModelBends.find(bend2);
+
+    if (b1 != mModelBends.end() && b2 != mModelBends.end()) {
+        if (b1->second->isParallel(b2->second))  {
+            distance = b1->second->computeBendDistance(b2->second);
+        }
+    }
+
+    return distance;
+}
+
+bool SheetMetalFeature::isSameDirection(FaceID bend1, FaceID bend2)
+{ 
+    auto b1 = mModelBends.find(bend1);
+    auto b2 = mModelBends.find(bend2);
+
+    return (b1->second->getBendFeature()->getBendDirection() == b2->second->getBendFeature()->getBendDirection());
+}

@@ -81,6 +81,12 @@ namespace SheetMetalComponent
 
         void computeBendAngles();
 
+        bool isParallel(FaceID bend1, FaceID bend2);
+        bool isSameAngle(FaceID bend1, FaceID bend2);
+        bool isSameDirection(FaceID bend1, FaceID bend2);
+
+        double distance(FaceID bend1, FaceID bend2);
+
         friend std::ostream& operator<<(std::ostream& os, const std::shared_ptr<SheetMetalFeature>& sheetMetal)
         {
             using namespace Fxt::SheetMetalComponent::Bend;
