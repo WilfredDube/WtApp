@@ -93,5 +93,10 @@ namespace Computation
   * */
   gp_Pnt computeMidPoint(const std::shared_ptr<gp_Pnt>& p1, const std::shared_ptr<gp_Pnt>& p2);
 
+  /*
+  *   Computer the factorial
+  * */
+  size_t computeFactorial(const size_t nBends);
+
 }
 }

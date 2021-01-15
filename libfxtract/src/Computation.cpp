@@ -211,5 +211,16 @@ namespace Computation
     return gp_Pnt(x, y, z);
   }
 
+  size_t computeFactorial(const size_t nBends)
+  {
+      int factorial {1};
+      for (unsigned long long n {1}, sum {}; n <= nBends; ++n)
+      {
+          factorial *= n;    // Calculate n! for current n
+      }
+
+      return factorial;
+  }
+
 }
 }
