@@ -3,8 +3,6 @@
 #include "../../include/cad-file-reader/StepFileReader.h"
 #include "../../include/cad-file-reader/ReaderCreationFailedException.h"
 
-#include "../../include/ModelUtils.h"
-
 #include <TopExp_Explorer.hxx>
 #include <STEPControl_Reader.hxx>
 

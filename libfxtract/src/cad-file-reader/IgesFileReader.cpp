@@ -3,8 +3,6 @@
 #include "../../include/cad-file-reader/IgesFileReader.h"
 #include "../../include/cad-file-reader/ReaderCreationFailedException.h"
 
-#include "../../include/ModelUtils.h"
-
 #include <IGESControl_Reader.hxx>
 
 using namespace Fxt::CadFileReader;
