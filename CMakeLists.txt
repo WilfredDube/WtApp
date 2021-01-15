@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.0)
 project(hello_x)
 
 add_subdirectory(logging)
-add_subdirectory(libSeqgen)
+add_subdirectory(libseqgen)
 add_subdirectory(libfxtract)
 add_subdirectory(model)
 add_subdirectory(view)
