@@ -93,8 +93,9 @@ void BendSequenceGenerator::generateBendingSequence()
         population[i].fitness = population[i].cal_fitness(sheetMetalFeature);
     }    
 
-    std::cout << "Num in pop = " << population.size() << std::endl;
-  
+    // // sort the population in increasing order of fitness score 
+    std::sort(population.begin(), population.end());
+
     std::vector<Sequence> new_generation; 
     
     while (generation < POPULATION_SIZE)
@@ -146,7 +147,7 @@ void BendSequenceGenerator::print()
 
 bool BendSequenceGenerator::Sequence::operator<(const BendSequenceGenerator::Sequence& individualSequence)
 {
-    return (fitness < individualSequence.fitness);
+    return (fitness > individualSequence.fitness);
 }
 
 
