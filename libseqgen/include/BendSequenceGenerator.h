@@ -24,9 +24,8 @@ class BendSequenceGenerator
 
     std::shared_ptr<Sequence> sequenceImpl_;
 
-    void print(const std::vector<Sequence>& new_generation);
-
 public:
+    BendSequenceGenerator() = delete;
     explicit BendSequenceGenerator(std::vector<int> chromosome, SheetMetalFeaturePtr& model);
 
     Sequence generateBendingSequence();
