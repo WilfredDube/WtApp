@@ -21,7 +21,8 @@ double BendSequenceGenerator::Sequence::cal_fitness(SheetMetalFeaturePtr& sheetM
 
     for(int i = 0; i < len; i++) 
     { 
-        if ((i + 1) < len){
+        if ((i + 1) < len)
+        {
             // Add 15 if the current and next bend have the same bend angle
             if(sheetMetalFeature->isSameAngle(chromosome[i], chromosome[i + 1])) {
                 equality = 10;
@@ -50,10 +51,8 @@ double BendSequenceGenerator::Sequence::cal_fitness(SheetMetalFeaturePtr& sheetM
             }
         } 
 
-        {
-            fitness += parallel * equality * direction / (seqDistance * nFlips * nRotations + 1);
-        }        
-        
+        fitness += parallel * equality * direction / (seqDistance * nFlips * nRotations + 1);
+  
         distance += seqDistance;
 
         parallel = 1; equality = 1; direction = 1; seqDistance = 0.0;
