@@ -398,5 +398,8 @@ bool SheetMetalFeature::isSameDirection(FaceID bend1, FaceID bend2)
     auto b1 = mModelBends.find(bend1);
     auto b2 = mModelBends.find(bend2);
 
-    return (b1->second->getBendFeature()->getBendDirection() == b2->second->getBendFeature()->getBendDirection());
+    if (b1 != mModelBends.end() && b2 != mModelBends.end())
+        return (b1->second->getBendFeature()->getBendDirection() == b2->second->getBendFeature()->getBendDirection());
+
+    return false;
 }
