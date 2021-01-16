@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../libfxtract/include/sheet-metal-component/SheetMetalFeature.h"
+#include "../../libfxtract/include/sheet-metal-component/SheetMetal.h"
 
 #include <memory>
 #include <vector>
@@ -15,7 +15,7 @@ class BendSequenceGenerator
 
         Sequence(std::vector<int> chromosome) : chromosome { chromosome }, targetSize { chromosome.size() } {}
 
-        double cal_fitness(SheetMetalFeaturePtr& sheetMetalFeature);
+        double cal_fitness(SheetMetalPtr& sheetMetalFeature);
         
         Sequence mate(Sequence parentSequence);
         bool operator<(const Sequence &individualSequence);
@@ -28,7 +28,7 @@ class BendSequenceGenerator
 
 public:
     BendSequenceGenerator() = delete;
-    explicit BendSequenceGenerator(std::vector<int> chromosome, SheetMetalFeaturePtr& model);
+    explicit BendSequenceGenerator(std::vector<int> chromosome, SheetMetalPtr& model);
 
     void generateBendingSequence();
     size_t getSequenceSize();

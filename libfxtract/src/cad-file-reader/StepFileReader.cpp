@@ -1,5 +1,5 @@
 #include "../../include/cad-file-reader/CadFileReader.h"
-#include "../../include/sheet-metal-component/SheetMetalFeature.h"
+#include "../../include/sheet-metal-component/SheetMetal.h"
 #include "../../include/cad-file-reader/StepFileReader.h"
 #include "../../include/cad-file-reader/ReaderCreationFailedException.h"
 
@@ -30,7 +30,7 @@ void StepFileReader::makeReader(const std::string& stepFile)
     }
 }
 
-void StepFileReader::extractFaces(SheetMetalFeaturePtr& model, const std::string& filename)
+void StepFileReader::extractFaces(SheetMetalPtr& model, const std::string& filename)
 {
   makeReader(filename);
 

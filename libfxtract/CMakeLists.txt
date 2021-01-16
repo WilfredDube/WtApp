@@ -17,7 +17,7 @@ set(Headers
 
   include/Computation.h
   include/sheet-metal-component/BoostSerializer.h
-  include/sheet-metal-component/SheetMetalFeature.h
+  include/sheet-metal-component/SheetMetal.h
   include/sheet-metal-component/MFaceAbstract.h
   include/sheet-metal-component/Point.h
 
@@ -46,7 +46,7 @@ set(Sources
   src/ModelMath.cpp
   
   src/Computation.cpp
-  src/sheet-metal-component/SheetMetalFeature.cpp
+  src/sheet-metal-component/SheetMetal.cpp
   src/sheet-metal-component/MFaceAbstract.cpp
   src/sheet-metal-component/face/ModelFace.cpp
 

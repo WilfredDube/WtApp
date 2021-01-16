@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../include/sheet-metal-component/SheetMetalFeature.h"
+#include "../../include/sheet-metal-component/SheetMetal.h"
 #include "UnknownFileFormatException.h"
 
 #include <memory>
@@ -18,7 +18,7 @@ namespace CadFileReader
     protected:
         virtual void makeReader(const std::string& filename) = 0;
     public:
-        virtual void extractFaces(SheetMetalFeaturePtr& model, const std::string& filename) = 0;
+        virtual void extractFaces(SheetMetalPtr& model, const std::string& filename) = 0;
         virtual bool isUsable() const noexcept { return true; }
     };
 }

@@ -8,13 +8,13 @@
 #include <chrono>
 #include <random>
 
-BendSequenceGenerator::BendSequenceGenerator(std::vector<int> chromosome, SheetMetalFeaturePtr& model) 
+BendSequenceGenerator::BendSequenceGenerator(std::vector<int> chromosome, SheetMetalPtr& model) 
+: sheetMetalFeature { model}
 {
     sequenceImpl_ = std::make_shared<BendSequenceGenerator::Sequence>(chromosome);
-    sequenceImpl_->fitness = sequenceImpl_->cal_fitness(model);  
 };
 
-double BendSequenceGenerator::Sequence::cal_fitness(SheetMetalFeaturePtr& sheetMetalFeature)
+double BendSequenceGenerator::Sequence::cal_fitness(SheetMetalPtr& sheetMetalFeature)
 {
     int len = targetSize; 
     double parallel = 1, equality = 1, direction = 1, fitness = 0, seqDistance = 0.0;
@@ -123,51 +123,9 @@ void BendSequenceGenerator::print()
     std::cout << "==============================" << std::endl;
     std::cout << "======================================================================";
     std::cout << "==============================" << std::endl;
-
-    // int n = 0;   
-    // while (n < new_generation.size())
-    // {   
-    //     std::cout<< "Generation: " << n << "\t"; 
-    //     std::cout<< "String: " ;
-    //     for(auto& c : new_generation[n].chromosome)
-    //     	std::cout<< c << " ";
-    //     std::cout <<"\t"; 
-    //     std::cout << "Fitness: "<< new_generation[n].fitness << "  "<< "Flips: "<< new_generation[n].nFlips;
-    //     std::cout << " Tools: " << new_generation[n].nTools;
-    //     std::cout << " Rotations: " << new_generation[n].nRotations;
-    //     std::cout << " Distance: " << new_generation[n].distance << "\n"; 
-  
-    //     ++n; 
-    //  }
 }
 
 bool BendSequenceGenerator::Sequence::operator<(const BendSequenceGenerator::Sequence& individualSequence)
 {
     return (fitness > individualSequence.fitness);
 }
-
-
-
-
-// BendSequenceGenerator::Sequence BendSequenceGenerator::Sequence::mate(BendSequenceGenerator::Sequence parentSequence)
-// {
-//     // chromosome for offspring 
-//     std::vector<int> child_chromosome = parentSequence.chromosome;
-
-//     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-
-//     std::shuffle (child_chromosome.begin(), child_chromosome.end(), std::default_random_engine(seed));
-
-//     // create new Individual(offspring) using generated chromosome for offspring 
-//     return Sequence(child_chromosome); 
-// }
-
-// bool BendSequenceGenerator::Sequence::operator<(const BendSequenceGenerator::Sequence& individualSequence)
-// {
-//     return (fitness < individualSequence.fitness);
-// }
-
-// bool BendSequenceGenerator::Sequence::operator==(const BendSequenceGenerator::Sequence& individualSequence)
-// {
-//     return std::equal(cbegin(chromosome), cend(chromosome), cbegin(individualSequence.chromosome));
-// }

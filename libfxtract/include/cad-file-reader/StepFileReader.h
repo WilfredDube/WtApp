@@ -13,7 +13,7 @@ namespace CadFileReader
         std::shared_ptr<STEPControl_Reader> mMyStepReader { nullptr };
     public:
         void makeReader(const std::string& filename);
-        void extractFaces(SheetMetalFeaturePtr& model, const std::string& filename);
+        void extractFaces(SheetMetalPtr& model, const std::string& filename);
     };
 }
 }

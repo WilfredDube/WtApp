@@ -1,5 +1,5 @@
 #include "../../include/cad-file-reader/CadFileReader.h"
-#include "../../include/sheet-metal-component/SheetMetalFeature.h"
+#include "../../include/sheet-metal-component/SheetMetal.h"
 #include "../../include/cad-file-reader/IgesFileReader.h"
 #include "../../include/cad-file-reader/ReaderCreationFailedException.h"
 
@@ -29,7 +29,7 @@ void IgesFileReader::makeReader(const std::string& igesFile)
     mMyIgesReader->TransferList(myList);
 }
 
-void IgesFileReader::extractFaces(SheetMetalFeaturePtr& model, const std::string& filename)
+void IgesFileReader::extractFaces(SheetMetalPtr& model, const std::string& filename)
 {
   makeReader(filename);
 
