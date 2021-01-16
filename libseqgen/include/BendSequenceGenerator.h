@@ -11,7 +11,7 @@ class BendSequenceGenerator
     {
         std::vector<int> chromosome;
         size_t nTools{1}, nRotations{0}, nFlips{0}, targetSize;
-        double distance{0}, fitness;
+        double distance{0}, fitness{0.0};
 
         Sequence(std::vector<int> chromosome) : chromosome { chromosome }, targetSize { chromosome.size() } {}
 
