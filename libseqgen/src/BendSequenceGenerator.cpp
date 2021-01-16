@@ -103,6 +103,8 @@ void BendSequenceGenerator::generateBendingSequence()
         ++generation; 
     }
 
+size_t BendSequenceGenerator::getSequenceSize() { return sequenceImpl_->chromosome.size(); }
+    
 void BendSequenceGenerator::print()
 {
     std::cout << "======================================================================";
