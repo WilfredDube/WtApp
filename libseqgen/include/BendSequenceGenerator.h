@@ -10,7 +10,7 @@ class BendSequenceGenerator
     struct Sequence
     {
         std::vector<int> chromosome;
-        unsigned nTools{1}, nRotations{0}, nFlips{0}, targetSize;
+        size_t nTools{1}, nRotations{0}, nFlips{0}, targetSize;
         double distance{0}, fitness;
 
         Sequence(std::vector<int> chromosome) : chromosome { chromosome } {}
