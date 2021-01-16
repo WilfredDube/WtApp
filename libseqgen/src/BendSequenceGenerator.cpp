@@ -8,13 +8,13 @@
 #include <chrono>
 #include <random>
 
-BendSequenceGenerator::BendSequenceGenerator(std::vector<int> chromosome, Fxt::SheetMetalComponent::SheetMetalFeature& model) 
+BendSequenceGenerator::BendSequenceGenerator(std::vector<int> chromosome, SheetMetalFeaturePtr& model) 
 {
     sequenceImpl_ = std::make_shared<BendSequenceGenerator::Sequence>(chromosome);
     sequenceImpl_->fitness = sequenceImpl_->cal_fitness(model);  
 };
 
-double BendSequenceGenerator::Sequence::cal_fitness(Fxt::SheetMetalComponent::SheetMetalFeature& model)
+double BendSequenceGenerator::Sequence::cal_fitness(SheetMetalFeaturePtr& model)
 {
     int len = targetSize; 
     double parallel = 1, equality = 1, direction = 1, fitness = 0, seqDistance = 0.0;

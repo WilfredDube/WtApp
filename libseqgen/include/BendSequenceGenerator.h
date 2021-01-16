@@ -27,8 +27,7 @@ class BendSequenceGenerator
     void print(const std::vector<Sequence>& new_generation);
 
 public:
-    BendSequenceGenerator() = default;
-    BendSequenceGenerator(std::vector<int> chromosome, Fxt::SheetMetalComponent::SheetMetalFeature& model);
+    explicit BendSequenceGenerator(std::vector<int> chromosome, SheetMetalFeaturePtr& model);
 
     Sequence generateBendingSequence();
 };
