@@ -1,25 +1,25 @@
-#include "../../include/sheet-metal-component/SheetMetalFeature.h"
+#include "../../include/sheet-metal-component/SheetMetal.h"
 #include "../../include/sheet-metal-component/bend/BendFeature.h"
 
 using namespace Fxt::SheetMetalComponent;
 
-void SheetMetalFeature::addModelFace(std::shared_ptr<Face::ModelFace>& modelFace)
+void SheetMetal::addModelFace(std::shared_ptr<Face::ModelFace>& modelFace)
 {
     mModelFaces[modelFace->getFaceId()] = modelFace;
 }
 
-void SheetMetalFeature::addModelBend(std::shared_ptr<Bend::ModelBend>& modelBend)
+void SheetMetal::addModelBend(std::shared_ptr<Bend::ModelBend>& modelBend)
 {
     mModelBends[modelBend->getFaceId()] = modelBend;
 }
 
-std::shared_ptr<gp_Dir> SheetMetalFeature::getNormalByFaceID(const FaceID faceID) const
+std::shared_ptr<gp_Dir> SheetMetal::getNormalByFaceID(const FaceID faceID) const
 {
     auto modelFace = mModelFaces.find(faceID)->second;
     return modelFace->getFaceNormal();
 }
 
-FaceID SheetMetalFeature::getIdOfBendWithJoiningFaceID(const FaceID currbendID, const FaceID faceID) const
+FaceID SheetMetal::getIdOfBendWithJoiningFaceID(const FaceID currbendID, const FaceID faceID) const
 {
     auto modelBend = mModelBends.find(currbendID);
 
@@ -34,7 +34,7 @@ FaceID SheetMetalFeature::getIdOfBendWithJoiningFaceID(const FaceID currbendID, 
     return -1;
 }
 
-bool SheetMetalFeature::splitModelBends(const FaceID id, std::map<FaceID, 
+bool SheetMetal::splitModelBends(const FaceID id, std::map<FaceID, 
                         std::shared_ptr<Bend::ModelBend>>& innerBends, 
                         std::map<FaceID, std::shared_ptr<Bend::ModelBend>>& outerBends,
                         std::deque<FaceID>& queue)
@@ -69,22 +69,22 @@ bool SheetMetalFeature::splitModelBends(const FaceID id, std::map<FaceID,
   return found;
 }
 
-std::map<FaceID, std::shared_ptr<Face::ModelFace>> SheetMetalFeature::getFaces() const
+std::map<FaceID, std::shared_ptr<Face::ModelFace>> SheetMetal::getFaces() const
 {
     return mModelFaces;
 }
 
-std::map<FaceID, std::shared_ptr<Bend::ModelBend>> SheetMetalFeature::getBends() const
+std::map<FaceID, std::shared_ptr<Bend::ModelBend>> SheetMetal::getBends() const
 {
     return mModelBends;
 }
 
-double SheetMetalFeature::getThickness() const
+double SheetMetal::getThickness() const
 {
     return mThickness;
 }
 
-void SheetMetalFeature::assignFaceAttributes(const FaceID faceID, std::shared_ptr<TopoDS_Shape>& aShape)
+void SheetMetal::assignFaceAttributes(const FaceID faceID, std::shared_ptr<TopoDS_Shape>& aShape)
 {
     mTopologicalShape = aShape;
 
@@ -108,7 +108,7 @@ void SheetMetalFeature::assignFaceAttributes(const FaceID faceID, std::shared_pt
     }
 }
 
-void SheetMetalFeature::classifyFaces()
+void SheetMetal::classifyFaces()
 {
     std::map<FaceID, std::shared_ptr<Face::ModelFace>> tempFaces;
     
@@ -155,7 +155,7 @@ void SheetMetalFeature::classifyFaces()
       face->setFaceEdgePosition();
 }
 
-void SheetMetalFeature::setBendIdWrapper(std::map<FaceID, std::shared_ptr<Bend::ModelBend>>& mFaces)
+void SheetMetal::setBendIdWrapper(std::map<FaceID, std::shared_ptr<Bend::ModelBend>>& mFaces)
 {
     size_t faceID = 0;
 
@@ -165,7 +165,7 @@ void SheetMetalFeature::setBendIdWrapper(std::map<FaceID, std::shared_ptr<Bend::
     }
 }
 
-void SheetMetalFeature::setFaceIdWrapper(std::map<FaceID, std::shared_ptr<Face::ModelFace>>& mFaces)
+void SheetMetal::setFaceIdWrapper(std::map<FaceID, std::shared_ptr<Face::ModelFace>>& mFaces)
 {
     size_t faceID = 0;
 
@@ -175,7 +175,7 @@ void SheetMetalFeature::setFaceIdWrapper(std::map<FaceID, std::shared_ptr<Face::
     }
 }
 
-void SheetMetalFeature::setThicknessDefiningFaceAttributes()
+void SheetMetal::setThicknessDefiningFaceAttributes()
 {
     for (auto& [faceId, face]: mModelFaces) {
       if (face->getFaceType() == FaceType::NONE) {
@@ -189,7 +189,7 @@ void SheetMetalFeature::setThicknessDefiningFaceAttributes()
     }
 }
 
-bool SheetMetalFeature::reduceModelSize()
+bool SheetMetal::reduceModelSize()
 {
     bool done = false;
     if (removeOuterBendFaces())
@@ -207,7 +207,7 @@ bool SheetMetalFeature::reduceModelSize()
     return done;
 }
 
-bool SheetMetalFeature::removeOuterBendFaces()
+bool SheetMetal::removeOuterBendFaces()
 {
     FaceID searchID;
     std::map<FaceID, std::shared_ptr<Bend::ModelBend>>& allModelBends = mModelBends;
@@ -241,7 +241,7 @@ bool SheetMetalFeature::removeOuterBendFaces()
     return (outerBends.size() == allModelBends.size());
 }
 
-void SheetMetalFeature::removeOuterFaces()
+void SheetMetal::removeOuterFaces()
 {
     std::map<FaceID, std::shared_ptr<Face::ModelFace>> innerFaces;
 
@@ -263,7 +263,7 @@ void SheetMetalFeature::removeOuterFaces()
         mModelFaces = innerFaces;
 }
 
-void SheetMetalFeature::reAssignFaceId(bool isBend)
+void SheetMetal::reAssignFaceId(bool isBend)
 {
     size_t newFaceId = 0;
 
@@ -299,7 +299,7 @@ void SheetMetalFeature::reAssignFaceId(bool isBend)
 }
 
 // TODO: toooooo many for loops
-void SheetMetalFeature::connectBendsToNewFaceId()
+void SheetMetal::connectBendsToNewFaceId()
 {
     for(auto& [bendId, bend] : mModelBends)
     {
@@ -336,7 +336,7 @@ void SheetMetalFeature::connectBendsToNewFaceId()
     }
 }
 
-void SheetMetalFeature::computeBendAngles()
+void SheetMetal::computeBendAngles()
 {
     for (auto& [bendId, bend] : mModelBends){
   
@@ -352,7 +352,7 @@ void SheetMetalFeature::computeBendAngles()
     }
 }
 
-bool SheetMetalFeature::isParallel(FaceID bend1, FaceID bend2)
+bool SheetMetal::isParallel(FaceID bend1, FaceID bend2)
 {
     bool parallel = false;
     auto b1 = mModelBends.find(bend1);
@@ -365,7 +365,7 @@ bool SheetMetalFeature::isParallel(FaceID bend1, FaceID bend2)
     return parallel;
 }
 
-bool SheetMetalFeature::isSameAngle(FaceID bend1, FaceID bend2)
+bool SheetMetal::isSameAngle(FaceID bend1, FaceID bend2)
 {
     bool parallel = false;
     auto b1 = mModelBends.find(bend1);
@@ -378,7 +378,7 @@ bool SheetMetalFeature::isSameAngle(FaceID bend1, FaceID bend2)
     return parallel;
 }
 
-double SheetMetalFeature::distance(FaceID bend1, FaceID bend2)
+double SheetMetal::distance(FaceID bend1, FaceID bend2)
 {
     double distance = 0;
     auto b1 = mModelBends.find(bend1);
@@ -393,7 +393,7 @@ double SheetMetalFeature::distance(FaceID bend1, FaceID bend2)
     return distance;
 }
 
-bool SheetMetalFeature::isSameDirection(FaceID bend1, FaceID bend2)
+bool SheetMetal::isSameDirection(FaceID bend1, FaceID bend2)
 { 
     auto b1 = mModelBends.find(bend1);
     auto b2 = mModelBends.find(bend2);

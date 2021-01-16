@@ -17,7 +17,7 @@ namespace SheetMetalComponent
 {
     using FaceID = Fxt::SheetMetalComponent::ModelTypes::FaceID;
 
-    class SheetMetalFeature
+    class SheetMetal
     {
         std::map<FaceID, std::shared_ptr<Face::ModelFace>> mModelFaces;
         std::map<FaceID, std::shared_ptr<Bend::ModelBend>> mModelBends;
@@ -87,7 +87,7 @@ namespace SheetMetalComponent
 
         double distance(FaceID bend1, FaceID bend2);
 
-        friend std::ostream& operator<<(std::ostream& os, const std::shared_ptr<SheetMetalFeature>& sheetMetal)
+        friend std::ostream& operator<<(std::ostream& os, const std::shared_ptr<SheetMetal>& sheetMetal)
         {
             using namespace Fxt::SheetMetalComponent::Bend;
 
@@ -103,4 +103,4 @@ namespace SheetMetalComponent
 }
 }
 
-using SheetMetalFeaturePtr = std::shared_ptr<Fxt::SheetMetalComponent::SheetMetalFeature>;
+using SheetMetalPtr = std::shared_ptr<Fxt::SheetMetalComponent::SheetMetal>;
