@@ -14,7 +14,7 @@ BendSequenceGenerator::BendSequenceGenerator(std::vector<int> chromosome, SheetM
     sequenceImpl_->fitness = sequenceImpl_->cal_fitness(model);  
 };
 
-double BendSequenceGenerator::Sequence::cal_fitness(SheetMetalFeaturePtr& model)
+double BendSequenceGenerator::Sequence::cal_fitness(SheetMetalFeaturePtr& sheetMetalFeature)
 {
     int len = targetSize; 
     double parallel = 1, equality = 1, direction = 1, fitness = 0, seqDistance = 0.0;
