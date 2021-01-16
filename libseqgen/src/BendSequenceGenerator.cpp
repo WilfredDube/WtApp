@@ -62,13 +62,13 @@ double BendSequenceGenerator::Sequence::cal_fitness(SheetMetalFeaturePtr& sheetM
     return fitness;
 }
 
-BendSequenceGenerator::Sequence BendSequenceGenerator::generateBendingSequence()
+void BendSequenceGenerator::generateBendingSequence()
 {   
     std::vector<int> initialSequence = sequenceImpl_->chromosome;
 
     if (initialSequence.size() == 1 || initialSequence.size() == 2)
     {
-        return sequenceImpl_->chromosome;
+        return ;
     }
 
     // current generation 
