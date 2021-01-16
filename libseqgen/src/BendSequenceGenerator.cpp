@@ -89,8 +89,9 @@ void BendSequenceGenerator::generateBendingSequence()
 
     for(int i = 0; i < genomes.size() ; i++) 
     { 
-        population.push_back({ Sequence(genomes[i]) }); 
-    }
+        population.push_back({ Sequence(genomes[i]) });
+        population[i].fitness = population[i].cal_fitness(sheetMetalFeature);
+    }    
 
     std::cout << "Num in pop = " << population.size() << std::endl;
   
