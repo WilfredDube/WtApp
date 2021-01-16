@@ -1,4 +1,4 @@
-#include "readObj.h"
+#include "../../include/obj-file-reader/readObj.h"
 
 #include <fstream>
 #include <iostream>
