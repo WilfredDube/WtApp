@@ -110,48 +110,43 @@ BendSequenceGenerator::Sequence BendSequenceGenerator::generateBendingSequence()
         ++generation; 
     }
 
-    // sort the population in increasing order of fitness score 
-    std::sort(new_generation.begin(), new_generation.end());
-
-    return new_generation[0];
-}
-    
-void BendSequenceGenerator::print(const std::vector<BendSequenceGenerator::Sequence>& new_generation)
+void BendSequenceGenerator::print()
 {
     std::cout << "======================================================================";
     std::cout << "==============================" << std::endl;
     std::cout << "======================================================================";
     std::cout << "==============================" << std::endl;
     std::cout<< "Best Sequence: " << "\t"; 
-    for(auto& c : new_generation[0].chromosome) {
+    for(auto& c : sequenceImpl_->chromosome) {
         std::cout<< c << " ";
         std::cout <<"\t"; 
     }
-    std::cout<< "Fitness : "<< new_generation[0].fitness << "\n";
-    std::cout<< "No of tools : "<< new_generation[0].nTools << "\n";
-    std::cout<< "No of rotations : "<< new_generation[0].nRotations << "\n";
-    std::cout<< "No of flips : "<< new_generation[0].nFlips << "\n";
-    std::cout<< "Distance : "<< new_generation[0].distance << "\n";
+    std::cout<< "Fitness : "<< sequenceImpl_->fitness << "\n";
+    std::cout<< "No of tools : "<< sequenceImpl_->nTools << "\n";
+    std::cout<< "No of rotations : "<< sequenceImpl_->nRotations << "\n";
+    std::cout<< "No of flips : "<< sequenceImpl_->nFlips << "\n";
+    std::cout<< "Distance : "<< sequenceImpl_->distance << "\n";
+    std::cout<< "Target size : "<< sequenceImpl_->targetSize << "\n";
     std::cout << "======================================================================";
     std::cout << "==============================" << std::endl;
     std::cout << "======================================================================";
     std::cout << "==============================" << std::endl;
 
-    int n = 0;   
-    while (n < new_generation.size())
-    {   
-        std::cout<< "Generation: " << n << "\t"; 
-        std::cout<< "String: " ;
-        for(auto& c : new_generation[n].chromosome)
-        	std::cout<< c << " ";
-        std::cout <<"\t"; 
-        std::cout << "Fitness: "<< new_generation[n].fitness << "  "<< "Flips: "<< new_generation[n].nFlips;
-        std::cout << " Tools: " << new_generation[n].nTools;
-        std::cout << " Rotations: " << new_generation[n].nRotations;
-        std::cout << " Distance: " << new_generation[n].distance << "\n"; 
+    // int n = 0;   
+    // while (n < new_generation.size())
+    // {   
+    //     std::cout<< "Generation: " << n << "\t"; 
+    //     std::cout<< "String: " ;
+    //     for(auto& c : new_generation[n].chromosome)
+    //     	std::cout<< c << " ";
+    //     std::cout <<"\t"; 
+    //     std::cout << "Fitness: "<< new_generation[n].fitness << "  "<< "Flips: "<< new_generation[n].nFlips;
+    //     std::cout << " Tools: " << new_generation[n].nTools;
+    //     std::cout << " Rotations: " << new_generation[n].nRotations;
+    //     std::cout << " Distance: " << new_generation[n].distance << "\n"; 
   
-        ++n; 
-     }
+    //     ++n; 
+    //  }
 }
 
 bool BendSequenceGenerator::Sequence::operator<(const BendSequenceGenerator::Sequence& individualSequence)
