@@ -23,34 +23,27 @@ double BendSequenceGenerator::Sequence::cal_fitness(SheetMetalFeaturePtr& sheetM
     { 
         if ((i + 1) < len){
             // Add 15 if the current and next bend have the same bend angle
-            if(model.isSameAngle(chromosome[i], chromosome[i + 1])) {
+            if(sheetMetalFeature->isSameAngle(chromosome[i], chromosome[i + 1])) {
                 equality = 10;
             } else {
                 ++nTools;
             }
-        }
-
-        if ((i + 1) < len){
+        
             // Compute the distance between the current and next bend
-            double dist = model.distance(chromosome[i], chromosome[i + 1]);
+            double dist = sheetMetalFeature->distance(chromosome[i], chromosome[i + 1]);
 
             if(dist != 0){
-                seqDistance = model.distance(chromosome[i], chromosome[i + 1]);
+                seqDistance = sheetMetalFeature->distance(chromosome[i], chromosome[i + 1]);
             }             
-            // std::cout << chromosome[i] << " - " << chromosome[i + 1] << " " << "Distance : " << seqDistance << std::endl;
-        }
-
-        if((i + 1) < len){
-            if(model.isSameDirection(chromosome[i], chromosome[i + 1])) {
+        
+            if(sheetMetalFeature->isSameDirection(chromosome[i], chromosome[i + 1])) {
                 direction = 30;
             } else {
                 ++nFlips;
             }            
-        }
-
-        if ((i + 1) < len){
+       
             // Add 20 to the fitness if the current and next bend are parallel
-            if(model.isParallel(chromosome[i], chromosome[i + 1])){
+            if(sheetMetalFeature->isParallel(chromosome[i], chromosome[i + 1])){
                 parallel = 20;
             } else {
                 ++nRotations;
