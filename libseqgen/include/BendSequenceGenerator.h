@@ -15,7 +15,7 @@ class BendSequenceGenerator
 
         Sequence(std::vector<int> chromosome) : chromosome { chromosome }, targetSize { chromosome.size() } {}
 
-        double cal_fitness(Fxt::SheetMetalComponent::SheetMetalFeature& model);
+        double cal_fitness(SheetMetalFeaturePtr& model);
         
         Sequence mate(Sequence parentSequence);
         bool operator<(const Sequence &individualSequence);
