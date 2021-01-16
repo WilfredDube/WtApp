@@ -96,13 +96,9 @@ void BendSequenceGenerator::generateBendingSequence()
     // // sort the population in increasing order of fitness score 
     std::sort(population.begin(), population.end());
 
-    std::vector<Sequence> new_generation; 
-    
-    while (generation < POPULATION_SIZE)
-    {   
-        new_generation.push_back(population[generation]);
-        ++generation; 
-    }
+    sequenceImpl_->chromosome = population[0].chromosome;
+    sequenceImpl_->fitness = population[0].fitness;
+}
 
 size_t BendSequenceGenerator::getSequenceSize() { return sequenceImpl_->chromosome.size(); }
     
