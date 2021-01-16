@@ -13,7 +13,7 @@ class BendSequenceGenerator
         size_t nTools{1}, nRotations{0}, nFlips{0}, targetSize;
         double distance{0}, fitness;
 
-        Sequence(std::vector<int> chromosome) : chromosome { chromosome } {}
+        Sequence(std::vector<int> chromosome) : chromosome { chromosome }, targetSize { chromosome.size() } {}
 
         double cal_fitness(Fxt::SheetMetalComponent::SheetMetalFeature& model);
         
