@@ -7,9 +7,9 @@
 #include <Wt/Dbo/Impl.h>
 #include <Wt/Auth/Identity.h>
 
-#include "FxtUserDatabase.h"
-#include "User.h"
-#include "Token.h"
+#include "../include/FxtUserDatabase.h"
+#include "../include/User.h"
+#include "../include/Token.h"
 
 #include <string>
 

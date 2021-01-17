@@ -1,4 +1,4 @@
-#include "MachineParam.h"
+#include "../include/MachineParam.h"
 
 #include <Wt/Dbo/Impl.h>
 #include <Wt/Auth/Dbo/AuthInfo.h>

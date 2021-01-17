@@ -1,6 +1,6 @@
-#include "Project.h"
-#include "ModelFile.h"
-#include "User.h"
+#include "../include/Project.h"
+#include "../include/ModelFile.h"
+#include "../include/User.h"
 
 #include <Wt/Dbo/Impl.h>
 #include <Wt/Auth/Dbo/AuthInfo.h>

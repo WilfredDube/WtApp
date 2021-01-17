@@ -4,8 +4,8 @@
  * See the LICENSE file for terms of use.
  */
 
-#include "Token.h"
-#include "User.h"
+#include "../include/Token.h"
+#include "../include/User.h"
 
 #include <Wt/Dbo/Impl.h>
 

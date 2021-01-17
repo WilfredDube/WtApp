@@ -1,4 +1,4 @@
-#include "BendFeature.h"
+#include "../include/BendFeature.h"
 
 #include <Wt/Dbo/Impl.h>
 #include <Wt/Auth/Dbo/AuthInfo.h>

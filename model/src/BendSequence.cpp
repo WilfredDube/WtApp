@@ -1,4 +1,4 @@
-#include "BendSequence.h"
+#include "../include/BendSequence.h"
 
 #include <Wt/Dbo/Impl.h>
 #include <Wt/Auth/Dbo/AuthInfo.h>

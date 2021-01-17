@@ -1,4 +1,4 @@
-#include "ProcessPlan.h"
+#include "../include/ProcessPlan.h"
 
 #include <Wt/Dbo/Impl.h>
 #include <Wt/Auth/Dbo/AuthInfo.h>

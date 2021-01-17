@@ -1,4 +1,4 @@
-#include "Material.h"
+#include "../include/Material.h"
 
 #include <Wt/Dbo/Impl.h>
 #include <Wt/Auth/Dbo/AuthInfo.h>
