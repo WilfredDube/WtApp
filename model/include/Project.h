@@ -15,30 +15,31 @@ namespace dbo = Wt::Dbo;
 
 typedef dbo::collection< dbo::ptr<ModelFile> > ModelFiles;
 
-class Project : public dbo::Dbo<Project> {
+class Project : public dbo::Dbo<Project> 
+{
 public:
   dbo::ptr<User> author;
 
   Wt::WString title;
-  Wt::WString brief_desc;
-  int nModelFiles;
-  Wt::WDateTime  dateCreated;
+  Wt::WString desc;
+  int no_files;
+  Wt::WDateTime  date_created;
 
-  ModelFiles modelFiles;
+  ModelFiles cad_files;
 
   size_t modelCount() const;
   std::string titleToUrl() const;
 
   template<class Action>
   void persist(Action& a) {
-    dbo::field(a, title, "project_title");
-    dbo::field(a, brief_desc, "project_brief_desc");
-    dbo::field(a, nModelFiles, "project_model_count");
-    dbo::field(a, dateCreated, "project_creation_date");
+    dbo::field(a, title, "title");
+    dbo::field(a, desc, "desc");
+    dbo::field(a, no_files, "no_files");
+    dbo::field(a, date_created, "date_created");
 
     dbo::belongsTo(a, author, "author");
     
-    dbo::hasMany(a, modelFiles, dbo::ManyToOne, "project");
+    dbo::hasMany(a, cad_files, dbo::ManyToOne, "project");
   }
 };
 

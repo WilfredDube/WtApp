@@ -9,7 +9,7 @@ DBO_INSTANTIATE_TEMPLATES(Project)
 
 size_t Project::modelCount() const
 {
-  return modelFiles.size();   
+  return cad_files.size();   
 }
 
 std::string Project::titleToUrl() const
