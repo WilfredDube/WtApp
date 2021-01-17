@@ -8,7 +8,7 @@
 #include <Wt/Dbo/WtSqlTraits.h>
 
 #include "ModelFile.h"
-#include "../model/Tool.h"
+#include "Tool.h"
 
 namespace dbo = Wt::Dbo;
 
