@@ -30,6 +30,18 @@ dbo::ptr<Project> ProjectDao::insert(std::string title, std::string desc)
 }
 
 dbo::ptr<Project> ProjectDao::get(std::string title)
+{
+    dbo::ptr<Project> project;
+
+    dbo::Transaction t(session);
+    
+    project = session.find<Project>()
+      .where("title = ?").bind(title);
+
+    t.commit();
+
+    return project;
+}
 
 Projects ProjectDao::getAll()
 {
