@@ -1,12 +1,9 @@
 set(Sources
 #  src/BendFeature.cpp
-#  src/FxtUserDatabase.cpp
 #  src/ModelFile.cpp
 #  src/Project.cpp
 #  src/BendSequence.cpp
-#  src/ProcessPlan.cpp
-#  src/Session.cpp
-#  src/Token.cpp
+  src/ProcessPlanDao.cpp
   src/ToolDao.cpp
   src/MaterialDao.cpp
   src/UserDao.cpp
@@ -15,13 +12,10 @@ set(Sources
 
 set(Headers
 #  include/BendFeature.h
-#  include/FxtUserDatabase.h
 #  include/ModelFile.h
 #  include/Project.h
 #  include/BendSequence.h
-#  include/ProcessPlan.h
-#  include/Session.h
-#  include/Token.h
+  include/ProcessPlanDao.h
   include/ToolDao.h
   include/MaterialDao.h
   include/UserDao.h
