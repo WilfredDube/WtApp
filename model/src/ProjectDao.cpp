@@ -1,9 +1,7 @@
 #include "../include/ProjectDao.h"
 
 #include "../include/ModelFile.h"
-#include "../include/Session.h"
 #include "../include/User.h"
-#include "../include/Project.h"
 
 #include <memory>
 
@@ -30,12 +28,11 @@ Wt::Dbo::ptr<Project> ProjectDao::insert(std::string title, std::string desc)
 
 dbo::ptr<Project> ProjectDao::get(std::string title)
 {
-    dbo::ptr<Project> project;
-
     dbo::Transaction t(session);
     
-    project = session.find<Project>()
-      .where("title = ?").bind(title);
+    dbo::ptr<Project> project = session.query<dbo::ptr<Project>>("select p from project p")
+                                        .where("title = ?").bind(title)
+                                        .where("author_id = ?").bind(session.user());
 
     t.commit();
 
