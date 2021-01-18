@@ -23,13 +23,13 @@ public:
 
     Wt::Dbo::ptr<Project> insert(std::string title, std::string desc);
 
-    Wt::Dbo::ptr<Project> getProject( std::string title);
+    Wt::Dbo::ptr<Project> get( std::string title);
 
-    Projects getAllProjects();
+    Projects getAll();
 
     bool deleteProject(Wt::Dbo::ptr<Project>& project);
 
-    ModelFiles getProjectModelFiles(dbo::ptr<Project>& project);
+    ModelFiles getModelFiles(Wt::Dbo::ptr<Project>& project);
 
 private:
     Session& session;

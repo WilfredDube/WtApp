@@ -29,9 +29,9 @@ dbo::ptr<Project> ProjectDao::insert(std::string title, std::string desc)
     return project;
 }
 
-dbo::ptr<Project> getProject(std::string title);
+dbo::ptr<Project> ProjectDao::get(std::string title)
 
-Projects ProjectDao::getAllProjects()
+Projects ProjectDao::getAll()
 {
     return session.user()->projects;
 }
@@ -47,7 +47,7 @@ bool ProjectDao::deleteProject(dbo::ptr<Project>& project)
     return true;
 }
 
-ModelFiles ProjectDao::getProjectModelFiles(dbo::ptr<Project>& project)
+ModelFiles ProjectDao::getModelFiles(dbo::ptr<Project>& project)
 {
     return project->cad_files;
 }
