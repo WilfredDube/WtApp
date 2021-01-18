@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../include/Project.h"
-#include "../include/Session.h"
+#include "../../model/include/Project.h"
+#include "../../model/include/Session.h"
 
 #include <Wt/WDate.h>
 #include <Wt/WString.h>

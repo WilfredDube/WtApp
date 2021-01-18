@@ -6,7 +6,7 @@ add_subdirectory(logging)
 add_subdirectory(libseqgen)
 add_subdirectory(libfxtract)
 add_subdirectory(model)
-add_subdirectory(view)
+add_subdirectory(dbdao)
 add_subdirectory(tests)
 
 set(main_source_files

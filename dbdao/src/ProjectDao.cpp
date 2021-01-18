@@ -1,7 +1,7 @@
 #include "../include/ProjectDao.h"
 
-#include "../include/ModelFile.h"
-#include "../include/User.h"
+#include "../../model/include/ModelFile.h"
+#include "../../model/include/User.h"
 
 #include <memory>
 
