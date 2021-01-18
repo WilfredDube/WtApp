@@ -19,7 +19,7 @@ class ProjectDao
 {
 public:
 
-    ProjectDao(Session& session) : session { session }, projectTable { session.user()->projects } {}
+    ProjectDao(Session& session) : session { session } {}
 
     Wt::Dbo::ptr<Project> insert(std::string title, std::string desc);
 
@@ -32,6 +32,5 @@ public:
     ModelFiles getProjectModelFiles(dbo::ptr<Project>& project);
 
 private:
-    Projects projectTable;
     Session& session;
 };
