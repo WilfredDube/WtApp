@@ -9,7 +9,7 @@ set(Sources
 #  src/Token.cpp
   src/ToolDao.cpp
   src/MaterialDao.cpp
-#  src/User.cpp
+  src/UserDao.cpp
   src/ProjectDao.cpp
 )
 
@@ -24,7 +24,7 @@ set(Headers
 #  include/Token.h
   include/ToolDao.h
   include/MaterialDao.h
-#  include/User.h
+  include/UserDao.h
   include/ProjectDao.h
 )
 
