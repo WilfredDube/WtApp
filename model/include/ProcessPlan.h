@@ -24,6 +24,7 @@ public:
   std::string part_no;
   int no_rotations;
   int no_flips;
+  int no_tools;
   int quantity;
   double tool_distance;
   double process_planning_time;
@@ -32,7 +33,6 @@ public:
   Wt::WDateTime  dateCreated;
 
   dbo::ptr<ModelFile> modelFile;
-  dbo::weak_ptr<MachineParam> machineParam;
   BendSequences bendSequences;
 
   template<class Action>
@@ -50,7 +50,6 @@ public:
     dbo::belongsTo(a, modelFile, "model_file", dbo::OnDeleteCascade);
 
     dbo::hasMany(a, bendSequences, dbo::ManyToOne, "process_plan");
-    dbo::hasOne(a, machineParam, "machine_param");
   }
 };
 
