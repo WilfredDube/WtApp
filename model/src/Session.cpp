@@ -3,15 +3,13 @@
 #include "../include/ModelFile.h"
 #include "../include/Project.h"
 #include "../include/Token.h"
-#include "../include/User.h"
-#include "../include/Tool.h"
 #include "../include/ProcessPlan.h"
 #include "../include/MachineParam.h"
 #include "../include/BendSequence.h"
-#include "../include/Material.h"
 
 #include "../../dbdao/include/UserDao.h"
 #include "../../dbdao/include/ToolDao.h"
+#include "../../dbdao/include/MaterialDao.h"
 
 #include <Wt/Auth/AuthService.h>
 #include <Wt/Auth/HashFunction.h>
@@ -130,20 +128,11 @@ Session::Session(dbo::SqlConnectionPool& connectionPool)
 
 void Session::fillMaterial()
 {
-  dbo::ptr<Material> material(Wt::cpp14::make_unique<Material>());
-  Material *m = material.modify();
-  m->addMaterial("Aluminium", 310, 0.43);
-  add(material);
+  MaterialDao materialDao{*this};
 
-  dbo::ptr<Material> material1(Wt::cpp14::make_unique<Material>());
-  Material *m1 = material1.modify();
-  m1->addMaterial("Mild Steel", 440, 0.45);
-  add(material1);
-
-  dbo::ptr<Material> material2(Wt::cpp14::make_unique<Material>());
-  Material *m2 = material2.modify();
-  m2->addMaterial("Stainless Steel", 505, 0.45);
-  add(material2);
+  materialDao.insert("Aluminium", 310, 0.43);
+  materialDao.insert("Mild Steel", 440, 0.45);
+  materialDao.insert("Stainless Steel", 505, 0.45);
 }
 
 void Session::fillTools()
