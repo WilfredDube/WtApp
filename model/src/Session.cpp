@@ -10,6 +10,8 @@
 #include "../include/BendSequence.h"
 #include "../include/Material.h"
 
+#include "../../dbdao/include/UserDao.h"
+
 #include <Wt/Auth/AuthService.h>
 #include <Wt/Auth/HashFunction.h>
 #include <Wt/Auth/Identity.h>
@@ -104,17 +106,15 @@ Session::Session(dbo::SqlConnectionPool& connectionPool)
   // mapClass<AuthInfo::AuthTokenType>("auth_token");
 
   try {
-    dbo::Transaction transaction(*this);  
+    dbo::Transaction transaction(*this);
 
     createTables();
 
-    dbo::ptr<User> guest = add(Wt::cpp14::make_unique<User>());
-    User *u = guest.modify();
-    u->name = "guest";
-    u->password = "guest";
+    UserDao userDao{*this};
+    dbo::ptr<User> guest = userDao.insert("guest", "guest");
 
-    Auth::User guestUser = users_.findWithIdentity(Wt::Auth::Identity::LoginName, u->name);
-    myPasswordService.updatePassword(guestUser, "guest");
+    Auth::User guestUser = users_.findWithIdentity(Wt::Auth::Identity::LoginName, guest->name);
+    // myPasswordService.updatePassword(guestUser, "guest");
 
     fillTools();
     fillMaterial();
