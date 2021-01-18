@@ -7,6 +7,7 @@ set(Sources
 #  src/ProcessPlan.cpp
 #  src/Session.cpp
 #  src/Token.cpp
+  src/ToolDao.cpp
   src/MaterialDao.cpp
 #  src/User.cpp
   src/ProjectDao.cpp
@@ -21,6 +22,7 @@ set(Headers
 #  include/ProcessPlan.h
 #  include/Session.h
 #  include/Token.h
+  include/ToolDao.h
   include/MaterialDao.h
 #  include/User.h
   include/ProjectDao.h
