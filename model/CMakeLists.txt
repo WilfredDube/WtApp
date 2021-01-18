@@ -10,6 +10,7 @@ set(Sources
   src/Tool.cpp
   src/Material.cpp
   src/User.cpp
+  src/ProjectDao.cpp
 )
 
 set(Headers
@@ -24,6 +25,7 @@ set(Headers
   include/Tool.h
   include/Material.h
   include/User.h
+  include/ProjectDao.h
 )
 
 set(THREADS_PREFER_PTHREAD_FLAG ON)
