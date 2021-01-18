@@ -9,24 +9,23 @@
 
 namespace dbo = Wt::Dbo;
 
-typedef dbo::collection< dbo::ptr<ModelFile> > ModelFiles;
-
-dbo::ptr<Project> ProjectDao::insert(std::string title, std::string desc)
+Wt::Dbo::ptr<Project> ProjectDao::insert(std::string title, std::string desc)
 {
-    dbo::ptr<Project> project(Wt::cpp14::make_unique<Project>());
+    auto ret = Wt::Dbo::ptr<Project>();
 
-    dbo::Transaction t(session);
+    {
+        dbo::Transaction transaction(session);
 
-    Project *p = project.modify();
+        std::unique_ptr<Project> project(Wt::cpp14::make_unique<Project>());
+        project->title = title;
+        project->desc = desc;
+        project->author = session.user();
+        project->date_created = Wt::WDateTime::currentDateTime();
 
-    p->title = title;
-    p->desc = desc;
-    p->author = session.user();
-    p->date_created = Wt::WDateTime::currentDateTime();
-
-    t.commit();
-
-    return project;
+        ret = session.add(std::move(project));
+    }
+    
+    return ret;
 }
 
 dbo::ptr<Project> ProjectDao::get(std::string title)
