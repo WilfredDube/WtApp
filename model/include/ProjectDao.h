@@ -1,5 +1,8 @@
 #pragma once
 
+#include "../include/Project.h"
+#include "../include/Session.h"
+
 #include <Wt/WDate.h>
 #include <Wt/WString.h>
 #include <Wt/Dbo/Types.h>
@@ -8,7 +11,6 @@
 #include <memory>
 
 class ModelFile;
-class Session;
 class User;
 class Project;
 
