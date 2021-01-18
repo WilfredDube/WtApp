@@ -129,3 +129,11 @@ bool BendSequenceGenerator::Sequence::operator<(const BendSequenceGenerator::Seq
 {
     return (fitness > individualSequence.fitness);
 }
+
+size_t BendSequenceGenerator::getNumberOfTools() { return sequenceImpl_->nTools; }
+
+size_t BendSequenceGenerator::getNumberOfRotations() { return sequenceImpl_->nRotations; }
+
+size_t BendSequenceGenerator::getNumberOfFlips() { return sequenceImpl_->nFlips; }
+
+double BendSequenceGenerator::getNumberOfDistance() { return sequenceImpl_->distance; }

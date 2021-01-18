@@ -31,6 +31,12 @@ public:
     explicit BendSequenceGenerator(std::vector<int> chromosome, SheetMetalPtr& model);
 
     void generateBendingSequence();
+
+    size_t getNumberOfTools();
+    size_t getNumberOfRotations();
+    size_t getNumberOfFlips();
+    double getNumberOfDistance();
+
     size_t getSequenceSize();
     void print();
 };
