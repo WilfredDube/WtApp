@@ -94,24 +94,18 @@ Session::Session(dbo::SqlConnectionPool& connectionPool)
   mapClass<Project>("project");
   mapClass<Token>("token");
   mapClass<User>("user");
-
-  mapClass<MachineParam>("machine_param");
   mapClass<BendSequence>("bend_sequence");
   mapClass<ProcessPlan>("process_plan");
-
   mapClass<Material>("material");
-
   mapClass<Tool>("tools");
-  
-//   #include "ProcessPlan.h"
-// #include "MachineParam.h"
-// #include "BendSequence.h"
+
   // mapClass<AuthInfo>("auth_info");
   // mapClass<AuthInfo::AuthIdentityType>("auth_identity");
   // mapClass<AuthInfo::AuthTokenType>("auth_token");
 
   try {
     dbo::Transaction transaction(*this);  
+
     createTables();
 
     dbo::ptr<User> guest = add(Wt::cpp14::make_unique<User>());
@@ -124,8 +118,6 @@ Session::Session(dbo::SqlConnectionPool& connectionPool)
 
     fillTools();
     fillMaterial();
-
-    std::cerr << "Created database." << std::endl;
 
     transaction.commit();
 
