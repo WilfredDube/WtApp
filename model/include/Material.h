@@ -12,10 +12,6 @@ namespace dbo = Wt::Dbo;
 
 class Material {
 public:
-  void addMaterial(std::string material_name,
-  double tensile_strength,
-  double k_factor);
-
   std::string material_name;
   double tensile_strength;
   double k_factor;

@@ -11,13 +11,6 @@ namespace dbo = Wt::Dbo;
 
 class Tool {
 public:
-  void addTool(std::string tool_id,
-  std::string tool_name,
-  double tool_angle,
-  double tool_length,
-  double tool_min_radius,
-  double tool_max_radius);
-
   std::string tool_id;
   std::string tool_name;
   double tool_angle;
