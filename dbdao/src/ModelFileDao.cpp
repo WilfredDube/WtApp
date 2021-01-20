@@ -49,6 +49,9 @@ dbo::ptr<ModelFile> ModelFileDao::update(dbo::ptr<ModelFile>& modelFile, Process
         dbo::Transaction transaction(session);
 
         modelFile.modify()->processLevel = processLevel;
+
+        if(processLevel == ProcessLevel::FEATURE_EXTRACTED)
+            modelFile.modify()->nbends = modelFile->bendFeatures.size();
     }
 
     return modelFile;
