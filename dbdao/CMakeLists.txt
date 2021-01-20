@@ -1,5 +1,5 @@
 set(Sources
-#  src/BendFeature.cpp
+  src/BendFeatureDao.cpp
 #  src/ModelFile.cpp
 #  src/BendSequence.cpp
   src/ProcessPlanDao.cpp
@@ -10,7 +10,7 @@ set(Sources
 )
 
 set(Headers
-#  include/BendFeature.h
+  include/BendFeatureDao.h
 #  include/ModelFile.h
 #  include/BendSequence.h
   include/ProcessPlanDao.h
