@@ -25,6 +25,8 @@ Wt::Dbo::ptr<ModelFile> ModelFileDao::insert(std::string materialType,
         cadFile->processLevel = ProcessLevel::UNPROCESSED;
         cadFile->author = session.user();
         cadFile->uploadDate = Wt::WDateTime::currentDateTime();
+
+        cadFile->project.modify()->no_files++;
         
         ret = session.add(std::move(cadFile));
     }
