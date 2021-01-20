@@ -1,36 +1,37 @@
-set(view_source_files
-  BreadCrumbWidget.cpp
-  BreadCrumbWidget.h
-  FileDropApplication.cpp
-  FileDropApplication.h
-  FXtractUI.cpp
-  FXtractUI.h
-  ModelFileWidget.cpp
-  ModelFileWidget.h
-  ModelInfoPanels.cpp
-  ModelInfoPanels.h
-  ModelViewerControls.cpp
-  ModelViewerControls.h
-  ModelViewerWidget.cpp
-  ModelViewerWidget.h
-  NavBarWidget.cpp
-  NavBarWidget.h
-  PaintWidget.cpp
-  PaintWidget.h
-  PanelList.cpp
-  PanelList.h
-  ProjectList.cpp
-  ProjectList.h
-  ProjectListWidget.cpp
-  ProjectListWidget.h
-  ProjectSummaryWidget.cpp
-  ProjectSummaryWidget.h
-  ProcessPlanDialog.cpp
-  ProcessPlanDialog.h
-  FeatureDialog.cpp
-  FeatureDialog.h
-  readObj.cpp
-  readObj.h
+set(Sources
+  src/BreadCrumbWidget.cpp
+  src/FileDropApplication.cpp
+  src/FXtractUI.cpp
+  src/ModelFileWidget.cpp
+  src/ModelInfoPanels.cpp
+  src/ModelViewerControls.cpp
+  src/ModelViewerWidget.cpp
+  src/NavBarWidget.cpp
+  src/PaintWidget.cpp
+  src/PanelList.cpp
+  src/ProjectList.cpp
+  src/ProjectListWidget.cpp
+  src/ProjectSummaryWidget.cpp
+  src/ProcessPlanDialog.cpp
+  src/FeatureDialog.cpp
+)
+
+set(Headers
+  include/BreadCrumbWidget.h
+  include/FileDropApplication.h
+  include/FXtractUI.h
+  include/ModelFileWidget.h
+  include/ModelInfoPanels.h
+  include/ModelViewerControls.h
+  include/ModelViewerWidget.h
+  include/NavBarWidget.h
+  include/PaintWidget.h
+  include/PanelList.h
+  include/ProjectList.h
+  include/ProjectListWidget.h
+  include/ProjectSummaryWidget.h
+  include/ProcessPlanDialog.h
+  include/FeatureDialog.h
 )
 
 set(CMAKE_CXX_STANDARD 17)
@@ -47,6 +48,6 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 find_package(wt COMPONENTS wt wtdbo wtdbosqlite3 wthttp REQUIRED)
 
-add_library(view ${view_source_files})
+add_library(view ${Sources} ${Headers})
 target_include_directories(view PRIVATE ${Boost_INCLUDE_DIRS} ${wt_INCLUDE_DIRS} ${OpenCASCADE_INCLUDE_DIR})
 target_link_libraries(view fxtract ${Boost_LIBRARIES} Threads::Threads ${wt_LIBRARIES} stdc++fs wthttp wt wtdbo wtdbosqlite3)
