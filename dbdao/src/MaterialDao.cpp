@@ -1,5 +1,6 @@
 #include "../include/MaterialDao.h"
 
+#include <cmath>
 #include <memory>
 
 namespace dbo = Wt::Dbo;
@@ -30,6 +31,15 @@ dbo::ptr<Material> MaterialDao::get(std::string materialName)
                                         .where("material_name = ?").bind(materialName);
 
     return material;
+}
+
+double MaterialDao::getBendingForce(std::string materialName, double thickness, double bendLength)
+{
+    auto material = get(materialName);
+
+    auto bendingForce = (bendLength * std::pow(thickness, 2) * material->k_factor * material->tensile_strength) / (8 * thickness);
+
+    return bendingForce;
 }
 
 Materials MaterialDao::getAll()

@@ -22,6 +22,8 @@ public:
 
     Wt::Dbo::ptr<Material> get(std::string material_name);
 
+    double getBendingForce(std::string materialName, double thickness, double bendLength);
+
     Materials getAll();
 
     bool deleteProject(Wt::Dbo::ptr<Material>& material);
