@@ -30,10 +30,10 @@ dbo::ptr<Tool> ToolDao::get(double toolAngle)
 {
     dbo::Transaction transaction(session);
     
-    dbo::ptr<Tool> tool = session.query<dbo::ptr<Tool>>("select t from tool t")
-                                        .where("tool_angle = ?").bind(toolAngle);
+    Tools tools = session.find<Tool>()
+                    .where("tool_angle = ?").bind(toolAngle);
 
-    return tool;
+    return *(tools.begin());
 }
 
 Tools ToolDao::getAll()
