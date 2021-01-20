@@ -29,6 +29,7 @@ public:
     Wt::Dbo::ptr<ModelFile> update(dbo::ptr<ModelFile>& modelFile, dbo::ptr<ProcessPlan>& processPlan);
     Wt::Dbo::ptr<ModelFile> update(dbo::ptr<ModelFile>& modelFile, ProcessLevel processLevel);
     Wt::Dbo::ptr<ModelFile> update(dbo::ptr<ModelFile>& modelFile, double thickness);
+    Wt::Dbo::ptr<ModelFile> update(dbo::ptr<ModelFile>& modelFile, std::string modelDataStringified);
 
     ModelFiles getAll();
 

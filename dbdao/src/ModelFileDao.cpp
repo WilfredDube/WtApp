@@ -65,6 +65,17 @@ dbo::ptr<ModelFile> ModelFileDao::update(dbo::ptr<ModelFile>& modelFile, double 
     return modelFile;
 }
 
+dbo::ptr<ModelFile> ModelFileDao::update(dbo::ptr<ModelFile>& modelFile, std::string modelDataStringified)
+{
+    {
+        dbo::Transaction transaction(session);
+
+        modelFile.modify()->modelData = modelDataStringified;
+    }
+
+    return modelFile;
+}
+
 dbo::ptr<ModelFile> ModelFileDao::get(std::string materialName)
 {
     dbo::Transaction transaction(session);
