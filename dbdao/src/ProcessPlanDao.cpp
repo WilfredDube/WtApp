@@ -49,7 +49,6 @@ dbo::ptr<ProcessPlan> ProcessPlanDao::update(dbo::ptr<ProcessPlan>& processPlan,
     return processPlan;
 }
 
-
 dbo::ptr<ProcessPlan> ProcessPlanDao::get(dbo::ptr<ModelFile>& modelFile)
 {
     dbo::Transaction transaction(session);
