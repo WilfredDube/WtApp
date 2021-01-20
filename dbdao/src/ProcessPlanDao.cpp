@@ -49,6 +49,17 @@ dbo::ptr<ProcessPlan> ProcessPlanDao::update(dbo::ptr<ProcessPlan>& processPlan,
     return processPlan;
 }
 
+dbo::ptr<ProcessPlan> ProcessPlanDao::update(dbo::ptr<ProcessPlan>& processPlan, int numberOfModules)
+{
+    {
+        dbo::Transaction transaction(session);
+
+        processPlan.modify()->no_modules = numberOfModules;
+    }
+
+    return processPlan;
+}
+
 dbo::ptr<ProcessPlan> ProcessPlanDao::get(dbo::ptr<ModelFile>& modelFile)
 {
     dbo::Transaction transaction(session);

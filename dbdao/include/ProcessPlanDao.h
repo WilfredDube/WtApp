@@ -28,6 +28,7 @@ public:
 
     Wt::Dbo::ptr<ProcessPlan> update(BendSequences bendSequences);
     Wt::Dbo::ptr<ProcessPlan> update(dbo::ptr<ProcessPlan>& processPlan, double estimated_manufacturing_time);
+    Wt::Dbo::ptr<ProcessPlan> update(dbo::ptr<ProcessPlan>& processPlan, int numberOfModules);
 
     Wt::Dbo::ptr<ProcessPlan> get(dbo::ptr<ModelFile>& modelFile);
 
