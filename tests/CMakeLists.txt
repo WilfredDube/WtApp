@@ -2,6 +2,7 @@ add_subdirectory(cad-file-reader-test)
 add_subdirectory(sheet-metal-component-test)
 add_subdirectory(libseqgen)
 add_subdirectory(project-dao)
+add_subdirectory(tool-dao)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
