@@ -29,7 +29,6 @@ public:
 
   double bendingForce, feature_recognition_time, thickness;
   int nbends;
-  int nModules; //number_of_modules;
   Wt::WString modelFile;
   Wt::WString modelObjFile;
   Wt::WString modelFileDir;
@@ -45,7 +44,6 @@ public:
   void persist(Action& a) {
     dbo::field(a, bendingForce, "bending_force");
     dbo::field(a, nbends, "model_bend_count");
-    dbo::field(a, nModules, "number_of_modules");
     dbo::field(a, modelFile, "model_file");
     dbo::field(a, modelObjFile, "model_obj_file");
     dbo::field(a, modelFileDir, "model_file_dir");
