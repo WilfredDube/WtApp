@@ -76,6 +76,17 @@ dbo::ptr<ModelFile> ModelFileDao::update(dbo::ptr<ModelFile>& modelFile, std::st
     return modelFile;
 }
 
+dbo::ptr<ModelFile> ModelFileDao::update(dbo::ptr<ModelFile>& modelFile, long double feature_recognition_time)
+{
+    {
+        dbo::Transaction transaction(session);
+
+        modelFile.modify()->feature_recognition_time = feature_recognition_time;
+    }
+
+    return modelFile;
+}
+
 dbo::ptr<ModelFile> ModelFileDao::get(std::string materialName)
 {
     dbo::Transaction transaction(session);
