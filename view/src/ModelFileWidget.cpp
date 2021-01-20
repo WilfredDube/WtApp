@@ -1,4 +1,5 @@
-#include "ModelFileWidget.h"
+#include "../include/ModelFileWidget.h"
+#include "../include/ProcessPlanDialog.h"
 
 #include <Wt/WText.h>
 #include <Wt/WImage.h>
@@ -7,18 +8,17 @@
 #include <Wt/WMessageBox.h>
 #include <Wt/WPushButton.h>
 
-#include "../libfxtract/include/ModelBend.h"
-#include "../libfxtract/include/Model.h"
-#include "../model/ModelFile.h"
-#include "../model/BendFeature.h"
-#include "../model/Tool.h"
-#include "../model/ProcessPlan.h"
-#include "../model/BendSequence.h"
-#include "../model/MachineParam.h"
-#include "../model/Material.h"
-#include "../libSeqgen/Sequence.h"
-#include "../libSeqgen/BendSeqGen.h"
-#include "ProcessPlanDialog.h"
+#include "../../libfxtract/include/sheet-metal-component/bend/ModelBend.h"
+#include "../../libfxtract/include/sheet-metal-component/SheetMetal.h"
+
+#include "../../dbdao/include/ModelFileDao.h"
+#include "../../dbdao/include/BendFeatureDao.h"
+#include "../../dbdao/include/ToolDao.h"
+#include "../../dbdao/include/ProcessPlanDao.h"
+#include "../../dbdao/include/BendSequenceDao.h"
+#include "../../dbdao/include/MaterialDao.h"
+
+#include "../../libseqgen/include/BendSequenceGenerator.h"
 
 #include <vector>
 #include <map>

@@ -1,10 +1,10 @@
-#include "NavBarWidget.h"
+#include "../include/NavBarWidget.h"
 
 #include <Wt/WNavigationBar.h>
 #include <Wt/WStackedWidget.h>
 #include <Wt/WLineEdit.h>
 
-#include "ProjectListWidget.h"
+#include "../include/ProjectListWidget.h"
 
 NavBarWidget::NavBarWidget(const std::string title, const std::string link, const std::string& basePath)
     : WContainerWidget(),

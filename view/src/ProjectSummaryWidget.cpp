@@ -1,4 +1,4 @@
-#include "ProjectSummaryWidget.h"
+#include "../include/ProjectSummaryWidget.h"
 
 #include <memory>
 #include <Wt/WHBoxLayout.h>

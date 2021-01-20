@@ -1,8 +1,9 @@
-#include "ProcessPlanDialog.h"
+#include "../include/ProcessPlanDialog.h"
 
-#include "../model/ModelFile.h"
-#include "../model/BendSequence.h"
-#include "../libSeqgen/ProductionTime.h"
+#include "../../dbdao/include/ModelFileDao.h"
+#include "../../dbdao/include/BendSequenceDao.h"
+
+#include "../../libseqgen/include/ProductionTime.h"
 
 #include <Wt/WText.h>
 #include <Wt/WTemplate.h>

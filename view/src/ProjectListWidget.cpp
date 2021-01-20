@@ -1,7 +1,9 @@
-#include "ProjectListWidget.h"
-#include "ProjectSummaryWidget.h"
-#include "../model/Project.h"
-#include "../model/Session.h"
+#include "../include/ProjectListWidget.h"
+#include "../include/ProjectSummaryWidget.h"
+
+#include "../../dbdao/include/ProjectDao.h"
+
+#include "../../model/include/Session.h"
 
 #include <Wt/WPushButton.h>
 #include <Wt/WDialog.h>

@@ -4,8 +4,8 @@
 #include <Wt/WContainerWidget.h>
 #include <Wt/Dbo/ptr.h>
 
-#include "../model/Project.h"
-#include "../model/Session.h"
+#include "../../dbdao/include/ProjectDao.h"
+#include "../../model/include/Session.h"
 
 namespace Wt {
     class WText;

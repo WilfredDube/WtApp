@@ -1,5 +1,5 @@
-#include "ProjectList.h"
-#include "ProjectSummaryWidget.h"
+#include "../include/ProjectList.h"
+#include "../include/ProjectSummaryWidget.h"
 
 ProjectList::ProjectList()
   : WContainerWidget()

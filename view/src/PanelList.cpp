@@ -6,7 +6,7 @@
 
 #include <Wt/WPanel.h>
 
-#include "PanelList.h"
+#include "../include/PanelList.h"
 
 using namespace Wt;
 

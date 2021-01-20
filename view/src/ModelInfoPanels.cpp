@@ -1,9 +1,9 @@
-#include "ModelInfoPanels.h"
-#include "PanelList.h"
+#include "../include/ModelInfoPanels.h"
+#include "../include/ModelFileWidget.h"
+#include "../include/PanelList.h"
 
-#include "../model/Project.h"
-#include "../model/ModelFile.h"
-#include "ModelFileWidget.h"
+#include "../../dbdao/include/ProjectDao.h"
+#include "../../dbdao/include/ModelFileDao.h"
 
 #include <Wt/WImage.h>
 #include <Wt/WHBoxLayout.h>

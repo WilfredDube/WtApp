@@ -2,8 +2,8 @@
 #define MODEL_VIEWER_WIDGET_H_
 
 #include <Wt/WContainerWidget.h>
-#include "../model/Project.h"
-#include "../model/Session.h"
+#include "../../dbdao/include/ProjectDao.h"
+#include "../../model/include/Session.h"
 
 namespace Wt {
     class WPushButton;

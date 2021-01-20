@@ -31,11 +31,14 @@
 #include <memory>
 #include <map>
 
-#include "BreadCrumbWidget.h"
-#include "FeatureDialog.h"
-#include "../model/ModelFile.h"
-#include "../libfxtract/include/ModelMath.h"
-#include "readObj.h"
+#include "../include/BreadCrumbWidget.h"
+#include "../include/FeatureDialog.h"
+
+#include "../../dbdao/include/ModelFileDao.h"
+
+#include "../../libfxtract/include/Computation.h"
+
+#include "../../libfxtract/include/obj-file-reader/readObj.h"
 
 class MyPaintedWidget : public Wt::WPaintedWidget
 {

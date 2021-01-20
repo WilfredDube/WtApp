@@ -2,7 +2,7 @@
 #define PROCESS_PLAN_DIALOG_H_
 
 #include <Wt/WDialog.h>
-#include "../model/Session.h"
+#include "../../model/include/Session.h"
 
 class ModelFile;
 class BendSequence;

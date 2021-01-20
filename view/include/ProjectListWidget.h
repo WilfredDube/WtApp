@@ -3,7 +3,7 @@
 
 #include <Wt/WContainerWidget.h>
 
-#include "ProjectList.h"
+#include "../include/ProjectList.h"
 
 namespace Wt {
   class WLink;

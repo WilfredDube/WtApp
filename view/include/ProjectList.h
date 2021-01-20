@@ -8,7 +8,7 @@
 
 #include <Wt/WContainerWidget.h>
 
-#include "ProjectSummaryWidget.h"
+#include "../include/ProjectSummaryWidget.h"
 
 class ProjectList : public Wt::WContainerWidget
 {

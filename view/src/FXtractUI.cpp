@@ -19,12 +19,13 @@
 #include <cstdlib>
 #include <filesystem>
 
-#include "FXtractUI.h"
-#include "NavBarWidget.h"
-#include "ModelViewerWidget.h"
-#include "ProjectListWidget.h"
-#include "../Utils/Utils.h"
-#include "../model/Session.h"
+#include "../include/FXtractUI.h"
+#include "../include/NavBarWidget.h"
+#include "../include/ModelViewerWidget.h"
+#include "../include/ProjectListWidget.h"
+
+#include "../../Utils/Utils.h"
+#include "../../model/include/Session.h"
 
 using namespace Wt;
 namespace fs = std::filesystem;

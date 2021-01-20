@@ -4,7 +4,7 @@
 * See the LICENSE file for terms of use.
 */
 
-#include "FileDropApplication.h"
+#include "../include/FileDropApplication.h"
 
 #include <boost/algorithm/string.hpp>
 #include <Wt/WPushButton.h>
@@ -21,8 +21,8 @@
 #include <iostream>
 #include <fstream>
 
-#include "../model/Session.h"
-#include "../model/User.h"
+#include "../../model/include/Session.h"
+#include "../../dbdao/include/UserDao.h"
 
 namespace Fxt {
 

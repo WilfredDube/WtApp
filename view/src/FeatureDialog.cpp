@@ -1,6 +1,6 @@
-#include "FeatureDialog.h"
+#include "../include/FeatureDialog.h"
 
-#include "../model/ModelFile.h"
+#include "../../dbdao/include/ModelFileDao.h"
 
 #include <Wt/WText.h>
 #include <Wt/WPushButton.h>

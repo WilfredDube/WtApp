@@ -13,7 +13,7 @@
 #include <vector>
 #include <map>
 
-#include "../model/Session.h"
+#include "../../model/include/Session.h"
 
 namespace Wt {
   class WText;

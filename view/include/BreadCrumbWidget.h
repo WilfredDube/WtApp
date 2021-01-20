@@ -2,7 +2,7 @@
 #define BREAD_CRUMB_WIDGET_H_
 
 #include <Wt/WContainerWidget.h>
-#include "../model/Session.h"
+#include "../../model/include/Session.h"
 
 class ModelFile;
 

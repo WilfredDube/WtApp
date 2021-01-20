@@ -2,7 +2,8 @@
 #define MODEL_FILE_WIDGET_H_
 
 #include <Wt/WContainerWidget.h>
-#include "../model/Session.h"
+
+#include "../../model/include/Session.h"
 
 namespace Wt {
   class WText;

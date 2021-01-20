@@ -1,4 +1,4 @@
-#include "ModelViewerControls.h"
+#include "../include/ModelViewerControls.h"
 
 #include <Wt/WPushButton.h>
 #include <Wt/WTemplate.h>
@@ -23,12 +23,14 @@
 #include <filesystem>
 #include <cmath>
 
-#include "FileDropApplication.h"
-#include "ProcessPlanDialog.h"
-#include "FeatureDialog.h"
-#include "../model/Project.h"
-#include "../model/ModelFile.h"
-#include "../libfxtract/include/ModelMath.h"
+#include "../include/FileDropApplication.h"
+#include "../include/ProcessPlanDialog.h"
+#include "../include/FeatureDialog.h"
+
+#include "../../dbdao/include/ProjectDao.h"
+#include "../../dbdao/include/ModelFileDao.h"
+
+#include "../../libfxtract/include/Computation.h"
 
 namespace fs = std::filesystem;
 

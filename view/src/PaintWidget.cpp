@@ -4,7 +4,7 @@
  * See the LICENSE file for terms of use.
  */
 
-#include "PaintWidget.h"
+#include "../include/PaintWidget.h"
 
 #include <Wt/WGLWidget.h>
 #include <Wt/WMatrix4x4.h>

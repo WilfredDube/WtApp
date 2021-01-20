@@ -2,7 +2,7 @@
 #define MODEL_INFO_PANELS_H_
 
 #include <Wt/WContainerWidget.h>
-#include "../model/Session.h"
+#include "../../model/include/Session.h"
 
 namespace Wt {
     class WTable;
