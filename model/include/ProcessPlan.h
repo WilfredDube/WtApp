@@ -25,6 +25,7 @@ public:
   int no_rotations;
   int no_flips;
   int no_tools;
+  int no_modules;
   int quantity;
   double tool_distance;
   double process_planning_time;
@@ -40,6 +41,7 @@ public:
     dbo::field(a, part_no, "part_no");
     dbo::field(a, no_rotations, "no_rotations");
     dbo::field(a, no_flips, "no_flips");
+    dbo::field(a, no_modules, "no_modules");
     dbo::field(a, quantity, "quantity");
     dbo::field(a, process_planning_time, "process_planning_time");
     dbo::field(a, estimated_manufacturing_time, "estimated_manufacturing_time");
