@@ -8,7 +8,6 @@
 #include <Wt/Dbo/WtSqlTraits.h>
 
 #include "ModelFile.h"
-#include "MachineParam.h"
 #include "BendSequence.h"
 
 namespace dbo = Wt::Dbo;

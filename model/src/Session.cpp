@@ -4,7 +4,6 @@
 #include "../include/Project.h"
 #include "../include/Token.h"
 #include "../include/ProcessPlan.h"
-#include "../include/MachineParam.h"
 #include "../include/BendSequence.h"
 
 #include "../../dbdao/include/UserDao.h"
