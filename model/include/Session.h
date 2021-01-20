@@ -17,7 +17,6 @@ class BendFeature;
 class User;
 class Project;
 class ModelFile;
-class MachineParam;
 class BendSequence;
 class ProcessPlan;
 
