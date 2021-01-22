@@ -1,9 +1,8 @@
-#ifndef MODEL_FILE_WIDGET_H_
-#define MODEL_FILE_WIDGET_H_
-
-#include <Wt/WContainerWidget.h>
+#pragma once
 
 #include "../../model/include/Session.h"
+
+#include <Wt/WContainerWidget.h>
 
 namespace Wt {
   class WText;
@@ -33,5 +32,3 @@ public:
     ModelFileWidget(Session& session, dbo::ptr<ModelFile> model);
     ~ModelFileWidget();
 };
-
-#endif

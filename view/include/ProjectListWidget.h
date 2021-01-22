@@ -1,9 +1,8 @@
-#ifndef PROJECT_LIST_WIDGET_H_
-#define PROJECT_LIST_WIDGET_H_
-
-#include <Wt/WContainerWidget.h>
+#pragma once
 
 #include "../include/ProjectList.h"
+
+#include <Wt/WContainerWidget.h>
 
 namespace Wt {
   class WLink;
@@ -37,5 +36,3 @@ private:
   void createNewProjectDialog();
   void addProject(const dbo::ptr<Project> post, Wt::WContainerWidget *parent);
 };
-
-#endif // PROJECT_LIST_WIDGET_H_

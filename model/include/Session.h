@@ -1,5 +1,4 @@
-#ifndef SESSION_H_
-#define SESSION_H_
+#pragma once
 
 #include <Wt/Auth/Login.h>
 #include <Wt/Auth/Dbo/UserDatabase.h>
@@ -55,5 +54,3 @@ private:
     void fillTools();
     void fillMaterial();
 };
-
-#endif // SESSION_H_

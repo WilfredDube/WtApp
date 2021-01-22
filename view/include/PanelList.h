@@ -1,11 +1,4 @@
-// This may look like C code, but it's really -*- C++ -*-
-/*
- * Copyright (C) 2008 Emweb bvba, Kessel-Lo, Belgium.
- *
- * See the LICENSE file for terms of use.
- */
-#ifndef PANEL_LIST_H_
-#define PANEL_LIST_H_
+#pragma once
 
 #include <Wt/WContainerWidget.h>
 
@@ -30,5 +23,3 @@ private:
 
   int wasExpanded_;
 };
-
-#endif // PANEL_LIST_H_

@@ -1,19 +1,12 @@
-// This may look like C code, but it's really -*- C++ -*-
-/*
-* Copyright (C) 2016 Emweb bvba, Herent, Belgium.
-*
-* See the LICENSE file for terms of use.
-*/
+#pragma once
 
-#ifndef FILEDROPAPPLICATION_H_
-#define FILEDROPAPPLICATION_H_
+#include "../../model/include/Session.h"
 
 #include <Wt/WContainerWidget.h>
 #include <Wt/WFileDropWidget.h>
-#include <vector>
-#include <map>
 
-#include "../../model/include/Session.h"
+#include <map>
+#include <vector>
 
 namespace Wt {
   class WText;
@@ -51,5 +44,3 @@ namespace Fxt {
   };
 
 }
-
-#endif // FILEDROPAPPLICATION_H_

@@ -1,9 +1,8 @@
-#ifndef FXTRACT_H_
-#define FXTRACT_H_
-
-#include <Wt/WContainerWidget.h>
+#pragma once
 
 #include "../../model/include/Session.h"
+
+#include <Wt/WContainerWidget.h>
 
 namespace Wt {
     class WStackedWidget;
@@ -49,5 +48,3 @@ private:
     void loggedOut();
     void displayProjects();
 };
-
-#endif

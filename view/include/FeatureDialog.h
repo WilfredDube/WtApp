@@ -1,8 +1,8 @@
-#ifndef FEATURE_DIALOG_H_
-#define FEATURE_DIALOG_H_
+#pragma once
+
+#include "../../model/include/Session.h"
 
 #include <Wt/WDialog.h>
-#include "../../model/include/Session.h"
 
 class ModelFile;
 
@@ -26,5 +26,3 @@ public:
     void ok();
     void cancel();
 };
-
-#endif

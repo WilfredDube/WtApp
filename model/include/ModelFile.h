@@ -1,5 +1,4 @@
-#ifndef MODEL_FILE_H_
-#define MODEL_FILE_H_
+#pragma once
 
 #include <Wt/WDateTime.h>
 #include <Wt/WString.h>

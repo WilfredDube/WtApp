@@ -1,8 +1,8 @@
-#ifndef PROCESS_PLAN_DIALOG_H_
-#define PROCESS_PLAN_DIALOG_H_
+#pragma once
+
+#include "../../model/include/Session.h"
 
 #include <Wt/WDialog.h>
-#include "../../model/include/Session.h"
 
 class ModelFile;
 class BendSequence;
@@ -48,5 +48,3 @@ public:
     void ok();
     void cancel();
 };
-
-#endif

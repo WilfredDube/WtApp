@@ -1,7 +1,5 @@
-#ifndef BREAD_CRUMB_WIDGET_H_
-#define BREAD_CRUMB_WIDGET_H_
+#pragma once
 
-#include <Wt/WContainerWidget.h>
 #include "../../model/include/Session.h"
 
 #include <Wt/WContainerWidget.h>
@@ -23,5 +21,3 @@ public:
     BreadCrumbWidget(Session& session, const std::string project, const std::string model = std::string());
     ~BreadCrumbWidget();
 };
-
-#endif

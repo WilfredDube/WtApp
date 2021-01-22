@@ -1,14 +1,8 @@
-/*
- * Copyright (C) 2020 Wilfred Dube
- *
- * See the LICENSE file for terms of use.
- */
-#ifndef PROJECT_LIST_H_
-#define PROJECT_LIST_H_
-
-#include <Wt/WContainerWidget.h>
+#pragma once
 
 #include "../include/ProjectSummaryWidget.h"
+
+#include <Wt/WContainerWidget.h>
 
 class ProjectList : public Wt::WContainerWidget
 {
@@ -19,5 +13,3 @@ public:
 
   using WContainerWidget::addWidget;
 };
-
-#endif // PROJECT_LIST_H_

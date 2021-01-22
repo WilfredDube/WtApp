@@ -1,8 +1,8 @@
-#ifndef MODEL_INFO_PANELS_H_
-#define MODEL_INFO_PANELS_H_
+#pragma once
+
+#include "../../model/include/Session.h"
 
 #include <Wt/WContainerWidget.h>
-#include "../../model/include/Session.h"
 
 namespace Wt {
     class WTable;
@@ -36,5 +36,3 @@ public:
     ModelInfoPanels(Session& session, dbo::ptr<Project> project);
     ~ModelInfoPanels(){}
 };
-
-#endif

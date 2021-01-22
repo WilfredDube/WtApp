@@ -1,8 +1,8 @@
-#ifndef MODEL_VIEWER_CONTROLS_H_
-#define MODEL_VIEWER_CONTROLS_H_
+#pragma once
+
+#include "../../model/include/Session.h"
 
 #include <Wt/WContainerWidget.h>
-#include "../../model/include/Session.h"
 
 namespace Wt {
     class WPushButton;
@@ -35,5 +35,3 @@ public:
     ModelViewerControls(Session& session, const std::string uploadPath, dbo::ptr<Project> project);
     ~ModelViewerControls();
 };
-
-#endif

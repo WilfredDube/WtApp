@@ -1,10 +1,10 @@
-#ifndef NAV_BAR_WIDGET_H_
-#define NAV_BAR_WIDGET_H_
+#pragma once
 
 #include <Wt/WContainerWidget.h>
-#include <string>
 #include <Wt/WNavigationBar.h>
 #include <Wt/WMenu.h>
+
+#include <string>
 
 class NavBarWidget : public Wt::WContainerWidget
 {
@@ -17,5 +17,3 @@ public:
     NavBarWidget(const std::string title, const std::string link, const std::string& basePath);
     ~NavBarWidget();
 };
-
-#endif // NAV_BAR_WIDGET_H_

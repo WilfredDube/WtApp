@@ -1,9 +1,9 @@
-#ifndef MODEL_VIEWER_WIDGET_H_
-#define MODEL_VIEWER_WIDGET_H_
+#pragma once
 
-#include <Wt/WContainerWidget.h>
 #include "../../dbdao/include/ProjectDao.h"
 #include "../../model/include/Session.h"
+
+#include <Wt/WContainerWidget.h>
 
 namespace Wt {
     class WPushButton;
@@ -40,5 +40,3 @@ public:
     ModelViewerWidget(Session& session, dbo::ptr<Project> project, const std::string uploadPath);
     ~ModelViewerWidget();
 };
-
-#endif

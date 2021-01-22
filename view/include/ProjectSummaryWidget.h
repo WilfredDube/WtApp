@@ -1,11 +1,11 @@
-#ifndef PROJECT_SUMMARY_WIDGET_H_
-#define PROJECT_SUMMARY_WIDGET_H_
-
-#include <Wt/WContainerWidget.h>
-#include <Wt/Dbo/ptr.h>
+#pragma once
 
 #include "../../dbdao/include/ProjectDao.h"
 #include "../../model/include/Session.h"
+
+#include <Wt/WContainerWidget.h>
+
+#include <Wt/Dbo/ptr.h>
 
 namespace Wt {
     class WText;
@@ -38,5 +38,3 @@ public:
     void deleteDialog();
     void rm();
 };
-
-#endif 
