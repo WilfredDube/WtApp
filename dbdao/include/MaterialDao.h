@@ -12,22 +12,28 @@
 
 typedef Wt::Dbo::collection< Wt::Dbo::ptr<Material> > Materials;
 
-class MaterialDao
+namespace Fxt 
 {
-public:
+namespace Dao
+{
+    class MaterialDao
+    {
+    public:
 
-    MaterialDao(Session& session) : session { session } {}
+        MaterialDao(Session& session) : session { session } {}
 
-    Wt::Dbo::ptr<Material> insert(std::string material_name, double tensile_strength, double k_factor);
+        Wt::Dbo::ptr<Material> insert(std::string material_name, double tensile_strength, double k_factor);
 
-    Wt::Dbo::ptr<Material> get(std::string material_name);
+        Wt::Dbo::ptr<Material> get(std::string material_name);
 
-    double getBendingForce(std::string materialName, double thickness, double bendLength);
+        double getBendingForce(std::string materialName, double thickness, double bendLength);
 
-    Materials getAll();
+        Materials getAll();
 
-    bool deleteProject(Wt::Dbo::ptr<Material>& material);
+        bool deleteProject(Wt::Dbo::ptr<Material>& material);
 
-private:
-    Session& session;
-};
+    private:
+        Session& session;
+    };
+}
+}

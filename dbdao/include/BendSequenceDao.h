@@ -12,20 +12,26 @@
 
 typedef Wt::Dbo::collection< Wt::Dbo::ptr<BendSequence> > BendSequences;
 
-class BendSequenceDao
+namespace Fxt 
 {
-public:
+namespace Dao
+{
+    class BendSequenceDao
+    {
+    public:
 
-    BendSequenceDao(Session& session) : session { session } {}
+        BendSequenceDao(Session& session) : session { session } {}
 
-    void insert(std::vector<int> bendSequence,  dbo::ptr<ProcessPlan>& processPlan);
+        void insert(std::vector<int> bendSequence,  dbo::ptr<ProcessPlan>& processPlan);
 
-    BendSequences get(dbo::ptr<ModelFile>& modelFile);
+        BendSequences get(dbo::ptr<ModelFile>& modelFile);
 
-    BendSequences getAll();
+        BendSequences getAll();
 
-    bool deleteProject(Wt::Dbo::ptr<BendSequence>& material);
+        bool deleteProject(Wt::Dbo::ptr<BendSequence>& material);
 
-private:
-    Session& session;
-};
+    private:
+        Session& session;
+    };
+}
+}

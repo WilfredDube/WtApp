@@ -14,24 +14,30 @@
 
 typedef Wt::Dbo::collection< Wt::Dbo::ptr<BendFeature> > BendFeatures;
 
-class BendFeatureDao
+namespace Fxt 
 {
-public:
+namespace Dao
+{
+    class BendFeatureDao
+    {
+    public:
 
-    BendFeatureDao(Session& session) : session { session } {}
+        BendFeatureDao(Session& session) : session { session } {}
 
-    Wt::Dbo::ptr<BendFeature> insert(Fxt::SheetMetalComponent::Bend::ModelBend& modelFile,
-                                     dbo::ptr<ModelFile>& cadFile,
-                                     double thickness);
+        Wt::Dbo::ptr<BendFeature> insert(Fxt::SheetMetalComponent::Bend::ModelBend& modelFile,
+                                        dbo::ptr<ModelFile>& cadFile,
+                                        double thickness);
 
-    Wt::Dbo::ptr<BendFeature> update(dbo::ptr<BendFeature>& bendFeature);
+        Wt::Dbo::ptr<BendFeature> update(dbo::ptr<BendFeature>& bendFeature);
 
-    BendFeatures get(dbo::ptr<ModelFile>& modelFile);
+        BendFeatures get(dbo::ptr<ModelFile>& modelFile);
 
-    BendFeatures getAll();
+        BendFeatures getAll();
 
-    bool deleteProject(Wt::Dbo::ptr<BendFeature>& bendFeature);
+        bool deleteProject(Wt::Dbo::ptr<BendFeature>& bendFeature);
 
-private:
-    Session& session;
-};
+    private:
+        Session& session;
+    };
+}
+}

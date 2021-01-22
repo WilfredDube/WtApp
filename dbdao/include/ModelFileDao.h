@@ -12,30 +12,36 @@
 
 typedef Wt::Dbo::collection< Wt::Dbo::ptr<ModelFile> > ModelFiles;
 
-class ModelFileDao
+namespace Fxt 
 {
-public:
+namespace Dao
+{
+    class ModelFileDao
+    {
+    public:
 
-    ModelFileDao(Session& session) : session { session } {}
+        ModelFileDao(Session& session) : session { session } {}
 
-    Wt::Dbo::ptr<ModelFile> insert(std::string materialType, 
-                                    std::string modelFileName,
-                                    std::string modelObjFileName,
-                                    std::string modelFileDir,
-                                    dbo::ptr<Project> project);
+        Wt::Dbo::ptr<ModelFile> insert(std::string materialType, 
+                                        std::string modelFileName,
+                                        std::string modelObjFileName,
+                                        std::string modelFileDir,
+                                        dbo::ptr<Project> project);
 
-    Wt::Dbo::ptr<ModelFile> get(std::string material_name);
+        Wt::Dbo::ptr<ModelFile> get(std::string material_name);
 
-    Wt::Dbo::ptr<ModelFile> update(dbo::ptr<ModelFile>& modelFile, dbo::ptr<ProcessPlan>& processPlan);
-    Wt::Dbo::ptr<ModelFile> update(dbo::ptr<ModelFile>& modelFile, ProcessLevel processLevel);
-    Wt::Dbo::ptr<ModelFile> update(dbo::ptr<ModelFile>& modelFile, double thickness);
-    Wt::Dbo::ptr<ModelFile> update(dbo::ptr<ModelFile>& modelFile, long double feature_recognition_time);
-    Wt::Dbo::ptr<ModelFile> update(dbo::ptr<ModelFile>& modelFile, std::string modelDataStringified);
+        Wt::Dbo::ptr<ModelFile> update(dbo::ptr<ModelFile>& modelFile, dbo::ptr<ProcessPlan>& processPlan);
+        Wt::Dbo::ptr<ModelFile> update(dbo::ptr<ModelFile>& modelFile, ProcessLevel processLevel);
+        Wt::Dbo::ptr<ModelFile> update(dbo::ptr<ModelFile>& modelFile, double thickness);
+        Wt::Dbo::ptr<ModelFile> update(dbo::ptr<ModelFile>& modelFile, long double feature_recognition_time);
+        Wt::Dbo::ptr<ModelFile> update(dbo::ptr<ModelFile>& modelFile, std::string modelDataStringified);
 
-    ModelFiles getAll();
+        ModelFiles getAll();
 
-    bool deleteProject(Wt::Dbo::ptr<ModelFile>& material);
+        bool deleteProject(Wt::Dbo::ptr<ModelFile>& material);
 
-private:
-    Session& session;
-};
+    private:
+        Session& session;
+    };
+}
+}

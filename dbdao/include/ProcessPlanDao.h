@@ -15,27 +15,33 @@ typedef Wt::Dbo::collection< Wt::Dbo::ptr<ProcessPlan> > ProcessPlans;
 class BendSequenceGenerator;
 class ModelFile;
 
-class ProcessPlanDao
+namespace Fxt 
 {
-public:
+namespace Dao
+{
+    class ProcessPlanDao
+    {
+    public:
 
-    ProcessPlanDao(Session& session) : session { session } {}
+        ProcessPlanDao(Session& session) : session { session } {}
 
-    Wt::Dbo::ptr<ProcessPlan> insert(BendSequenceGenerator& bendSequence,
-                                     dbo::ptr<ModelFile>& modelFile,
-                                     double process_planning_time,
-                                     std::string moderator);
+        Wt::Dbo::ptr<ProcessPlan> insert(BendSequenceGenerator& bendSequence,
+                                        dbo::ptr<ModelFile>& modelFile,
+                                        double process_planning_time,
+                                        std::string moderator);
 
-    Wt::Dbo::ptr<ProcessPlan> update(BendSequences bendSequences);
-    Wt::Dbo::ptr<ProcessPlan> update(dbo::ptr<ProcessPlan>& processPlan, double estimated_manufacturing_time);
-    Wt::Dbo::ptr<ProcessPlan> update(dbo::ptr<ProcessPlan>& processPlan, int numberOfModules);
+        Wt::Dbo::ptr<ProcessPlan> update(BendSequences bendSequences);
+        Wt::Dbo::ptr<ProcessPlan> update(dbo::ptr<ProcessPlan>& processPlan, double estimated_manufacturing_time);
+        Wt::Dbo::ptr<ProcessPlan> update(dbo::ptr<ProcessPlan>& processPlan, int numberOfModules);
 
-    Wt::Dbo::ptr<ProcessPlan> get(dbo::ptr<ModelFile>& modelFile);
+        Wt::Dbo::ptr<ProcessPlan> get(dbo::ptr<ModelFile>& modelFile);
 
-    ProcessPlans getAll();
+        ProcessPlans getAll();
 
-    bool deleteProject(Wt::Dbo::ptr<ProcessPlan>& processPlan);
+        bool deleteProject(Wt::Dbo::ptr<ProcessPlan>& processPlan);
 
-private:
-    Session& session;
-};
+    private:
+        Session& session;
+    };
+}
+}

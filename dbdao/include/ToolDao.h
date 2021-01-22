@@ -12,25 +12,31 @@
 
 typedef Wt::Dbo::collection< Wt::Dbo::ptr<Tool> > Tools;
 
-class ToolDao
+namespace Fxt 
 {
-public:
+namespace Dao
+{
+    class ToolDao
+    {
+    public:
 
-    ToolDao(Session& session) : session { session } {}
+        ToolDao(Session& session) : session { session } {}
 
-    Wt::Dbo::ptr<Tool> insert(std::string toolId, 
-                              std::string toolName, 
-                              double toolAngle, 
-                              double toolLength, 
-                              double toolMinRadius, 
-                              double toolMaxRadius);
+        Wt::Dbo::ptr<Tool> insert(std::string toolId, 
+                                std::string toolName, 
+                                double toolAngle, 
+                                double toolLength, 
+                                double toolMinRadius, 
+                                double toolMaxRadius);
 
-    Wt::Dbo::ptr<Tool> get(double toolAngle);
+        Wt::Dbo::ptr<Tool> get(double toolAngle);
 
-    Tools getAll();
+        Tools getAll();
 
-    bool deleteProject(Wt::Dbo::ptr<Tool>& tool);
+        bool deleteProject(Wt::Dbo::ptr<Tool>& tool);
 
-private:
-    Session& session;
-};
+    private:
+        Session& session;
+    };
+}
+}

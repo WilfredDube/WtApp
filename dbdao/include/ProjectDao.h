@@ -17,22 +17,28 @@ class Project;
 typedef Wt::Dbo::collection< Wt::Dbo::ptr<ModelFile> > ModelFiles;
 typedef Wt::Dbo::collection< Wt::Dbo::ptr<Project> > Projects;
 
-class ProjectDao
+namespace Fxt 
 {
-public:
+namespace Dao
+{
+    class ProjectDao
+    {
+    public:
 
-    ProjectDao(Session& session) : session { session } {}
+        ProjectDao(Session& session) : session { session } {}
 
-    Wt::Dbo::ptr<Project> insert(std::string title, std::string desc);
+        Wt::Dbo::ptr<Project> insert(std::string title, std::string desc);
 
-    Wt::Dbo::ptr<Project> get( std::string title);
+        Wt::Dbo::ptr<Project> get( std::string title);
 
-    Projects getAll();
+        Projects getAll();
 
-    bool deleteProject(Wt::Dbo::ptr<Project>& project);
+        bool deleteProject(Wt::Dbo::ptr<Project>& project);
 
-    ModelFiles getModelFiles(Wt::Dbo::ptr<Project>& project);
+        ModelFiles getModelFiles(Wt::Dbo::ptr<Project>& project);
 
-private:
-    Session& session;
-};
+    private:
+        Session& session;
+    };
+}
+}

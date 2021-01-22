@@ -12,20 +12,26 @@
 
 typedef Wt::Dbo::collection< Wt::Dbo::ptr<User> > Users;
 
-class UserDao
+namespace Fxt 
 {
-public:
+namespace Dao
+{
+    class UserDao
+    {
+    public:
 
-    UserDao(Session& session) : session { session } {}
+        UserDao(Session& session) : session { session } {}
 
-    Wt::Dbo::ptr<User> insert(std::string name, std::string password, std::string email = "");
+        Wt::Dbo::ptr<User> insert(std::string name, std::string password, std::string email = "");
 
-    Wt::Dbo::ptr<User> get(std::string name);
+        Wt::Dbo::ptr<User> get(std::string name);
 
-    Users getAll();
+        Users getAll();
 
-    bool deleteProject(Wt::Dbo::ptr<User>& user);
+        bool deleteProject(Wt::Dbo::ptr<User>& user);
 
-private:
-    Session& session;
-};
+    private:
+        Session& session;
+    };
+}
+}
