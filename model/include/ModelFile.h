@@ -23,7 +23,6 @@ typedef dbo::collection< dbo::ptr<BendFeature> > BendFeatures;
 enum class ProcessLevel { UNPROCESSED, FEATURE_EXTRACTED, PROCESS_PLAN_GEN };
 
 class ModelFile {
-public:
   dbo::ptr<User> author;
   dbo::ptr<Project> project;
 
@@ -40,6 +39,7 @@ public:
   BendFeatures bendFeatures;
   dbo::weak_ptr<ProcessPlan> processPlan;
 
+public:
   template<class Action>
   void persist(Action& a) {
     dbo::field(a, bendingForce, "bending_force");
@@ -60,8 +60,28 @@ public:
     dbo::hasMany(a, bendFeatures, dbo::ManyToOne, "bend_features");
     dbo::hasOne(a, processPlan);
   }
+
+  dbo::ptr<User> getAuthor() { return author; }
+  dbo::ptr<Project> getProject() { return project; }
+
+  double getBendingForce() const { return bendingForce; }
+  double getFeatureRecognitionTime() const { return feature_recognition_time; }
+  double getThickness() const { return thickness; }
+  double getNumberOfBends() const { return nbends; }
+
+  Wt::WString getCadFileName() const { return modelFile; }
+  Wt::WString getModelObjFile() const { return modelObjFile; }
+  Wt::WString getCadFileDir() const { return modelFileDir; }
+  Wt::WString getModelData() const { return modelData; }
+  Wt::WString getModelMaterial() const { return modelMaterial; }
+
+  ProcessLevel getProcessLevel() const { return processLevel; }
+  BendFeatures getBendFeatures() const { return bendFeatures; }
+  dbo::weak_ptr<ProcessPlan> getProcessPlan() const { return processPlan; }
+
+  friend class BendFeatureDao;
+  friend class BendSequenceDao;
+  friend class ModelFileDao;
 };
 
 DBO_EXTERN_TEMPLATES(ModelFile);
-
-#endif // MODEL_FILE_H_
