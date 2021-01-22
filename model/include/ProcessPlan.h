@@ -19,8 +19,6 @@ typedef dbo::collection< dbo::ptr<BendSequence> > BendSequences;
 
 class ProcessPlan 
 {
-class ProcessPlan {
-public:
   std::string part_no;
   int no_rotations;
   int no_flips;
@@ -36,6 +34,7 @@ public:
   dbo::ptr<ModelFile> modelFile;
   BendSequences bendSequences;
 
+public:
   template<class Action>
   void persist(Action& a) {
     dbo::field(a, part_no, "part_no");
@@ -53,6 +52,26 @@ public:
 
     dbo::hasMany(a, bendSequences, dbo::ManyToOne, "process_plan");
   }
+
+  std::string getPartNo() const { return part_no; }
+  int getNumberOfRotation() const { return no_rotations; }
+  int getNumberOfFlips() const { return no_flips; }
+  int getNumberOfModules() const { return no_modules; }
+  int getNumberOfTools() const { return no_tools; }
+
+  int getQuantity() const { return quantity; }
+  
+  double getToolDistance() const { return tool_distance; }
+  double getProcessPlanningTime() const { return process_planning_time; }
+  double getEstimatedManufacturingTime() const { return estimated_manufacturing_time; }
+
+  std::string getModerator() const { return moderator; }
+
+  dbo::ptr<ModelFile> getModelFile() const { return modelFile; }
+  BendSequences getBendingSequence() const { return bendSequences; }
+
+  friend class ProcessPlanDao;
+  friend class BendSequenceDao;
 };
 
 DBO_EXTERN_TEMPLATES(ProcessPlan)

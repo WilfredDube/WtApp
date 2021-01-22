@@ -17,12 +17,19 @@ class Material
   double tensile_strength;
   double k_factor;
 
+public:
   template<class Action>
   void persist(Action& a) {
     dbo::id(a, material_name, "material_name", 20);
     dbo::field(a, tensile_strength, "tensile_strength");
     dbo::field(a, k_factor, "k_factor");
   }
+
+  std::string getId() const { return material_name; }
+  double getTensileStrength() const { return tensile_strength; }
+  double getKFactor() const { return k_factor; }
+
+  friend class MaterialDao;
 };
 
 namespace Wt {

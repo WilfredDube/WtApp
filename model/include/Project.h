@@ -16,7 +16,6 @@ typedef dbo::collection< dbo::ptr<ModelFile> > ModelFiles;
 
 class Project : public dbo::Dbo<Project> 
 {
-public:
   dbo::ptr<User> author;
 
   Wt::WString title;
@@ -26,6 +25,7 @@ public:
 
   ModelFiles cad_files;
 
+public:
   size_t modelCount() const;
   std::string titleToUrl() const;
 
@@ -40,6 +40,18 @@ public:
     
     dbo::hasMany(a, cad_files, dbo::ManyToOne, "project");
   }
+
+  dbo::ptr<User> getAuthor() const { return author; }
+
+  Wt::WString getTitle() const { return title; }
+  Wt::WString getDescription() const { return desc; }
+  int getNumberOfFiles() const { return no_files; }
+  Wt::WDateTime getCreationDate() const { return date_created; }
+
+  ModelFiles getModelFiles() const { return cad_files; }
+
+  friend class ProjectDao;
+  friend class ModelFileDao;
 };
 
 DBO_EXTERN_TEMPLATES(Project);

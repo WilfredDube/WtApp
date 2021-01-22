@@ -28,6 +28,7 @@ public:
 
   dbo::ptr<ModelFile> modelFile;
 
+public:
   template<class Action>
   void persist(Action& a) {
     dbo::field(a, bend_id, "bend_id");
@@ -42,6 +43,22 @@ public:
 
     dbo::belongsTo(a, modelFile, "bend_features", dbo::OnDeleteCascade);
   }
+
+  int getBendId() const { return bend_id; }
+  int getFaceID1() const { return face_id1; }
+  int getFaceID2() const { return face_id2; }
+
+  double getAngle() const { return bend_angle; }
+  double getRadius() const { return bend_radius; }
+  double getForce() const { return bend_force; }
+  double getLength() const { return bend_length; }
+
+  int getBendDirection() const { return bend_direction; }
+  std::string getBendToolId() const { return bending_tool_id; }
+
+  dbo::ptr<ModelFile> getModelFile() const { return modelFile; }
+
+  friend class BendFeatureDao;
 };
 
 DBO_EXTERN_TEMPLATES(BendFeature)
