@@ -4,6 +4,8 @@
 
 namespace dbo = Wt::Dbo;
 
+using namespace Fxt::Dao;
+
 Wt::Dbo::ptr<User> UserDao::insert(std::string name, std::string password, std::string email)
 {
     auto ret = Wt::Dbo::ptr<User>();

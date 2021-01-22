@@ -7,6 +7,8 @@
 
 namespace dbo = Wt::Dbo;
 
+using namespace Fxt::Dao;
+
 Wt::Dbo::ptr<Project> ProjectDao::insert(std::string title, std::string desc)
 {
     auto ret = Wt::Dbo::ptr<Project>();

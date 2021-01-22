@@ -5,6 +5,8 @@
 
 namespace dbo = Wt::Dbo;
 
+using namespace Fxt::Dao;
+
 Wt::Dbo::ptr<Material> MaterialDao::insert(std::string material_name, double tensile_strength, double k_factor)
 {
     auto ret = Wt::Dbo::ptr<Material>();

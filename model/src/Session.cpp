@@ -25,9 +25,10 @@
 // #include <Wt/WApplication.h>
 
 using namespace Wt;
+using namespace Fxt::Dao;
 
-namespace {
-
+namespace 
+{
     class FXtractOAuth : public std::vector<const Wt::Auth::OAuthService *>
     {
       public:

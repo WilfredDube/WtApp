@@ -4,6 +4,8 @@
 
 namespace dbo = Wt::Dbo;
 
+using namespace Fxt::Dao;
+
 Wt::Dbo::ptr<ModelFile> ModelFileDao::insert(std::string materialType, 
                                              std::string modelFileName,
                                              std::string modelObjFileName,

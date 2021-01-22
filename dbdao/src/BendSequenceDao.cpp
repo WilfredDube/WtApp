@@ -5,6 +5,8 @@
 
 namespace dbo = Wt::Dbo;
 
+using namespace Fxt::Dao;
+
 void BendSequenceDao::insert(std::vector<int> bendSequence, dbo::ptr<ProcessPlan>& processPlan)
 {
     auto ret = Wt::Dbo::ptr<BendSequence>();

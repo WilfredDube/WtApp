@@ -4,6 +4,8 @@
 
 namespace dbo = Wt::Dbo;
 
+using namespace Fxt::Dao;
+
 Wt::Dbo::ptr<Tool> ToolDao::insert(std::string toolId, std::string toolName, double toolAngle, 
                                     double toolLength, double toolMinRadius, double toolMaxRadius)
 {

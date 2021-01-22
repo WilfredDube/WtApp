@@ -7,6 +7,7 @@
 namespace dbo = Wt::Dbo;
 
 using namespace Fxt::SheetMetalComponent;
+using namespace Fxt::Dao;
 
 Wt::Dbo::ptr<BendFeature> BendFeatureDao::insert(Bend::ModelBend& modelBend,
                                      dbo::ptr<ModelFile>& cadFile,

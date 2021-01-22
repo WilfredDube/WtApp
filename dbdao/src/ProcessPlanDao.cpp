@@ -6,6 +6,8 @@
 
 namespace dbo = Wt::Dbo;
 
+using namespace Fxt::Dao;
+
 Wt::Dbo::ptr<ProcessPlan> ProcessPlanDao::insert(BendSequenceGenerator& bendSequence,
                                      dbo::ptr<ModelFile>& modelFile,
                                      double process_planning_time,
