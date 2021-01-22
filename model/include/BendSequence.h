@@ -7,6 +7,14 @@
 
 namespace dbo = Wt::Dbo;
 
+namespace Fxt 
+{
+namespace Dao
+{
+  class BendSequenceDao;
+}
+}
+
 class ProcessPlan;
 
 class BendSequence 
@@ -25,7 +33,7 @@ public:
   int getBendId() const { return bend_id; }
   dbo::ptr<ProcessPlan> getProcessPlan() const { return processPlan; }
   
-  friend class BendSequenceDao;
+  friend class Fxt::Dao::BendSequenceDao;
 };
 
 DBO_EXTERN_TEMPLATES(BendSequence)

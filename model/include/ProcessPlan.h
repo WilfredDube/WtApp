@@ -11,6 +11,15 @@
 
 namespace dbo = Wt::Dbo;
 
+namespace Fxt 
+{
+namespace Dao
+{
+  class ProcessPlanDao;
+  class BendSequenceDao;
+}
+}
+
 class ModelFile;
 class MachineParam;
 class BendSequence;
@@ -70,8 +79,8 @@ public:
   dbo::ptr<ModelFile> getModelFile() const { return modelFile; }
   BendSequences getBendingSequence() const { return bendSequences; }
 
-  friend class ProcessPlanDao;
-  friend class BendSequenceDao;
+  friend class Fxt::Dao::ProcessPlanDao;
+  friend class Fxt::Dao::BendSequenceDao;
 };
 
 DBO_EXTERN_TEMPLATES(ProcessPlan)

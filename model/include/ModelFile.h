@@ -15,6 +15,16 @@ class Project;
 class BendFeature;
 class ProcessPlan;
 
+namespace Fxt 
+{
+namespace Dao
+{
+  class BendFeatureDao;
+  class BendSequenceDao;
+  class ModelFileDao;
+}
+}
+
 namespace dbo = Wt::Dbo;
 
 typedef dbo::collection< dbo::ptr<BendFeature> > BendFeatures;
@@ -79,9 +89,9 @@ public:
   BendFeatures getBendFeatures() const { return bendFeatures; }
   dbo::weak_ptr<ProcessPlan> getProcessPlan() const { return processPlan; }
 
-  friend class BendFeatureDao;
-  friend class BendSequenceDao;
-  friend class ModelFileDao;
+  friend class Fxt::Dao::BendFeatureDao;
+  friend class Fxt::Dao::BendSequenceDao;
+  friend class Fxt::Dao::ModelFileDao;
 };
 
 DBO_EXTERN_TEMPLATES(ModelFile);

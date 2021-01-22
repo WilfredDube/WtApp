@@ -8,6 +8,14 @@
 
 namespace dbo = Wt::Dbo;
 
+namespace Fxt 
+{
+namespace Dao
+{
+  class ToolDao;
+}
+}
+
 class Tool 
 {
   std::string tool_id;
@@ -35,7 +43,7 @@ public:
   double getToolMinRadius() const { return tool_min_radius; }
   double getToolMaxRadius() const { return tool_max_radius; }
 
-  friend class ToolDao;
+  friend class Fxt::Dao::ToolDao;
 };
 
 namespace Wt {

@@ -12,6 +12,15 @@ class ModelFile;
 
 namespace dbo = Wt::Dbo;
 
+namespace Fxt 
+{
+namespace Dao
+{
+  class ProjectDao;
+  class ModelFileDao;
+}
+}
+
 typedef dbo::collection< dbo::ptr<ModelFile> > ModelFiles;
 
 class Project : public dbo::Dbo<Project> 
@@ -50,8 +59,8 @@ public:
 
   ModelFiles getModelFiles() const { return cad_files; }
 
-  friend class ProjectDao;
-  friend class ModelFileDao;
+  friend class Fxt::Dao::ProjectDao;
+  friend class Fxt::Dao::ModelFileDao;
 };
 
 DBO_EXTERN_TEMPLATES(Project);

@@ -9,6 +9,14 @@
 
 namespace dbo = Wt::Dbo;
 
+namespace Fxt 
+{
+namespace Dao
+{
+  class BendFeatureDao;
+}
+}
+
 class ModelFile;
 
 typedef dbo::collection< dbo::ptr<Tool> > Tools;
@@ -58,7 +66,7 @@ public:
 
   dbo::ptr<ModelFile> getModelFile() const { return modelFile; }
 
-  friend class BendFeatureDao;
+  friend class Fxt::Dao::BendFeatureDao;
 };
 
 DBO_EXTERN_TEMPLATES(BendFeature)

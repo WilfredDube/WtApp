@@ -11,6 +11,14 @@
 
 namespace dbo = Wt::Dbo;
 
+namespace Fxt 
+{
+namespace Dao
+{
+  class MaterialDao;
+}
+}
+
 class Material 
 {
   std::string material_name;
@@ -29,7 +37,7 @@ public:
   double getTensileStrength() const { return tensile_strength; }
   double getKFactor() const { return k_factor; }
 
-  friend class MaterialDao;
+  friend class Fxt::Dao::MaterialDao;
 };
 
 namespace Wt {
