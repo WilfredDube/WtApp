@@ -1,4 +1,5 @@
 #include "../include/BreadCrumbWidget.h"
+
 #include "../../dbdao/include/ModelFileDao.h"
 
 #include <Wt/WText.h>
@@ -7,13 +8,13 @@ BreadCrumbWidget::BreadCrumbWidget(Session& session, const std::string project, 
     : WContainerWidget(),
     session_(session)
 {
-    project_ = addWidget(Wt::cpp14::make_unique<Wt::WText>(project));
-    project_->setInline(true);
+    projectNameTxt = addWidget(Wt::cpp14::make_unique<Wt::WText>(project));
+    projectNameTxt->setInline(true);
 
     addWidget(Wt::cpp14::make_unique<Wt::WText>("<b> > </b>"))->setInline(true);
 
-    model_ = addWidget(Wt::cpp14::make_unique<Wt::WText>(model));
-    model_->setInline(true);
+    modelNameTxt = addWidget(Wt::cpp14::make_unique<Wt::WText>(model));
+    modelNameTxt->setInline(true);
 
     setWidth(Wt::WLength::Auto);
     addStyleClass("color-style", true);
