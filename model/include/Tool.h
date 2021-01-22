@@ -1,5 +1,4 @@
-#ifndef TOOL_H_
-#define TOOL_H_
+#pragma once
 
 #include <Wt/WDate.h>
 #include <Wt/WString.h>
@@ -9,8 +8,8 @@
 
 namespace dbo = Wt::Dbo;
 
-class Tool {
-public:
+class Tool 
+{
   std::string tool_id;
   std::string tool_name;
   double tool_angle;
@@ -43,5 +42,3 @@ namespace Wt {
 }
 
 DBO_EXTERN_TEMPLATES(Tool)
-
-#endif // TOOL_H_

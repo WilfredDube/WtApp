@@ -1,17 +1,18 @@
-#ifndef MATERIAL_H_
-#define MATERIAL_H_
+#pragma once
 
 #include <Wt/WDate.h>
-#include <Wt/WString.h>
-#include <Wt/Dbo/Types.h>
 #include <Wt/WGlobal.h>
+#include <Wt/WString.h>
+
+#include <Wt/Dbo/Types.h>
 #include <Wt/Dbo/WtSqlTraits.h>
+
 #include <string>
 
 namespace dbo = Wt::Dbo;
 
-class Material {
-public:
+class Material 
+{
   std::string material_name;
   double tensile_strength;
   double k_factor;
@@ -38,5 +39,3 @@ namespace Wt {
 }
 
 DBO_EXTERN_TEMPLATES(Material)
-
-#endif // MATERIAL_H_

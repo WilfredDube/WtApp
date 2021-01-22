@@ -3,8 +3,8 @@
 #include <Wt/WDateTime.h>
 #include <Wt/WString.h>
 #include <Wt/Dbo/Types.h>
-#include <Wt/WGlobal.h>
 #include <Wt/Dbo/WtSqlTraits.h>
+
 #include "ProcessPlan.h"
 #include "BendFeature.h"
 #include "Project.h"
@@ -21,7 +21,8 @@ typedef dbo::collection< dbo::ptr<BendFeature> > BendFeatures;
 
 enum class ProcessLevel { UNPROCESSED, FEATURE_EXTRACTED, PROCESS_PLAN_GEN };
 
-class ModelFile {
+class ModelFile 
+{
   dbo::ptr<User> author;
   dbo::ptr<Project> project;
 

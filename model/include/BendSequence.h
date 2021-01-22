@@ -1,5 +1,4 @@
-#ifndef BENDING_SEQUENCE_H
-#define BENDING_SEQUENCE_H
+#pragma once
 
 #include <Wt/WDate.h>
 #include <Wt/WString.h>
@@ -13,8 +12,8 @@ namespace dbo = Wt::Dbo;
 
 class ProcessPlan;
 
-class BendSequence {
-public:
+class BendSequence 
+{
   int bend_id;
   dbo::ptr<ProcessPlan> processPlan;
 
@@ -27,5 +26,3 @@ public:
 };
 
 DBO_EXTERN_TEMPLATES(BendSequence)
-
-#endif // BENDING_SEQUENCE_H

@@ -1,5 +1,4 @@
-#ifndef PROCESS_PLAN_H
-#define PROCESS_PLAN_H
+#pragma once
 
 #include <Wt/WDate.h>
 #include <Wt/WString.h>
@@ -18,6 +17,8 @@ class BendSequence;
 
 typedef dbo::collection< dbo::ptr<BendSequence> > BendSequences;
 
+class ProcessPlan 
+{
 class ProcessPlan {
 public:
   std::string part_no;
@@ -55,5 +56,3 @@ public:
 };
 
 DBO_EXTERN_TEMPLATES(ProcessPlan)
-
-#endif // PROCESS_PLAN_H

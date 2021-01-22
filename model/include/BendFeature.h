@@ -1,10 +1,7 @@
-#ifndef BEND_FEATURE_H_
-#define BEND_FEATURE_H_
+#pragma once
 
-#include <Wt/WDate.h>
 #include <Wt/WString.h>
 #include <Wt/Dbo/Types.h>
-#include <Wt/WGlobal.h>
 #include <Wt/Dbo/WtSqlTraits.h>
 
 #include "ModelFile.h"
@@ -16,7 +13,8 @@ class ModelFile;
 
 typedef dbo::collection< dbo::ptr<Tool> > Tools;
 
-class BendFeature {
+class BendFeature 
+{
 public:
   int bend_id;
   int face_id1;
@@ -47,5 +45,3 @@ public:
 };
 
 DBO_EXTERN_TEMPLATES(BendFeature)
-
-#endif // BEND_FEATURE_
