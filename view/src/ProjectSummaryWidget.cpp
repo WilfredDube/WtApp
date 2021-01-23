@@ -40,14 +40,14 @@ ProjectSummaryWidget::ProjectSummaryWidget(Session &session, const std::string &
 
     auto iconBox = vBox_->addLayout(Wt::cpp14::make_unique<Wt::WHBoxLayout>());
 
-    Wt::WLocalDateTime ldateTime = project_->dateCreated.toLocalTime();
+    Wt::WLocalDateTime ldateTime = project_->getCreationDate().toLocalTime();
 
     if (ldateTime.isValid()) {
         ;//std::string ldatetime = ldateTime.toString().toUTF8();
     }
     
     Wt::WString datetime = "<small><i>" 
-                            + project_->dateCreated.toString("dddd, MMMM d, yyyy @ HH:mm") + 
+                            + project_->getCreationDate().toString("dddd, MMMM d, yyyy @ HH:mm") + 
                             "</i></small>";
 
     iconBox->addWidget(Wt::cpp14::make_unique<Wt::WText>(datetime));
@@ -87,8 +87,8 @@ void ProjectSummaryWidget::buildProject()
 void ProjectSummaryWidget::render()
 {
     projectName_->setLink(Wt::WLink(Wt::LinkType::InternalPath, (basePath_ + "viewer/" + project_->titleToUrl())));
-    projectName_->setText("<h4>" + project_->title + "</h4>");
-    projectDesc_->setText(project_->brief_desc);
+    projectName_->setText("<h4>" + project_->getTitle() + "</h4>");
+    projectDesc_->setText(project_->getDescription());
     projectImage_->setImageLink("icons/model.png");
 }
 
@@ -118,7 +118,7 @@ void ProjectSummaryWidget::rm()
 void ProjectSummaryWidget::deleteDialog()
 {
     Wt::StandardButton answer = Wt::WMessageBox::show(
-                                    "FxTract", "<p>Delete this project, \"" + project_->title + "\" ?</p>",
+                                    "FxTract", "<p>Delete this project, \"" + project_->getTitle() + "\" ?</p>",
                                     Wt::StandardButton::Ok | Wt::StandardButton::Cancel
                                 );
     if (answer == Wt::StandardButton::Ok) {

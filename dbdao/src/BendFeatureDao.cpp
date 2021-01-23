@@ -30,7 +30,7 @@ Wt::Dbo::ptr<BendFeature> BendFeatureDao::insert(Bend::ModelBend& modelBend,
         bendFeature->bend_direction = 0;
 
         ToolDao toolDao { session };
-        bendFeature->bending_tool_id = toolDao.get(bendFeature->bend_angle)->tool_id;
+        bendFeature->bending_tool_id = toolDao.get(bendFeature->bend_angle)->getId();
 
         MaterialDao materialDao { session };
         bendFeature->bend_force = materialDao.getBendingForce(cadFile->modelMaterial.toUTF8(), thickness, bendFeature->bend_length);

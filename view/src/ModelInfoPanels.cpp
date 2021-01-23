@@ -68,7 +68,7 @@ ModelInfoPanels::ModelInfoPanels(Session& session, dbo::ptr<Project> project)
 
 void ModelInfoPanels::loadModelList()
 {
-    ModelFiles modelFiles = project_->modelFiles;
+    ModelFiles modelFiles = project_->getModelFiles();
     for (auto a : modelFiles)
     {
         modelFilesGroupBox_->addNew<ModelFileWidget>(session_, a);;
@@ -77,33 +77,33 @@ void ModelInfoPanels::loadModelList()
 
 void ModelInfoPanels::reloadList()
 {
-    dbo::Transaction t(session_);
+    // dbo::Transaction t(session_);
 
-    project_.modify()->nModelFiles = project_->modelFiles.size() - 1;    
+    // project_.modify()->nModelFiles = project_->modelFiles.size() - 1;    
 
-    t.commit();
+    // t.commit();
 }
 
 void ModelInfoPanels::updateModelList(dbo::ptr<ModelFile> modelFile)
 {   
-    dbo::Transaction t(session_);
+    // dbo::Transaction t(session_);
 
-    project_.modify()->nModelFiles = project_->modelFiles.size();    
+    // project_.modify()->nModelFiles = project_->modelFiles.size();    
 
-    t.commit();
+    // t.commit();
 
     modelFilesGroupBox_->addNew<ModelFileWidget>(session_, modelFile);
 }
 
 void ModelInfoPanels::updateFeatureTables(dbo::ptr<ModelFile> modelFile)
 {
-    if (modelFile->processLevel == ProcessLevel::UNPROCESSED)
+    if (modelFile->getProcessLevel() == ProcessLevel::UNPROCESSED)
     {
         ; // Do nothing
     } else {
         dbo::Transaction t(session_);
 
-        BendFeatures bf = modelFile->bendFeatures;
+        BendFeatures bf = modelFile->getBendFeatures();
 
         faceRelationshipTable_->clear();
         faceRelationshipTable_->setHeaderCount(1);

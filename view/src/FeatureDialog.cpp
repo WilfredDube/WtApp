@@ -21,7 +21,6 @@ FeatureDialog::FeatureDialog(Session& session, const std::string& title, Wt::Dbo
     session_(session),
     modelFile_(modelFile)
 {
-    auto& processPlan = modelFile_->processPlan;
     ok_ = footer()->addNew<Wt::WPushButton>("DONE");
 
     rejectWhenEscapePressed();
@@ -41,7 +40,7 @@ FeatureDialog::FeatureDialog(Session& session, const std::string& title, Wt::Dbo
 
     dbo::Transaction t(session_);
 
-    BendFeatures bf = modelFile_->bendFeatures;
+    BendFeatures bf = modelFile_->getBendFeatures();
 
     int rowCount = bendSequenceTable_->rowCount();
 

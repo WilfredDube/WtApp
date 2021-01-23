@@ -1,7 +1,7 @@
-#include "ModelViewerWidget.h"
-#include "ModelViewerControls.h"
-#include "PaintWidget.h"
-#include "ModelInfoPanels.h"
+#include "../include/ModelViewerWidget.h"
+#include "../include/ModelViewerControls.h"
+#include "../include/PaintWidget.h"
+#include "../include/ModelInfoPanels.h"
 
 #include <Wt/WImage.h>
 #include <Wt/WGridLayout.h>
@@ -128,7 +128,7 @@ ModelViewerWidget::ModelViewerWidget(Session& session, dbo::ptr<Project> project
     auto vBox = setLayout(Wt::cpp14::make_unique<Wt::WVBoxLayout>());
     vBox->setContentsMargins(0, 0, 0, 0);
 
-    breadCrumb_ = vBox->addWidget(cpp14::make_unique<BreadCrumbWidget>(session_, project_->title.toUTF8()));  
+    breadCrumb_ = vBox->addWidget(cpp14::make_unique<BreadCrumbWidget>(session_, project_->getTitle().toUTF8()));  
 
     hbox_ = vBox->addLayout(Wt::cpp14::make_unique<Wt::WGridLayout>());     
 
@@ -153,7 +153,7 @@ ModelViewerWidget::ModelViewerWidget(Session& session, dbo::ptr<Project> project
 
 void ModelViewerWidget::setBendDirection(dbo::ptr<ModelFile> modelFile)
 {
-    auto dialog = addChild(Wt::cpp14::make_unique<FeatureDialog>(session_, "Model File : " + modelFile->modelFile.toUTF8(), modelFile));
+    auto dialog = addChild(Wt::cpp14::make_unique<FeatureDialog>(session_, "Model File : " + modelFile->getCadFileName().toUTF8(), modelFile));
     dialog->setWidth(900);
     dialog->show();
 }
@@ -177,7 +177,7 @@ std::vector<float> extractObjData(std::string objFile)
 void ModelViewerWidget::updateShaders(dbo::ptr<ModelFile> modelFile)
 {
     std::vector<float> data;
-    std::string objFile = modelFile->modelFileDir.toUTF8() + modelFile->modelObjFile.toUTF8();
+    std::string objFile = modelFile->getCadFileDir().toUTF8() + modelFile->getModelObjFile().toUTF8();
 
     if (objDataMap.find(objFile) != objDataMap.end()) {
         data = objDataMap[objFile];

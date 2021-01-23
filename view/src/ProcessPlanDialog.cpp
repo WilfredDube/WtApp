@@ -38,24 +38,24 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
 
     dbo::Transaction transaction(session_);
 
-    auto& processPlan = modelFile_->processPlan;
-    auto nTools = modelFile_->processPlan->machineParam->num_tools;
-    auto nBends = modelFile_->nbends;
-    auto nFlips = modelFile_->processPlan->no_flips;
-    auto nRotations = modelFile_->processPlan->no_rotations;
-    auto distance = modelFile_->processPlan->tool_distance;
-    auto bendingForce = modelFile_->bendingForce;
+    auto processPlan = modelFile_->getProcessPlan();
+    auto nTools = modelFile_->getProcessPlan()->getNumberOfTools();
+    auto nBends = modelFile_->getNumberOfBends();
+    auto nFlips = modelFile_->getProcessPlan()->getNumberOfFlips();
+    auto nRotations = modelFile_->getProcessPlan()->getNumberOfRotation();
+    auto distance = modelFile_->getProcessPlan()->getToolDistance();
+    auto bendingForce = modelFile_->getBendingForce();
 
     t->bindWidget("process_code", Wt::cpp14::make_unique<Wt::WText>())
-                ->setText(modelFile_->project->title);
+                ->setText(modelFile_->getProject()->getTitle());
     
     t->bindWidget("module_no", Wt::cpp14::make_unique<Wt::WText>())
-                ->setText(processString(modelFile_->nModules));
+                ->setText(processString(modelFile_->getProcessPlan()->getNumberOfModules()));
 
     t->bindWidget("planner_name", Wt::cpp14::make_unique<Wt::WText>())
-                ->setText(modelFile_->author->name);
+                ->setText(session.user()->name);
 
-    std::string placeHolder = modelFile_->processPlan->moderator.empty() ? "Click to enter moderator name" : modelFile_->processPlan->moderator;
+    std::string placeHolder = modelFile_->getProcessPlan()->getModerator().empty() ? "Click to enter moderator name" : modelFile_->getProcessPlan()->getModerator();
     moderator_ = t->bindWidget("moderator", Wt::cpp14::make_unique<Wt::WInPlaceEdit>(placeHolder));
     moderator_->setPlaceholderText("Enter moderator's name");
     moderator_->valueChanged().connect([&]{
@@ -77,14 +77,15 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
     });
 
     partName_ = t->bindWidget("part_name", Wt::cpp14::make_unique<Wt::WText>());
-    partName_->setText(modelFile_->modelFile); 
+    partName_->setText(modelFile_->getCadFileName()); 
 
     material_ = t->bindWidget("material_name", Wt::cpp14::make_unique<Wt::WText>());
-    material_->setText(modelFile_->modelMaterial);    
+    material_->setText(modelFile_->getModelMaterial());    
 
     quantity_ = t->bindWidget("quantity", Wt::cpp14::make_unique<Wt::WSpinBox>());
     quantity_->setRange(1,100);
-    int value = modelFile_->processPlan->quantity == 1 ? 1 : modelFile_->processPlan->quantity;
+
+    int value = modelFile_->getProcessPlan()->getQuantity() == 1 ? 1 : modelFile_->getProcessPlan()->getQuantity();
     quantity_->setValue(value);
     quantity_->setSingleStep(1);
     quantity_->setWidth(100);
@@ -102,31 +103,18 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
     nFlips_->setText(processString(nFlips));
 
     processPlanningTime_ = t->bindWidget("process_planning_time", Wt::cpp14::make_unique<Wt::WText>());
-    processPlanningTime_->setText(processString(processPlan->process_planning_time));
+    processPlanningTime_->setText(processString(processPlan->getProcessPlanningTime()));
 
     totalProcessingTime_ = t->bindWidget("total_processing_time", Wt::cpp14::make_unique<Wt::WText>());
     auto totalProductionTime = computeTotalProductionTime(quantity_->value(), nTools, nBends, nFlips, nRotations);
     totalProcessingTime_->setText(processString(totalProductionTime));
 
     quantity_->changed().connect([=]{
-        dbo::Transaction trn(session_);
-
-        modelFile_->processPlan.modify()->quantity = quantity_->value();
-        
         quantityChanged(quantity_->value(), nTools, nBends, nFlips, nRotations);
-
-        trn.commit();
-
     });
 
     quantity_->enterPressed().connect([=]{
-        dbo::Transaction trn(session_);
-
-        modelFile_->processPlan.modify()->quantity = quantity_->value();   
-
         quantityChanged(quantity_->value(), nTools, nBends, nFlips, nRotations);
-
-        trn.commit();
     });
 
     bendSequenceTable_  = t->bindWidget("feature_table", Wt::cpp14::make_unique<Wt::WTable>());
@@ -141,23 +129,23 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
     bendSequenceTable_->elementAt(0, 5)->addNew<Wt::WText>("<b>BEND LENGTH</b>");
     bendSequenceTable_->elementAt(0, 6)->addNew<Wt::WText>("<b>TOOLS</b>");
 
-    BendFeatures bf = modelFile_->bendFeatures;
+    BendFeatures bf = modelFile_->getBendFeatures();
 
     int rowCount = bendSequenceTable_->rowCount();
 
-    auto& seq = processPlan->bendSequences;
+    auto bendingSequence = processPlan->getBendingSequence();
 
-    auto startIter = processPlan->bendSequences.begin();
-    auto endIter = processPlan->bendSequences.end();
+    auto startIter = bendingSequence.begin();
+    auto endIter = bendingSequence.end();
 
     int size = 1;
     for( ; startIter != endIter; ++startIter)
     {    
         for(auto& bend : bf) 
         {
-            if (bend->bend_id == startIter->get()->bend_id )
+            if (bend->bend_id == startIter->get()->getBendId() )
             {
-                std::cout << "Bend Sequences count : " << startIter->get()->bend_id << std::endl;
+                std::cout << "Bend Sequences count : " << startIter->get()->getBendId() << std::endl;
 
                 bendSequenceTable_->elementAt(rowCount, 0)->addNew<Wt::WText>(std::to_string(size));
                 bendSequenceTable_->elementAt(rowCount, 1)->addNew<Wt::WText>("B" + std::to_string(bend->bend_id));

@@ -159,11 +159,11 @@ ModelFileWidget::ModelFileWidget(Session& session, dbo::ptr<ModelFile> model)
 
     dbo::Transaction t(session_);
 
-    icons_->setIconColor(modelFile_.get()->processLevel);
+    icons_->setIconColor(modelFile_->getProcessLevel());
 
     t.commit();
 
-    auto text = hBox_->addWidget(Wt::cpp14::make_unique<Wt::WText>(modelFile_->modelFile));
+    auto text = hBox_->addWidget(Wt::cpp14::make_unique<Wt::WText>(modelFile_->getCadFileName()));
     text->clicked().connect([=]{
         session_.modelFileClicked().emit(modelFile_);
         processModelFile();
@@ -181,9 +181,9 @@ ModelFileWidget::~ModelFileWidget(){}
 void ModelFileWidget::processModelFile()
 {
     std::vector<ModelBend> bendFeatureData;
-    std::string filename = modelFile_->modelFileDir.toUTF8() + modelFile_->modelFile.toUTF8(); 
+    std::string filename = modelFile_->getCadFileDir().toUTF8() + modelFile_->getCadFileName().toUTF8(); 
 
-    switch (modelFile_->processLevel)
+    switch (modelFile_->getProcessLevel())
     {
     case ProcessLevel::UNPROCESSED:
         std::cout << "Feature extraction started..." << std::endl;
@@ -281,7 +281,7 @@ void ModelFileWidget::processModelFile()
             
             dbo::Transaction t(session_);
 
-            restoreStr = modelFile_.modify()->modelData.toUTF8();
+            restoreStr = modelFile_.modify()->getModelData().toUTF8();
 
             auto& bendFeatures = modelFile_.modify()->bendFeatures;
             
@@ -368,7 +368,7 @@ void ModelFileWidget::processModelFile()
 void ModelFileWidget::deleteModelFile()
 {
     Wt::StandardButton answer = Wt::WMessageBox::show(
-                                    "FxTract", "<p>Delete \"" + modelFile_->modelFile + "\" ?</p>",
+                                    "FxTract", "<p>Delete \"" + modelFile_->getCadFileName() + "\" ?</p>",
                                     Wt::StandardButton::Ok | Wt::StandardButton::Cancel
                                 );
     if (answer == Wt::StandardButton::Ok) {
@@ -380,10 +380,10 @@ void ModelFileWidget::rm()
 {
     dbo::Transaction t(session_);
 
-    if (fs::exists(modelFile_->modelFileDir.toUTF8()))
+    if (fs::exists(modelFile_->getCadFileDir().toUTF8()))
     {
-        fs::remove_all(modelFile_->modelFileDir.toUTF8());
-        std::cout << "\n***Done : " << modelFile_->modelFile << " deleted" << std::endl;      
+        fs::remove_all(modelFile_->getCadFileDir().toUTF8());
+        std::cout << "\n***Done : " << modelFile_->getCadFileName() << " deleted" << std::endl;      
     }
 
     session_.modelFileDeleted().emit(modelFile_);

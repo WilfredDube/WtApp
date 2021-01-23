@@ -271,7 +271,7 @@ void ModelViewerControls::featureDialog()
         return;
     }
 
-    auto dialog = addChild(Wt::cpp14::make_unique<FeatureDialog>(session_, "Model File : " + modelFile_->modelFile.toUTF8(), modelFile_));
+    auto dialog = addChild(Wt::cpp14::make_unique<FeatureDialog>(session_, "Model File : " + modelFile_->getCadFileName().toUTF8(), modelFile_));
     dialog->setWidth(900);
     dialog->show();
 }
@@ -287,7 +287,7 @@ void ModelViewerControls::settingsDialog()
         return;
     }
 
-    if (modelFile_->processLevel != ProcessLevel::PROCESS_PLAN_GEN)
+    if (modelFile_->getProcessLevel() != ProcessLevel::PROCESS_PLAN_GEN)
     {
         Wt::WMessageBox::show(
             "FxTract", "<b> generate the model process plan.</b>", 

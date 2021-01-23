@@ -25,7 +25,7 @@ BreadCrumbWidget::BreadCrumbWidget(Session& session, const std::string project, 
 
 void BreadCrumbWidget::setModelCrumb(dbo::ptr<ModelFile> model)
 {
-    model_->setText(model->modelFile);
+    modelNameTxt->setText(model->getCadFileName());
     refresh();
 }
 
