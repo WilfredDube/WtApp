@@ -1,4 +1,6 @@
 #include "../include/ModelFileWidget.h"
+
+#include "../include/ColorWidget.h"
 #include "../include/ProcessPlanDialog.h"
 
 #include <Wt/WText.h>
