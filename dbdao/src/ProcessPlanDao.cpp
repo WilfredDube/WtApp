@@ -40,6 +40,39 @@ Wt::Dbo::ptr<ProcessPlan> ProcessPlanDao::insert(BendSequenceGenerator& bendSequ
     return ret;
 }
 
+Wt::Dbo::ptr<ProcessPlan> ProcessPlanDao::update(dbo::ptr<ModelFile>& modelFile, const Wt::WString& moderator)
+{
+    {
+        dbo::Transaction transaction(session);
+
+        modelFile->processPlan.modify()->moderator = moderator.toUTF8();
+    }
+
+    return  modelFile->processPlan;
+}
+
+Wt::Dbo::ptr<ProcessPlan> ProcessPlanDao::update(dbo::ptr<ModelFile>& modelFile, std::string& partNumber)
+{
+    {
+        dbo::Transaction transaction(session);
+
+        modelFile->processPlan.modify()->part_no = partNumber;
+    }
+
+    return  modelFile->processPlan;
+}
+
+Wt::Dbo::ptr<ProcessPlan> ProcessPlanDao::update(dbo::ptr<ModelFile>& modelFile, size_t quantity)
+{
+    {
+        dbo::Transaction transaction(session);
+
+        modelFile->processPlan.modify()->quantity = quantity;
+    }
+
+    return  modelFile->processPlan;
+}
+
 dbo::ptr<ProcessPlan> ProcessPlanDao::update(dbo::ptr<ProcessPlan>& processPlan, double manufacturing_time)
 {
     {

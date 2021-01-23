@@ -30,6 +30,9 @@ namespace Dao
                                         double process_planning_time,
                                         std::string moderator);
 
+        Wt::Dbo::ptr<ProcessPlan> update(dbo::ptr<ModelFile>& modelFile, size_t quantity);
+        Wt::Dbo::ptr<ProcessPlan> update(dbo::ptr<ModelFile>& modelFile, std::string& partNumber);
+        Wt::Dbo::ptr<ProcessPlan> update(dbo::ptr<ModelFile>& modelFile, const Wt::WString& moderator);
         Wt::Dbo::ptr<ProcessPlan> update(BendSequences bendSequences);
         Wt::Dbo::ptr<ProcessPlan> update(dbo::ptr<ProcessPlan>& processPlan, double estimated_manufacturing_time);
         Wt::Dbo::ptr<ProcessPlan> update(dbo::ptr<ProcessPlan>& processPlan, int numberOfModules);
