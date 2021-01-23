@@ -79,6 +79,8 @@ public:
   dbo::ptr<ModelFile> getModelFile() const { return modelFile; }
   BendSequences getBendingSequence() const { return bendSequences; }
 
+  Wt::WDateTime getCreationDate() const { return dateCreated; }
+
   friend class Fxt::Dao::ProcessPlanDao;
   friend class Fxt::Dao::BendSequenceDao;
 };
