@@ -181,27 +181,13 @@ void ModelViewerControls::saveNewModel(std::vector<std::string> files, std::stri
         } else {
             fs::rename( p, modelDir + *iter);
         }
+
+        using namespace Fxt::Dao;
+
+        ModelFileDao modelFileDao { session_ };
+        dbo::ptr<ModelFile> modelFile = modelFileDao.insert(materialType, modelFileName, modelObjFile, modelDir, project_);
         
-        dbo::Transaction t(session_);
-
-        dbo::ptr<ModelFile> modelFile(Wt::cpp14::make_unique<ModelFile>());
-        ModelFile *m = modelFile.modify();
-        
-        session_.add(modelFile);
-
-        m->modelMaterial = materialType;
-        m->modelFile = modelFileName;
-        m->modelObjFile = modelObjFile;
-        m->modelFileDir = modelDir;
-        m->processLevel = ProcessLevel::UNPROCESSED;
-        m->author = session_.user();
-        m->project = project_;
-        m->uploadDate = Wt::WDateTime::currentDateTime();
-        session_.modelFileChanged().emit(modelFile);            
-
-        session_.flush();
-
-        t.commit();            
+        session_.modelFileChanged().emit(modelFile);
     
         fs::remove_all(p);
     }
