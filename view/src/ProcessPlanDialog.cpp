@@ -2,6 +2,7 @@
 
 #include "../../dbdao/include/ModelFileDao.h"
 #include "../../dbdao/include/BendSequenceDao.h"
+#include "../../dbdao/include/ProcessPlanDao.h"
 
 #include "../../libseqgen/include/ProductionTime.h"
 
@@ -59,21 +60,21 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
     moderator_ = t->bindWidget("moderator", Wt::cpp14::make_unique<Wt::WInPlaceEdit>(placeHolder));
     moderator_->setPlaceholderText("Enter moderator's name");
     moderator_->valueChanged().connect([&]{
-        dbo::Transaction trn(session);
-        modelFile_->processPlan.modify()->moderator = moderator_->text().toUTF8();
-        trn.commit();
+        using namespace Fxt::Dao;
+        ProcessPlanDao processPlanDao { session };
+        processPlanDao.update(modelFile_, moderator_->text());
     });
 
     creationDate_ = t->bindWidget("creation_date", Wt::cpp14::make_unique<Wt::WText>());
-    creationDate_->setText(processPlan->dateCreated.toString("dddd, MMMM d, yyyy, HH:mm"));
+    creationDate_->setText(processPlan->getCreationDate().toString("dddd, MMMM d, yyyy, HH:mm"));
 
-    std::string partPlaceHolder = modelFile_->processPlan->part_no.empty() ? "Click to enter the part number" : modelFile_->processPlan->part_no;
+    std::string partPlaceHolder = modelFile_->getProcessPlan()->getPartNo().empty() ? "Click to enter the part number" : modelFile_->getProcessPlan()->getPartNo();
     partNo_ = t->bindWidget("part_no", Wt::cpp14::make_unique<Wt::WInPlaceEdit>(partPlaceHolder));
     partNo_->setPlaceholderText("Enter part number");
     partNo_->valueChanged().connect([&]{
-        dbo::Transaction trn(session);
-        modelFile_->processPlan.modify()->part_no = partNo_->text().toUTF8();
-        trn.commit();
+        using namespace Fxt::Dao;
+        ProcessPlanDao processPlanDao { session };
+        processPlanDao.update(modelFile_, partNo_->text().toUTF8());
     });
 
     partName_ = t->bindWidget("part_name", Wt::cpp14::make_unique<Wt::WText>());
@@ -181,6 +182,13 @@ inline void ProcessPlanDialog::quantityChanged(unsigned nParts, unsigned nTools,
 {
     auto time_p = computeTotalProductionTime(quantity_->value(), nTools, nBends, nFlips, nRotations);;
     totalProcessingTime_->setText(processString(time_p));
+
+    {
+        using namespace Fxt::Dao;
+
+        ProcessPlanDao processPlanDao { session_ };
+        processPlanDao.update(modelFile_, quantity_->value());
+    }
 }
 
 ProcessPlanDialog::~ProcessPlanDialog(){}
