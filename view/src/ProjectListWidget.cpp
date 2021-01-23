@@ -73,26 +73,20 @@ void ProjectListWidget::createNewProjectDialog()
     /** Process the dialog result.  */
     dialog->finished().connect([=] {
       if (dialog->result() == Wt::DialogCode::Accepted) {
-        dbo::Transaction t(session_);
 
-        dbo::ptr<Project> project(Wt::cpp14::make_unique<Project>());
-        Project *p = project.modify();
-        p->title = projectName->text();
-        p->brief_desc = projectDesc->text();
-        p->author = session_.user();
-        p->dateCreated = Wt::WDateTime::currentDateTime();
+        using namespace Fxt::Dao;
+        ProjectDao projectDao { session_ };
+        dbo::ptr<Project> project = projectDao.insert(projectName->text().toUTF8(), projectDesc->text().toUTF8());
 
         addProject(project, projectList_);
         
         std::string userFolder = uploadPath_ + "/" + session_.user()->name.toUTF8(); 
         if (fs::exists(userFolder))
         {
-          std::string projectFolder = userFolder + "/" + p->titleToUrl();
+          std::string projectFolder = userFolder + "/" + project->titleToUrl();
           fs::create_directories(projectFolder);
           std::cout << "\n***Done : Project folder created >> " + projectFolder << std::endl;
         }
-
-        t.commit();
 
         projectList_->refresh();
       }
