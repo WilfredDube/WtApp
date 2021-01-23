@@ -34,8 +34,8 @@ namespace Dao
         Wt::Dbo::ptr<ProcessPlan> update(dbo::ptr<ModelFile>& modelFile, std::string& partNumber);
         Wt::Dbo::ptr<ProcessPlan> update(dbo::ptr<ModelFile>& modelFile, const Wt::WString& moderator);
         Wt::Dbo::ptr<ProcessPlan> update(BendSequences bendSequences);
-        Wt::Dbo::ptr<ProcessPlan> update(dbo::ptr<ProcessPlan>& processPlan, double estimated_manufacturing_time);
-        Wt::Dbo::ptr<ProcessPlan> update(dbo::ptr<ProcessPlan>& processPlan, int numberOfModules);
+        Wt::Dbo::ptr<ProcessPlan> update(dbo::ptr<ModelFile>& modelFile, double estimated_manufacturing_time);
+        Wt::Dbo::ptr<ProcessPlan> update(dbo::ptr<ModelFile>& modelFile, int numberOfModules);
 
         Wt::Dbo::ptr<ProcessPlan> get(dbo::ptr<ModelFile>& modelFile);
 

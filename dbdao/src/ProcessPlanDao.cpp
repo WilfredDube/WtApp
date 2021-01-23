@@ -73,26 +73,27 @@ Wt::Dbo::ptr<ProcessPlan> ProcessPlanDao::update(dbo::ptr<ModelFile>& modelFile,
     return  modelFile->processPlan;
 }
 
-dbo::ptr<ProcessPlan> ProcessPlanDao::update(dbo::ptr<ProcessPlan>& processPlan, double manufacturing_time)
+
+dbo::ptr<ProcessPlan> ProcessPlanDao::update(dbo::ptr<ModelFile>& modelFile, double manufacturing_time)
 {
     {
         dbo::Transaction transaction(session);
 
-        processPlan.modify()->estimated_manufacturing_time = manufacturing_time;
+         modelFile->processPlan.modify()->estimated_manufacturing_time = manufacturing_time;
     }
 
-    return processPlan;
+    return  modelFile->processPlan;
 }
 
-dbo::ptr<ProcessPlan> ProcessPlanDao::update(dbo::ptr<ProcessPlan>& processPlan, int numberOfModules)
+dbo::ptr<ProcessPlan> ProcessPlanDao::update(dbo::ptr<ModelFile>& modelFile, int numberOfModules)
 {
     {
         dbo::Transaction transaction(session);
 
-        processPlan.modify()->no_modules = numberOfModules;
+         modelFile->processPlan.modify()->no_modules = numberOfModules;
     }
 
-    return processPlan;
+    return  modelFile->processPlan;
 }
 
 dbo::ptr<ProcessPlan> ProcessPlanDao::get(dbo::ptr<ModelFile>& modelFile)
