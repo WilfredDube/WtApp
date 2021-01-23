@@ -71,8 +71,8 @@ public:
     dbo::hasOne(a, processPlan);
   }
 
-  dbo::ptr<User> getAuthor() { return author; }
-  dbo::ptr<Project> getProject() { return project; }
+  dbo::ptr<User> getAuthor() const { return author; }
+  dbo::ptr<Project> getProject() const { return project; }
 
   double getBendingForce() const { return bendingForce; }
   double getFeatureRecognitionTime() const { return feature_recognition_time; }
