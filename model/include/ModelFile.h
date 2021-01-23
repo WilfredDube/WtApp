@@ -22,6 +22,7 @@ namespace Dao
   class BendFeatureDao;
   class BendSequenceDao;
   class ModelFileDao;
+  class ProcessPlanDao;
 }
 }
 
@@ -92,6 +93,7 @@ public:
   friend class Fxt::Dao::BendFeatureDao;
   friend class Fxt::Dao::BendSequenceDao;
   friend class Fxt::Dao::ModelFileDao;
+  friend class Fxt::Dao::ProcessPlanDao;
 };
 
 DBO_EXTERN_TEMPLATES(ModelFile);
