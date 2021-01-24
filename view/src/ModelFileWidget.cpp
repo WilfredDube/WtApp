@@ -157,13 +157,19 @@ void ModelFileWidget::extractFeatures()
 
         std::vector<float> bendingForces;
         for (auto& [bendId, bend]: modelFeatureCache[filename]) {
+            loggingService->writeInfoEntry("Computations on the extracted features...."
+                                    , std::to_string(bend->getBendFeature()->getBendAngle()) + "degrees");
 
             auto tool = toolDao.get(bend->getBendFeature()->getBendAngle());
+
+            loggingService->writeInfoEntry("Tool assignment....");
 
             float bendingForce = materialDao.getBendingForce(
                                     modelFile_->getModelMaterial().toUTF8(),
                                     sheetMetalFeatureModel->getThickness(), 
                                     bend->getBendFeature()->getBendLength());
+
+            loggingService->writeInfoEntry("Computations of the bending force....");
 
             bendingForces.push_back(bendingForce);
 
