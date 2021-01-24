@@ -7,8 +7,8 @@
 #include <Wt/Auth/AuthWidget.h>
 #include <Wt/Auth/PasswordService.h>
 
-#include "view/FXtractUI.h"
-#include "model/Session.h"
+#include "view/include/FXtractUI.h"
+#include "model/include/Session.h"
 
 // export LD_LIBRARY_PATH=/usr/local/lib64/
 
