@@ -71,14 +71,12 @@ ModelFileWidget::ModelFileWidget(Session& session, dbo::ptr<ModelFile> model)
 
 void ModelFileWidget::processModelFile()
 {
-    std::string filename = modelFile_->getCadFileDir().toUTF8() + modelFile_->getCadFileName().toUTF8(); 
-
     switch (modelFile_->getProcessLevel())
     {
     case ProcessLevel::UNPROCESSED:
         std::cout << "Feature extraction started..." << std::endl;
 
-        extractFeatures(modelFile_, session_, filename);
+        extractFeatures();
 
         icons_->setIconColor(ProcessLevel::FEATURE_EXTRACTED);
 
@@ -87,7 +85,7 @@ void ModelFileWidget::processModelFile()
     case ProcessLevel::FEATURE_EXTRACTED:
         std::cout << "Process Planning started..." << std::endl;        
 
-        generateBendingSequence(modelFile_, session_);
+        generateBendingSequence();
 
         icons_->setIconColor(ProcessLevel::PROCESS_PLAN_GEN );
         break;
@@ -128,8 +126,10 @@ void ModelFileWidget::rm()
     this->removeFromParent();
 }
 
-void ModelFileWidget::extractFeatures(Wt::Dbo::ptr<ModelFile>& modelFile, Session& session, std::string filename)
+void ModelFileWidget::extractFeatures()
 {
+    std::string filename = modelFile_->getCadFileDir().toUTF8() + modelFile_->getCadFileName().toUTF8();
+
     if (modelFeatureCache.find(filename) != modelFeatureCache.end())
     {
         auto bendFeatureData = modelFeatureCache[filename];
@@ -180,7 +180,7 @@ void ModelFileWidget::extractFeatures(Wt::Dbo::ptr<ModelFile>& modelFile, Sessio
     }
 }
 
-void ModelFileWidget::generateBendingSequence(Wt::Dbo::ptr<ModelFile>& modelFile_, Session& session_)
+void ModelFileWidget::generateBendingSequence()
 {
     double total_time = 0.0;
     BendFeatureDao bendFeatureDao { session_ };
