@@ -112,8 +112,8 @@ Session::Session(dbo::SqlConnectionPool& connectionPool)
     UserDao userDao{*this};
     dbo::ptr<User> guest = userDao.insert("guest", "guest");
 
-    Auth::User guestUser = users_.findWithIdentity(Wt::Auth::Identity::LoginName, guest->name);
-    // myPasswordService.updatePassword(guestUser, "guest");
+    Auth::User guestUser = users_.findWithIdentity(Wt::Auth::Identity::LoginName, guest.modify()->name);
+    myPasswordService.updatePassword(guestUser, "guest");
 
     fillTools();
     fillMaterial();
