@@ -51,9 +51,11 @@ set (OCCT_LIBS TKSTEP;TKIGES;TKXSBase;TKBRep;TKG3d;TKTopAlgo;TKMath;TKernel)
 set (OpenCASCADE_INCLUDE_DIR  "/usr/local/include/opencascade")
 
 find_package(Threads REQUIRED)
+find_package(Boost COMPONENTS system filesystem REQUIRED)
 
 add_library(fxtract STATIC ${Sources} ${Headers})
 target_compile_features(fxtract PUBLIC cxx_std_17)
 set_target_properties(fxtract PROPERTIES CXX_EXTENSIONS OFF)
+
 target_include_directories(fxtract PUBLIC ${Boost_INCLUDE_DIRS} ${OpenCASCADE_INCLUDE_DIR})
-target_link_libraries(fxtract logger ${Boost_LIBRARIES} Threads::Threads ${OCCT_LIBS})
+target_link_libraries(fxtract logger ${Boost_LIBRARIES} Threads::Threads ${OCCT_LIBS} -lboost_serialization)

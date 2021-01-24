@@ -14,6 +14,7 @@ set(Sources
   src/ProjectSummaryWidget.cpp
   src/ProcessPlanDialog.cpp
   src/FeatureDialog.cpp
+  src/ColorWidget.cpp
 )
 
 set(Headers
@@ -32,6 +33,7 @@ set(Headers
   include/ProjectSummaryWidget.h
   include/ProcessPlanDialog.h
   include/FeatureDialog.h
+  include/ColorWidget.h
 )
 
 set(CMAKE_CXX_STANDARD 17)
@@ -50,4 +52,4 @@ find_package(wt COMPONENTS wt wtdbo wtdbosqlite3 wthttp REQUIRED)
 
 add_library(view ${Sources} ${Headers})
 target_include_directories(view PRIVATE ${Boost_INCLUDE_DIRS} ${wt_INCLUDE_DIRS} ${OpenCASCADE_INCLUDE_DIR})
-target_link_libraries(view fxtract ${Boost_LIBRARIES} Threads::Threads ${wt_LIBRARIES} stdc++fs wthttp wt wtdbo wtdbosqlite3)
+target_link_libraries(view fxtract dbdao ${Boost_LIBRARIES} Threads::Threads ${wt_LIBRARIES} stdc++fs wthttp wt wtdbo wtdbosqlite3)
