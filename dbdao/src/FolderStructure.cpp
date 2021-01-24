@@ -18,6 +18,11 @@ bool fileExists(std::string filename)
     return fs::exists(filename);
 }
 
+bool pathExists(std::filesystem::path path)
+{
+    return fs::exists(path);
+}
+
 void renameFile(std::filesystem::path path, std::string newName)
 {
     fs::rename(path, newName);
