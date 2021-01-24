@@ -99,18 +99,11 @@ void ProjectSummaryWidget::rm()
     project_.remove();
     t.commit();
 
-    std::string userFolder = uploadPath_ + "/" + session_.user()->name.toUTF8(); 
-    if (fs::exists(userFolder))
-    {
-        fs::path path{ userFolder + "/" + project_->titleToUrl() };
+    std::string userFolder = uploadPath_ + "/" + session_.user()->name.toUTF8();
+    std::string path{ userFolder + "/" + project_->titleToUrl() };
 
-        if (fs::exists(path))
-        {
-            fs::remove_all(path);
-            std::cout << "\n***Done : Project folder deleted >> " + path.u8string() << std::endl;
-        }        
-        
-    }
+    if(pathExists(userFolder) && pathExists(path))
+        deleteFolder(path);
 
     this->removeFromParent();
 }

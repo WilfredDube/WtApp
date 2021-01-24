@@ -80,12 +80,11 @@ void ProjectListWidget::createNewProjectDialog()
 
         addProject(project, projectList_);
         
-        std::string userFolder = uploadPath_ + "/" + session_.user()->name.toUTF8(); 
-        if (fs::exists(userFolder))
-        {
+        std::string userFolder = uploadPath_ + "/" + session_.user()->name.toUTF8();
+
+        if(createFolders(userFolder)) {
           std::string projectFolder = userFolder + "/" + project->titleToUrl();
-          fs::create_directories(projectFolder);
-          std::cout << "\n***Done : Project folder created >> " + projectFolder << std::endl;
+          createFolders(projectFolder);
         }
 
         projectList_->refresh();
