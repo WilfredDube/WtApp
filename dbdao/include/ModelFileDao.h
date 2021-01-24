@@ -37,6 +37,8 @@ namespace Dao
         Wt::Dbo::ptr<ModelFile> update(dbo::ptr<ModelFile>& modelFile, long double feature_recognition_time);
         Wt::Dbo::ptr<ModelFile> update(dbo::ptr<ModelFile>& modelFile, std::string modelDataStringified);
 
+        std::string getStringifiedModelData(dbo::ptr<ModelFile>& modelFile);
+
         ModelFiles getAll();
 
         bool deleteProject(Wt::Dbo::ptr<ModelFile>& material);

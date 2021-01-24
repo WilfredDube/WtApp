@@ -115,6 +115,11 @@ dbo::ptr<ModelFile> ModelFileDao::get(std::string materialName)
     return cadFile;
 }
 
+std::string ModelFileDao::getStringifiedModelData(dbo::ptr<ModelFile>& modelFile)
+{
+   return modelFile->getModelData().toUTF8();
+}
+
 ModelFiles ModelFileDao::getAll()
 {
     return session.user()->modelfiles;
