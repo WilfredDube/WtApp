@@ -7,6 +7,7 @@ set(Sources
   src/MaterialDao.cpp
   src/UserDao.cpp
   src/ProjectDao.cpp
+  src/FolderStructure.cpp
 )
 
 set(Headers
@@ -18,6 +19,7 @@ set(Headers
   include/MaterialDao.h
   include/UserDao.h
   include/ProjectDao.h
+  include/FolderStructure.h
 )
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wall -lm -Wl,-R/usr/local/lib")
