@@ -7,7 +7,7 @@ DBO_INSTANTIATE_TEMPLATES(User)
 
 Projects User::allProjects() const 
 {
-    return projects.find().orderBy("project_creation_date desc");
+    return projects.find().orderBy("date_created desc");
 }
 
 dbo::dbo_traits<User>::IdType User::stringToId(const std::string &s)
