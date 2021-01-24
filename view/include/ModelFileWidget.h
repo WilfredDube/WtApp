@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../include/ColorWidget.h"
+
 #include "../../model/include/Session.h"
 
 #include "../../libfxtract/include/sheet-metal-component/ModelTypes.h"
@@ -12,9 +14,6 @@ namespace Wt {
   class WString;
   class WImage;
 }
-
-class ModelFile;
-class ColorWidget;
 
 namespace Fxt{
   namespace SheetMetalComponent{
