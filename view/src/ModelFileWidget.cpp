@@ -137,7 +137,7 @@ void ModelFileWidget::extractFeatures(Wt::Dbo::ptr<ModelFile>& modelFile, Sessio
         int startTime = clock();
 
         auto sheetMetalFeatureModel = std::make_shared<Fxt::SheetMetalComponent::SheetMetal>();
-        auto loggingService = std::make_shared<Fxt::Logging::StandardOutputLogger>(session_.user()->name);
+        auto loggingService = std::make_shared<Fxt::Logging::StandardOutputLogger>(session_.user()->name.toUTF8());
         auto cadReaderFactory = std::make_shared<Fxt::CadFileReader::CadFileReaderFactory>(loggingService);
 
         auto cadFileReader = cadReaderFactory->createReader(filename.c_str());
@@ -185,8 +185,6 @@ void ModelFileWidget::generateBendingSequence(Wt::Dbo::ptr<ModelFile>& modelFile
     double total_time = 0.0;
     BendFeatureDao bendFeatureDao { session_ };
     ModelFileDao modelFileDao { session_ };
-    ProcessPlanDao processPlanDao { session_ };
-    BendSequenceDao bendSequenceDao { session_ };
 
     auto bendFeatures = bendFeatureDao.get(modelFile_);            
     auto serializedObjectData = modelFileDao.getStringifiedModelData(modelFile_);
