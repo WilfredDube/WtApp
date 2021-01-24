@@ -33,5 +33,4 @@ find_package(wt COMPONENTS wt dbo dbosqlite3 http REQUIRED)
 
 add_executable (hello ${main_source_files})
 target_include_directories(hello PRIVATE ${Boost_INCLUDE_DIRS} ${wt_INCLUDE_DIRS})
-target_link_libraries(hello logger fxtract seqgen  -g ${Boost_LIBRARIES} Threads::Threads ${wt_LIBRARIES} -lwthttp -lwt -lwtdbo -lwtdbosqlite3 -lboost_serialization)
-#target_link_libraries(hello logger view model fxtract seqgen  -g ${Boost_LIBRARIES} Threads::Threads ${wt_LIBRARIES} -lwthttp -lwt -lwtdbo -lwtdbosqlite3 -lboost_serialization)
+target_link_libraries(hello logger view model fxtract seqgen dbdao -g ${Boost_LIBRARIES} Threads::Threads ${wt_LIBRARIES} -lwthttp -lwt -lwtdbo -lwtdbosqlite3 -lboost_serialization)
