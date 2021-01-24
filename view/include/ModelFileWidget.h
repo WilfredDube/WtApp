@@ -2,6 +2,8 @@
 
 #include "../../model/include/Session.h"
 
+#include "../../libfxtract/include/sheet-metal-component/ModelTypes.h"
+
 #include <Wt/WContainerWidget.h>
 
 namespace Wt {
