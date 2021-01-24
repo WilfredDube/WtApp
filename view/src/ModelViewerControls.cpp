@@ -29,10 +29,9 @@
 
 #include "../../dbdao/include/ProjectDao.h"
 #include "../../dbdao/include/ModelFileDao.h"
+#include "../../dbdao/include/FolderStructure.h"
 
 #include "../../libfxtract/include/Computation.h"
-
-namespace fs = std::filesystem;
 
 namespace {
 
@@ -114,7 +113,6 @@ void ModelViewerControls::saveNewModel(std::vector<std::string> files, std::stri
     for (std::vector<std::string>::iterator iter = begin(files); (iter != end(files)); ++iter) {
 
         std::string modelDir, modelFileName, modelObjFile;
-        fs::path p { userTempFolder + *iter };
         
         std::string filename = iter->substr(0, iter->rfind("."));
         std::string ext = iter->substr(iter->find(".") + 1);
@@ -157,29 +155,32 @@ void ModelViewerControls::saveNewModel(std::vector<std::string> files, std::stri
 
         // discard the uploaded files if their corresponding model or .obj files have not been found
         if (modelFileName.empty() || modelObjFile.empty()) {
-            fs::remove_all(userTempFolder);
-            fs::create_directory(userTempFolder);
+            deleteFolder(userTempFolder);
+            createFolders(userTempFolder);
             
             std::cerr << "Error : No correcsponding step/iges/obj file uploaded!!" << std::endl;
             break;
         }
 
-        if (fs::exists(modelDir)) {
+        if (fileExists(modelDir)) {
             ++dupCount;
             modelDir += "_" + std::to_string(dupCount) + "/";
         } else  {
             modelDir +=  "/";
         }
 
-        fs::create_directory(modelDir);
+        createFolders(modelDir);
 
         if (obj != files.end()) {
-            fs::path pobj { userTempFolder + *obj };        
-            fs::rename( p, modelDir + *iter);                
-            fs::rename( pobj, modelDir + *obj);
+            std::filesystem::path pobj { userTempFolder + *obj }; 
+            std::filesystem::path p { userTempFolder + *iter };
+
+            renameFile( p, modelDir + *iter);                
+            renameFile( pobj, modelDir + *obj);
+
             files.erase(obj);            
         } else {
-            fs::rename( p, modelDir + *iter);
+            renameFile( { userTempFolder + *iter }, modelDir + *iter);
         }
 
         using namespace Fxt::Dao;
@@ -189,7 +190,7 @@ void ModelViewerControls::saveNewModel(std::vector<std::string> files, std::stri
         
         session_.modelFileChanged().emit(modelFile);
     
-        fs::remove_all(p);
+        deleteFolder({ userTempFolder + *iter });
     }
 }
 

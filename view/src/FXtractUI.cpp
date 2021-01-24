@@ -17,7 +17,6 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
-#include <filesystem>
 
 #include "../include/FXtractUI.h"
 #include "../include/NavBarWidget.h"
@@ -26,9 +25,9 @@
 
 #include "../../Utils/Utils.h"
 #include "../../model/include/Session.h"
+#include "../../dbdao/include/FolderStructure.h"
 
 using namespace Wt;
-namespace fs = std::filesystem;
 
 namespace {
   const std::string UPLOAD_FOLDER = "uploads";
@@ -45,11 +44,7 @@ FXtractUI::FXtractUI(const std::string& basePath, Wt::Dbo::SqlConnectionPool& co
 {
   Wt::WApplication *app = Wt::WApplication::instance();
 
-  if (!fs::exists(UPLOAD_FOLDER))
-  {
-    fs::create_directories(UPLOAD_FOLDER);
-    std::cout << "\n***Done : Upload folder created..." << std::endl;
-  }  
+  createFolders(UPLOAD_FOLDER);
 
   app->setTitle("FxTract");
 
@@ -100,18 +95,10 @@ FXtractUI::FXtractUI(const std::string& basePath, Wt::Dbo::SqlConnectionPool& co
 void FXtractUI::onAuthEvent()
 {
   if (session_.login().loggedIn()) {   
-    std::string userFolder = UPLOAD_FOLDER + "/" + session_.user()->name.toUTF8(); 
-    if (!fs::exists(userFolder))
-    {
-      fs::create_directories(userFolder);
-      std::cout << "\n***Done : User folder created >> " + userFolder << std::endl;
-    }
+    std::string userFolder = UPLOAD_FOLDER + "/" + session_.user()->name.toUTF8();
 
-    if (!fs::exists(userFolder + TEMP_FOLDER))
-    {
-      fs::create_directories(userFolder + TEMP_FOLDER);
-      std::cout << "\n***Done : user temp folder created..." << std::endl;
-    }
+    createFolders(userFolder);
+    createFolders(userFolder + TEMP_FOLDER);
       
     loggedIn();    
   } else {
