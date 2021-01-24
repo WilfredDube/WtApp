@@ -100,6 +100,8 @@ void BendSequenceGenerator::generateBendingSequence()
     sequenceImpl_->fitness = population[0].fitness;
 }
 
+std::vector<int> BendSequenceGenerator::getSequence() { return sequenceImpl_->chromosome; }
+
 size_t BendSequenceGenerator::getSequenceSize() { return sequenceImpl_->chromosome.size(); }
     
 void BendSequenceGenerator::print()

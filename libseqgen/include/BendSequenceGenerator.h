@@ -37,6 +37,7 @@ public:
     size_t getNumberOfFlips();
     double getNumberOfDistance();
 
+    std::vector<int> getSequence();
     size_t getSequenceSize();
     void print();
 };
