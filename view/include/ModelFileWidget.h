@@ -41,6 +41,7 @@ private:
 
     std::map<std::string, std::map<FaceID, std::shared_ptr<Fxt::SheetMetalComponent::Bend::ModelBend>>> modelFeatureCache;
 
+    void extractFeatures(Wt::Dbo::ptr<ModelFile>& modelFile, Session& session, std::string filename);
 public:
     ModelFileWidget(Session& session, dbo::ptr<ModelFile> model);
     ~ModelFileWidget();

@@ -190,29 +190,7 @@ void ModelFileWidget::processModelFile()
     case ProcessLevel::UNPROCESSED:
         std::cout << "Feature extraction started..." << std::endl;
 
-        if (modelFeatureMap.find(filename) != modelFeatureMap.end())
-        {
-            bendFeatureData = modelFeatureMap[std::string(filename)];
-        } else
-        {
-            int startTime = clock();
-            long double thickness = procModelFile(filename.c_str());
-            bendFeatureData = modelFeatureMap[std::string(filename)];
-            int stopTime = clock();
-
-            total_time = (stopTime - startTime) / double(CLOCKS_PER_SEC);
-            std::cout << ">>>>>>>>>> Feature extraction time : " << total_time <<std::endl;
-
-            for (auto a: bendFeatureData) {
-                std::cout << "Bend ID : " << a.getFaceId() << std::endl;
-
-                long double angle = a.getBendAngle();
-                std::string toolName;
-
-                dbo::Transaction t(session_);
-
-                dbo::collection<dbo::ptr<Tool> > tools = session_.find<Tool>()
-                                    .where("tool_angle = ?").bind(std::to_string(angle));
+        extractFeatures(modelFile_, session_, filename);
 
                 for (const dbo::ptr<Tool> tool : tools){
                     toolName = tool->tool_id;
@@ -382,11 +360,58 @@ void ModelFileWidget::rm()
 {
     dbo::Transaction t(session_);
 
-    if (fs::exists(modelFile_->getCadFileDir().toUTF8()))
+
+void ModelFileWidget::extractFeatures(Wt::Dbo::ptr<ModelFile>& modelFile, Session& session, std::string filename)
+{
+    if (modelFeatureCache.find(filename) != modelFeatureCache.end())
     {
-        fs::remove_all(modelFile_->getCadFileDir().toUTF8());
-        std::cout << "\n***Done : " << modelFile_->getCadFileName() << " deleted" << std::endl;      
+        auto bendFeatureData = modelFeatureCache[filename];
+    } else {
+        int startTime = clock();
+
+        auto sheetMetalFeatureModel = std::make_shared<Fxt::SheetMetalComponent::SheetMetal>();
+        auto loggingService = std::make_shared<Fxt::Logging::StandardOutputLogger>(session_.user()->name);
+        auto cadReaderFactory = std::make_shared<Fxt::CadFileReader::CadFileReaderFactory>(loggingService);
+
+        auto cadFileReader = cadReaderFactory->createReader(filename.c_str());
+
+        cadFileReader->extractFaces(sheetMetalFeatureModel, filename.c_str());
+
+        modelFeatureCache[filename] = sheetMetalFeatureModel->getBends();
+
+        int stopTime = clock();
+
+        auto total_time = (stopTime - startTime) / double(CLOCKS_PER_SEC);
+
+        ToolDao toolDao { session_ };
+        MaterialDao materialDao { session_ };
+        ModelFileDao modelFileDao { session_ };
+        BendFeatureDao bendFeatureDao { session_ };
+
+        std::vector<float> bendingForces;
+        for (auto& [bendId, bend]: modelFeatureCache[filename]) {
+
+            auto tool = toolDao.get(bend->getBendFeature()->getBendAngle());
+
+            float bendingForce = materialDao.getBendingForce(
+                                    modelFile_->getModelMaterial().toUTF8(),
+                                    sheetMetalFeatureModel->getThickness(), 
+                                    bend->getBendFeature()->getBendLength());
+
+            bendingForces.push_back(bendingForce);
+
+            bendFeatureDao.insert(*bend, modelFile_, sheetMetalFeatureModel->getThickness());
+        }
+
+        float bendingForce = *(std::max_element(bendingForces.begin(), bendingForces.end()));
+
+        modelFileDao.update(modelFile_, total_time);
+        modelFileDao.update(modelFile_, bendingForce);
+        modelFileDao.update(modelFile_, ProcessLevel::FEATURE_EXTRACTED);
+        modelFileDao.update(modelFile_, sheetMetalFeatureModel->getThickness());
+        modelFileDao.update(modelFile_, save(sheetMetalFeatureModel));
     }
+}
 
     session_.modelFileDeleted().emit(modelFile_);
 
