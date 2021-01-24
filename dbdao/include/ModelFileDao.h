@@ -41,7 +41,7 @@ namespace Dao
 
         ModelFiles getAll();
 
-        bool deleteProject(Wt::Dbo::ptr<ModelFile>& material);
+        bool deleteProject(Wt::Dbo::ptr<ModelFile>& cadFile);
 
     private:
         Session& session;
