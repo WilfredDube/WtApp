@@ -38,6 +38,9 @@ private:
     void processModelFile();
     void deleteModelFile();
     void rm();
+
+    std::map<std::string, std::map<FaceID, std::shared_ptr<Fxt::SheetMetalComponent::Bend::ModelBend>>> modelFeatureCache;
+
 public:
     ModelFileWidget(Session& session, dbo::ptr<ModelFile> model);
     ~ModelFileWidget();
