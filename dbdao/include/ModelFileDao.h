@@ -33,6 +33,7 @@ namespace Dao
         Wt::Dbo::ptr<ModelFile> update(dbo::ptr<ModelFile>& modelFile, dbo::ptr<ProcessPlan>& processPlan);
         Wt::Dbo::ptr<ModelFile> update(dbo::ptr<ModelFile>& modelFile, ProcessLevel processLevel);
         Wt::Dbo::ptr<ModelFile> update(dbo::ptr<ModelFile>& modelFile, double thickness);
+        Wt::Dbo::ptr<ModelFile> update(dbo::ptr<ModelFile>& modelFile, float bendingForce);
         Wt::Dbo::ptr<ModelFile> update(dbo::ptr<ModelFile>& modelFile, long double feature_recognition_time);
         Wt::Dbo::ptr<ModelFile> update(dbo::ptr<ModelFile>& modelFile, std::string modelDataStringified);
 

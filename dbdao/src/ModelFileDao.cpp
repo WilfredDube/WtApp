@@ -61,6 +61,17 @@ dbo::ptr<ModelFile> ModelFileDao::update(dbo::ptr<ModelFile>& modelFile, Process
     return modelFile;
 }
 
+dbo::ptr<ModelFile> ModelFileDao::update(dbo::ptr<ModelFile>& modelFile, float bendingForce)
+{
+    {
+        dbo::Transaction transaction(session);
+
+        modelFile.modify()->bendingForce = bendingForce;
+    }
+
+    return modelFile;
+}
+
 dbo::ptr<ModelFile> ModelFileDao::update(dbo::ptr<ModelFile>& modelFile, double thickness)
 {
     {
