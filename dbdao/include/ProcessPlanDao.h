@@ -28,7 +28,7 @@ namespace Dao
         Wt::Dbo::ptr<ProcessPlan> insert(BendSequenceGenerator& bendSequence,
                                         dbo::ptr<ModelFile>& modelFile,
                                         double process_planning_time,
-                                        std::string moderator);
+                                        std::string moderator = "");
 
         Wt::Dbo::ptr<ProcessPlan> update(dbo::ptr<ModelFile>& modelFile, size_t quantity);
         Wt::Dbo::ptr<ProcessPlan> update(dbo::ptr<ModelFile>& modelFile, std::string& partNumber);
