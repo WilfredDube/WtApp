@@ -16,6 +16,14 @@ namespace Wt {
 class ModelFile;
 class ColorWidget;
 
+namespace Fxt{
+  namespace SheetMetalComponent{
+    namespace Bend {
+      class ModelBend;
+    }
+  }
+}
+
 class ModelFileWidget : public Wt::WContainerWidget
 {
 private:
