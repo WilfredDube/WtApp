@@ -175,7 +175,7 @@ void FXtractUI::handleInternalPathChange(const std::string&)
       } else if (path == "viewer") {
         std::string projectname = app->internalPathNextPart(basePath_ + path + '/');
         dbo::ptr<Project> project = session_.find<Project>()
-            .where("LOWER(project_title) LIKE LOWER(?)").bind(urltoTitle(projectname))
+            .where("LOWER(title) LIKE LOWER(?)").bind(urltoTitle(projectname))
             .where("author_id = ?").bind(session_.user().id());
 
         if (!project)
