@@ -24,7 +24,7 @@ namespace Dao
 
         BendFeatureDao(Session& session) : session { session } {}
 
-        Wt::Dbo::ptr<BendFeature> insert(Fxt::SheetMetalComponent::Bend::ModelBend& modelFile,
+        Wt::Dbo::ptr<BendFeature> insert(const Fxt::SheetMetalComponent::Bend::ModelBend& modelBend,
                                         dbo::ptr<ModelFile>& cadFile,
                                         double thickness);
 
