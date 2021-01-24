@@ -1,22 +1,14 @@
 #include "../include/ProjectSummaryWidget.h"
 
-#include <memory>
+#include "../../dbdao/include/FolderStructure.h"
+
 #include <Wt/WHBoxLayout.h>
 #include <Wt/WVBoxLayout.h>
 #include <Wt/WImage.h>
 #include <Wt/WText.h>
-#include <Wt/WString.h>
-#include <Wt/WLink.h>
 #include <Wt/WAnchor.h>
 #include <Wt/WMessageBox.h>
 #include <Wt/WLocalDateTime.h>
-
-#include <iostream>
-#include <fstream>
-#include <cstdlib>
-#include <filesystem>
-
-namespace fs = std::filesystem;
 
 ProjectSummaryWidget::ProjectSummaryWidget(Session &session, const std::string &basePath, dbo::ptr<Project> project, const std::string uploadPath)
     : WContainerWidget(),

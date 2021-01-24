@@ -12,7 +12,6 @@
 #include <Wt/WTable.h>
 #include <Wt/WSpinBox.h>
 #include <Wt/WInPlaceEdit.h>
-#include <Wt/WMessageBox.h>
 
 namespace {
 

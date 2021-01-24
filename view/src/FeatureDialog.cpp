@@ -2,7 +2,6 @@
 
 #include "../../dbdao/include/ModelFileDao.h"
 
-#include <Wt/WText.h>
 #include <Wt/WPushButton.h>
 #include <Wt/WTable.h>
 #include <Wt/WComboBox.h>

@@ -5,13 +5,9 @@
 #include "../../dbdao/include/ProjectDao.h"
 #include "../../dbdao/include/ModelFileDao.h"
 
-#include <Wt/WImage.h>
-#include <Wt/WHBoxLayout.h>
-#include <Wt/WApplication.h>
 #include <Wt/WTable.h>
 #include <Wt/WGroupBox.h>
 #include <Wt/WText.h>
-#include <Wt/WEnvironment.h>
 
 #include <cmath>
 

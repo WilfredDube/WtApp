@@ -6,19 +6,10 @@
 
 #include "../include/FileDropApplication.h"
 
-#include <boost/algorithm/string.hpp>
-#include <Wt/WPushButton.h>
 #include <Wt/WText.h>
-#include <Wt/WFileDropWidget.h>
-#include <Wt/WLineEdit.h>
-#include <Wt/WPushButton.h>
-#include <Wt/WLabel.h>
-#include <Wt/WMessageBox.h>
 #include <Wt/WProgressBar.h>
-#include <Wt/WDialog.h>
 #include "Wt/Utils.h"
 
-#include <iostream>
 #include <fstream>
 
 #include "../../model/include/Session.h"

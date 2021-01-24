@@ -2,26 +2,11 @@
 
 #include <Wt/WPushButton.h>
 #include <Wt/WTemplate.h>
-#include <Wt/WDialog.h>
 #include <Wt/WLabel.h>
-#include <Wt/WLineEdit.h>
-#include <Wt/WTextArea.h>
-#include <Wt/WFileDropWidget.h>
 #include <Wt/WComboBox.h>
 #include <Wt/WProgressBar.h>
 #include <Wt/WTimer.h>
-#include <Wt/WTable.h>
 #include <Wt/WMessageBox.h>
-#include <Wt/WInPlaceEdit.h>
-
-#include <boost/tokenizer.hpp>
-#include <boost/algorithm/string.hpp>
-
-#include <iostream>
-#include <sstream>
-#include <fstream>
-#include <filesystem>
-#include <cmath>
 
 #include "../include/FileDropApplication.h"
 #include "../include/ProcessPlanDialog.h"

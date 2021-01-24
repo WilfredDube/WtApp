@@ -1,21 +1,16 @@
 #include "../include/ModelFileWidget.h"
 
-#include "../include/ColorWidget.h"
 #include "../include/ProcessPlanDialog.h"
 
 #include <Wt/WText.h>
 #include <Wt/WImage.h>
 #include <Wt/WHBoxLayout.h>
-#include <Wt/WDialog.h>
 #include <Wt/WMessageBox.h>
-#include <Wt/WPushButton.h>
 
-#include "../../libfxtract/include/sheet-metal-component/SheetMetal.h"
 #include "../../libfxtract/include/sheet-metal-component/BoostSerializer.h"
 
 #include "../../libfxtract/include/cad-file-reader/CadFileReader.h"
 #include "../../libfxtract/include/cad-file-reader/CadFileReaderFactory.h"
-#include "../../libfxtract/include/cad-file-reader/ReaderCreationFailedException.h"
 
 #include "../../logging/include/LoggingFacility.h"
 #include "../../logging/include/StandardOutputLogger.h"
@@ -29,11 +24,6 @@
 #include "../../dbdao/include/FolderStructure.h"
 
 #include "../../libseqgen/include/BendSequenceGenerator.h"
-
-#include <algorithm>
-#include <map>
-#include <vector>
-
 
 using namespace Fxt;
 using namespace Fxt::Dao;

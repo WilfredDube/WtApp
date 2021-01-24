@@ -1,23 +1,3 @@
-#include <Wt/WLineEdit.h>
-#include <Wt/WPushButton.h>
-#include <Wt/Auth/AuthModel.h>
-#include <Wt/Auth/AuthWidget.h>
-#include <Wt/Auth/PasswordService.h>
-#include <Wt/Auth/RegistrationModel.h>
-#include <Wt/WApplication.h>
-#include <Wt/WStackedWidget.h>
-#include <Wt/WTemplate.h>
-#include <Wt/WText.h>
-#include <Wt/WEnvironment.h>
-#include <Wt/WBootstrapTheme.h>
-#include <Wt/WMenu.h>
-#include <memory>
-#include <vector>
-
-#include <iostream>
-#include <fstream>
-#include <cstdlib>
-
 #include "../include/FXtractUI.h"
 #include "../include/NavBarWidget.h"
 #include "../include/ModelViewerWidget.h"
@@ -26,6 +6,15 @@
 #include "../../Utils/Utils.h"
 #include "../../model/include/Session.h"
 #include "../../dbdao/include/FolderStructure.h"
+
+#include <Wt/Auth/AuthModel.h>
+#include <Wt/Auth/AuthWidget.h>
+#include <Wt/Auth/PasswordService.h>
+#include <Wt/Auth/RegistrationModel.h>
+#include <Wt/WApplication.h>
+#include <Wt/WStackedWidget.h>
+#include <Wt/WText.h>
+#include <Wt/WBootstrapTheme.h>
 
 using namespace Wt;
 

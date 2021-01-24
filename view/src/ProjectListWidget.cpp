@@ -2,6 +2,7 @@
 #include "../include/ProjectSummaryWidget.h"
 
 #include "../../dbdao/include/ProjectDao.h"
+#include "../../dbdao/include/FolderStructure.h"
 
 #include "../../model/include/Session.h"
 
@@ -11,14 +12,6 @@
 #include <Wt/WLineEdit.h>
 #include <Wt/WHBoxLayout.h>
 #include <Wt/WTextArea.h>
-#include <Wt/WLocalDateTime.h>
-
-#include <iostream>
-#include <fstream>
-#include <cstdlib>
-#include <filesystem>
-
-namespace fs = std::filesystem;
 
 ProjectListWidget::ProjectListWidget(const std::string& basePath, Session& session, const std::string uploadPath)
   : WContainerWidget(),

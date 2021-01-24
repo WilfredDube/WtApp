@@ -4,7 +4,6 @@
 #include "../include/ModelInfoPanels.h"
 
 #include <Wt/WImage.h>
-#include <Wt/WGridLayout.h>
 #include <Wt/WApplication.h>
 #include <Wt/WVBoxLayout.h>
 #include <Wt/WEnvironment.h>
@@ -12,19 +11,6 @@
 #include <Wt/WPaintDevice.h>
 #include <Wt/WPaintedWidget.h>
 #include <Wt/WPainter.h>
-
-#include <Wt/WPushButton.h>
-#include <Wt/WText.h>
-#include <Wt/WDialog.h>
-#include <Wt/WLabel.h>
-#include <Wt/WLineEdit.h>
-#include <Wt/WTextArea.h>
-#include <Wt/WFileDropWidget.h>
-#include <Wt/WComboBox.h>
-#include <Wt/WProgressBar.h>
-#include <Wt/WTimer.h>
-#include <Wt/WTable.h>
-#include <Wt/WMessageBox.h>
 
 #include <thread>
 #include <future>
