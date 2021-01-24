@@ -290,8 +290,7 @@ void ModelFileWidget::processModelFile()
             // std::cout << ">>>>>>>>>> Bend sequence time : " << total_time <<std::endl;
             // std::cout << total_time << std::endl;
 
-            dbo::ptr<ProcessPlan> processPlan(Wt::cpp14::make_unique<ProcessPlan>());
-            ProcessPlan *pp = processPlan.modify();
+        generateBendingSequence(modelFile_, session_);
 
             session_.add(processPlan);
 
@@ -413,11 +412,35 @@ void ModelFileWidget::extractFeatures(Wt::Dbo::ptr<ModelFile>& modelFile, Sessio
     }
 }
 
-    session_.modelFileDeleted().emit(modelFile_);
+void ModelFileWidget::generateBendingSequence(Wt::Dbo::ptr<ModelFile>& modelFile_, Session& session_)
+{
+    double total_time = 0.0;
+    BendFeatureDao bendFeatureDao { session_ };
+    ModelFileDao modelFileDao { session_ };
+    ProcessPlanDao processPlanDao { session_ };
+    BendSequenceDao bendSequenceDao { session_ };
 
-    modelFile_.remove();
+    auto bendFeatures = bendFeatureDao.get(modelFile_);            
+    auto serializedObjectData = modelFileDao.getStringifiedModelData(modelFile_);
+    auto unStringifiedSheetMetalObj = restore(serializedObjectData);
 
-    t.commit();    
+    int value = 0;
+    std::vector<int> vec(unStringifiedSheetMetalObj->getBends().size());
+    std::generate(begin(vec), end(vec), [&value]{ value += 1; return value; });
 
-    this->removeFromParent();
+    int startTime = clock();
+
+    auto bendSequenceGenerator = std::make_shared<BendSequenceGenerator>(vec, unStringifiedSheetMetalObj);
+    bendSequenceGenerator->generateBendingSequence();
+
+    int stopTime = clock();
+    total_time = (stopTime - startTime) / double(CLOCKS_PER_SEC);
+
+    ProcessPlanDao processPlanDao { session_ };
+    auto processPlan = processPlanDao.insert(*bendSequenceGenerator, modelFile_, total_time);
+
+    BendSequenceDao bendSequenceDao { session_ };
+    bendSequenceDao.insert(bendSequenceGenerator->getSequence(), processPlan);
+
+    modelFileDao.update(modelFile_, ProcessLevel::PROCESS_PLAN_GEN);
 }
