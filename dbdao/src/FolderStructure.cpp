@@ -28,7 +28,7 @@ void renameFile(std::filesystem::path path, std::string newName)
     fs::rename(path, newName);
 }
 
-void deleteProject(std::string folderName)
+void deleteFolder(std::string folderName)
 {
     if (fs::exists(folderName)) {
         fs::remove_all(folderName);
