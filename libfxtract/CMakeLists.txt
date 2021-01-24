@@ -29,9 +29,9 @@ set(Sources
   src/cad-file-reader/StepFileReader.cpp
 
   src/obj-file-reader/readObj.cpp
-
   
   src/Computation.cpp
+  src/sheet-metal-component/BoostSerializer.cpp
   src/sheet-metal-component/SheetMetal.cpp
   src/sheet-metal-component/MFaceAbstract.cpp
   src/sheet-metal-component/face/ModelFace.cpp
