@@ -81,6 +81,8 @@ namespace SheetMetalComponent
 
         void computeBendAngles();
 
+        int getNumberOfModules();
+
         bool isParallel(FaceID bend1, FaceID bend2);
         bool isSameAngle(FaceID bend1, FaceID bend2);
         bool isSameDirection(FaceID bend1, FaceID bend2);

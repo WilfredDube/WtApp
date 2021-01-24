@@ -352,6 +352,30 @@ void SheetMetal::computeBendAngles()
     }
 }
 
+int SheetMetal::getNumberOfModules()
+{
+    const Standard_Real kMachineModuleLength = 1000.0;
+    long double longest = 0.0;
+
+    for (auto [bendId, bend] : getBends()) {
+        if (longest < bend->getBendFeature()->getBendLength()) {
+            longest = bend->getBendFeature()->getBendLength();
+        }
+    }
+
+    int num_of_modules = 1;
+
+    if (longest > kMachineModuleLength){
+        num_of_modules = longest / kMachineModuleLength;
+
+        if ((static_cast<int>(longest) % static_cast<int>(kMachineModuleLength)) > 0)
+            ++num_of_modules;
+    }
+
+    return num_of_modules;
+}
+
+
 bool SheetMetal::isParallel(FaceID bend1, FaceID bend2)
 {
     bool parallel = false;
