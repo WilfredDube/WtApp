@@ -10,8 +10,6 @@
 #include "view/include/FXtractUI.h"
 #include "model/include/Session.h"
 
-// export LD_LIBRARY_PATH=/usr/local/lib64/
-
 class FXtractApp : public Wt::WApplication
 {
 public:
