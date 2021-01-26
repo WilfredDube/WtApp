@@ -15,6 +15,12 @@ namespace Wt {
     class WPushButton;
 }
 
+namespace Fxt {
+    namespace Dao {
+        class ProcessPlanDao;
+    }
+}
+
 class ProcessPlanDialog : public Wt::WDialog
 {
 private:
@@ -39,7 +45,7 @@ private:
     Wt::WTable* bendSequenceTable_;
     Wt::WPushButton *ok_, *download_;
 
-    inline void quantityChanged(unsigned nParts, unsigned nTools, unsigned nBends, unsigned nFlips, unsigned nRotations);
+    inline void quantityChanged(Fxt::Dao::ProcessPlanDao processPlanDao, unsigned nParts, unsigned nTools, unsigned nBends, unsigned nFlips, unsigned nRotations);
 public:
     void setModelCrumb(dbo::ptr<ModelFile> modelFile);
     ProcessPlanDialog(Session& session, const std::string& title, Wt::Dbo::ptr<ModelFile>& modelFile_);
