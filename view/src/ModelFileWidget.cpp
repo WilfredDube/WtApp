@@ -133,12 +133,19 @@ void ModelFileWidget::extractFeatures()
         auto cadFileReader = cadReaderFactory->createReader(filename.c_str());
 
         cadFileReader->extractFaces(sheetMetalFeatureModel, filename.c_str());
+        sheetMetalFeatureModel->classifyFaces();
+        sheetMetalFeatureModel->computeBendAngles();
+
+        if(sheetMetalFeatureModel->reduceModelSize())
+            loggingService->writeInfoEntry({ "Done......." });
 
         modelFeatureCache[filename] = sheetMetalFeatureModel->getBends();
 
         int stopTime = clock();
 
         auto total_time = (stopTime - startTime) / double(CLOCKS_PER_SEC);
+
+        loggingService->writeInfoEntry("{" + session_.user()->name.toUTF8() + "}: " + filename + ": Computations on the extracted features....");
 
         ToolDao toolDao { session_ };
         MaterialDao materialDao { session_ };
@@ -147,7 +154,7 @@ void ModelFileWidget::extractFeatures()
 
         std::vector<float> bendingForces;
         for (auto& [bendId, bend]: modelFeatureCache[filename]) {
-            loggingService->writeInfoEntry("Computations on the extracted features...."
+            loggingService->writeInfoEntry(filename + ": Computations on the extracted features...."
                                     , std::to_string(bend->getBendFeature()->getBendAngle()) + "degrees");
 
             auto tool = toolDao.get(bend->getBendFeature()->getBendAngle());
@@ -202,6 +209,8 @@ void ModelFileWidget::generateBendingSequence()
     auto processPlan = processPlanDao.insert(*bendSequenceGenerator, modelFile_, total_time);
 
     BendSequenceDao bendSequenceDao { session_ };
+    std::cout << "Before size: " << bendFeatures.size() << std::endl;
+    std::cout << "Sequence size: " << bendSequenceGenerator->getSequence().size() << std::endl;
     bendSequenceDao.insert(bendSequenceGenerator->getSequence(), processPlan);
 
     modelFileDao.update(modelFile_, ProcessLevel::PROCESS_PLAN_GEN);
