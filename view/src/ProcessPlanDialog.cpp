@@ -55,12 +55,12 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
     t->bindWidget("planner_name", Wt::cpp14::make_unique<Wt::WText>())
                 ->setText(session.user()->name);
 
+    using namespace Fxt::Dao;
+    ProcessPlanDao processPlanDao { session };
     std::string placeHolder = modelFile_->getProcessPlan()->getModerator().empty() ? "Click to enter moderator name" : modelFile_->getProcessPlan()->getModerator();
     moderator_ = t->bindWidget("moderator", Wt::cpp14::make_unique<Wt::WInPlaceEdit>(placeHolder));
     moderator_->setPlaceholderText("Enter moderator's name");
-    moderator_->valueChanged().connect([&]{
-        using namespace Fxt::Dao;
-        ProcessPlanDao processPlanDao { session };
+    moderator_->valueChanged().connect([&]{        
         processPlanDao.update(modelFile_, moderator_->text());
     });
 
@@ -71,8 +71,6 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
     partNo_ = t->bindWidget("part_no", Wt::cpp14::make_unique<Wt::WInPlaceEdit>(partPlaceHolder));
     partNo_->setPlaceholderText("Enter part number");
     partNo_->valueChanged().connect([&]{
-        using namespace Fxt::Dao;
-        ProcessPlanDao processPlanDao { session };
         processPlanDao.update(modelFile_, partNo_->text().toUTF8());
     });
 
@@ -110,11 +108,11 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
     totalProcessingTime_->setText(processString(totalProductionTime));
 
     quantity_->changed().connect([=]{
-        quantityChanged(quantity_->value(), nTools, nBends, nFlips, nRotations);
+        quantityChanged(processPlanDao, quantity_->value(), nTools, nBends, nFlips, nRotations);
     });
 
     quantity_->enterPressed().connect([=]{
-        quantityChanged(quantity_->value(), nTools, nBends, nFlips, nRotations);
+        quantityChanged(processPlanDao, quantity_->value(), nTools, nBends, nFlips, nRotations);
     });
 
     bendSequenceTable_  = t->bindWidget("feature_table", Wt::cpp14::make_unique<Wt::WTable>());
@@ -182,12 +180,7 @@ inline void ProcessPlanDialog::quantityChanged(Fxt::Dao::ProcessPlanDao processP
     auto time_p = computeTotalProductionTime(quantity_->value(), nTools, nBends, nFlips, nRotations);;
     totalProcessingTime_->setText(processString(time_p));
 
-    {
-        using namespace Fxt::Dao;
-
-        ProcessPlanDao processPlanDao { session_ };
-        processPlanDao.update(modelFile_, quantity_->value());
-    }
+    processPlanDao.update(modelFile_, quantity_->value());
 }
 
 ProcessPlanDialog::~ProcessPlanDialog(){}
