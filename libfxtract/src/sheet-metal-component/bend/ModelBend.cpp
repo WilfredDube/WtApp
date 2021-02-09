@@ -7,19 +7,21 @@ using namespace Fxt::SheetMetalComponent::Bend;
 using namespace Fxt::SheetMetalComponent::Edge;
 
 ModelBend::ModelBend(const FaceID faceID, std::shared_ptr<TopoDS_Face> topoDSFace)
-: MFaceAbstract(faceID, topoDSFace), mBendFeature {std::make_shared<BendFeature>()},
-    mBendLine {std::make_shared<BendLine>()}
+: MFaceAbstract(faceID, topoDSFace)
 {
     if(topoDSFace != nullptr)
     {
-      setPlaneType(PlaneType::NON_PLANAR);
-      setFaceType(FaceType::BEND_FACE);
+        mBendFeature = {std::make_shared<BendFeature>()};
+        mBendLine = {std::make_shared<BendLine>()};
 
-      mBendFeature->setJoiningFaceID1(0);
-      mBendFeature->setJoiningFaceID2(0);
-      mBendFeature->setBendAngle(0);
+        setPlaneType(PlaneType::NON_PLANAR);
+        setFaceType(FaceType::BEND_FACE);
 
-      init();
+        mBendFeature->setJoiningFaceID1(0);
+        mBendFeature->setJoiningFaceID2(0);
+        mBendFeature->setBendAngle(0);
+
+        init();
     }
 }
 
