@@ -1,7 +1,8 @@
 #pragma once
 
-// #include "../Point.h"
-// #include "../../Computation.h"
+#include "Point.h"
+#include "../BoostSerializer.h"
+#include "../edge/ModelEdge.h"
 
 #include <gp_Lin.hxx>
 
@@ -23,6 +24,18 @@ namespace Bend
     
     class BendLine
     {
+        friend class boost::serialization::access;
+        friend std::ostream & operator<<(std::ostream &os, const BendLine &br);
+
+        template<class Archive>
+        void serialize(Archive &ar, const unsigned int version)
+        {
+            // save/load base class information
+            ar & mBendLinePnt & mBendLineDir;
+
+            makeBendLine();
+        }
+    
         // Central in line along a bend and between the LINE type edges.
         std::shared_ptr<gp_Lin> mBendLine;
         

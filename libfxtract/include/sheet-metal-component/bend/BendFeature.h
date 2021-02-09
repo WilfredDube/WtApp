@@ -18,7 +18,17 @@ namespace Bend
     struct BendFeature
     {
     private:
-        // using FaceID = Fxt::SheetMetalComponent::ModelTypes::FaceID;
+        friend class boost::serialization::access;
+        friend std::ostream & operator<<(std::ostream &os, const BendFeature &br);
+
+        template<class Archive>
+        void serialize(Archive &ar, const unsigned int version)
+        {
+            // save/load base class information
+            ar & mBendAngle & mBendDirection;
+            ar & mBendLength;
+            ar & mJoinedFaceId1 & mJoinedFaceId2;
+        }
 
         long double mBendLength;
 

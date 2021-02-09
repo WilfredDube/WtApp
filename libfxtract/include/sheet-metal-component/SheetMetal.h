@@ -19,6 +19,15 @@ namespace SheetMetalComponent
 
     class SheetMetal
     {
+        friend class boost::serialization::access;
+        friend std::ostream & operator<<(std::ostream &os, const SheetMetal &m);
+
+        template<class Archive>
+        void serialize(Archive &ar, const unsigned int version)
+        {
+            ar & mModelBends;
+        }
+
         std::map<FaceID, std::shared_ptr<Face::ModelFace>> mModelFaces;
         std::map<FaceID, std::shared_ptr<Bend::ModelBend>> mModelBends;
 

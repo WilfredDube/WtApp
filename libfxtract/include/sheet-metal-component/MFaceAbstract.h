@@ -1,7 +1,8 @@
 #pragma once
 
 #include "ModelTypes.h"
-#include "./edge/ModelEdge.h"
+#include "BoostSerializer.h"
+#include "edge/ModelEdge.h"
 
 #include <GeomAbs_CurveType.hxx>
 #include <Interface_Static.hxx>
@@ -18,6 +19,13 @@ namespace SheetMetalComponent
 {
     class MFaceAbstract
     {
+        friend class boost::serialization::access; 
+        friend std::ostream & operator<<(std::ostream &os, const MFaceAbstract &mf);
+
+        template<class Archive>
+        void serialize(Archive & ar, const unsigned int /* file_version */){
+            ar & mFaceID;
+        }
     protected:
         enum class PlaneType { PLANAR, NON_PLANAR };
 

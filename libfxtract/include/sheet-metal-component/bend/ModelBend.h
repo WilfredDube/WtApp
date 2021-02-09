@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../MFaceAbstract.h"
+#include "../../../include/sheet-metal-component/bend/BendLine.h"
 #include "../../../include/sheet-metal-component/bend/BendFeature.h"
 
 namespace Fxt
@@ -9,11 +10,23 @@ namespace SheetMetalComponent
 {
 namespace Bend
 {            
-    class BendLine;
-    class BendFeature;
+    // class BendLine;
+    // class BendFeature;
 
     class ModelBend : public Fxt::SheetMetalComponent::MFaceAbstract
     {
+        friend class boost::serialization::access;
+        friend std::ostream & operator<<(std::ostream &os, const ModelBend &br);
+        
+        template<class Archive>
+        void serialize(Archive &ar, const unsigned int version)
+        {
+            // save/load base class information
+            ar & boost::serialization::base_object<MFaceAbstract>(*this);
+            ar & mBendFeature;
+            ar & mBendLine;
+        }
+
         std::shared_ptr< Fxt::SheetMetalComponent::Bend::BendFeature> mBendFeature;
     
         unsigned long mBendSameAsId;
