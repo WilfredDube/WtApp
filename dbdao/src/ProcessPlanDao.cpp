@@ -42,9 +42,9 @@ Wt::Dbo::ptr<ProcessPlan> ProcessPlanDao::insert(BendSequenceGenerator& bendSequ
 
 Wt::Dbo::ptr<ProcessPlan> ProcessPlanDao::update(dbo::ptr<ModelFile>& modelFile, const Wt::WString& moderator)
 {
+    dbo::Transaction transaction(session);
+    
     {
-        dbo::Transaction transaction(session);
-
         modelFile->processPlan.modify()->moderator = moderator.toUTF8();
     }
 
@@ -53,9 +53,9 @@ Wt::Dbo::ptr<ProcessPlan> ProcessPlanDao::update(dbo::ptr<ModelFile>& modelFile,
 
 Wt::Dbo::ptr<ProcessPlan> ProcessPlanDao::update(dbo::ptr<ModelFile>& modelFile, std::string& partNumber)
 {
-    {
-        dbo::Transaction transaction(session);
+    dbo::Transaction transaction(session);
 
+    {
         modelFile->processPlan.modify()->part_no = partNumber;
     }
 
@@ -64,9 +64,9 @@ Wt::Dbo::ptr<ProcessPlan> ProcessPlanDao::update(dbo::ptr<ModelFile>& modelFile,
 
 Wt::Dbo::ptr<ProcessPlan> ProcessPlanDao::update(dbo::ptr<ModelFile>& modelFile, size_t quantity)
 {
-    {
-        dbo::Transaction transaction(session);
+    dbo::Transaction transaction(session);
 
+    {
         modelFile->processPlan.modify()->quantity = quantity;
     }
 
@@ -76,9 +76,9 @@ Wt::Dbo::ptr<ProcessPlan> ProcessPlanDao::update(dbo::ptr<ModelFile>& modelFile,
 
 dbo::ptr<ProcessPlan> ProcessPlanDao::update(dbo::ptr<ModelFile>& modelFile, double manufacturing_time)
 {
-    {
-        dbo::Transaction transaction(session);
+    dbo::Transaction transaction(session);
 
+    {
          modelFile->processPlan.modify()->estimated_manufacturing_time = manufacturing_time;
     }
 
@@ -87,9 +87,9 @@ dbo::ptr<ProcessPlan> ProcessPlanDao::update(dbo::ptr<ModelFile>& modelFile, dou
 
 dbo::ptr<ProcessPlan> ProcessPlanDao::update(dbo::ptr<ModelFile>& modelFile, int numberOfModules)
 {
-    {
-        dbo::Transaction transaction(session);
+    dbo::Transaction transaction(session);
 
+    {
          modelFile->processPlan.modify()->no_modules = numberOfModules;
     }
 
