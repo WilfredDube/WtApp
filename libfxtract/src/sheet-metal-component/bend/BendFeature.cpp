@@ -3,6 +3,20 @@
 
 using namespace Fxt::SheetMetalComponent::Bend;
 
+std::ostream & operator<<(std::ostream &os, const BendFeature &bf)
+{
+    os << std::setprecision(3);
+    os << bf.getBendAngle() << " "
+       << bf.getBendDirection() << " "
+       << bf.getBendLength() << " "
+       << bf.getJoiningFaceID1() << " "
+       << bf.getJoiningFaceID2() << " ";
+
+    os << '\n';
+        
+    return os;
+}
+
 void BendFeature::setJoiningFaceID1(const FaceID mFaceID)
 {
     mJoinedFaceId1 = mFaceID;

@@ -8,6 +8,22 @@
 using namespace Fxt::SheetMetalComponent::Bend;
 using namespace Fxt::SheetMetalComponent::Edge;
 
+std::ostream & operator<<(std::ostream &os, const BendLine &mb)
+{
+    os << std::setprecision(3);
+    os << mb.getBendLine()->Location().X() << " " 
+       << mb.getBendLine()->Location().Y() << " " 
+       << mb.getBendLine()->Location().Z();
+
+    os << mb.getBendLine()->Direction().X() << " " 
+       << mb.getBendLine()->Direction().Y() << " " 
+       << mb.getBendLine()->Direction().Z();
+
+    os << '\n';
+        
+    return os;
+}
+
 void BendLine::computeBendLine(
     const std::vector<std::shared_ptr<Fxt::SheetMetalComponent::Edge::ModelEdge>>& arcEdges)
 {
