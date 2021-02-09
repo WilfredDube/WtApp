@@ -133,11 +133,13 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
 
     auto bendingSequence = processPlan->getBendingSequence();
 
-    auto startIter = bendingSequence.begin();
-    auto endIter = bendingSequence.end();
+    // std::cout << "Sequence size: " + bendingSequence.size() << std::endl;
+
+    // auto startIter = bendingSequence.begin();
+    // auto endIter = bendingSequence.end();
 
     int size = 1;
-    for( ; startIter != endIter; ++startIter)
+    for(auto startIter = bendingSequence.begin(); startIter != bendingSequence.end(); ++startIter)
     {    
         for(auto& bend : bf) 
         {
