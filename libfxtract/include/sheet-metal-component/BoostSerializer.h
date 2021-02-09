@@ -9,8 +9,13 @@
 #include <boost/serialization/utility.hpp>
 #include <boost/serialization/map.hpp>
 #include <boost/serialization/assume_abstract.hpp>
+#include <boost/serialization/shared_ptr.hpp>
 
-#include "SheetMetal.h"
+namespace Fxt{
+    namespace SheetMetalComponent {
+        class SheetMetal;
+    }
+}
 
 std::string save(const std::shared_ptr<Fxt::SheetMetalComponent::SheetMetal>& sheetMetalFeatureModel);
 
