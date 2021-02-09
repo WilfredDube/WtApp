@@ -13,15 +13,9 @@ namespace Fxt
 {
 namespace SheetMetalComponent
 {
-namespace Edge
-{
-    class ModelEdge;
-}
 
 namespace Bend
-{    
-    class Point;
-    
+{        
     class BendLine
     {
         friend class boost::serialization::access;
