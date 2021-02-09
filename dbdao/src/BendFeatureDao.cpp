@@ -46,7 +46,7 @@ BendFeatures BendFeatureDao::get(dbo::ptr<ModelFile>& modelFile)
     dbo::Transaction transaction(session);
     
     BendFeatures bendFeatures = session.find<BendFeature>()
-                                        .where("modelFile = ?").bind(modelFile);
+                                        .where("bend_features_id = ?").bind(modelFile.id());
 
     return bendFeatures;
 }
