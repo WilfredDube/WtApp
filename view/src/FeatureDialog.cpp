@@ -51,34 +51,15 @@ FeatureDialog::FeatureDialog(Session& session, const std::string& title, Wt::Dbo
         bendSequenceTable_->elementAt(rowCount, 4)->addNew<Wt::WText>(processString(bend->bend_length));
         bendSequenceTable_->elementAt(rowCount, 5)->addNew<Wt::WText>(processString(bend->bend_radius));
         
-        auto comboBox = bendSequenceTable_->elementAt(rowCount, 6)->addNew<Wt::WComboBox>();
-        comboBox->addItem("Select the bend direction");
-        comboBox->addItem("Inside");
-        comboBox->addItem("Outside");
+        std::string bendDirection;
+        if(bend->bend_direction == 1)
+            bendDirection = "INSIDE";
+        else if(bend->bend_direction == 2)
+            bendDirection = "OUTSIDE";
 
-        comboBox->setCurrentIndex(int(bend->bend_direction));
+        bendSequenceTable_->elementAt(rowCount, 6)->addNew<Wt::WText>(bendDirection);
 
         bendSequenceTable_->elementAt(rowCount, 7)->addNew<Wt::WText>(bend->bending_tool_id.c_str());
-
-        comboBox->changed().connect([=]{
-            Wt::WString bendDirStr = comboBox->currentText();
-            size_t bendDir;
-
-            if (bendDirStr == "Inside")
-            {
-                bendDir = 1;
-            } else {
-                bendDir = 2;
-            }
-
-            if (bendDir == 1 || bendDir == 2) {
-                dbo::Transaction t(session_);
-
-                bend.modify()->bend_direction = bendDir;
-
-                t.commit();
-            }            
-        });
 
         ++rowCount;
     }
