@@ -96,6 +96,8 @@ namespace SheetMetalComponent
         bool isSameAngle(FaceID bend1, FaceID bend2);
         bool isSameDirection(FaceID bend1, FaceID bend2);
 
+        void assignBendDirection();
+
         double distance(FaceID bend1, FaceID bend2);
 
         friend std::ostream& operator<<(std::ostream& os, const std::shared_ptr<SheetMetal>& sheetMetal)

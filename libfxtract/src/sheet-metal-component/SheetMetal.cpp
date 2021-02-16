@@ -427,3 +427,39 @@ bool SheetMetal::isSameDirection(FaceID bend1, FaceID bend2)
 
     return false;
 }
+
+void SheetMetal::assignBendDirection()
+{
+    auto max = std::numeric_limits<long double>::min();
+    auto min = std::numeric_limits<long double>::max();
+
+    for(auto& [id, bend] : mModelBends){
+        if(max < bend->getBendFeature()->getBendRadius()){
+            max = bend->getBendFeature()->getBendRadius();
+
+            bend->getBendFeature()->setBendDirection(2);
+        }
+
+        if(min > bend->getBendFeature()->getBendRadius()){
+            min = bend->getBendFeature()->getBendRadius();
+
+            bend->getBendFeature()->setBendDirection(1);
+        }
+    }
+
+    for(auto& [id, bend] : mModelBends){
+        if(max == bend->getBendFeature()->getBendRadius()){
+            bend->getBendFeature()->setBendDirection(2);
+        }
+
+        if(min == bend->getBendFeature()->getBendRadius()){
+            bend->getBendFeature()->setBendDirection(1);
+        }
+
+      bend->getBendFeature()->setBendRadius(min);
+    }
+
+    std::cerr << "Max radius: " << max << '\n';
+    std::cerr << "Min radius: " << min << '\n';
+    std::cerr << "Actual radius: " << (min + max) / 2 << '\n';
+}
