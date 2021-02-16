@@ -64,6 +64,7 @@ namespace Bend
         long double getBendLength() const;
 
         void setCurvature(const long double cv);
+        void setBendRadius(long double bendRadius);
         long double getBendRadius() const;
         
         // TODO : calculate Bending force, direction, orientation & distance

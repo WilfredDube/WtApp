@@ -77,6 +77,11 @@ void BendFeature::setCurvature(const long double cv)
     }
 }
 
+void BendFeature::setBendRadius(long double bendRadius)
+{
+    mBendRadius = bendRadius;
+}
+
 long double BendFeature::getBendRadius() const
 {
     return mBendRadius;
