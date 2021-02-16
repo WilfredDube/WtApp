@@ -135,6 +135,7 @@ void ModelFileWidget::extractFeatures()
         cadFileReader->extractFaces(sheetMetalFeatureModel, filename.c_str());
         sheetMetalFeatureModel->classifyFaces();
         sheetMetalFeatureModel->computeBendAngles();
+        sheetMetalFeatureModel->assignBendDirection();
 
         if(sheetMetalFeatureModel->reduceModelSize())
             loggingService->writeInfoEntry({ "Done......." });
