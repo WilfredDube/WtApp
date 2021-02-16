@@ -27,7 +27,7 @@ Wt::Dbo::ptr<BendFeature> BendFeatureDao::insert(const Bend::ModelBend& modelBen
         bendFeature->bend_radius = modelBend.getBendFeature()->getBendRadius();
         bendFeature->bend_length = modelBend.getBendFeature()->getBendLength();
         bendFeature->modelFile = cadFile;
-        bendFeature->bend_direction = 0;
+        bendFeature->bend_direction = modelBend.getBendFeature()->getBendDirection();
 
         ToolDao toolDao { session };
         bendFeature->bending_tool_id = toolDao.get(bendFeature->bend_angle)->getId();
