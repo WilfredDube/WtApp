@@ -110,7 +110,8 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
 
     totalProcessingTime_ = t->bindWidget("total_processing_time", Wt::cpp14::make_unique<Wt::WText>());
     auto totalProductionTime = computeTotalProductionTime(quantity_->value(), nTools, nBends, nFlips, nRotations);
-    totalProcessingTime_->setText(processString(totalProductionTime));
+    setProductionTime(totalProductionTime);
+    // totalProcessingTime_->setText(processString(totalProductionTime));
 
     quantity_->changed().connect([=]{
         quantityChanged(processPlanDao, quantity_->value(), nTools, nBends, nFlips, nRotations);
@@ -192,8 +193,7 @@ void ProcessPlanDialog::setModelCrumb(dbo::ptr<ModelFile> modelFile)
 
 inline void ProcessPlanDialog::quantityChanged(Fxt::Dao::ProcessPlanDao processPlanDao, unsigned nParts, unsigned nTools, unsigned nBends, unsigned nFlips, unsigned nRotations)
 {
-    auto time_p = computeTotalProductionTime(quantity_->value(), nTools, nBends, nFlips, nRotations);;
-    totalProcessingTime_->setText(processString(time_p));
+    setProductionTime(time_p);
 
     Fxt::Dao::ProcessPlanDao processPlanDao (session_);
     processPlanDao.update(modelFile_, quantity_->value());
