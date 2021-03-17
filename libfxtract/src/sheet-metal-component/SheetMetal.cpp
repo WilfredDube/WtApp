@@ -437,26 +437,27 @@ void SheetMetal::assignBendDirection()
         if(max < bend->getBendFeature()->getBendRadius()){
             max = bend->getBendFeature()->getBendRadius();
 
-            bend->getBendFeature()->setBendDirection(2);
+            bend->getBendFeature()->setBendDirection(1);
         }
 
         if(min > bend->getBendFeature()->getBendRadius()){
             min = bend->getBendFeature()->getBendRadius();
 
-            bend->getBendFeature()->setBendDirection(1);
+            bend->getBendFeature()->setBendDirection(2);
         }
     }
 
     for(auto& [id, bend] : mModelBends){
         if(max == bend->getBendFeature()->getBendRadius()){
-            bend->getBendFeature()->setBendDirection(2);
-        }
-
-        if(min == bend->getBendFeature()->getBendRadius()){
             bend->getBendFeature()->setBendDirection(1);
         }
 
-      bend->getBendFeature()->setBendRadius(min);
+        if(min == bend->getBendFeature()->getBendRadius()){
+            bend->getBendFeature()->setBendDirection(2);
+        }
+
+        std::cerr << "bend dir: " << bend->getBendFeature()->getBendDirection() << '\n';
+        bend->getBendFeature()->setBendRadius(min);
     }
 
     std::cerr << "Max radius: " << max << '\n';
