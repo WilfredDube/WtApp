@@ -23,7 +23,7 @@ ModelInfoPanels::ModelInfoPanels(Session& session, dbo::ptr<Project> project)
 
     session_.modelFileChanged().connect(this, &ModelInfoPanels::updateModelList);
     session_.modelFileDeleted().connect(this, &ModelInfoPanels::reloadList);
-    session_.modelFeaturesExtracted().connect(this, &ModelInfoPanels::updateFeatureTables);
+    session_.modelFeaturesTableUpdate().connect(this, &ModelInfoPanels::updateFeatureTables);
 
     /************************** Model File List *********************/
     auto modelFilesGroupBox = Wt::cpp14::make_unique<Wt::WGroupBox>();
@@ -56,10 +56,10 @@ ModelInfoPanels::ModelInfoPanels(Session& session, dbo::ptr<Project> project)
     panelList_->addWidget("Bend Feature Summary", std::move(bendFeaturesSummaryTable));
 
     /************************** Project Process Plans *********************/
-    auto processPlanGroupBox = Wt::cpp14::make_unique<Wt::WGroupBox>();
-    processPlanGroupBox_ = processPlanGroupBox.get();
-    processPlanGroupBox->addStyleClass("centered-example");
-    panelList_->addWidget("Project Process Plans", std::move(processPlanGroupBox));
+    // auto processPlanGroupBox = Wt::cpp14::make_unique<Wt::WGroupBox>();
+    // processPlanGroupBox_ = processPlanGroupBox.get();
+    // processPlanGroupBox->addStyleClass("centered-example");
+    // panelList_->addWidget("Project Process Plans", std::move(processPlanGroupBox));
 }
 
 void ModelInfoPanels::loadModelList()

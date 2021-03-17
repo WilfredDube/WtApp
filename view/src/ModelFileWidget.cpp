@@ -71,6 +71,7 @@ void ModelFileWidget::processModelFile()
         icons_->setIconColor(ProcessLevel::FEATURE_EXTRACTED);
 
         session_.modelFeaturesExtracted().emit(modelFile_);
+        session_.modelFeaturesTableUpdate().emit(modelFile_);
         break;
     case ProcessLevel::FEATURE_EXTRACTED:
         std::cout << "Process Planning started..." << std::endl;        
@@ -78,6 +79,8 @@ void ModelFileWidget::processModelFile()
         generateBendingSequence();
 
         icons_->setIconColor(ProcessLevel::PROCESS_PLAN_GEN );
+
+        session_.modelFeaturesTableUpdate().emit(modelFile_);
         break;
     case ProcessLevel::PROCESS_PLAN_GEN:
 
@@ -87,8 +90,8 @@ void ModelFileWidget::processModelFile()
             d->show();
         }
         
-        break;
-    
+        session_.modelFeaturesTableUpdate().emit(modelFile_);
+        break;    
     default:
         break;
     }
@@ -177,7 +180,7 @@ void ModelFileWidget::extractFeatures()
         float bendingForce = *(std::max_element(bendingForces.begin(), bendingForces.end()));
 
         modelFileDao.update(modelFile_, total_time);
-        modelFileDao.update(modelFile_, bendingForce);
+        modelFileDao.update(modelFile_, bendingForce/ 1000);
         modelFileDao.update(modelFile_, ProcessLevel::FEATURE_EXTRACTED);
         modelFileDao.update(modelFile_, sheetMetalFeatureModel->getThickness());
         modelFileDao.update(modelFile_, save(sheetMetalFeatureModel));
@@ -202,6 +205,7 @@ void ModelFileWidget::generateBendingSequence()
 
     auto bendSequenceGenerator = std::make_shared<BendSequenceGenerator>(vec, unStringifiedSheetMetalObj);
     bendSequenceGenerator->generateBendingSequence();
+    bendSequenceGenerator->print();
 
     int stopTime = clock();
     total_time = (stopTime - startTime) / double(CLOCKS_PER_SEC);

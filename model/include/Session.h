@@ -32,6 +32,7 @@ public:
     Wt::Signal<dbo::ptr<ModelFile> >& modelFileClicked(){ return modelFileClicked_; }
     Wt::Signal<dbo::ptr<ModelFile> >& modelFileDeleted(){ return modelFileDelete_; }
     Wt::Signal<dbo::ptr<ModelFile> >& modelFeaturesExtracted() { return modelFeaturesExtracted_; }
+    Wt::Signal<dbo::ptr<ModelFile> >& modelFeaturesTableUpdate() { return modelFeaturesTableUpdate_; }
 
     FxtUserDatabase& users();
     Wt::Auth::Login& login() { return login_; }
@@ -50,6 +51,7 @@ private:
     Wt::Signal< dbo::ptr<ModelFile> > modelFileClicked_;
     Wt::Signal< dbo::ptr<ModelFile> > modelFileDelete_;
     Wt::Signal< dbo::ptr<ModelFile> > modelFeaturesExtracted_;
+    Wt::Signal< dbo::ptr<ModelFile> > modelFeaturesTableUpdate_;
 
     void fillTools();
     void fillMaterial();
