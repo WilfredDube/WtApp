@@ -25,6 +25,7 @@ Wt::Dbo::ptr<ProcessPlan> ProcessPlanDao::insert(BendSequenceGenerator& bendSequ
         processPlan->modelFile = modelFile;
 
         processPlan->no_flips = bendSequence.getNumberOfFlips();
+        processPlan->no_modules = bendSequence.getNumberOfModules();
         processPlan->no_rotations = bendSequence.getNumberOfRotations();
         processPlan->no_tools = bendSequence.getNumberOfTools();
         processPlan->tool_distance = bendSequence.getNumberOfDistance();
