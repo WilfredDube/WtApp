@@ -28,6 +28,7 @@ typedef dbo::collection< dbo::ptr<BendSequence> > BendSequences;
 
 class ProcessPlan 
 {
+public:
   std::string part_no;
   int no_rotations;
   int no_flips;
@@ -43,7 +44,6 @@ class ProcessPlan
   dbo::ptr<ModelFile> modelFile;
   BendSequences bendSequences;
 
-public:
   template<class Action>
   void persist(Action& a) {
     dbo::field(a, part_no, "part_no");

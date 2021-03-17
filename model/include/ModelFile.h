@@ -34,6 +34,7 @@ enum class ProcessLevel { UNPROCESSED, FEATURE_EXTRACTED, PROCESS_PLAN_GEN };
 
 class ModelFile 
 {
+public:
   dbo::ptr<User> author;
   dbo::ptr<Project> project;
 
@@ -49,8 +50,7 @@ class ModelFile
 
   BendFeatures bendFeatures;
   dbo::weak_ptr<ProcessPlan> processPlan;
-
-public:
+  
   template<class Action>
   void persist(Action& a) {
     dbo::field(a, bendingForce, "bending_force");
