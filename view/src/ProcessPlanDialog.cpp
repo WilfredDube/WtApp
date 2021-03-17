@@ -113,12 +113,12 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
     setProductionTime(totalProductionTime);
     // totalProcessingTime_->setText(processString(totalProductionTime));
 
-    quantity_->changed().connect([=]{
-        quantityChanged(processPlanDao, quantity_->value(), nTools, nBends, nFlips, nRotations);
+    quantity_->changed().connect([=] {
+        quantityChanged(quantity_->value(), nTools, nBends, nFlips, nRotations);
     });
 
-    quantity_->enterPressed().connect([=]{
-        quantityChanged(processPlanDao, quantity_->value(), nTools, nBends, nFlips, nRotations);
+    quantity_->enterPressed().connect([=] {
+        quantityChanged(quantity_->value(), nTools, nBends, nFlips, nRotations);
     });
 
     bendSequenceTable_  = t->bindWidget("feature_table", Wt::cpp14::make_unique<Wt::WTable>());
@@ -191,7 +191,7 @@ void ProcessPlanDialog::setModelCrumb(dbo::ptr<ModelFile> modelFile)
     refresh();
 }
 
-inline void ProcessPlanDialog::quantityChanged(Fxt::Dao::ProcessPlanDao processPlanDao, unsigned nParts, unsigned nTools, unsigned nBends, unsigned nFlips, unsigned nRotations)
+inline void ProcessPlanDialog::quantityChanged(unsigned nParts, unsigned nTools, unsigned nBends, unsigned nFlips, unsigned nRotations)
 {
     setProductionTime(time_p);
 
