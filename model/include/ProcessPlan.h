@@ -48,6 +48,7 @@ public:
   void persist(Action& a) {
     dbo::field(a, part_no, "part_no");
     dbo::field(a, no_rotations, "no_rotations");
+    dbo::field(a, no_tools, "no_tools");
     dbo::field(a, no_flips, "no_flips");
     dbo::field(a, no_modules, "no_modules");
     dbo::field(a, quantity, "quantity");
