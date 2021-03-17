@@ -129,7 +129,12 @@ void BendSequenceGenerator::print()
 
 bool BendSequenceGenerator::Sequence::operator<(const BendSequenceGenerator::Sequence& individualSequence)
 {
-    return (fitness > individualSequence.fitness);
+    return (this->fitness > individualSequence.fitness);
+}
+
+bool BendSequenceGenerator::Sequence::operator==(const BendSequenceGenerator::Sequence& individualSequence)
+{
+    return std::equal(cbegin(this->chromosome), cend(this->chromosome), cbegin(individualSequence.chromosome));
 }
 
 size_t BendSequenceGenerator::getNumberOfTools() { return sequenceImpl_->nTools; }
