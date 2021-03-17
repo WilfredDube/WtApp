@@ -93,6 +93,9 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
     nTools_ = t->bindWidget("tools_no", Wt::cpp14::make_unique<Wt::WText>());
     nTools_->setText(processString(nTools));
 
+    thickness_ = t->bindWidget("thickness", Wt::cpp14::make_unique<Wt::WText>());
+    thickness_->setText(processString(thickness));
+
     bendingForce_ = t->bindWidget("bending_force", Wt::cpp14::make_unique<Wt::WText>());
     bendingForce_->setText(processString(bendingForce));
 
