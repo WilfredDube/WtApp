@@ -5,9 +5,9 @@
             <div>
                 ${add-model}
             </div>           
-            <div>
+            <!-- <div>
                 ${bs-gen}
-            </div>          
+            </div>           -->
             <div>
                 ${fag}
             </div>
