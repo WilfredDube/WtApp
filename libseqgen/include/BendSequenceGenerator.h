@@ -35,6 +35,7 @@ public:
     size_t getNumberOfTools();
     size_t getNumberOfRotations();
     size_t getNumberOfFlips();
+    size_t getNumberOfModules();
     double getNumberOfDistance();
 
     std::vector<int> getSequence();

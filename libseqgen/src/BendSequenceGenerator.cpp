@@ -143,4 +143,6 @@ size_t BendSequenceGenerator::getNumberOfRotations() { return sequenceImpl_->nRo
 
 size_t BendSequenceGenerator::getNumberOfFlips() { return sequenceImpl_->nFlips; }
 
+size_t BendSequenceGenerator::getNumberOfModules() { return sequenceImpl_->nModules; }
+
 double BendSequenceGenerator::getNumberOfDistance() { return sequenceImpl_->distance; }
