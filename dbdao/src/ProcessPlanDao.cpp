@@ -57,7 +57,7 @@ Wt::Dbo::ptr<ProcessPlan> ProcessPlanDao::update(dbo::ptr<ModelFile>& modelFile,
     dbo::Transaction transaction(session);
 
     {
-        modelFile->processPlan.modify()->part_no = partNumber;
+        modelFile->processPlan.modify()->part_no = partNumber.toUTF8();
     }
 
     return  modelFile->processPlan;
