@@ -40,7 +40,7 @@ Wt::Dbo::ptr<ProcessPlan> ProcessPlanDao::insert(BendSequenceGenerator& bendSequ
     return ret;
 }
 
-Wt::Dbo::ptr<ProcessPlan> ProcessPlanDao::update(dbo::ptr<ModelFile>& modelFile, const Wt::WString& moderator)
+Wt::Dbo::ptr<ProcessPlan> ProcessPlanDao::updateModerator(dbo::ptr<ModelFile>& modelFile, const Wt::WString& moderator)
 {
     dbo::Transaction transaction(session);
     
@@ -51,7 +51,7 @@ Wt::Dbo::ptr<ProcessPlan> ProcessPlanDao::update(dbo::ptr<ModelFile>& modelFile,
     return  modelFile->processPlan;
 }
 
-Wt::Dbo::ptr<ProcessPlan> ProcessPlanDao::update(dbo::ptr<ModelFile>& modelFile, std::string& partNumber)
+Wt::Dbo::ptr<ProcessPlan> ProcessPlanDao::update(dbo::ptr<ModelFile>& modelFile, const Wt::WString& partNumber)
 {
     dbo::Transaction transaction(session);
 
