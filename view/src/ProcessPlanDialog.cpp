@@ -177,9 +177,7 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
 
     transaction.commit();
 
-    /*
-     * Reject the dialog
-     */
+    // Reject the dialog
     ok_->clicked().connect(this, &Wt::WDialog::reject);
 
     // session_.modelFileClicked().connect(this, &ProcessPlanDialog::setModelCrumb);
@@ -193,6 +191,7 @@ void ProcessPlanDialog::setModelCrumb(dbo::ptr<ModelFile> modelFile)
 
 inline void ProcessPlanDialog::quantityChanged(unsigned nParts, unsigned nTools, unsigned nBends, unsigned nFlips, unsigned nRotations)
 {
+    auto time_p = computeTotalProductionTime(quantity_->value(), nTools, nBends, nFlips, nRotations);
     setProductionTime(time_p);
 
     Fxt::Dao::ProcessPlanDao processPlanDao (session_);
