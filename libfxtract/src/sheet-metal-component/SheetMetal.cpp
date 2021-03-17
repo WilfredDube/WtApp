@@ -366,7 +366,7 @@ int SheetMetal::getNumberOfModules()
     int num_of_modules = 0;
 
     if (longest > kMachineModuleLength){
-        num_of_modules = longest / kMachineModuleLength;
+        num_of_modules = longest / kMachineModuleLength - 1;
 
         if ((static_cast<int>(longest) % static_cast<int>(kMachineModuleLength)) > 0)
             ++num_of_modules;
