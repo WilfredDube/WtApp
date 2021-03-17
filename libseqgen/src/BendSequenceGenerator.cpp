@@ -113,6 +113,15 @@ void BendSequenceGenerator::generateBendingSequence()
      }
 
 
+    int bestSeq = 0;
+    sequenceImpl_->chromosome = population[bestSeq].chromosome;
+    sequenceImpl_->fitness = population[bestSeq].fitness;
+    sequenceImpl_->nTools = population[bestSeq].nTools;
+    sequenceImpl_->nFlips = population[bestSeq].nFlips;
+    sequenceImpl_->nRotations = population[bestSeq].nRotations;
+    sequenceImpl_->distance = population[bestSeq].distance;
+    sequenceImpl_->targetSize = population[bestSeq].targetSize;
+    sequenceImpl_->nModules = sheetMetalFeature->getNumberOfModules();
 }
 
 std::vector<int> BendSequenceGenerator::getSequence() { return sequenceImpl_->chromosome; }
