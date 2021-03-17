@@ -363,7 +363,7 @@ int SheetMetal::getNumberOfModules()
         }
     }
 
-    int num_of_modules = 1;
+    int num_of_modules = 0;
 
     if (longest > kMachineModuleLength){
         num_of_modules = longest / kMachineModuleLength;
