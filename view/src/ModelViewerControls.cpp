@@ -49,25 +49,25 @@ ModelViewerControls::ModelViewerControls(Session& session, const std::string upl
 	addModelButton_ = controls_->bindWidget("add-model", std::move(addModelButton));
     addModelButton_->addStyleClass("btn btn-floating btn-success btn-circle btn-md");
     addModelButton_->setIcon("icons/add_model.svg");
-    addModelButton_->setToolTip("Add model file(s)");
+    addModelButton_->setToolTip("Upload CAD file(s)");
     addModelButton_->clicked().connect([=] {
         addModelDialog();
     });
 
-    auto bendingSeqButton = Wt::cpp14::make_unique<Wt::WPushButton>();
-	bendingSeqButton_ = controls_->bindWidget("bs-gen", std::move(bendingSeqButton));
-    bendingSeqButton_->addStyleClass("btn btn-floating btn-success btn-circle btn-md");
-    bendingSeqButton_->setIcon("icons/bsg.svg");
-    bendingSeqButton_->setToolTip("Generate the Bending Sequence");
-    bendingSeqButton_->clicked().connect([=] {
-        bendingSeqDialog();
-    });
+    // auto bendingSeqButton = Wt::cpp14::make_unique<Wt::WPushButton>();
+	// bendingSeqButton_ = controls_->bindWidget("bs-gen", std::move(bendingSeqButton));
+    // bendingSeqButton_->addStyleClass("btn btn-floating btn-success btn-circle btn-md");
+    // bendingSeqButton_->setIcon("icons/settings.svg");
+    // bendingSeqButton_->setToolTip("Generate the Bending Sequence");
+    // bendingSeqButton_->clicked().connect([=] {
+    //     bendingSeqDialog();
+    // });
 
     auto featureButton = Wt::cpp14::make_unique<Wt::WPushButton>();
 	featureButton_ = controls_->bindWidget("fag", std::move(featureButton));
     featureButton_->addStyleClass("btn btn-success btn-circle btn-md");
     featureButton_->setIcon("icons/fag.svg");
-    featureButton_->setToolTip("View Model Face Adjacency Graph");
+    featureButton_->setToolTip("Current CAD model features");
     featureButton_->clicked().connect([=] {
         featureDialog();
     });
@@ -75,11 +75,11 @@ ModelViewerControls::ModelViewerControls(Session& session, const std::string upl
     auto SettingButton = Wt::cpp14::make_unique<Wt::WPushButton>();
 	SettingButton_ = controls_->bindWidget("settings", std::move(SettingButton));
     SettingButton_->addStyleClass("btn btn-success btn-circle btn-md");
-    SettingButton_->setIcon("icons/settings.svg");
-    SettingButton_->setToolTip("Change Display settings");
+    SettingButton_->setIcon("icons/bsg.svg");
+    SettingButton_->setToolTip("Display processing plan");
     SettingButton_->clicked().connect([=] {
         settingsDialog();
-    });  
+    }); 
 
     addWidget(std::move(controls_));
 
