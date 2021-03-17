@@ -57,12 +57,12 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
                 ->setText(session.user()->name);
 
     using namespace Fxt::Dao;
-    ProcessPlanDao processPlanDao { session };
     std::string placeHolder = modelFile_->getProcessPlan()->getModerator().empty() ? "Click to enter moderator name" : modelFile_->getProcessPlan()->getModerator();
     moderator_ = t->bindWidget("moderator", Wt::cpp14::make_unique<Wt::WInPlaceEdit>(placeHolder));
     moderator_->setPlaceholderText("Enter moderator's name");
-    moderator_->valueChanged().connect([&]{        
-        processPlanDao.update(modelFile_, moderator_->text());
+    moderator_->valueChanged().connect([&] {
+        ProcessPlanDao processPlanDao(session_);
+        processPlanDao.updateModerator(modelFile_, moderator_->text());
     });
 
     creationDate_ = t->bindWidget("creation_date", Wt::cpp14::make_unique<Wt::WText>());
@@ -71,8 +71,9 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
     std::string partPlaceHolder = modelFile_->getProcessPlan()->getPartNo().empty() ? "Click to enter the part number" : modelFile_->getProcessPlan()->getPartNo();
     partNo_ = t->bindWidget("part_no", Wt::cpp14::make_unique<Wt::WInPlaceEdit>(partPlaceHolder));
     partNo_->setPlaceholderText("Enter part number");
-    partNo_->valueChanged().connect([&]{
-        processPlanDao.update(modelFile_, partNo_->text().toUTF8());
+    partNo_->valueChanged().connect([&] {
+        ProcessPlanDao processPlanDao(session_);
+        processPlanDao.update(modelFile_, std::string(partNo_->text().toUTF8()));
     });
 
     partName_ = t->bindWidget("part_name", Wt::cpp14::make_unique<Wt::WText>());
@@ -191,6 +192,7 @@ inline void ProcessPlanDialog::quantityChanged(Fxt::Dao::ProcessPlanDao processP
     auto time_p = computeTotalProductionTime(quantity_->value(), nTools, nBends, nFlips, nRotations);;
     totalProcessingTime_->setText(processString(time_p));
 
+    Fxt::Dao::ProcessPlanDao processPlanDao (session_);
     processPlanDao.update(modelFile_, quantity_->value());
 }
 
