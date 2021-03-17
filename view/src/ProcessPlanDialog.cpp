@@ -45,6 +45,7 @@ ProcessPlanDialog::ProcessPlanDialog(Session& session, const std::string& title,
     auto nRotations = modelFile_->getProcessPlan()->getNumberOfRotation();
     auto distance = modelFile_->getProcessPlan()->getToolDistance();
     auto bendingForce = modelFile_->getBendingForce();
+    auto thickness = modelFile_->getThickness();
 
     t->bindWidget("process_code", Wt::cpp14::make_unique<Wt::WText>())
                 ->setText(modelFile_->getProject()->getTitle());
