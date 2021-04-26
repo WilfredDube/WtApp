@@ -2,4 +2,5 @@ build
 .vscode
 TODO
 approot/fxtract.db
-tests/*
+tests
+third_party

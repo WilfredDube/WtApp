@@ -1,34 +1,34 @@
-set(model_source_files
-  BendFeature.cpp
-  BendFeature.h
-  CMakeLists.txt
-  FxtUserDatabase.cpp
-  FxtUserDatabase.h
-  ModelFile.cpp
-  ModelFile.h
-  Project.cpp
-  Project.h
-  BendSequence.cpp
-  BendSequence.h
-  MachineParam.cpp
-  MachineParam.h
-  ProcessPlan.cpp
-  ProcessPlan.h
-  Session.cpp
-  Session.h
-  Token.cpp
-  Token.h
-  Tool.cpp
-  Tool.h
-  Material.cpp
-  Material.h
-  User.cpp
-  User.h
+set(Sources
+  src/BendFeature.cpp
+  src/FxtUserDatabase.cpp
+  src/ModelFile.cpp
+  src/Project.cpp
+  src/BendSequence.cpp
+  src/ProcessPlan.cpp
+  src/Session.cpp
+  src/Token.cpp
+  src/Tool.cpp
+  src/Material.cpp
+  src/User.cpp
+)
+
+set(Headers
+  include/BendFeature.h
+  include/FxtUserDatabase.h
+  include/ModelFile.h
+  include/Project.h
+  include/BendSequence.h
+  include/ProcessPlan.h
+  include/Session.h
+  include/Token.h
+  include/Tool.h
+  include/Material.h
+  include/User.h
 )
 
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 find_package(wt COMPONENTS wt wtdbo wtdbosqlite3 wthttp REQUIRED)
 
-add_library(model ${model_source_files})
+add_library(model ${Sources} ${Headers})
 target_link_libraries(model ${Boost_LIBRARIES} Threads::Threads ${wt_LIBRARIES} wthttp wt wtdbo wtdbosqlite3 ${OpenCASCADE_LIBRARIES})
